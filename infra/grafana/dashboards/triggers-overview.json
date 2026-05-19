@@ -1,0 +1,215 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "links": [],
+  "panels": [
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 }, "id": 100, "title": "Trigger Execution (Router)", "type": "row" },
+    {
+      "title": "Triggers Processed Rate", "description": "Triggers processed per second by status", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 1 }, "id": 1,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15, "pointSize": 5, "spanNulls": false, "stacking": { "mode": "none" } }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(triggers_trigger_processed_total[5m])", "legendFormat": "{{status}}" }]
+    },
+    {
+      "title": "Processing Duration (p50 / p95 / p99)", "description": "Trigger processing latency", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 1 }, "id": 2,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, rate(triggers_trigger_processing_duration_seconds_bucket[5m]))", "legendFormat": "p50" },
+        { "expr": "histogram_quantile(0.95, rate(triggers_trigger_processing_duration_seconds_bucket[5m]))", "legendFormat": "p95" },
+        { "expr": "histogram_quantile(0.99, rate(triggers_trigger_processing_duration_seconds_bucket[5m]))", "legendFormat": "p99" }
+      ]
+    },
+    {
+      "title": "Batch Size (p50 / p95 / p99)", "description": "Triggers per batch", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 1 }, "id": 3,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "short" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, rate(triggers_trigger_batch_size_bucket[5m]))", "legendFormat": "p50" },
+        { "expr": "histogram_quantile(0.95, rate(triggers_trigger_batch_size_bucket[5m]))", "legendFormat": "p95" },
+        { "expr": "histogram_quantile(0.99, rate(triggers_trigger_batch_size_bucket[5m]))", "legendFormat": "p99" }
+      ]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 9 }, "id": 101, "title": "Message Lifecycle (Router)", "type": "row" },
+    {
+      "title": "Message Outcomes Rate", "description": "ack / nack / reject per second", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 10 }, "id": 4,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(triggers_message_total[5m])", "legendFormat": "{{result}}" }]
+    },
+    {
+      "title": "Total Messages", "description": "Cumulative messages since startup", "type": "stat",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 10 }, "id": 5,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "green", "value": null }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "triggers_message_total", "legendFormat": "{{result}}" }]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 18 }, "id": 102, "title": "Executor (Router)", "type": "row" },
+    {
+      "title": "Executor Rate by Type", "description": "Executor invocations per second by type and status", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 19 }, "id": 6,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(triggers_executor_total[5m])", "legendFormat": "{{type}} / {{status}}" }]
+    },
+    {
+      "title": "Executor Duration by Type (p50 / p95 / p99)", "description": "Executor latency per type", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 19 }, "id": 7,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le, type) (rate(triggers_executor_duration_seconds_bucket[5m])))", "legendFormat": "p50 {{type}}" },
+        { "expr": "histogram_quantile(0.95, sum by (le, type) (rate(triggers_executor_duration_seconds_bucket[5m])))", "legendFormat": "p95 {{type}}" },
+        { "expr": "histogram_quantile(0.99, sum by (le, type) (rate(triggers_executor_duration_seconds_bucket[5m])))", "legendFormat": "p99 {{type}}" }
+      ]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 27 }, "id": 103, "title": "NATS Publish (Router)", "type": "row" },
+    {
+      "title": "Events Published Rate", "description": "NATS publish attempts by status", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 28 }, "id": 8,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(triggers_event_published_total[5m])", "legendFormat": "{{status}}" }]
+    },
+    {
+      "title": "Publish Latency (p50 / p95 / p99)", "description": "NATS publish latency", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 28 }, "id": 9,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, rate(triggers_publish_duration_seconds_bucket[5m]))", "legendFormat": "p50" },
+        { "expr": "histogram_quantile(0.95, rate(triggers_publish_duration_seconds_bucket[5m]))", "legendFormat": "p95" },
+        { "expr": "histogram_quantile(0.99, rate(triggers_publish_duration_seconds_bucket[5m]))", "legendFormat": "p99" }
+      ]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 36 }, "id": 108, "title": "Workflow Execution", "type": "row" },
+    {
+      "title": "Workflow Processed Rate", "description": "Workflow plugin/trigger requests per second by mode and status", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 37 }, "id": 30,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(triggers_workflow_processed_total[5m])", "legendFormat": "{{mode}} / {{status}}" }]
+    },
+    {
+      "title": "Workflow Processing Duration (p50 / p95 / p99)", "description": "End-to-end latency by mode", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 37 }, "id": 31,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le, mode) (rate(triggers_workflow_processing_duration_seconds_bucket[5m])))", "legendFormat": "p50 {{mode}}" },
+        { "expr": "histogram_quantile(0.95, sum by (le, mode) (rate(triggers_workflow_processing_duration_seconds_bucket[5m])))", "legendFormat": "p95 {{mode}}" },
+        { "expr": "histogram_quantile(0.99, sum by (le, mode) (rate(triggers_workflow_processing_duration_seconds_bucket[5m])))", "legendFormat": "p99 {{mode}}" }
+      ]
+    },
+    {
+      "title": "Workflow Batch Size (p50 / p95)", "description": "Messages per batch from workflow", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 37 }, "id": 32,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "short" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, rate(triggers_workflow_batch_size_bucket[5m]))", "legendFormat": "p50" },
+        { "expr": "histogram_quantile(0.95, rate(triggers_workflow_batch_size_bucket[5m]))", "legendFormat": "p95" }
+      ]
+    },
+    {
+      "title": "Workflow Message Outcomes Rate", "description": "Workflow message ack/nack/reject per second", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 45 }, "id": 33,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(triggers_workflow_message_total[5m])", "legendFormat": "{{result}}" }]
+    },
+    {
+      "title": "Workflow Executor Rate by Type", "description": "Executor invocations per second by action type", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 45 }, "id": 34,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(triggers_workflow_executor_total[5m])", "legendFormat": "{{type}} / {{status}}" }]
+    },
+    {
+      "title": "Workflow Resume Callback Rate", "description": "Resume callbacks published per second", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 45 }, "id": 35,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(triggers_workflow_resume_published_total[5m])", "legendFormat": "{{status}}" }]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 53 }, "id": 104, "title": "Trigger Config", "type": "row" },
+    {
+      "title": "Trigger Cache Hit/Miss", "description": "Trigger config cache lookups per second", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 54 }, "id": 10,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(triggers_trigger_cache_total[5m])", "legendFormat": "{{result}}" }]
+    },
+    {
+      "title": "Placeholder Resolutions Rate", "description": "Placeholder resolutions per second by status", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 54 }, "id": 11,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(triggers_placeholder_resolutions_total[5m])", "legendFormat": "{{status}}" }]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 62 }, "id": 105, "title": "Go Runtime & Process", "type": "row" },
+    {
+      "title": "Goroutines", "type": "timeseries", "gridPos": { "h": 8, "w": 6, "x": 0, "y": 63 }, "id": 12,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "blue", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 20 }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "go_goroutines{job=\"triggers\"}", "legendFormat": "goroutines" }]
+    },
+    {
+      "title": "Heap Memory", "type": "timeseries", "gridPos": { "h": 8, "w": 6, "x": 6, "y": 63 }, "id": 13,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "decbytes" }, "overrides": [] },
+      "targets": [
+        { "expr": "go_memstats_heap_alloc_bytes{job=\"triggers\"}", "legendFormat": "heap in use" },
+        { "expr": "go_memstats_heap_sys_bytes{job=\"triggers\"}", "legendFormat": "heap sys" }
+      ]
+    },
+    {
+      "title": "Process Memory (RSS)", "type": "timeseries", "gridPos": { "h": 8, "w": 6, "x": 12, "y": 63 }, "id": 14,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "orange", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 20 }, "unit": "decbytes" }, "overrides": [] },
+      "targets": [{ "expr": "process_resident_memory_bytes{job=\"triggers\"}", "legendFormat": "RSS" }]
+    },
+    {
+      "title": "GC Pause Duration", "type": "timeseries", "gridPos": { "h": 8, "w": 6, "x": 18, "y": 63 }, "id": 15,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "red", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [{ "expr": "rate(go_gc_duration_seconds_sum{job=\"triggers\"}[5m])", "legendFormat": "GC time/s" }]
+    },
+    {
+      "title": "Open File Descriptors", "type": "timeseries", "gridPos": { "h": 8, "w": 8, "x": 0, "y": 71 }, "id": 16,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "short" }, "overrides": [] },
+      "targets": [
+        { "expr": "process_open_fds{job=\"triggers\"}", "legendFormat": "open" },
+        { "expr": "process_max_fds{job=\"triggers\"}", "legendFormat": "max" }
+      ]
+    },
+    {
+      "title": "CPU Usage", "type": "timeseries", "gridPos": { "h": 8, "w": 8, "x": 8, "y": 71 }, "id": 17,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "purple", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 20 }, "unit": "percentunit" }, "overrides": [] },
+      "targets": [{ "expr": "rate(process_cpu_seconds_total{job=\"triggers\"}[5m])", "legendFormat": "CPU" }]
+    },
+    {
+      "title": "GC Cycles Rate", "type": "timeseries", "gridPos": { "h": 8, "w": 8, "x": 16, "y": 71 }, "id": 18,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "yellow", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(go_gc_duration_seconds_count{job=\"triggers\"}[5m])", "legendFormat": "GC cycles/s" }]
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": ["mapexIam", "triggers", "go"],
+  "templating": { "list": [{ "current": { "selected": false, "text": "Prometheus", "value": "prometheus" }, "hide": 0, "includeAll": false, "name": "DS_PROMETHEUS", "options": [], "query": "prometheus", "refresh": 1, "regex": "", "type": "datasource" }] },
+  "time": { "from": "now-1h", "to": "now" },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Triggers - Overview",
+  "uid": "triggers-overview",
+  "version": 2
+}

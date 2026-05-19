@@ -1,0 +1,22 @@
+[
+  {
+    "_id": { "$oid": "0000000000000000000aa101" },
+    "email": "admin@mapex.local",
+    "password": "$2a$10$JWP6rv7qxx2b2.llyNeoretlFhunSnPOVVeZByWzEQDrhSbFZPZXq",
+    "changePasswordNextLogin": true,
+    "authProvider": {
+      "type": "internal",
+      "externalId": null,
+      "metadata": {}
+    },
+    "firstName": "Admin",
+    "lastName": "Mapex",
+    "phone": null,
+    "jobTitle": "Platform Administrator",
+    "enabled": true,
+    "avatar": null,
+    "startTour": false,
+    "created": { "$date": "2026-01-01T00:00:00.000Z" },
+    "updated": { "$date": "2026-01-01T00:00:00.000Z" }
+  }
+]

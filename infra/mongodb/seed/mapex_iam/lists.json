@@ -1,0 +1,4332 @@
+[
+  {
+    "_id": {
+      "$oid": "507f1f77bcf86cd799439011"
+    },
+    "type": "asset_category",
+    "name": "Assets IoT",
+    "value": "iot",
+    "parentId": null,
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:44:06.350Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "type": "asset_manufacturer",
+    "name": "Milesight IoT",
+    "value": "milesight_iot",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439011"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:44:06.350Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "type": "asset_manufacturer",
+    "name": "Dragino",
+    "value": "dragino",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439011"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:44:06.350Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "type": "asset_manufacturer",
+    "name": "Elsys",
+    "value": "elsys",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439011"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:44:06.350Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "507f1f77bcf86cd799439015"
+    },
+    "type": "asset_manufacturer",
+    "name": "Disruptive Technologies",
+    "value": "disruptive_technologies",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439011"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:44:06.350Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "43f182325294b1400270de81"
+    },
+    "type": "asset_model",
+    "name": "AM102 - 2-in-1 IAQ Sensor",
+    "value": "am102",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.341Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "e2928f9c9877fea005cdd4fd"
+    },
+    "type": "asset_model",
+    "name": "AM102L - 2-in-1 IAQ Sensor",
+    "value": "am102l",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.341Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "90368c211fbfd9c33c6b9505"
+    },
+    "type": "asset_model",
+    "name": "AM103 - 3-in-1 IAQ Sensor",
+    "value": "am103",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.341Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "4e9b980b50436209e4026743"
+    },
+    "type": "asset_model",
+    "name": "AM103L - 3-in-1 IAQ Sensor",
+    "value": "am103l",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.341Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "2a6d555b503119c172bdc01f"
+    },
+    "type": "asset_model",
+    "name": "AM104 - 4-in-1 IAQ Sensor",
+    "value": "am104",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.341Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "d9b542d0b7135e20ee3c4bea"
+    },
+    "type": "asset_model",
+    "name": "AM107 - 7-in-1 IAQ Sensor",
+    "value": "am107",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.341Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "d220103b5c9d92a730027573"
+    },
+    "type": "asset_model",
+    "name": "AM307 - 9-in-1 IAQ Sensor",
+    "value": "am307v2",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.341Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "4c9afebcdf852083bf836526"
+    },
+    "type": "asset_model",
+    "name": "AM307L - 9-in-1 IAQ Sensor",
+    "value": "am307lv2",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.341Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "0c7d7aa4fcf572f0be0bc4ef"
+    },
+    "type": "asset_model",
+    "name": "AM308 - 9-in-1 IAQ Sensor",
+    "value": "am308v2",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.341Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "96ee13b21f918c3ccf611566"
+    },
+    "type": "asset_model",
+    "name": "AM308L - 9-in-1 IAQ Sensor",
+    "value": "am308lv2",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.341Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "de2838a77e696b7d6a524bd9"
+    },
+    "type": "asset_model",
+    "name": "AM319 HCHO - 9-in-1 IAQ Sensor (HCHO)",
+    "value": "am319_hcho_v2",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.341Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "012d1a7b925aa5e22e8b84bc"
+    },
+    "type": "asset_model",
+    "name": "AM319 O3 - 9-in-1 IAQ Sensor (O3)",
+    "value": "am319_o3_v2",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.341Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "fedc5979a7bc39b7b866fd41"
+    },
+    "type": "asset_model",
+    "name": "AT101 - Outdoor Asset Tracker",
+    "value": "at101",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.341Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "4849dd8ec5bb9c3652891c79"
+    },
+    "type": "asset_model",
+    "name": "CT101 - Smart Current Transformer",
+    "value": "ct101",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.341Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "ad8eeb208585146a84a826aa"
+    },
+    "type": "asset_model",
+    "name": "CT103 - Smart Current Transformer",
+    "value": "ct103",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.341Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "af636c42425249deebf87c88"
+    },
+    "type": "asset_model",
+    "name": "CT105 - Smart Current Transformer",
+    "value": "ct105",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.341Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "c352967da4839ff7c66418a9"
+    },
+    "type": "asset_model",
+    "name": "CT303 - Smart Current Transformer",
+    "value": "ct303",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "342f16dc45f936481d943a1f"
+    },
+    "type": "asset_model",
+    "name": "CT305 - Smart Current Transformer",
+    "value": "ct305",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "79cc68f566503b82f5d640af"
+    },
+    "type": "asset_model",
+    "name": "CT310 - Smart Current Transformer",
+    "value": "ct310",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "15054be65647cb29f4df478f"
+    },
+    "type": "asset_model",
+    "name": "DS3604 - IoT E-Ink Display",
+    "value": "ds3604",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "7eefe6d1ceb4ff21eef35243"
+    },
+    "type": "asset_model",
+    "name": "EM300-CL - Capacitive Level Sensor",
+    "value": "em300_cl",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "c82bbfee5c22b06478b8d571"
+    },
+    "type": "asset_model",
+    "name": "EM300-DI - Pulse Counter",
+    "value": "em300_di",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "26f76693b803db9c44f8e4ec"
+    },
+    "type": "asset_model",
+    "name": "EM300-DI (HALL) - Pulse Counter",
+    "value": "em300_di_hall",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "e61ea4e7de82d1c7b57dc40a"
+    },
+    "type": "asset_model",
+    "name": "EM300-MCS - Magnetic Contact Switch",
+    "value": "em300_mcs",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "3f5329b87dde0bd4f79b7768"
+    },
+    "type": "asset_model",
+    "name": "EM300-MLD - Membrane Leakage Detection Sensor",
+    "value": "em300_mld",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "92443d1105fba7645aa4389a"
+    },
+    "type": "asset_model",
+    "name": "EM300-SLD - Spot Leakage Detection Sensor",
+    "value": "em300_sld",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "5ea547fa052c0566974a3d8b"
+    },
+    "type": "asset_model",
+    "name": "EM300-TH - Temperature and Humidity Sensor",
+    "value": "em300_th",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "a89b66147dae90dd2c25f31f"
+    },
+    "type": "asset_model",
+    "name": "EM300-ZLD - Zone Leakage Detection Sensor",
+    "value": "em300_zld",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "7d37494b36a735efec722fe4"
+    },
+    "type": "asset_model",
+    "name": "EM310-TILT - Tilt Sensor",
+    "value": "em310_tilt",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "a43559e792d592514032c417"
+    },
+    "type": "asset_model",
+    "name": "EM310-UDL - Ultrasonic Distance/Level Sensor",
+    "value": "em310_udl",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "0e48145e5491a7cbba815f3a"
+    },
+    "type": "asset_model",
+    "name": "EM320-TH - Temperature and Humidity Sensor",
+    "value": "em320_th",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "a8e2ea2052c04c7a89c20634"
+    },
+    "type": "asset_model",
+    "name": "EM320-TILT - Tilt Sensor",
+    "value": "em320_tilt",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "27b04328a21526dbc48b5f60"
+    },
+    "type": "asset_model",
+    "name": "EM400-MUD - Multifunctional Distance Sensor",
+    "value": "em400_mud",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "b47f30d42204a3a4f483d7ea"
+    },
+    "type": "asset_model",
+    "name": "EM400-TLD - ToF Laser Distance Sensor",
+    "value": "em400_tld",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "585c3f7a8bba638476d3c6cf"
+    },
+    "type": "asset_model",
+    "name": "EM400-UDL - Ultrasonic Distance/Level Sensor",
+    "value": "em400_udl",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "22c94519a7c2f6aa636c02ea"
+    },
+    "type": "asset_model",
+    "name": "EM410-RDL - Radar Distance Level Sensor",
+    "value": "em410_rdl",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "a44190e22193c5d3012349f6"
+    },
+    "type": "asset_model",
+    "name": "EM500-CO2 - Outdoor CO2 Sensor",
+    "value": "em500_co2",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "7307c2ec669587a434f51280"
+    },
+    "type": "asset_model",
+    "name": "EM500-LGT - Light Sensor",
+    "value": "em500_lgt",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "59cf480e84554ccbab3f75e3"
+    },
+    "type": "asset_model",
+    "name": "EM500-PP - Pipe Pressure Sensor",
+    "value": "em500_pp",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "40648418f561422ba975f17a"
+    },
+    "type": "asset_model",
+    "name": "EM500-PT100 - Platinum Temperature Sensor",
+    "value": "em500_pt100",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "a8cd5f5ecdef1bc426b1e965"
+    },
+    "type": "asset_model",
+    "name": "EM500-SMTC - Soil Moisture, Temperature & Conductivity Sensor",
+    "value": "em500_smtc",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "fb2fa005fcd44c3fca6eaebb"
+    },
+    "type": "asset_model",
+    "name": "EM500-SWL - Submersible Water Level Sensor",
+    "value": "em500_swl",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "38d35d48a53bb148ac1aeb2d"
+    },
+    "type": "asset_model",
+    "name": "EM500-UDL - Ultrasonic Distance/Level Sensor",
+    "value": "em500_udl",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "891a8be0de5c399368f4cf2b"
+    },
+    "type": "asset_model",
+    "name": "FT101 - Fine Dust Air Quality Sensor",
+    "value": "ft101",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "92be525bc91d1e53a794a42d"
+    },
+    "type": "asset_model",
+    "name": "GS101 - Gas Sensor",
+    "value": "gs101",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "49c535157370d3c5a3f5f274"
+    },
+    "type": "asset_model",
+    "name": "GS301 - Bathroom Odor Detector",
+    "value": "gs301",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "cc730a0e9628ed46bcc5165b"
+    },
+    "type": "asset_model",
+    "name": "GS524N - Gas Sensor",
+    "value": "gs524n",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "8d36b075254c5651af211e68"
+    },
+    "type": "asset_model",
+    "name": "GS601 - Vape Detector",
+    "value": "gs601",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.342Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "945b9a5ba8229a541cd1dc93"
+    },
+    "type": "asset_model",
+    "name": "TS101 - Insertion Temperature Sensor",
+    "value": "ts101",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6e51ede40082ced29968f9f9"
+    },
+    "type": "asset_model",
+    "name": "TS201 - Cost Effective Temperature Sensor",
+    "value": "ts201",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "9cda41db573398228c475d1b"
+    },
+    "type": "asset_model",
+    "name": "TS201 - Cost Effective Temperature Sensor",
+    "value": "ts201_v2",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "b5bfc97526737e85f9841729"
+    },
+    "type": "asset_model",
+    "name": "TS301 - Temperature Sensor",
+    "value": "ts301",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "414073d91ea92c80802ec9d2"
+    },
+    "type": "asset_model",
+    "name": "TS302 - Temperature Sensor",
+    "value": "ts302",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "631302f3ec3529a44b2f32df"
+    },
+    "type": "asset_model",
+    "name": "UC100 - Protocol Converter",
+    "value": "uc100",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "1d73d7fb59200f15bb0740f8"
+    },
+    "type": "asset_model",
+    "name": "UC100 - Protocol Converter",
+    "value": "uc100_v2",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "60c4d318a831fa669fa2ba7f"
+    },
+    "type": "asset_model",
+    "name": "UC11-N1 - I/O Controller",
+    "value": "uc11_n1",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "4cd3f3d273e55e97acf63634"
+    },
+    "type": "asset_model",
+    "name": "UC11-T1 - I/O Controller",
+    "value": "uc11_t1",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "cd9ee96b97d060bd60a3516e"
+    },
+    "type": "asset_model",
+    "name": "UC11XX - I/O Controller",
+    "value": "uc11xx",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "9bf62c422397824f701216b3"
+    },
+    "type": "asset_model",
+    "name": "UC300 - IoT Controller",
+    "value": "uc300",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "d7dcab5a50e0dda46b310815"
+    },
+    "type": "asset_model",
+    "name": "UC50X - Multi-interface Controller",
+    "value": "uc50x",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "567fb272c9a01a8d13584487"
+    },
+    "type": "asset_model",
+    "name": "UC511 - Solenoid Valve Controller",
+    "value": "uc511",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "75838d0381cae71828808458"
+    },
+    "type": "asset_model",
+    "name": "UC512 - Solenoid Valve Controller",
+    "value": "uc512",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "332db5d63a143a81a7dc0abc"
+    },
+    "type": "asset_model",
+    "name": "UC521 - Solenoid Valve Controller",
+    "value": "uc521",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "747bb11d7af8efdb927b67b7"
+    },
+    "type": "asset_model",
+    "name": "VS121 - AI Workplace Occupancy Sensor",
+    "value": "vs121",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "c545b49d61266064a2412cb5"
+    },
+    "type": "asset_model",
+    "name": "VS132 - AI People Counting Sensor",
+    "value": "vs132",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "906cdb7dee8af1e0bc5d8140"
+    },
+    "type": "asset_model",
+    "name": "VS133 - AI ToF People Counting Sensor",
+    "value": "vs133",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "02875be52b323c97f9e63067"
+    },
+    "type": "asset_model",
+    "name": "VS135 - Ultra ToF People Counter",
+    "value": "vs135",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "3c49174823d8459a656d916e"
+    },
+    "type": "asset_model",
+    "name": "VS321 - Battery Version Workplace Occupancy Sensor",
+    "value": "vs321",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "e59521d9157654df45090d66"
+    },
+    "type": "asset_model",
+    "name": "VS330 - Bathroom Occupancy Sensor",
+    "value": "vs330",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "069ed67a80b10028421758d3"
+    },
+    "type": "asset_model",
+    "name": "VS340 - Desk & Seat Occupancy Sensor",
+    "value": "vs340",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "d38a05533ee42765ac54112a"
+    },
+    "type": "asset_model",
+    "name": "VS341 - Desk & Seat Occupancy Sensor",
+    "value": "vs341",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "b4f4fefeb3186f25b1bf6ae3"
+    },
+    "type": "asset_model",
+    "name": "VS350 - Passage People Counter",
+    "value": "vs350",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "95bfc495b4abc41f7b94dd25"
+    },
+    "type": "asset_model",
+    "name": "VS351 - Mini AI Thermopile People Counter",
+    "value": "vs351",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "21eef150de3616d339d1004a"
+    },
+    "type": "asset_model",
+    "name": "VS360 - IR Breakbeam People Counter",
+    "value": "vs360",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "cd1487ccc9f30e667d7bc036"
+    },
+    "type": "asset_model",
+    "name": "VS370 - Radar Human Presence Sensor",
+    "value": "vs370",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "15835d7b31f5f088f9d84774"
+    },
+    "type": "asset_model",
+    "name": "VS373 - Radar Fall Detection Sensor",
+    "value": "vs373",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "ead4adb6163b950f6862a291"
+    },
+    "type": "asset_model",
+    "name": "WS101 - Smart Button",
+    "value": "ws101",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "edd2906ffbe8f3b333821ba2"
+    },
+    "type": "asset_model",
+    "name": "WS136 - Smart Scene Panel",
+    "value": "ws136",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "48d51c5d6d1991fc7c74f9e7"
+    },
+    "type": "asset_model",
+    "name": "WS156 - Smart Scene Panel",
+    "value": "ws156",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "08fc6855048107975c40cb82"
+    },
+    "type": "asset_model",
+    "name": "WS201 - Smart Fill Level Monitoring Sensor",
+    "value": "ws201",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "be50c09e8ff4407a93cb11fe"
+    },
+    "type": "asset_model",
+    "name": "WS202 - PIR & Light Sensor",
+    "value": "ws202",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "179f1211cb76c6a1ee5083be"
+    },
+    "type": "asset_model",
+    "name": "WS203 - Motion & TH Sensor",
+    "value": "ws203",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "dd80677d6739717425f1fc51"
+    },
+    "type": "asset_model",
+    "name": "WS301 - Magnetic Contact Switch",
+    "value": "ws301",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "c4134b33a68f29a1791d5242"
+    },
+    "type": "asset_model",
+    "name": "WS302 - Sound Level Sensor",
+    "value": "ws302",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "f2f800743b59b475c132ecb5"
+    },
+    "type": "asset_model",
+    "name": "WS303 - Mini Leak Detection Sensor",
+    "value": "ws303",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "9b8be4ed0832a9eb5c9f63b5"
+    },
+    "type": "asset_model",
+    "name": "WS501 - Smart Wall Switch",
+    "value": "ws501",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "5e1991ab0a259b7d10998dea"
+    },
+    "type": "asset_model",
+    "name": "WS501 - Smart Wall Switch",
+    "value": "ws501_cn",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "1333baf5a43da9ff453ea302"
+    },
+    "type": "asset_model",
+    "name": "WS501 - Smart Wall Switch",
+    "value": "ws501_us",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "3f091e0122ab553ba262be18"
+    },
+    "type": "asset_model",
+    "name": "WS501 - Smart Wall Switch",
+    "value": "ws501_eu",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "be703ff21b489677201b2597"
+    },
+    "type": "asset_model",
+    "name": "WS502 - Smart Wall Switch",
+    "value": "ws502",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.343Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "c2b30b1425ff0eda23b9db5e"
+    },
+    "type": "asset_model",
+    "name": "WS502 - Smart Wall Switch",
+    "value": "ws502_cn",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.344Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "840bea3f5b43f1d52dcb764a"
+    },
+    "type": "asset_model",
+    "name": "WS502 - Smart Wall Switch",
+    "value": "ws502_eu",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.344Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "066c5444fd36e53430ae2a8e"
+    },
+    "type": "asset_model",
+    "name": "WS503 - Smart Wall Switch",
+    "value": "ws503",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.344Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "301df3dc3d7490e7a614493d"
+    },
+    "type": "asset_model",
+    "name": "WS503 - Smart Wall Switch",
+    "value": "ws503_cn",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.344Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "0bc1c60ce09567e6d4ae0bb3"
+    },
+    "type": "asset_model",
+    "name": "WS51X - Smart Wall Socket",
+    "value": "ws51x",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.344Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "e16af92505aed7c173ca9611"
+    },
+    "type": "asset_model",
+    "name": "WS52X - Smart Portable Socket",
+    "value": "ws52x",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.344Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "3192e79112bfd2447c82a92c"
+    },
+    "type": "asset_model",
+    "name": "WS558 - Smart Light Controller",
+    "value": "ws558",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.344Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "ee88c4827dbecd74a61959b3"
+    },
+    "type": "asset_model",
+    "name": "WT101 - Smart Radiator Thermostat",
+    "value": "wt101",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.344Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "c44abfa89c99f12118f7d25d"
+    },
+    "type": "asset_model",
+    "name": "WT201 - Smart Thermostat",
+    "value": "wt201",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.344Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "506677d6133d3ef3c67946a8"
+    },
+    "type": "asset_model",
+    "name": "WT201 - Smart Thermostat",
+    "value": "wt201_v2",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.344Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "323d13f1af72cb29b57b843e"
+    },
+    "type": "asset_model",
+    "name": "WT301 - Smart Thermostat",
+    "value": "wt301",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.344Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "61d8cd0066eefed58dc9e504"
+    },
+    "type": "asset_model",
+    "name": "WT302 - Smart Thermostat",
+    "value": "wt302",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.344Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "9e8acc844d413896dd638552"
+    },
+    "type": "asset_model",
+    "name": "WT303 - Smart Fan Coil Thermostat",
+    "value": "wt303",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.344Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "9604cae71eefd058bf301056"
+    },
+    "type": "asset_model",
+    "name": "WT304 - Smart Fan Coil Thermostat",
+    "value": "wt304",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.344Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "fd6c93a1def19904b3ac3e70"
+    },
+    "type": "asset_model",
+    "name": "WTS305 - Weather Station",
+    "value": "wts305",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.344Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "4e831049dd0557fd06975d73"
+    },
+    "type": "asset_model",
+    "name": "WTS505 - IoT Weather Station",
+    "value": "wts505",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.344Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "f8b80dec65866df31f734b76"
+    },
+    "type": "asset_model",
+    "name": "WTS506 - IoT Weather Station",
+    "value": "wts506",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439012"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.344Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "7782f78037527d4a3318a527"
+    },
+    "type": "asset_model",
+    "name": "AIS01 - Indoor Air Quality Sensor",
+    "value": "ais01",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.375Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "48a05938422e2cf129620df8"
+    },
+    "type": "asset_model",
+    "name": "AQS01-L - Air Quality Sensor",
+    "value": "aqs01_l",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.375Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "80ca5ad729cea87bfb22caaf"
+    },
+    "type": "asset_model",
+    "name": "AQS02-L - Air Quality Sensor",
+    "value": "aqs02_l",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.375Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "48a96962e1181308154dc9fe"
+    },
+    "type": "asset_model",
+    "name": "BH01-LB - Gas Detector",
+    "value": "bh01_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.375Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "77ce376a942c8857eaa4e85e"
+    },
+    "type": "asset_model",
+    "name": "CPL01 - Current Probe",
+    "value": "cpl01",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.375Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "2cf54285b436c70361fe3241"
+    },
+    "type": "asset_model",
+    "name": "CPL03-LB - Current Probe",
+    "value": "cpl03_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "a5d3a5f93148deaec8bf832a"
+    },
+    "type": "asset_model",
+    "name": "CS01-LB - Smoke Detector",
+    "value": "cs01_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "f0e404c0cff4dbc727a0ce7a"
+    },
+    "type": "asset_model",
+    "name": "D20-LB&D20S-LB&D22-LB&D23-LB - External Sensor",
+    "value": "d20_lbd20s_lbd22_lbd23_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "8d8b2555969c240d2ed7f88b"
+    },
+    "type": "asset_model",
+    "name": "DDS04-LB",
+    "value": "dds04_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "09d4fdf4bc379ef80380e2a7"
+    },
+    "type": "asset_model",
+    "name": "DDS20-LB",
+    "value": "dds20_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "c48b446cb9281665fcd60022"
+    },
+    "type": "asset_model",
+    "name": "DDS45-LB",
+    "value": "dds45_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "1b657d64bcb5a1b1e13d7571"
+    },
+    "type": "asset_model",
+    "name": "DDS75-LB",
+    "value": "dds75_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "df6a61d3ccc6a0e9c7d11639"
+    },
+    "type": "asset_model",
+    "name": "DMT01 - Multi-Sensor",
+    "value": "dmt01",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "a134bb7fb87ba2708a427021"
+    },
+    "type": "asset_model",
+    "name": "DS03A-LB - Door Sensor",
+    "value": "ds03a_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "ff3c3bd4a5fe945b2f2ae5e2"
+    },
+    "type": "asset_model",
+    "name": "DS20L - DS18B20 Temperature Sensor",
+    "value": "ds20l",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "9acc0e58b30d5d6bbe7ce37d"
+    },
+    "type": "asset_model",
+    "name": "LA66 USB - USB Adapter",
+    "value": "la66_usb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "5f7777118464f4a1a5639795"
+    },
+    "type": "asset_model",
+    "name": "LAQ4 - Air Quality Sensor",
+    "value": "laq4",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "0231973b3a2134068c63a496"
+    },
+    "type": "asset_model",
+    "name": "LC01 - Contact Sensor",
+    "value": "lc01",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "d7ac767889208828b0c24bbb"
+    },
+    "type": "asset_model",
+    "name": "LC03 - Contact Sensor",
+    "value": "lc03",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "0ebc8f0ff5c0b71dedc93aaa"
+    },
+    "type": "asset_model",
+    "name": "LCC01-LB - Contact Closure",
+    "value": "lcc01_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "f564ce80d36d87bb8629154b"
+    },
+    "type": "asset_model",
+    "name": "LDDS04 - ToF Distance Sensor",
+    "value": "ldds04",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "8c5c6478ba36eb96453646e5"
+    },
+    "type": "asset_model",
+    "name": "LDDS20 - ToF Distance Sensor",
+    "value": "ldds20",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "f46e2141e07c400ffbb03258"
+    },
+    "type": "asset_model",
+    "name": "LDDS45 - ToF Distance Sensor",
+    "value": "ldds45",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "b0e7a62b28711b74f67af5a8"
+    },
+    "type": "asset_model",
+    "name": "LDDS75 - ToF Distance Sensor",
+    "value": "ldds75",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "cdd23e2280af86f33559c362"
+    },
+    "type": "asset_model",
+    "name": "LDS02 - Optical Distance Sensor",
+    "value": "lds02",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "84286c17e40b829276f35f54"
+    },
+    "type": "asset_model",
+    "name": "LDS03A - Optical Distance Sensor",
+    "value": "lds03a",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "26ae9afd1c54ba5ad3f87f3c"
+    },
+    "type": "asset_model",
+    "name": "LDS12-LB - Distance/Level Sensor",
+    "value": "lds12_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "e378ca48dfac7416fd4aa1c1"
+    },
+    "type": "asset_model",
+    "name": "LDS25-LB - Distance/Level Sensor",
+    "value": "lds25_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "85648a19859c24cd58a1ba8a"
+    },
+    "type": "asset_model",
+    "name": "LDS40-LB - Distance/Level Sensor",
+    "value": "lds40_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "b914766393278b688ed64b7a"
+    },
+    "type": "asset_model",
+    "name": "LHT52 - Temperature & Humidity Sensor",
+    "value": "lht52",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "f9be79d0a962e0c4cc7c48dc"
+    },
+    "type": "asset_model",
+    "name": "LHT65N - Temperature & Humidity Sensor (No External Probe)",
+    "value": "lht65n",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6c9abfcb93004646f2cdf8c1"
+    },
+    "type": "asset_model",
+    "name": "LHT65N-PIR - Temperature & Humidity Sensor with PIR",
+    "value": "lht65n_pir",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "b8d8c4be307d339a25775213"
+    },
+    "type": "asset_model",
+    "name": "LHT65N-VIB - Temperature & Humidity Sensor with Vibration",
+    "value": "lht65n_vib",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "e35c07122d9005766a8568dd"
+    },
+    "type": "asset_model",
+    "name": "LLDS12 - Laser Distance Sensor",
+    "value": "llds12",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "b67a290c67b2418cf27a2f03"
+    },
+    "type": "asset_model",
+    "name": "LLDS40 - Laser Distance Sensor",
+    "value": "llds40",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "bea6502503fb93d86ec5aa5b"
+    },
+    "type": "asset_model",
+    "name": "LLMS01 - Laser Motion Sensor",
+    "value": "llms01",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "4243ec244cc4c9053249f34d"
+    },
+    "type": "asset_model",
+    "name": "LMDS120 - Microwave Radar Distance Sensor",
+    "value": "lmds120",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "66d1dbface6e14f594246e67"
+    },
+    "type": "asset_model",
+    "name": "LMDS200 - Microwave Radar Distance Sensor",
+    "value": "lmds200",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "cb2ee0731635a0de51bb71cc"
+    },
+    "type": "asset_model",
+    "name": "LMS01-LB - Motion Sensor",
+    "value": "lms01_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "a5bedd5c1d57017cbba88532"
+    },
+    "type": "asset_model",
+    "name": "LSE01 - Soil Moisture & EC Sensor",
+    "value": "lse01",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "bd71f7dd99c8f6c4748b4781"
+    },
+    "type": "asset_model",
+    "name": "LSN50 & LSN50-V2",
+    "value": "lsn50_lsn50_v2",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "e3ee9a067f81babdef6c84ca"
+    },
+    "type": "asset_model",
+    "name": "LSN50V2-D20-D22-D23 - Node with Smoke/Gas Detector",
+    "value": "lsn50v2_d20_d22_d23",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "48fba59e2c5a50573f7ef72a"
+    },
+    "type": "asset_model",
+    "name": "LSN50V2-S31&S31B - Node with Soil Moisture Sensor",
+    "value": "lsn50v2_s31s31b",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "271ebaab8d3c4dc1aefff79c"
+    },
+    "type": "asset_model",
+    "name": "LSPH01 - Soil pH Sensor",
+    "value": "lsph01",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "51e3ea91e704c14420d39401"
+    },
+    "type": "asset_model",
+    "name": "LT22222-L - Temperature Sensor Array",
+    "value": "lt22222_l",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "d092a171b74b756354d21d35"
+    },
+    "type": "asset_model",
+    "name": "LTC2 - Current Transformer Sensor",
+    "value": "ltc2",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "5394adabd978c2cd1b063fa7"
+    },
+    "type": "asset_model",
+    "name": "LTC2-LB - Current Transformer Sensor",
+    "value": "ltc2_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "e29a82c8ea74dc2f9784549d"
+    },
+    "type": "asset_model",
+    "name": "LWL02 - Water Leak Detector",
+    "value": "lwl02",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "2769e965939e56240141687a"
+    },
+    "type": "asset_model",
+    "name": "LWL03A - Water Leak Detector",
+    "value": "lwl03a",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "f877d1f4f19082828b9ef0fc"
+    },
+    "type": "asset_model",
+    "name": "LWL04-LB - Water Leak Detector",
+    "value": "lwl04_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "ef118fbdd2a4fc2360325a58"
+    },
+    "type": "asset_model",
+    "name": "MDS120-LB - Microwave Radar Distance Sensor (Battery)",
+    "value": "mds120_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "9ec223dda1c4913eafdba16b"
+    },
+    "type": "asset_model",
+    "name": "MDS200-LB - Microwave Radar Distance Sensor (Battery)",
+    "value": "mds200_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "f69a519eceb98d5dd7663f82"
+    },
+    "type": "asset_model",
+    "name": "PB01 - Push Button",
+    "value": "pb01",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "51e952c90bcde39c24204a34"
+    },
+    "type": "asset_model",
+    "name": "PB05 - Push Button",
+    "value": "pb05",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "67fadd5bc4a1df45088b13d7"
+    },
+    "type": "asset_model",
+    "name": "PF52 - Push Button",
+    "value": "pf52",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "9642d636247dc345e79629c3"
+    },
+    "type": "asset_model",
+    "name": "POM01-LB - Presence Detection Sensor",
+    "value": "pom01_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "9bfd83b31e2f43abd05171fc"
+    },
+    "type": "asset_model",
+    "name": "PS-LB - Pressure Sensor",
+    "value": "ps_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "c2e48b920423d63ca07b927e"
+    },
+    "type": "asset_model",
+    "name": "RS485-BL - RS485 Interface",
+    "value": "rs485_bl",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "fa0cf6fdf3da2f19cb6d6202"
+    },
+    "type": "asset_model",
+    "name": "RS485-LB - RS485 Interface",
+    "value": "rs485_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "f257fc12276e667809438856"
+    },
+    "type": "asset_model",
+    "name": "RS485-LB_A16-15 - RS485 Interface",
+    "value": "rs485_lb_a16_15",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "bbe724709f98a13d1ab393a2"
+    },
+    "type": "asset_model",
+    "name": "RS485-LN - RS485 Interface",
+    "value": "rs485_ln",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "0193d6388c74a741b2d1d4b1"
+    },
+    "type": "asset_model",
+    "name": "S31-LB&S31B-LB - Soil Moisture Sensor",
+    "value": "s31_lbs31b_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "3ba5e4ec1d44bfe8fec364b6"
+    },
+    "type": "asset_model",
+    "name": "SDI-12-LB - SDI-12 Interface",
+    "value": "sdi_12_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "4e3d9371e667975a26c71ba6"
+    },
+    "type": "asset_model",
+    "name": "SE01-LB - Soil Moisture & EC Sensor",
+    "value": "se01_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "7a2629583019d27c3808052c"
+    },
+    "type": "asset_model",
+    "name": "SE02-LB - Soil Moisture & EC Sensor",
+    "value": "se02_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "531c55bf4673760a5d8b41f9"
+    },
+    "type": "asset_model",
+    "name": "SE0X-LB - Soil Moisture & EC Sensor",
+    "value": "se0x_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "a8670dd7979267236398038b"
+    },
+    "type": "asset_model",
+    "name": "SN50_V3-LB - Sensor Node",
+    "value": "sn50_v3_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "ff35205379ba922b759a631c"
+    },
+    "type": "asset_model",
+    "name": "SPH01-LB - Soil pH Sensor",
+    "value": "sph01_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "8a0c91665f0ba8ac2b7387bb"
+    },
+    "type": "asset_model",
+    "name": "SW3L - 3-Button Switch",
+    "value": "sw3l",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "2e1c7270fd67bcd86171fa1b"
+    },
+    "type": "asset_model",
+    "name": "SW3L-LB - 3-Button Switch",
+    "value": "sw3l_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "bbd64f05d19f2883f58e4c2f"
+    },
+    "type": "asset_model",
+    "name": "T68DL - E-Ink Display",
+    "value": "t68dl",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "e5cba1ae75a2511b9c3ff936"
+    },
+    "type": "asset_model",
+    "name": "TC01-LB - Current Transformer",
+    "value": "tc01_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "e6cd690ac8e9d9fc78dbf567"
+    },
+    "type": "asset_model",
+    "name": "THERMOSTAT1 - Thermostat",
+    "value": "thermostat1",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "ee6ffce59f5ec7ffd46af4ea"
+    },
+    "type": "asset_model",
+    "name": "TRACKERD - GPS Tracker",
+    "value": "trackerd",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "ac0dc0f24dc4a84d36146bcd"
+    },
+    "type": "asset_model",
+    "name": "TS01-LB - Temperature Sensor",
+    "value": "ts01_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "73cdb80d3ba1ea47d3efe246"
+    },
+    "type": "asset_model",
+    "name": "UV254-LB - UV254 Sensor",
+    "value": "uv254_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "ec97f53e3883c55573ae9a3d"
+    },
+    "type": "asset_model",
+    "name": "WEATHER STATION - Weather Station",
+    "value": "weather_station",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "587a9d810eb3339e8f257f91"
+    },
+    "type": "asset_model",
+    "name": "WL03A-LB - Water Leak Detector",
+    "value": "wl03a_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "51d15bb22732bb5153519d62"
+    },
+    "type": "asset_model",
+    "name": "WQS-LB - Water Quality Sensor",
+    "value": "wqs_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "7fb1517e7b7a223f40408551"
+    },
+    "type": "asset_model",
+    "name": "WSC2-LB - Valve Controller",
+    "value": "wsc2_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "5f9a44fd9c8b069c4c01cbe3"
+    },
+    "type": "asset_model",
+    "name": "WSC3-LB - Valve Controller",
+    "value": "wsc3_lb",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439013"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:14:44.376Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "c7e8d64718396b9940b4d5ed"
+    },
+    "type": "asset_model",
+    "name": "ELT - Temperature, Humidity, Acceleration & Atmospheric Pressure Sensor",
+    "value": "elt",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "c7d194f4b5dc9c90e7757d71"
+    },
+    "type": "asset_model",
+    "name": "ELT DISTANCE RADAR - Radar Distance Sensor",
+    "value": "elt_distance_radar",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "a8660d2a9747e6f802e8b08d"
+    },
+    "type": "asset_model",
+    "name": "ELT INTERNA ANTENNA - Temperature, Humidity, Acceleration & Atmospheric Pressure Sensor with Internal Antenna",
+    "value": "elt_interna_antenna",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "24bd775ae8cc4c68f79bfe86"
+    },
+    "type": "asset_model",
+    "name": "ELT LITE - Multisensor with One Generic Input",
+    "value": "elt_lite",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "3ee904e8032dede26ff556c5"
+    },
+    "type": "asset_model",
+    "name": "ELT ULTRASONIC 10M - Ultrasonic Distance Sensor 10m Range",
+    "value": "elt_ultrasonic_10m",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "8c0dfad06b7cca9274a8aa32"
+    },
+    "type": "asset_model",
+    "name": "ELT ULTRASONIC 5M - Ultrasonic Distance Sensor 5m Range",
+    "value": "elt_ultrasonic_5m",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "f4afc389ec354b7cbaa0df77"
+    },
+    "type": "asset_model",
+    "name": "ELT ULTRASONIC SNOW - Ultrasonic Snow Level Sensor",
+    "value": "elt_ultrasonic_snow",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "ec143b5a9dca113f03c40881"
+    },
+    "type": "asset_model",
+    "name": "EMS - Temperature, Humidity, Leak Detection, Acceleration & Magnet Switch Sensor",
+    "value": "ems",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "741d29c68c36453da4228687"
+    },
+    "type": "asset_model",
+    "name": "EMS DESK - Desk Occupancy, Temperature & Humidity Sensor",
+    "value": "ems_desk",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "893945f0a5e9e5da9f7200f0"
+    },
+    "type": "asset_model",
+    "name": "EMS DOOR - Magnet Switch & Acceleration Sensor",
+    "value": "ems_door",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "f3ae8562a6165aed29c4af9a"
+    },
+    "type": "asset_model",
+    "name": "EMS LITE - Leak Detection, Temperature & Humidity Sensor",
+    "value": "ems_lite",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "1e10c1519e1e4e8e20585944"
+    },
+    "type": "asset_model",
+    "name": "ERS - Temperature, Humidity, Light & Motion PIR Sensor",
+    "value": "ers",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "147f0c390e028530dd8fc0a3"
+    },
+    "type": "asset_model",
+    "name": "ERS CO2 - CO2, Temperature, Humidity, Light & Motion PIR Sensor",
+    "value": "ers_co2",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "aef08e7c007f4bb1e30c5b31"
+    },
+    "type": "asset_model",
+    "name": "ERS CO2 LITE - CO2, Temperature & Humidity Sensor",
+    "value": "ers_co2_lite",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "d45e5bdf12dde9225ec6d94e"
+    },
+    "type": "asset_model",
+    "name": "ERS DISPLAY - Temperature, Humidity, Light & Motion PIR Sensor with E-paper Display",
+    "value": "ers_display",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "cd85d47b3eab69c51b476dcb"
+    },
+    "type": "asset_model",
+    "name": "ERS DISPLAY CO2 - Temperature, Humidity, CO2, Light & Motion PIR Sensor with E-paper Display",
+    "value": "ers_display_co2",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "29acf27229aa5aaf089ee3ba"
+    },
+    "type": "asset_model",
+    "name": "ERS DISPLAY CO2 LITE - CO2, Temperature & Humidity Sensor with E-paper Display",
+    "value": "ers_display_co2_lite",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "cf02e28fd595fa7cb6125f07"
+    },
+    "type": "asset_model",
+    "name": "ERS DISPLAY LITE - Temperature & Humidity Sensor with E-paper Display",
+    "value": "ers_display_lite",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "a5dc8e5fc1ff229535d7bf21"
+    },
+    "type": "asset_model",
+    "name": "ERS ECO CO2 LITE - CO2, Temperature & Humidity Sensor (Solar Powered)",
+    "value": "ers_eco_co2_lite",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "262fcb56f3e3c56ddf6438b4"
+    },
+    "type": "asset_model",
+    "name": "ERS ECO LITE - Temperature & Humidity Sensor (Solar Powered)",
+    "value": "ers_eco_lite",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "25c1bef509438252c4fc6103"
+    },
+    "type": "asset_model",
+    "name": "ERS EYE - Room Occupancy, Temperature, Humidity, Light & Motion PIR Sensor",
+    "value": "ers_eye",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "b6ccf3fb82022de37389e1e0"
+    },
+    "type": "asset_model",
+    "name": "ERS LITE - Temperature & Humidity Sensor",
+    "value": "ers_lite",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "0fad018fac337d9105f0e95e"
+    },
+    "type": "asset_model",
+    "name": "ERS SOUND - Sound Level, Temperature, Humidity, Light & Motion PIR Sensor",
+    "value": "ers_sound",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "048a83aec3844844a2957132"
+    },
+    "type": "asset_model",
+    "name": "ERS TEMP - Temperature Sensor",
+    "value": "ers_temp",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "48a30454ea7b44ffc6c015f8"
+    },
+    "type": "asset_model",
+    "name": "ERS VOC - VOC, Temperature, Humidity, Light & Motion PIR Sensor",
+    "value": "ers_voc",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439014"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:37:51.245Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "319f5d7e69949d8a55d804c4"
+    },
+    "type": "asset_model",
+    "name": "CO2 - Measures CO2, temperature, humidity and air pressure",
+    "value": "co2",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439015"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:42:40.145Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "61f18c1f3cb1e5a41571b3bd"
+    },
+    "type": "asset_model",
+    "name": "DESK OCCUPANCY - Detects the presence of someone at a desk",
+    "value": "desk_occupancy",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439015"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:42:40.144Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "5ff6fd3ba143d7f2b9ec25e9"
+    },
+    "type": "asset_model",
+    "name": "DOOR & WINDOW - Detects if doors or windows are open or closed in real-time",
+    "value": "door_window",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439015"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:42:40.145Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "8c1d6b947fd443c7806d5549"
+    },
+    "type": "asset_model",
+    "name": "MOTION - Detects the presence of people in a room",
+    "value": "motion",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439015"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:42:40.145Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "b378b31f0f86c5c4383ea3c4"
+    },
+    "type": "asset_model",
+    "name": "PROXIMITY - Detects when an object is placed or removed within a 5 mm range",
+    "value": "proximity",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439015"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:42:40.144Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "435f1eeecf60b6f1826004a5"
+    },
+    "type": "asset_model",
+    "name": "TACTILE TOUCH - Sends an immediate event whenever it is touched",
+    "value": "tactile_touch",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439015"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:42:40.144Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "bfd6ae58994b2571dfddae5c"
+    },
+    "type": "asset_model",
+    "name": "TEMPERATURE - Accurately measures temperature anywhere",
+    "value": "temperature",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439015"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:42:40.144Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "e179fb46981b4a99194d76f1"
+    },
+    "type": "asset_model",
+    "name": "TEMPERATURE & HUMIDITY - Measures relative humidity and temperature",
+    "value": "temperature_humidity",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439015"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:42:40.145Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "eb6c5bdacdba16e9a18948da"
+    },
+    "type": "asset_model",
+    "name": "TEMPERATURE PROBE - Measures temperature in a wide range of environments",
+    "value": "temperature_probe",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439015"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:42:40.145Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "e860c6c8fd81d17f6f288081"
+    },
+    "type": "asset_model",
+    "name": "WATER - Reports the presence of water on the sensor",
+    "value": "water",
+    "parentId": {
+      "$oid": "507f1f77bcf86cd799439015"
+    },
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:42:40.144Z"
+    }
+  }
+]

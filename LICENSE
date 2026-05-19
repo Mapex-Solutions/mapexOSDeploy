@@ -1,0 +1,74 @@
+Business Source License 1.1
+
+Parameters
+
+Licensor: Mapex Solutions
+
+Licensed Work: MapexOS, including the source code, configuration, scripts,
+documentation, and other materials made available in this repository.
+
+Additional Use Grant:
+
+You may use, reproduce, modify, and self-host the Licensed Work internally
+within your own organization, including for production use in support of your
+own business operations.
+
+You may not make the Licensed Work, or any derivative of it, available to
+third parties as a hosted or managed service, including but not limited to
+SaaS, PaaS, platform resale, service bureau, white-label hosting, or any
+similar commercial offering, unless you have a separate written commercial
+license from the Licensor.
+
+For clarity, internal use by a company for its own operations is permitted.
+Providing the Licensed Work as a service to customers, affiliates, or third
+parties is not permitted under this Additional Use Grant.
+
+Change Date: 2030-05-19
+
+Change License: Apache License, Version 2.0
+
+Terms
+
+Copyright (c) 2026 Mapex Solutions
+
+Licensed under the Business Source License, Version 1.1 (the "License");
+you may not use this file except in compliance with the License.
+
+You may obtain a copy of the License at:
+
+https://mariadb.com/bsl11
+
+Unless required by applicable law or agreed to in writing, Licensor provides
+the Licensed Work on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ANY KIND, either express or implied, including, without limitation,
+warranties of title, non-infringement, merchantability, and fitness for a
+particular purpose.
+
+The Licensor hereby grants you the right to copy, modify, create derivative
+works, redistribute, and make non-production use of the Licensed Work, in
+each case subject to the terms of this License and the Additional Use Grant.
+
+Effective on the Change Date, or the fourth anniversary of the first public
+distribution of a specific version of the Licensed Work under this License,
+whichever comes first, the Licensor hereby grants you rights under the terms
+of the Change License, and the rights granted in the paragraph above
+terminate.
+
+If your use of the Licensed Work does not comply with the requirements of this
+License, the Licensor may terminate your rights under this License by notice
+to you, and your rights will terminate automatically if you do not cure the
+violation within 30 days after becoming aware of it.
+
+This License does not grant you any right in the trademarks, service marks,
+brand names, logos, or trade names of the Licensor, except as required for
+reasonable and customary use in describing the origin of the Licensed Work.
+
+If you institute patent litigation against the Licensor or any contributor
+claiming that the Licensed Work or a contribution incorporated within it
+constitutes direct or contributory patent infringement, then any rights
+granted to you under this License for the Licensed Work shall terminate as of
+the date the litigation is filed.
+
+Any redistribution of the Licensed Work must include this License and retain
+all copyright, patent, trademark, and attribution notices present in the
+Licensed Work.

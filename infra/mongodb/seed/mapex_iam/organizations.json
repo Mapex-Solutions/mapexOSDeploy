@@ -1,0 +1,35 @@
+[
+  {
+    "_id": { "$oid": "0000000000000000000aa001" },
+    "name": "MapexOS",
+    "type": "vendor",
+    "parentOrgId": null,
+    "code": "000001",
+    "pathKey": "000001",
+    "depth": 0,
+    "customerId": null,
+    "childCount": 0,
+    "logo": null,
+    "enabled": true,
+    "address": {
+      "zipCode": "01000-000",
+      "city": "São Paulo",
+      "state": "SP",
+      "country": "Brazil"
+    },
+    "phone": "+5511999999999",
+    "authConfig": {
+      "providerType": "internal",
+      "issuerUrl": null,
+      "clientId": null,
+      "jwtClaimMappings": {},
+      "metadata": {}
+    },
+    "accessPolicy": {
+      "rolePolicy": "merge",
+      "defaultScope": "recursive"
+    },
+    "created": { "$date": "2026-01-01T00:00:00.000Z" },
+    "updated": { "$date": "2026-01-01T00:00:00.000Z" }
+  }
+]

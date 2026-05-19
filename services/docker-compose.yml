@@ -1,0 +1,290 @@
+# =============================================================================
+# MapexOS Application Services (Standalone)
+# =============================================================================
+#
+# Pre-built images from Docker Hub. No build tools required.
+# Included automatically by the root docker-compose.yml.
+# Requires infrastructure from infra/docker-compose.yml.
+#
+# Services:
+#   - mapex-iam        : Core platform service        (port 5000)
+#   - http-gateway     : HTTP Gateway / API aggregator (port 5001)
+#   - assets           : Asset management API          (port 5002)
+#   - router           : Event routing                 (port 5003)
+#   - events           : Event processing              (port 5004)
+#   - triggers         : Trigger execution             (port 5006)
+#   - workflow          : DAG workflow engine           (port 5007)
+#   - mapex-vault       : Credential vault             (port 5010)
+#   - js-executor      : Dynamic JS execution engine   (port 8000)
+#   - js-wf-executor   : Workflow JS code node executor (port 8001)
+#   - frontend         : Web UI (nginx)                (port 80)
+#
+# =============================================================================
+
+services:
+  # ===========================================================================
+  # MAPEX IAM SERVICE (port 5000)
+  # ===========================================================================
+  mapex-iam:
+    image: thiagoanselmo/mapex-iam:${IMAGE_TAG}
+    container_name: mapex-iam
+    ports:
+      - "5000:5000"
+    env_file:
+      - ../envs/${ENV_PROFILE}.env
+      - ./mapexIam/envs/mapexIam.env
+    depends_on:
+      mongodb-init:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+      nats-core:
+        condition: service_healthy
+    networks:
+      - mapex-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:5000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ===========================================================================
+  # HTTP GATEWAY SERVICE (port 5001)
+  # ===========================================================================
+  http-gateway:
+    image: thiagoanselmo/http-gateway:${IMAGE_TAG}
+    container_name: mapex-http-gateway
+    ports:
+      - "5001:5001"
+    env_file:
+      - ../envs/${ENV_PROFILE}.env
+      - ./http_gateway/envs/http_gateway.env
+    depends_on:
+      mapex-iam:
+        condition: service_healthy
+    networks:
+      - mapex-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:5001/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ===========================================================================
+  # ASSETS SERVICE (port 5002)
+  # ===========================================================================
+  assets:
+    image: thiagoanselmo/assets:${IMAGE_TAG}
+    container_name: mapex-assets
+    ports:
+      - "5002:5002"
+    env_file:
+      - ../envs/${ENV_PROFILE}.env
+      - ./assets/envs/assets.env
+    depends_on:
+      mapex-iam:
+        condition: service_healthy
+    networks:
+      - mapex-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:5002/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ===========================================================================
+  # ROUTER SERVICE (port 5003)
+  # ===========================================================================
+  router:
+    image: thiagoanselmo/router:${IMAGE_TAG}
+    container_name: mapex-router
+    ports:
+      - "5003:5003"
+    env_file:
+      - ../envs/${ENV_PROFILE}.env
+      - ./router/envs/router.env
+    depends_on:
+      mapex-iam:
+        condition: service_healthy
+    networks:
+      - mapex-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:5003/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ===========================================================================
+  # EVENTS SERVICE (port 5004)
+  # ===========================================================================
+  events:
+    image: thiagoanselmo/events:${IMAGE_TAG}
+    container_name: mapex-events
+    ports:
+      - "5004:5004"
+    env_file:
+      - ../envs/${ENV_PROFILE}.env
+      - ./events/envs/events.env
+    depends_on:
+      mapex-iam:
+        condition: service_healthy
+      clickhouse-init:
+        condition: service_completed_successfully
+    networks:
+      - mapex-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:5004/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ===========================================================================
+  # TRIGGERS SERVICE (port 5006)
+  # ===========================================================================
+  triggers:
+    image: thiagoanselmo/triggers:${IMAGE_TAG}
+    container_name: mapex-triggers
+    ports:
+      - "5006:5006"
+    env_file:
+      - ../envs/${ENV_PROFILE}.env
+      - ./triggers/envs/triggers.env
+    depends_on:
+      mapex-iam:
+        condition: service_healthy
+    networks:
+      - mapex-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:5006/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ===========================================================================
+  # WORKFLOW SERVICE (port 5007)
+  # ===========================================================================
+  workflow:
+    image: thiagoanselmo/workflow:${IMAGE_TAG}
+    container_name: mapex-workflow
+    ports:
+      - "5007:5007"
+    env_file:
+      - ../envs/${ENV_PROFILE}.env
+      - ./workflow/envs/workflow.env
+    depends_on:
+      mapex-iam:
+        condition: service_healthy
+      nats-init:
+        condition: service_completed_successfully
+    networks:
+      - mapex-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:5007/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ===========================================================================
+  # VAULT SERVICE (port 5010)
+  # ===========================================================================
+  mapex-vault:
+    image: thiagoanselmo/mapex-vault:${IMAGE_TAG}
+    container_name: mapex-vault
+    ports:
+      - "5010:5010"
+    env_file:
+      - ../envs/${ENV_PROFILE}.env
+      - ./mapexVault/envs/mapexVault.env
+    depends_on:
+      mapex-iam:
+        condition: service_healthy
+    networks:
+      - mapex-network
+    restart: unless-stopped
+    # PKI material is no longer bootstrapped from disk. The mongodb-init
+    # container (infra compose) generates the CA pair and inserts encrypted
+    # CA docs into mapex_vault.pkiCertificateAuthorities. mapexVault reads
+    # from Mongo only.
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:5010/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ===========================================================================
+  # JS EXECUTOR SERVICE (port 8000)
+  # ===========================================================================
+  js-executor:
+    image: thiagoanselmo/js-executor:${IMAGE_TAG}
+    container_name: mapex-js-executor
+    user: "root"
+    ports:
+      - "8000:8000"
+    env_file:
+      - ../envs/${ENV_PROFILE}.env
+      - ./js_executor/envs/js_executor.env
+    depends_on:
+      assets:
+        condition: service_healthy
+    networks:
+      - mapex-network
+    restart: unless-stopped
+
+  # ===========================================================================
+  # JS WORKFLOW EXECUTOR SERVICE (port 8001)
+  # ===========================================================================
+  js-wf-executor:
+    image: thiagoanselmo/js-wf-executor:${IMAGE_TAG}
+    container_name: mapex-js-wf-executor
+    user: "root"
+    ports:
+      - "8001:8001"
+    env_file:
+      - ../envs/${ENV_PROFILE}.env
+      - ./js_workflow_executor/envs/js_workflow_executor.env
+    depends_on:
+      nats-core:
+        condition: service_healthy
+    networks:
+      - mapex-network
+    restart: unless-stopped
+
+  # ===========================================================================
+  # FRONTEND - Web UI (port 80)
+  # ===========================================================================
+  frontend:
+    image: thiagoanselmo/frontend:${IMAGE_TAG}
+    container_name: mapex-frontend
+    ports:
+      - "80:80"
+    environment:
+      - MAPEXOS_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST}:5000
+      - HTTP_GATEWAY_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST}:5001
+      - ASSETS_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST}:5002
+      - ROUTER_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST}:5003
+      - EVENTS_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST}:5004
+      - TRIGGERS_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST}:5006
+      - WORKFLOW_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST}:5007
+      - VAULT_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST}:5010
+      - JS_EXECUTOR_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST}:8000
+    depends_on:
+      mapex-iam:
+        condition: service_healthy
+    networks:
+      - mapex-network
+    restart: unless-stopped

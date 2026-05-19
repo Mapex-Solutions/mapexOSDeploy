@@ -1,0 +1,1241 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 100,
+      "title": "Event Processing",
+      "type": "row"
+    },
+    {
+      "title": "Events Processed Rate",
+      "description": "Rate of events processed per second, broken down by NATS consumer and status (success/error). This is the primary throughput indicator for the JS Executor. A drop in rate with rising consumer lag indicates the service cannot keep up with incoming events.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 0,
+        "y": 1
+      },
+      "id": 1,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 15,
+            "spanNulls": false,
+            "stacking": {
+              "mode": "none"
+            }
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(jsexec_events_processed_total[5m])",
+          "legendFormat": "{{consumer}} / {{status}}"
+        }
+      ]
+    },
+    {
+      "title": "Event Duration (p50 / p95 / p99)",
+      "description": "End-to-end event processing latency percentiles by consumer. Includes NATS message handling, script lookup, V8 execution, and result publishing. p50 = typical latency, p95 = slow events, p99 = worst case. Compare with script duration to isolate whether overhead is in the framework or the script itself.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 6,
+        "y": 1
+      },
+      "id": 2,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, sum by (le, consumer) (rate(jsexec_event_duration_seconds_bucket[5m])))",
+          "legendFormat": "p50 {{consumer}}"
+        },
+        {
+          "expr": "histogram_quantile(0.95, sum by (le, consumer) (rate(jsexec_event_duration_seconds_bucket[5m])))",
+          "legendFormat": "p95 {{consumer}}"
+        },
+        {
+          "expr": "histogram_quantile(0.99, sum by (le, consumer) (rate(jsexec_event_duration_seconds_bucket[5m])))",
+          "legendFormat": "p99 {{consumer}}"
+        }
+      ]
+    },
+    {
+      "title": "Avg Payload Size",
+      "description": "Average size of incoming event payloads. Large payloads increase serialization overhead and V8 memory pressure. If average size grows unexpectedly, investigate whether upstream datasources are sending bloated events.",
+      "type": "stat",
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 12,
+        "y": 1
+      },
+      "id": 3,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 10000
+              },
+              {
+                "color": "red",
+                "value": 50000
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(jsexec_payload_size_bytes_sum[5m]) / rate(jsexec_payload_size_bytes_count[5m])",
+          "legendFormat": "avg"
+        }
+      ]
+    },
+    {
+      "title": "Total Events Processed",
+      "description": "Cumulative count of all events processed since the service started. Provides an at-a-glance view of total throughput volume.",
+      "type": "stat",
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 16,
+        "y": 1
+      },
+      "id": 4,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "sum(jsexec_events_processed_total)",
+          "legendFormat": "total"
+        }
+      ]
+    },
+    {
+      "title": "Total Script Errors",
+      "description": "Cumulative count of script execution errors since startup. Errors indicate user scripts throwing exceptions or timing out. Sustained growth requires reviewing script code or increasing timeouts.",
+      "type": "stat",
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 20,
+        "y": 1
+      },
+      "id": 5,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 10
+              },
+              {
+                "color": "red",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "sum(jsexec_script_errors_total)",
+          "legendFormat": "errors"
+        }
+      ]
+    },
+    {
+      "title": "Workers (gauge)",
+      "description": "Current number of active Piscina worker threads. This represents the parallel V8 execution capacity. If all workers are busy, new tasks queue up, increasing wait duration.",
+      "type": "stat",
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 12,
+        "y": 5
+      },
+      "id": 6,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 8
+              },
+              {
+                "color": "red",
+                "value": 16
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "jsexec_piscina_workers{job=\"jsexec\"}",
+          "legendFormat": "workers"
+        }
+      ]
+    },
+    {
+      "title": "Piscina Completed Total",
+      "description": "Cumulative count of tasks completed by the Piscina worker pool since startup. Compare with total events processed to verify that every event results in a completed task.",
+      "type": "stat",
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 16,
+        "y": 5
+      },
+      "id": 7,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "jsexec_piscina_completed_total{job=\"jsexec\"}",
+          "legendFormat": "completed"
+        }
+      ]
+    },
+    {
+      "title": "Batch Size (p50 / p95)",
+      "description": "Number of messages fetched per NATS batch. Larger batches improve throughput but increase per-batch latency. If p95 is consistently at max batch size, the service is under sustained load.",
+      "type": "stat",
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 20,
+        "y": 5
+      },
+      "id": 8,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, rate(jsexec_batch_size_bucket[5m]))",
+          "legendFormat": "p50"
+        },
+        {
+          "expr": "histogram_quantile(0.95, rate(jsexec_batch_size_bucket[5m]))",
+          "legendFormat": "p95"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 101,
+      "title": "Script Execution",
+      "type": "row"
+    },
+    {
+      "title": "Script Duration by Type (p50 / p95 / p99)",
+      "description": "V8 script execution time per script type. This measures only the time inside the V8 isolate, excluding framework overhead. High p99 values indicate scripts with expensive computations or blocking operations. Compare with event duration to see framework overhead.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 10
+      },
+      "id": 9,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, sum by (le, script_type) (rate(jsexec_script_duration_seconds_bucket[5m])))",
+          "legendFormat": "p50 {{script_type}}"
+        },
+        {
+          "expr": "histogram_quantile(0.95, sum by (le, script_type) (rate(jsexec_script_duration_seconds_bucket[5m])))",
+          "legendFormat": "p95 {{script_type}}"
+        },
+        {
+          "expr": "histogram_quantile(0.99, sum by (le, script_type) (rate(jsexec_script_duration_seconds_bucket[5m])))",
+          "legendFormat": "p99 {{script_type}}"
+        }
+      ]
+    },
+    {
+      "title": "Script Errors Rate",
+      "description": "Script execution errors per second by script type and error type (timeout, runtime, compilation). Helps distinguish between user code errors and infrastructure issues. A spike in timeout errors may require increasing the per-node timeout configuration.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 10
+      },
+      "id": 10,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "bars",
+            "lineWidth": 1,
+            "fillOpacity": 50
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(jsexec_script_errors_total[5m])",
+          "legendFormat": "{{script_type}} / {{error_type}}"
+        }
+      ]
+    },
+    {
+      "title": "Compile Duration (p50 / p99)",
+      "description": "Script compilation time by source (fresh compile vs bytecode restore). Bytecode restores should be significantly faster than fresh compiles. If fresh compile rate is high, the bytecode cache may not be functioning properly.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 10
+      },
+      "id": 11,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, sum by (le, source) (rate(jsexec_compile_duration_seconds_bucket[5m])))",
+          "legendFormat": "p50 {{source}}"
+        },
+        {
+          "expr": "histogram_quantile(0.99, sum by (le, source) (rate(jsexec_compile_duration_seconds_bucket[5m])))",
+          "legendFormat": "p99 {{source}}"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 102,
+      "title": "Cache Tiers",
+      "type": "row"
+    },
+    {
+      "title": "Script Registry Hit Rate",
+      "description": "In-memory compiled script cache hit ratio. Higher is better -- hits avoid recompilation. A low hit rate means scripts are being evicted frequently; consider increasing the registry size or checking for excessive script variations.",
+      "type": "gauge",
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 0,
+        "y": 19
+      },
+      "id": 12,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0.5
+              },
+              {
+                "color": "green",
+                "value": 0.9
+              }
+            ]
+          },
+          "unit": "percentunit",
+          "min": 0,
+          "max": 1
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(jsexec_script_registry_total{result=\"hit\"}[5m]) / (rate(jsexec_script_registry_total{result=\"hit\"}[5m]) + rate(jsexec_script_registry_total{result=\"miss\"}[5m]))",
+          "legendFormat": "hit rate"
+        }
+      ]
+    },
+    {
+      "title": "Asset Cache by Tier",
+      "description": "Asset cache lookups per second by tier (memory, redis, origin). The tiered cache serves asset data (device metadata). Most lookups should hit memory or redis. Frequent origin hits indicate cache misses that trigger database queries.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 4,
+        "y": 19
+      },
+      "id": 13,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 15
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(jsexec_asset_cache_total[5m])",
+          "legendFormat": "{{tier}}"
+        }
+      ]
+    },
+    {
+      "title": "Template Cache by Tier",
+      "description": "Template cache lookups per second by tier. Templates define the structure for asset data transformation scripts. Cache misses trigger fetches from the assets service.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 9,
+        "y": 19
+      },
+      "id": 14,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 15
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(jsexec_template_cache_total[5m])",
+          "legendFormat": "{{tier}}"
+        }
+      ]
+    },
+    {
+      "title": "Bytecode Cache by Tier",
+      "description": "Bytecode cache lookups per second by tier. Bytecode caching avoids recompiling V8 scripts from source on every execution. Frequent misses at lower tiers (memory) with hits at higher tiers (redis) indicate memory pressure.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 14,
+        "y": 19
+      },
+      "id": 15,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 15
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(jsexec_bytecode_cache_total[5m])",
+          "legendFormat": "{{tier}}"
+        }
+      ]
+    },
+    {
+      "title": "Script Registry by Result",
+      "description": "Script registry lookups per second by result (hit/miss). The script registry is the fastest cache layer -- an in-memory map of compiled scripts. Monitoring hit vs miss rate helps tune registry eviction policies.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 19,
+        "y": 19
+      },
+      "id": 16,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 15
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(jsexec_script_registry_total[5m])",
+          "legendFormat": "{{result}}"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 27
+      },
+      "id": 103,
+      "title": "Piscina Worker Pool",
+      "type": "row"
+    },
+    {
+      "title": "Piscina Completed Rate",
+      "description": "Rate of tasks completed by the Piscina worker pool per second. This is the effective throughput of the V8 execution layer. Compare with events processed rate to verify 1:1 correspondence. A divergence may indicate dropped or retried tasks.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 28
+      },
+      "id": 17,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "green",
+            "mode": "fixed"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 15
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(jsexec_piscina_completed_total[5m])",
+          "legendFormat": "completed/s"
+        }
+      ]
+    },
+    {
+      "title": "Run Duration (p50 / p95 / p99)",
+      "description": "Piscina task run duration -- the time a worker thread spends executing a task. This includes V8 script execution and result serialization. High values indicate expensive scripts or large result payloads.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 28
+      },
+      "id": 18,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, rate(jsexec_piscina_run_duration_seconds_bucket[5m]))",
+          "legendFormat": "run p50"
+        },
+        {
+          "expr": "histogram_quantile(0.95, rate(jsexec_piscina_run_duration_seconds_bucket[5m]))",
+          "legendFormat": "run p95"
+        },
+        {
+          "expr": "histogram_quantile(0.99, rate(jsexec_piscina_run_duration_seconds_bucket[5m]))",
+          "legendFormat": "run p99"
+        }
+      ]
+    },
+    {
+      "title": "Wait Duration (p50 / p95 / p99)",
+      "description": "Time tasks spend waiting in the Piscina queue before a worker picks them up. High wait times mean all workers are busy and tasks are queuing. If p95 wait > 100ms, consider increasing the worker count or reducing script execution time.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 28
+      },
+      "id": 19,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, rate(jsexec_piscina_wait_duration_seconds_bucket[5m]))",
+          "legendFormat": "wait p50"
+        },
+        {
+          "expr": "histogram_quantile(0.95, rate(jsexec_piscina_wait_duration_seconds_bucket[5m]))",
+          "legendFormat": "wait p95"
+        },
+        {
+          "expr": "histogram_quantile(0.99, rate(jsexec_piscina_wait_duration_seconds_bucket[5m]))",
+          "legendFormat": "wait p99"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 36
+      },
+      "id": 104,
+      "title": "NATS Consumer",
+      "type": "row"
+    },
+    {
+      "title": "Consumer Lag",
+      "description": "Number of pending (unprocessed) messages per NATS consumer. Sustained lag indicates the service is consuming slower than messages are being produced. Monitor this alongside worker pool utilization to determine if scaling is needed.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 37
+      },
+      "id": 20,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 20
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "jsexec_nats_consumer_lag{job=\"jsexec\"}",
+          "legendFormat": "{{consumer}}"
+        }
+      ]
+    },
+    {
+      "title": "Batch Size (p50 / p95)",
+      "description": "Messages fetched per NATS batch. Larger batches improve throughput but increase per-batch latency. If p95 is consistently at max batch size, the service is under sustained load and may benefit from more workers.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 37
+      },
+      "id": 21,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, rate(jsexec_batch_size_bucket[5m]))",
+          "legendFormat": "p50"
+        },
+        {
+          "expr": "histogram_quantile(0.95, rate(jsexec_batch_size_bucket[5m]))",
+          "legendFormat": "p95"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 45
+      },
+      "id": 105,
+      "title": "Node.js Runtime",
+      "type": "row"
+    },
+    {
+      "title": "Heap Memory",
+      "description": "V8 heap memory: 'used' = live objects; 'total' = allocated heap. If used approaches total, V8 will trigger more frequent GC.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 0,
+        "y": 46
+      },
+      "id": 22,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 15
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "nodejs_heap_size_used_bytes{job=\"jsexec\"}",
+          "legendFormat": "heap used"
+        },
+        {
+          "expr": "nodejs_heap_size_total_bytes{job=\"jsexec\"}",
+          "legendFormat": "heap total"
+        }
+      ]
+    },
+    {
+      "title": "Event Loop Lag",
+      "description": "Node.js event loop lag. p50 shows typical responsiveness; p99 shows worst-case blocking. Values above 100ms indicate the event loop is being blocked.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 4,
+        "y": 46
+      },
+      "id": 23,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "nodejs_eventloop_lag_p50_seconds{job=\"jsexec\"}",
+          "legendFormat": "p50"
+        },
+        {
+          "expr": "nodejs_eventloop_lag_p99_seconds{job=\"jsexec\"}",
+          "legendFormat": "p99"
+        }
+      ]
+    },
+    {
+      "title": "Process Memory & CPU",
+      "description": "RSS = actual physical memory. CPU rate = cores consumed per second.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 8,
+        "y": 46
+      },
+      "id": 24,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 15
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "process_resident_memory_bytes{job=\"jsexec\"}",
+          "legendFormat": "RSS"
+        },
+        {
+          "expr": "rate(process_cpu_seconds_total{job=\"jsexec\"}[5m])",
+          "legendFormat": "CPU (rate)"
+        }
+      ]
+    },
+    {
+      "title": "GC Duration",
+      "description": "V8 garbage collection pause time per second.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 12,
+        "y": 46
+      },
+      "id": 25,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "red",
+            "mode": "fixed"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(nodejs_gc_duration_seconds_sum{job=\"jsexec\"}[5m])",
+          "legendFormat": "GC time/s"
+        }
+      ]
+    },
+    {
+      "title": "Active Handles",
+      "description": "Active handles (sockets, timers, etc.). Sustained growth may indicate handle leaks.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 16,
+        "y": 46
+      },
+      "id": 26,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 20
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "nodejs_active_handles_total{job=\"jsexec\"}",
+          "legendFormat": "handles"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 54
+      },
+      "id": 106,
+      "title": "Heartbeat Gate",
+      "type": "row"
+    },
+    {
+      "type": "stat",
+      "title": "Implicit heartbeats published/sec",
+      "description": "Heartbeats emitted by js-executor when asset.healthMonitor.enabled=true and heartbeatMode='implicit'.",
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 55
+      },
+      "id": 107,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "rate(js_executor_heartbeats_published_total[5m])",
+          "legendFormat": "published",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Heartbeats skipped by reason",
+      "description": "Skip rate split by reason: 'disabled' (asset.healthMonitor.enabled=false) or 'explicit_mode' (heartbeatMode='explicit').",
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 55
+      },
+      "id": 108,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "sum by (reason) (rate(js_executor_heartbeats_skipped_total[5m]))",
+          "legendFormat": "{{reason}}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps"
+        },
+        "overrides": []
+      }
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": [
+    "jsexec",
+    "js_executor",
+    "nodejs"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "Prometheus",
+          "value": "prometheus"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "type": "datasource"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "JS Executor - Overview",
+  "uid": "jsexec-overview",
+  "version": 2
+}

@@ -1,0 +1,707 @@
+# =============================================================================
+# MapexOS Infrastructure (Standalone)
+# =============================================================================
+#
+# All infrastructure required by MapexOS services.
+# Included automatically by the root docker-compose.yml.
+#
+# Services:
+#   - Redis      : Cache layer (port 6379)
+#   - MongoDB    : Document database (port 27017, ReplicaSet rs0)
+#   - ClickHouse : Time-series analytics (ports 8123, 9440)
+#   - MinIO      : Object storage S3 (ports 9000, 9001)
+#   - NATS Core  : Message broker (ports 4222, 8222)
+#   - Mapex Broker MQTT : Mosquitto + plugins (port 1883)
+#   - Prometheus : Metrics collection (port 9090)
+#   - Grafana    : Metrics visualization (port 3001)
+#
+# =============================================================================
+
+services:
+  # ===========================================================================
+  # REDIS - Cache Layer
+  # ===========================================================================
+  redis:
+    image: redis:7-alpine
+    container_name: mapex-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/conf/redis.conf:/usr/local/etc/redis/redis.conf:ro
+      - ./redis/data:/data
+    command: redis-server /usr/local/etc/redis/redis.conf
+    networks:
+      - mapex-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # ===========================================================================
+  # MONGODB - Document Database (ReplicaSet rs0)
+  # ===========================================================================
+  mongodb:
+    image: mongo:7
+    container_name: mapex-mongodb
+    ports:
+      - "27017:27017"
+    command: ["--replSet", "rs0", "--bind_ip_all"]
+    volumes:
+      - ./mongodb/data:/data/db
+    networks:
+      - mapex-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "try { rs.status().ok } catch(e) { 0 }"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # MongoDB Init - ReplicaSet + PKI bootstrap + Seed Data
+  # On a fresh DB it generates the platform PKI, drops broker certs into
+  # ./broker-certs (the broker mounts this), envelope-encrypts the CA
+  # private keys with CREDENTIAL_MASTER_KEY, and inserts the documents
+  # into mapex_vault.pkiCertificateAuthorities. Idempotent on re-runs.
+  # Image is published from the private mapexOS source repo; do not build
+  # locally.
+  mongodb-init:
+    image: thiagoanselmo/mongodb-init:${IMAGE_TAG}
+    container_name: mapex-mongodb-init
+    depends_on:
+      mongodb:
+        condition: service_started
+    volumes:
+      - ./mongodb/seed:/seed:ro
+      - ./broker-certs:/broker-certs
+    networks:
+      - mapex-network
+    restart: "no"
+    env_file:
+      - ../envs/${ENV_PROFILE}.env
+    environment:
+      MONGO_HOST: mongodb
+      # standalone runs every service inside compose — RS member host is
+      # the container name.
+      RS_HOST: mongodb
+      # DB_PREFIX is keyed to GO_ENV so multiple environments share the
+      # same MongoDB instance without collisions (dev-mapex_vault vs
+      # prod-mapex_vault). Image tag is independent (IMAGE_TAG above).
+      DB_PREFIX: ${GO_ENV}-
+      PKI_BROKER_CN: mapex-mqtt-broker
+      PKI_BROKER_SAN: mapex-mqtt-broker,localhost,127.0.0.1
+
+  # ===========================================================================
+  # CLICKHOUSE - Time-Series Analytics
+  # ===========================================================================
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    container_name: mapex-clickhouse
+    ports:
+      - "8123:8123"   # HTTP interface
+      - "9440:9000"   # Native TCP
+    env_file:
+      - ../envs/${ENV_PROFILE}.env
+    environment:
+      # CLICKHOUSE_DB / USER / PASSWORD come from the env_file above —
+      # envs/<profile>.env provides both the upstream-image-style aliases
+      # and the service-style names from the same value.
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1
+    volumes:
+      - ./clickhouse/conf/config.xml:/etc/clickhouse-server/config.d/config.xml:ro
+      - ./clickhouse/data:/var/lib/clickhouse
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    networks:
+      - mapex-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8123/ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # ClickHouse Init - Creates tables on startup
+  clickhouse-init:
+    image: clickhouse/clickhouse-server:latest
+    container_name: mapex-clickhouse-init
+    depends_on:
+      clickhouse:
+        condition: service_healthy
+    volumes:
+      - ./clickhouse/seed:/seed:ro
+    env_file:
+      - ../envs/${ENV_PROFILE}.env
+    environment:
+      # CLICKHOUSE_HOST / PORT pin the in-network target so we don't rely
+      # on the env_file (which may use a managed-cluster URI in prod).
+      # CLICKHOUSE_USER / CLICKHOUSE_PASSWORD come from env_file.
+      CLICKHOUSE_HOST: clickhouse
+      CLICKHOUSE_PORT: 9000
+    networks:
+      - mapex-network
+    restart: "no"
+    entrypoint: ["bash", "/seed/seed.sh"]
+
+  # ===========================================================================
+  # MINIO - Object Storage (S3 Compatible)
+  # ===========================================================================
+  minio:
+    image: minio/minio:latest
+    container_name: mapex-minio
+    ports:
+      - "9000:9000"   # S3 API
+      - "9001:9001"   # Console
+    env_file:
+      - ./minio/conf/minio.env
+    volumes:
+      - ./minio/data:/data
+    command: server /data --console-address ":9001"
+    networks:
+      - mapex-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # MinIO Init - Creates buckets on startup
+  minio-init:
+    image: minio/mc:latest
+    container_name: mapex-minio-init
+    depends_on:
+      minio:
+        condition: service_healthy
+    env_file:
+      - ./minio/conf/minio.env
+    networks:
+      - mapex-network
+    restart: "no"
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        echo "=== Configuring MinIO client ==="
+        mc alias set mapex http://minio:9000 $${MINIO_ROOT_USER} $${MINIO_ROOT_PASSWORD}
+
+        echo "=== Creating buckets ==="
+
+        mc mb mapex/mapex-assets --ignore-existing
+        echo "Bucket mapex-assets created"
+
+        mc mb mapex/mapex-templates --ignore-existing
+        echo "Bucket mapex-templates created"
+
+        mc mb mapex/mapex-bytecode --ignore-existing
+        echo "Bucket mapex-bytecode created"
+
+        mc mb mapex/mapex-exports --ignore-existing
+        echo "Bucket mapex-exports created"
+
+        mc mb mapex/mapex-workflows --ignore-existing
+        echo "Bucket mapex-workflows created"
+
+        # mapex-asset-auth: Slim auth projection (TieredAuthStore L2)
+        # Used by: mapex-broker-mqtt plugin. Keyed flat by `{assetUUID}.json`
+        # so the broker can fetch the auth payload with a single bare-key
+        # lookup. Distinct from mapex-assets — that bucket carries the
+        # wider AssetReadModel consumed by Router / JS-Executor / Events.
+        mc mb mapex/mapex-asset-auth --ignore-existing
+        echo "Bucket mapex-asset-auth created"
+
+        echo "=== Setting bucket policies ==="
+        mc anonymous set none mapex/mapex-assets
+        mc anonymous set none mapex/mapex-templates
+        mc anonymous set none mapex/mapex-bytecode
+        mc anonymous set none mapex/mapex-workflows
+        mc anonymous set none mapex/mapex-asset-auth
+
+        echo "=== Listing buckets ==="
+        mc ls mapex
+
+        echo "=== MinIO initialization complete ==="
+
+  # ===========================================================================
+  # NATS CORE - Central Message Broker
+  # ===========================================================================
+  nats-core:
+    image: nats:2.12-alpine
+    container_name: mapex-nats-core
+    ports:
+      - "4222:4222"   # Client connections
+      - "8222:8222"   # HTTP monitoring
+    volumes:
+      - ./nats/conf/core/nats.conf:/etc/nats/nats.conf:ro
+      - ./nats/data/core:/data
+    command: ["-c", "/etc/nats/nats.conf"]
+    networks:
+      - mapex-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8222/healthz"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # ===========================================================================
+  # MAPEX BROKER MQTT - MapexOS-flavored Mosquitto
+  #
+  # Pre-built image (thiagoanselmo/mapex-broker-mqtt) bundling Mosquitto v2 +
+  # the in-house mapex-broker plugin (ACL + presence + ingress) +
+  # mosquitto-go-auth (HTTP auth callout to assets MS). Operators do not
+  # build this image; CI publishes it. See
+  # mapexGoKit/plugins/mosquitto_broker/README.md for tagging + publish.
+  #
+  # Required env (operator must export):
+  #   - INTERNAL_API_KEY  must equal the assets MS internal_api_key
+  # ===========================================================================
+  mapex-broker-mqtt:
+    image: thiagoanselmo/mapex-broker-mqtt:${IMAGE_TAG}
+    container_name: mapex-broker-mqtt
+    ports:
+      - "1883:1883"
+    env_file:
+      - ../envs/${ENV_PROFILE}.env
+    environment:
+      # Credentials (INTERNAL_API_KEY, CACHE_L2_ACCESS_KEY,
+      # CACHE_L2_SECRET_KEY) come from the env_file above. The keys below
+      # are platform-internal constants or GO_ENV-derived subjects.
+      NATS_URL: nats://nats-core:4222
+      ASSETS_HOST: assets
+      ASSETS_PORT: "5002"
+      # NATS subjects are keyed to GO_ENV (not IMAGE_TAG) so multiple
+      # environments can share the same NATS cluster.
+      NATS_SUBJECT_PRESENCE: ${GO_ENV}.mapexos.mqtt.presence.advisory
+      NATS_SUBJECT_INGRESS_PREFIX: ${GO_ENV}.mapexos.mqtt.data
+      AUTH_CACHE_SECONDS: "60"
+      AUTH_CACHE_JITTER: "10"
+      PLUGIN_WORKER_POOL_SIZE: "4"
+      PLUGIN_BUFFER_SIZE: "10000"
+      # TieredAuthStore L1 (Pebble on NVMe inside container) + L2 (MinIO).
+      # L1 is always on; L2 points at the `mapex-asset-auth` bucket the
+      # Assets MS writes its slim AuthProjection to (key shape
+      # `{assetUUID}.json`). The bucket name is fixed by the platform
+      # contract and NOT operator-configurable on the broker side.
+      CACHE_L1_PATH: /var/cache/mqtt
+      CACHE_L1_TTL_MINUTES: "30"
+      CACHE_L2_ENDPOINT: minio:9000
+      CACHE_L2_USE_SSL: "false"
+      FANOUT_INVALIDATE_SUBJECT: ${GO_ENV}.mapexos.fanout.asset.invalidate
+    depends_on:
+      nats-core:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+      # Wait for mongodb-init to finish so the PKI bootstrap has written
+      # server.crt / server.key / ca-chain.pem into the broker volume.
+      mongodb-init:
+        condition: service_completed_successfully
+    networks:
+      - mapex-network
+    restart: unless-stopped
+    volumes:
+      - ./mosquitto/data:/mosquitto/data
+      - ./broker-certs:/mosquitto/certs:ro
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z 127.0.0.1 1883 || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # ===========================================================================
+  # NATS STREAMS INIT - Creates JetStream streams on startup
+  #
+  # Stream names follow the canonical pattern ${ENV}-MAPEXOS-{SERVICE}-{CONTEXT}
+  # (uppercase env), subjects follow ${env}.mapexos.{service}.{action} (lowercase
+  # env). ENV is resolved at container runtime from GO_ENV (default "dev"),
+  # so multiple environments can share the same NATS cluster without collisions.
+  #
+  # On startup the container drops every legacy stream name from a fixed list
+  # (one-shot migration; no production data on these streams).
+  # ===========================================================================
+  nats-init:
+    image: natsio/nats-box:latest
+    container_name: mapex-nats-init
+    env_file:
+      - ../envs/${ENV_PROFILE}.env
+    environment:
+      GO_ENV: ${GO_ENV}
+    depends_on:
+      nats-core:
+        condition: service_healthy
+    networks:
+      - mapex-network
+    restart: "no"
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        echo "=== Waiting for NATS servers to be ready ==="
+        sleep 3
+
+        ENV=$${GO_ENV}
+        UPPER_ENV=$$(echo "$$ENV" | tr '[:lower:]' '[:upper:]')
+        LOWER_ENV=$$(echo "$$ENV" | tr '[:upper:]' '[:lower:]')
+        echo "[nats-init] env=$$ENV upper=$$UPPER_ENV lower=$$LOWER_ENV"
+
+        CORE_URL="nats://$${NATS_USERNAME}:$${NATS_PASSWORD}@nats-core:4222"
+        # mapex-mqtt-broker is the device entry point.
+
+        echo "=== Dropping legacy stream names on CORE ==="
+        LEGACY_STREAMS="EVENTS EVENTS-RAW EVENTS-ASSET-STATUS EVENTS-BUSINESSRULE EVENTS-JSEXEC EVENTS-ROUTER EVENTS-TRIGGER EVENTS-WORKFLOW WORKFLOW-EXECUTION WORKFLOW-RESUME WORKFLOW-STATE WORKFLOW-SIGNAL WORKFLOW-LOGS WORKFLOW-SCHEDULE WORKFLOW-JS-CODE ASSET-HEARTBEAT ASSET-HEALTH-MONITOR MAPEXOS-MQTT-PRESENCE MAPEXOS-LISTS FANOUT ROUTE-GROUPS TRIGGERS PROCESSOR-JS-EXECUTE MQTT-DATA MAPEX-VAULT VAULT-SCHEDULE VAULT-RECONCILER MAPEXOS_CACHE_INVALIDATION MAPEXOS-DLQ MAPEXOS"
+        for s in $$LEGACY_STREAMS; do
+          nats stream rm "$$s" -f --server="$$CORE_URL" 2>/dev/null || true
+        done
+        # Drop env-prefixed legacy name that the FANOUT stream had before
+        # being promoted to platform-wide (was ASSETS-FANOUT, now FANOUT).
+        nats stream rm "$${UPPER_ENV}-MAPEXOS-ASSETS-FANOUT" -f --server="$$CORE_URL" 2>/dev/null || true
+        echo "[nats-init] legacy streams dropped"
+
+        # stream_ensure: add or update a JetStream stream idempotently.
+        # POSIX sh (busybox/ash) — no bash arrays, so we filter `--defaults`
+        # out of the positional params using the sentinel trick. `nats stream
+        # add` errors out (code 10058) when the stream exists with a
+        # different config; for existing streams we call `nats stream
+        # update` to apply mutable fields (description, subjects, limits).
+        # Structural changes (storage, retention) still error, which is
+        # intentional. `update` rejects `--defaults` (no such option),
+        # `--no-interactive -f` suppresses the editor prompt + confirmation.
+        stream_ensure() {
+          name="$$1"
+          shift
+          if nats stream info "$$name" --server="$$CORE_URL" >/dev/null 2>&1; then
+            # Stream exists — `nats stream update` only accepts mutable
+            # fields and rejects --storage / --defaults. We just sync the
+            # description (the only metadata we want to keep aligned with
+            # the compose file); structural reconfig still requires manual
+            # drop + recreate, which is the right default.
+            desc=""
+            for arg in "$$@"; do
+              case "$$arg" in
+                --description=*) desc="$$arg" ;;
+              esac
+            done
+            if [ -n "$$desc" ]; then
+              nats stream update "$$name" "$$desc" --server="$$CORE_URL" --no-interactive -f >/dev/null
+            fi
+          else
+            nats stream add "$$name" "$$@" --server="$$CORE_URL"
+          fi
+        }
+
+        echo "=== Creating canonical streams on NATS CORE ==="
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-JSEXECUTOR-MQTTDATA" \
+          --description="Republished MQTT telemetry from mapex-mqtt-broker" \
+          --subjects="$${LOWER_ENV}.mapexos.mqtt.data.>" \
+          --storage=file \
+          --retention=work \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-EVENTS-SAVE" \
+          --description="Processed event save sink from router" \
+          --subjects="$${LOWER_ENV}.mapexos.events.save" \
+          --storage=file \
+          --retention=limits \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-EVENTS-RAW" \
+          --description="Raw telemetry events" \
+          --subjects="$${LOWER_ENV}.mapexos.events.raw" \
+          --storage=file \
+          --retention=work \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-EVENTS-ASSET-STATUS" \
+          --description="Asset connectivity transitions (offline/online)" \
+          --subjects="$${LOWER_ENV}.mapexos.events.asset_status_save" \
+          --storage=file \
+          --retention=work \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-EVENTS-ROUTER-LOGS" \
+          --description="Router execution history" \
+          --subjects="$${LOWER_ENV}.mapexos.events.router" \
+          --storage=file \
+          --retention=work \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-EVENTS-BUSINESSRULE" \
+          --description="Business rule execution history" \
+          --subjects="$${LOWER_ENV}.mapexos.events.businessrule" \
+          --storage=file \
+          --retention=work \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-EVENTS-JSEXECUTOR-LOGS" \
+          --description="JS executor debug logs" \
+          --subjects="$${LOWER_ENV}.mapexos.events.logs.jsexecutor" \
+          --storage=file \
+          --retention=work \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-EVENTS-TRIGGERS-LOGS" \
+          --description="Trigger execution history" \
+          --subjects="$${LOWER_ENV}.mapexos.events.trigger" \
+          --storage=file \
+          --retention=work \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-EVENTS-WORKFLOW-LOGS" \
+          --description="Workflow execution history" \
+          --subjects="$${LOWER_ENV}.mapexos.events.workflow" \
+          --storage=file \
+          --retention=work \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-JSEXECUTOR-PROCESS" \
+          --description="JS script execution requests" \
+          --subjects="$${LOWER_ENV}.mapexos.processor.js.execute" \
+          --storage=file \
+          --retention=work \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-ROUTER-EXECUTE" \
+          --description="Route execution events" \
+          --subjects="$${LOWER_ENV}.mapexos.route.execute" \
+          --storage=file \
+          --retention=work \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-MAPEXOSGOKIT-DLQ" \
+          --description="Unified dead-letter queue for every service" \
+          --subjects="$${LOWER_ENV}.mapexos.mapexosgokit.dlq" \
+          --storage=file \
+          --retention=limits \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-ASSETS-LISTS" \
+          --description="List updates (manufacturer/model/category)" \
+          --subjects="$${LOWER_ENV}.mapexos.lists.>" \
+          --storage=file \
+          --retention=work \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-MAPEXIAM-CACHE-INVALIDATION" \
+          --description="MapexIam cache invalidation" \
+          --subjects="$${LOWER_ENV}.mapexos.cache.invalidation.>" \
+          --storage=file \
+          --retention=limits \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-TRIGGERS-EXECUTE" \
+          --description="Trigger dispatch from router/workflow" \
+          --subjects="$${LOWER_ENV}.mapexos.trigger.>" \
+          --storage=file \
+          --retention=work \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-MAPEXVAULT-EVENTS" \
+          --description="Credential lifecycle events" \
+          --subjects="$${LOWER_ENV}.mapexos.vault.events" \
+          --storage=file \
+          --retention=limits \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-MAPEXIAM-ORGANIZATIONS" \
+          --description="Organization lifecycle events" \
+          --subjects="$${LOWER_ENV}.mapexos.events.organization.>" \
+          --storage=file \
+          --retention=limits \
+          --defaults
+
+        # Platform-wide FANOUT cache invalidation broadcast (TieredCache L0/L1).
+        # Memory storage for speed, short retention. Subjects span every
+        # publisher (assets, workflow, future services) under fanout.>.
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-FANOUT" \
+          --description="Platform-wide cache invalidation broadcast" \
+          --subjects="$${LOWER_ENV}.mapexos.fanout.>" \
+          --storage=memory \
+          --retention=limits \
+          --max-age=5m \
+          --max-msgs=10000 \
+          --max-bytes=10485760 \
+          --discard=old \
+          --defaults
+
+        # Platform L2 write retry stream — fallback for synchronous
+        # MinIO write failures. Asset and assettemplate modules
+        # publish here when the happy-path L2 write fails; in-module
+        # consumers retry against current Mongo state and emit FANOUT
+        # on success. NATS-native Msg-Id dedup with a 5s window
+        # coalesces rapid successive failures on the same entity.
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-L2-WRITES" \
+          --description="L2 write retry stream for durable cache sync" \
+          --subjects="$${LOWER_ENV}.mapexos.l2_writes.>" \
+          --storage=file \
+          --retention=work \
+          --max-age=24h \
+          --dupe-window=5s \
+          --discard=old \
+          --defaults
+
+        echo "=== Creating Workflow streams on NATS CORE ==="
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-WORKFLOW-EXECUTION" \
+          --description="Workflow instance execution commands" \
+          --subjects="$${LOWER_ENV}.mapexos.workflow.execution.>" \
+          --storage=file \
+          --retention=work \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-WORKFLOW-RESUME" \
+          --description="Workflow resume signals for suspended instances" \
+          --subjects="$${LOWER_ENV}.mapexos.workflow.resume.>" \
+          --storage=file \
+          --retention=work \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-WORKFLOW-STATE" \
+          --description="Workflow lifecycle state events" \
+          --subjects="$${LOWER_ENV}.mapexos.workflow.state.>" \
+          --storage=file \
+          --retention=work \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-WORKFLOW-SIGNAL" \
+          --description="Workflow external signal delivery" \
+          --subjects="$${LOWER_ENV}.mapexos.workflow.signal.>" \
+          --storage=file \
+          --retention=work \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-WORKFLOW-LOGS" \
+          --description="Per-step workflow execution logs" \
+          --subjects="$${LOWER_ENV}.mapexos.workflow.logs.>" \
+          --storage=file \
+          --retention=work \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-WORKFLOW-SCHEDULE" \
+          --description="Workflow schedule (long-retention, scheduled msgs)" \
+          --subjects="$${LOWER_ENV}.mapexos.workflow.schedule.>" \
+          --storage=file \
+          --retention=limits \
+          --max-age=720h \
+          --allow-schedules \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-JSWORKFLOWEXECUTOR-CODE" \
+          --description="Workflow code node execution requests" \
+          --subjects="$${LOWER_ENV}.mapexos.workflow.js.code" \
+          --storage=file \
+          --retention=work \
+          --defaults
+
+        echo "=== Creating Health Monitor streams on NATS CORE ==="
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-ASSETS-HEARTBEAT" \
+          --description="Asset heartbeat ingestion (JS Executor, LoRaWAN, CoAP)" \
+          --subjects="$${LOWER_ENV}.mapexos.asset.heartbeat.>" \
+          --storage=file \
+          --retention=work \
+          --max-age=1h \
+          --defaults
+
+        # MQTT presence — mapex-mqtt-broker plugin publishes connect +
+        # disconnect to a single subject; both consumers filter inside
+        # the assets MS healthmonitor module by the Event field.
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-ASSETS-MQTT-PRESENCE" \
+          --description="MQTT broker presence advisories (connect/disconnect)" \
+          --subjects="$${LOWER_ENV}.mapexos.mqtt.presence.advisory" \
+          --storage=file \
+          --retention=work \
+          --max-age=5m \
+          --discard=old \
+          --replicas=$${STREAM_REPLICAS:-1} \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-ASSETS-HEALTH-MONITOR" \
+          --description="Health monitor periodic scan scheduler" \
+          --subjects="$${LOWER_ENV}.mapexos.healthmonitor.>" \
+          --storage=file \
+          --retention=work \
+          --dupe-window=10s \
+          --allow-schedules \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-MAPEXVAULT-RECONCILER" \
+          --description="Vault reconciler loop (credential refresh safety-net)" \
+          --subjects="$${LOWER_ENV}.mapexos.vault.reconcile.>" \
+          --storage=file \
+          --retention=work \
+          --dupe-window=10s \
+          --allow-schedules \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-MAPEXVAULT-SCHEDULE" \
+          --description="Vault credential refresh schedule" \
+          --subjects="$${LOWER_ENV}.mapexos.vault.schedule.>" \
+          --storage=file \
+          --retention=limits \
+          --max-age=720h \
+          --allow-schedules \
+          --defaults
+
+        # mapex-mqtt-broker is the device entry point.
+
+        echo "=== Listing streams ==="
+        echo "--- CORE ---"
+        nats stream list --server="$$CORE_URL"
+
+        echo "=== NATS streams initialization complete ==="
+
+  # ===========================================================================
+  # PROMETHEUS - Metrics Collection
+  # ===========================================================================
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: mapex-prometheus
+    user: "root"
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/conf/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./prometheus/data:/prometheus
+    networks:
+      - mapex-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:9090/-/healthy"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # ===========================================================================
+  # GRAFANA - Metrics Visualization
+  # ===========================================================================
+  grafana:
+    image: grafana/grafana:latest
+    container_name: mapex-grafana
+    ports:
+      - "3001:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      prometheus:
+        condition: service_healthy
+    networks:
+      - mapex-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+networks:
+  mapex-network:
+    driver: bridge

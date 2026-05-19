@@ -1,0 +1,1120 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 100,
+      "title": "Webhook Auth",
+      "type": "row"
+    },
+    {
+      "title": "Total Auth Failures",
+      "description": "Cumulative count of authentication failures since the last service restart, across all auth strategies (apikey, basic, bearer, none). A rising value indicates brute-force attempts, misconfigured datasources, or expired credentials.",
+      "type": "stat",
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 0,
+        "y": 1
+      },
+      "id": 1,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "sum(httpgw_event_auth_failures_total)",
+          "legendFormat": "failures"
+        }
+      ]
+    },
+    {
+      "title": "Auth Attempts Rate",
+      "description": "Webhook authentication attempts per second, broken down by auth strategy (apikey, basic, bearer, none) and result (success, failure). Shows the load on the authentication middleware and the distribution of auth methods used by datasources.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 7,
+        "x": 4,
+        "y": 1
+      },
+      "id": 2,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 15,
+            "spanNulls": false,
+            "stacking": {
+              "mode": "none"
+            }
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(httpgw_event_auth_total[5m])",
+          "legendFormat": "{{auth_type}} / {{result}}"
+        }
+      ]
+    },
+    {
+      "title": "Auth Latency (p50 / p95 / p99)",
+      "description": "Webhook authentication validation latency per strategy. Measures time spent verifying API keys, basic credentials, or bearer tokens against MongoDB. High latency here adds directly to webhook response time. p99 spikes may indicate database connection issues.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 7,
+        "x": 11,
+        "y": 1
+      },
+      "id": 3,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, rate(httpgw_event_auth_duration_seconds_bucket[5m]))",
+          "legendFormat": "p50 {{auth_type}}"
+        },
+        {
+          "expr": "histogram_quantile(0.95, rate(httpgw_event_auth_duration_seconds_bucket[5m]))",
+          "legendFormat": "p95 {{auth_type}}"
+        },
+        {
+          "expr": "histogram_quantile(0.99, rate(httpgw_event_auth_duration_seconds_bucket[5m]))",
+          "legendFormat": "p99 {{auth_type}}"
+        }
+      ]
+    },
+    {
+      "title": "Auth Failures Rate",
+      "description": "Authentication failures per second by auth strategy. Each failure triggers a security event published to NATS. Sustained failure rates indicate possible brute-force attacks, expired API keys, or misconfigured datasource credentials that need rotation.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 1
+      },
+      "id": 4,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "bars",
+            "lineWidth": 1,
+            "fillOpacity": 50
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(httpgw_event_auth_failures_total[5m])",
+          "legendFormat": "{{auth_type}}"
+        }
+      ]
+    },
+    {
+      "title": "Auth Gate Disabled (req/s)",
+      "description": "Requests rejected with 403 because the resolved DataSource has Enabled=false. Runs BEFORE the auth strategy switch — disabled DataSources cannot reach apiKey/jwt/oauth2/ip_whitelist validation. Sustained non-zero rate indicates a client still hitting a DataSource that was disabled in the UI.",
+      "type": "stat",
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 9
+      },
+      "id": 107,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "yellow", "value": 0.1 },
+              { "color": "red", "value": 1 }
+            ]
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "graphMode": "area",
+        "colorMode": "value"
+      },
+      "targets": [
+        {
+          "expr": "sum(rate(httpgw_event_auth_failures_total{auth_type=\"disabled\"}[5m]))",
+          "legendFormat": "disabled"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 101,
+      "title": "Event Ingestion",
+      "type": "row"
+    },
+    {
+      "title": "Total Events Processed",
+      "description": "Cumulative count of events processed through the full webhook handler flow since the last service restart, broken down by status (success, error). This is the primary throughput indicator for the HTTP Gateway.",
+      "type": "stat",
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 0,
+        "y": 10
+      },
+      "id": 5,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "sum(httpgw_event_processed_total)",
+          "legendFormat": "{{status}}"
+        }
+      ]
+    },
+    {
+      "title": "Events Processed Rate",
+      "description": "Events processed per second through the full webhook handler flow, broken down by status (success, error). This shows the real-time ingestion throughput. A drop in success rate with rising error rate indicates downstream issues (NATS publish failures, payload validation errors).",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 7,
+        "x": 4,
+        "y": 10
+      },
+      "id": 6,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 15
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(httpgw_event_processed_total[5m])",
+          "legendFormat": "{{status}}"
+        }
+      ]
+    },
+    {
+      "title": "Events Published Rate",
+      "description": "NATS publish attempts per second by subject (events.device, events.trigger) and result (success, error). Shows the fan-out pattern: each processed event is published to a NATS subject for downstream consumers (Router, Events service). Failures here mean messages are being dropped.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 7,
+        "x": 11,
+        "y": 10
+      },
+      "id": 7,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 15
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(httpgw_event_published_total[5m])",
+          "legendFormat": "{{subject}} / {{status}}"
+        }
+      ]
+    },
+    {
+      "title": "Processing Duration (p50 / p95 / p99)",
+      "description": "End-to-end handler processing time excluding authentication. Covers payload parsing, validation, enrichment, and NATS publish. p95 above 100ms may indicate NATS backpressure or slow payload transformations.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 10
+      },
+      "id": 8,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, rate(httpgw_event_processing_duration_seconds_bucket[5m]))",
+          "legendFormat": "p50"
+        },
+        {
+          "expr": "histogram_quantile(0.95, rate(httpgw_event_processing_duration_seconds_bucket[5m]))",
+          "legendFormat": "p95"
+        },
+        {
+          "expr": "histogram_quantile(0.99, rate(httpgw_event_processing_duration_seconds_bucket[5m]))",
+          "legendFormat": "p99"
+        }
+      ]
+    },
+    {
+      "title": "Payload Size Distribution",
+      "description": "Distribution of incoming webhook body sizes across histogram buckets. Helps identify unusually large payloads that may cause memory pressure or slow processing. Most IoT payloads should be under 1KB; large outliers may indicate misconfigured devices or bulk uploads.",
+      "type": "histogram",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 18
+      },
+      "id": 9,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "options": {
+        "bucketSize": 0,
+        "combine": false,
+        "fillOpacity": 80
+      },
+      "targets": [
+        {
+          "expr": "rate(httpgw_event_payload_size_bytes_bucket[5m])",
+          "legendFormat": "{{le}}",
+          "format": "heatmap"
+        }
+      ]
+    },
+    {
+      "title": "Avg Payload Size",
+      "description": "Average incoming webhook body size over the last 5 minutes. Green is normal (<10KB), yellow indicates larger-than-expected payloads (10-50KB), red means oversized payloads (>50KB) that may stress memory and serialization.",
+      "type": "stat",
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 12,
+        "y": 18
+      },
+      "id": 10,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 10000
+              },
+              {
+                "color": "red",
+                "value": 50000
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(httpgw_event_payload_size_bytes_sum[5m]) / rate(httpgw_event_payload_size_bytes_count[5m])",
+          "legendFormat": "avg"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 26
+      },
+      "id": 102,
+      "title": "Datasource CRUD",
+      "type": "row"
+    },
+    {
+      "title": "Total DS Operations",
+      "description": "Cumulative count of datasource CRUD operations since the last service restart. Covers create, read, update, delete, and list operations. Useful for understanding the management overhead vs event ingestion workload.",
+      "type": "stat",
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 0,
+        "y": 27
+      },
+      "id": 11,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "sum(httpgw_ds_operations_total)",
+          "legendFormat": "operations"
+        }
+      ]
+    },
+    {
+      "title": "DS Operations Rate",
+      "description": "Datasource CRUD operations per second by operation type (create, read, update, delete, list) and result (success, error). Shows the management plane activity. High error rates on specific operations may indicate validation issues or database connectivity problems.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 7,
+        "x": 4,
+        "y": 27
+      },
+      "id": 12,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 15
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(httpgw_ds_operations_total[5m])",
+          "legendFormat": "{{operation}} / {{status}}"
+        }
+      ]
+    },
+    {
+      "title": "DS Operation Latency (p50 / p95 / p99)",
+      "description": "Datasource CRUD operation latency percentiles by operation type. All operations hit MongoDB. p95 above 50ms may indicate missing indexes, lock contention, or network latency to the database.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 7,
+        "x": 11,
+        "y": 27
+      },
+      "id": 13,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, rate(httpgw_ds_operation_duration_seconds_bucket[5m]))",
+          "legendFormat": "p50 {{operation}}"
+        },
+        {
+          "expr": "histogram_quantile(0.95, rate(httpgw_ds_operation_duration_seconds_bucket[5m]))",
+          "legendFormat": "p95 {{operation}}"
+        },
+        {
+          "expr": "histogram_quantile(0.99, rate(httpgw_ds_operation_duration_seconds_bucket[5m]))",
+          "legendFormat": "p99 {{operation}}"
+        }
+      ]
+    },
+    {
+      "title": "DS List Results Count (p50 / p95 / p99)",
+      "description": "Number of items returned per datasource list query at various percentiles. Detects over-fetching: if p95 is consistently high, clients may be listing without proper pagination or filters, which wastes bandwidth and database resources.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 27
+      },
+      "id": 14,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, rate(httpgw_ds_list_results_count_bucket[5m]))",
+          "legendFormat": "p50"
+        },
+        {
+          "expr": "histogram_quantile(0.95, rate(httpgw_ds_list_results_count_bucket[5m]))",
+          "legendFormat": "p95"
+        },
+        {
+          "expr": "histogram_quantile(0.99, rate(httpgw_ds_list_results_count_bucket[5m]))",
+          "legendFormat": "p99"
+        }
+      ]
+    },
+    {
+      "title": "DS Cache Hit/Miss Rate",
+      "description": "Datasource cache hit and miss rate per second. The tiered cache (in-memory + Redis) avoids MongoDB lookups on every webhook auth. A low hit ratio (<80%) means the cache is undersized or TTL is too short, causing unnecessary database load during event ingestion.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 35
+      },
+      "id": 15,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 15
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(httpgw_ds_cache_total[5m])",
+          "legendFormat": "{{result}}"
+        }
+      ]
+    },
+    {
+      "title": "DS Cache Hit Ratio",
+      "description": "Percentage of datasource cache lookups that resulted in a hit over the last 5 minutes. A healthy cache should maintain >90% hit ratio. Drops below 80% indicate cache churn, TTL expiration storms, or deployment-related cold starts.",
+      "type": "stat",
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 12,
+        "y": 35
+      },
+      "id": 16,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "thresholds": {
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "yellow",
+                "value": 0.8
+              },
+              {
+                "color": "green",
+                "value": 0.9
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(httpgw_ds_cache_total{result=\"hit\"}[5m]) / (rate(httpgw_ds_cache_total{result=\"hit\"}[5m]) + rate(httpgw_ds_cache_total{result=\"miss\"}[5m]))",
+          "legendFormat": "hit ratio"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 43
+      },
+      "id": 103,
+      "title": "Go Runtime",
+      "type": "row"
+    },
+    {
+      "title": "Goroutines",
+      "description": "Number of active goroutines. Each in-flight webhook request uses goroutines for auth, processing, and NATS publish. Sustained growth without corresponding request increases may indicate goroutine leaks.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 0,
+        "y": 44
+      },
+      "id": 17,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "fixed"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 20
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "go_goroutines{job=\"httpgw\"}",
+          "legendFormat": "goroutines"
+        }
+      ]
+    },
+    {
+      "title": "Heap Memory",
+      "description": "Go heap memory: 'in use' is actively allocated objects; 'sys' is total memory obtained from OS. Large gap between them means fragmentation or GC hasn't reclaimed yet.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 6,
+        "y": 44
+      },
+      "id": 18,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 15
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "go_memstats_heap_alloc_bytes{job=\"httpgw\"}",
+          "legendFormat": "heap in use"
+        },
+        {
+          "expr": "go_memstats_heap_sys_bytes{job=\"httpgw\"}",
+          "legendFormat": "heap sys"
+        }
+      ]
+    },
+    {
+      "title": "Process Memory (RSS)",
+      "description": "Resident Set Size \u2014 actual physical memory used by the process. This is what the OS reports and what matters for container memory limits.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 12,
+        "y": 44
+      },
+      "id": 19,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "orange",
+            "mode": "fixed"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 20
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "process_resident_memory_bytes{job=\"httpgw\"}",
+          "legendFormat": "RSS"
+        }
+      ]
+    },
+    {
+      "title": "GC Pause Duration",
+      "description": "Time spent in garbage collection stop-the-world pauses per second. High values cause latency spikes in all handlers. If this grows, consider tuning GOGC or reducing allocation pressure.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 44
+      },
+      "id": 20,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "red",
+            "mode": "fixed"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(go_gc_duration_seconds_sum{job=\"httpgw\"}[5m])",
+          "legendFormat": "GC time/s"
+        }
+      ]
+    },
+    {
+      "title": "Open File Descriptors",
+      "description": "Open vs max allowed file descriptors. Each NATS connection, MongoDB connection, and HTTP client uses FDs. Approaching max causes 'too many open files' errors.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 52
+      },
+      "id": 21,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 10
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "process_open_fds{job=\"httpgw\"}",
+          "legendFormat": "open"
+        },
+        {
+          "expr": "process_max_fds{job=\"httpgw\"}",
+          "legendFormat": "max"
+        }
+      ]
+    },
+    {
+      "title": "CPU Usage",
+      "description": "CPU seconds consumed per second. Value of 1.0 = one full CPU core. The HTTP Gateway is mostly I/O bound (NATS, MongoDB, HTTP), so high CPU may indicate excessive JSON marshalling or auth validation in hot loops.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 52
+      },
+      "id": 22,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "purple",
+            "mode": "fixed"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 20
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(process_cpu_seconds_total{job=\"httpgw\"}[5m])",
+          "legendFormat": "CPU"
+        }
+      ]
+    },
+    {
+      "title": "GC Cycles Rate",
+      "description": "Garbage collection cycles per second. More cycles = more CPU overhead but shorter pauses. If this is very high (>10/s), the service is allocating too much short-lived memory.",
+      "type": "timeseries",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 52
+      },
+      "id": 23,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "yellow",
+            "mode": "fixed"
+          },
+          "custom": {
+            "drawStyle": "line",
+            "lineWidth": 2,
+            "fillOpacity": 15
+          },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [
+        {
+          "expr": "rate(go_gc_duration_seconds_count{job=\"httpgw\"}[5m])",
+          "legendFormat": "GC cycles/s"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 60
+      },
+      "id": 104,
+      "title": "Heartbeat (POST /api/v1/heartbeat)",
+      "type": "row"
+    },
+    {
+      "type": "stat",
+      "title": "Heartbeats/sec by status",
+      "description": "Rate of POST /api/v1/heartbeat outcomes (success vs error) over the last 5 minutes.",
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 61
+      },
+      "id": 105,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "sum by (status) (rate(http_gateway_heartbeats_total[5m]))",
+          "legendFormat": "{{status}}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps"
+        },
+        "overrides": []
+      }
+    },
+    {
+      "type": "timeseries",
+      "title": "Heartbeat duration p95",
+      "description": "End-to-end p95 latency of EventService.ProcessHeartbeat over 5-minute windows.",
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 61
+      },
+      "id": 106,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum by (le) (rate(http_gateway_heartbeat_duration_seconds_bucket[5m])))",
+          "legendFormat": "p95",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        },
+        "overrides": []
+      }
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": [
+    "mapexIam",
+    "http_gateway",
+    "go"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "Prometheus",
+          "value": "prometheus"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "type": "datasource"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "HTTP Gateway - Overview",
+  "uid": "httpgw-overview",
+  "version": 2
+}

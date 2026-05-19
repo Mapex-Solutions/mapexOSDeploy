@@ -1,0 +1,25 @@
+# =============================================================================
+# MapexOS — Public Stack
+# =============================================================================
+#
+# Self-hostable IoT platform. Pulls pre-built Docker Hub images and starts
+# infrastructure + services in one command. Local evaluation by default;
+# switch to production via .env (see README).
+#
+# Usage:
+#   docker compose up -d                                        # Local access
+#   MAPEXOS_PUBLIC_HOST=<server-ip> docker compose up -d        # Remote access
+#   docker compose ps                                           # Check status
+#   docker compose down                                         # Stop everything
+#
+# Access:
+#   Frontend : http://<MAPEXOS_PUBLIC_HOST>
+#   Login    : admin@mapex.local / mapex@123 (change on first login)
+#   Grafana  : http://<MAPEXOS_PUBLIC_HOST>:3001 (admin/admin)
+#   MinIO    : http://<MAPEXOS_PUBLIC_HOST>:9001 (mapex_admin/mapex_admin_secret_change_me)
+#
+# =============================================================================
+
+include:
+  - path: ./infra/docker-compose.yml
+  - path: ./services/docker-compose.yml

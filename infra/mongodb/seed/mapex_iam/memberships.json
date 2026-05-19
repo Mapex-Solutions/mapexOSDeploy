@@ -1,0 +1,17 @@
+[
+  {
+    "_id": { "$oid": "0000000000000000000aa401" },
+    "assigneeType": "user",
+    "assigneeId": { "$oid": "0000000000000000000aa101" },
+    "orgId": { "$oid": "0000000000000000000aa001" },
+    "orgPathKey": "000001",
+    "customerId": null,
+    "roleIds": [
+      { "$oid": "0000000000000000000aa201" }
+    ],
+    "scope": "recursive",
+    "enabled": true,
+    "created": { "$date": "2026-01-01T00:00:00.000Z" },
+    "updated": { "$date": "2026-01-01T00:00:00.000Z" }
+  }
+]

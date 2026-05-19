@@ -1,0 +1,328 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "links": [],
+  "panels": [
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 }, "id": 100, "title": "Auth & Sessions", "type": "row" },
+    {
+      "title": "Total Auth Attempts", "description": "Cumulative count of all authentication attempts (password, token, apikey) since the last service restart. The displayed value is the grand total across all methods and statuses. Use this to gauge overall auth traffic volume.", "type": "stat",
+      "gridPos": { "h": 6, "w": 4, "x": 0, "y": 1 }, "id": 1,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "blue", "value": null }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "sum(mapexos_auth_attempts_total)", "legendFormat": "total" }]
+    },
+    {
+      "title": "Auth Successful", "description": "Cumulative count of authentication attempts that succeeded (status=success) across all methods (password, token, apikey). A healthy system shows this value much larger than the failed count.", "type": "stat",
+      "gridPos": { "h": 6, "w": 4, "x": 4, "y": 1 }, "id": 2,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "green", "value": null }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "sum(mapexos_auth_attempts_total{status=\"success\"})", "legendFormat": "success" }]
+    },
+    {
+      "title": "Total Auth Failed", "description": "Cumulative count of authentication attempts that failed (status!=success) across all methods. Rapid growth indicates brute-force attempts, expired tokens, or misconfigured API keys. Investigate by checking the per-method breakdown in the rate panel.", "type": "stat",
+      "gridPos": { "h": 6, "w": 4, "x": 8, "y": 1 }, "id": 3,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "green", "value": null }, { "color": "red", "value": 1 }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "sum(mapexos_auth_attempts_total{status=\"error\"})", "legendFormat": "failed" }]
+    },
+    {
+      "title": "Auth Attempts Rate", "description": "Authentication attempts per second broken down by method (password, token, apikey) and status. Spikes in error rates for a specific method can indicate credential stuffing (password), expired JWTs (token), or revoked keys (apikey).", "type": "timeseries",
+      "gridPos": { "h": 6, "w": 12, "x": 12, "y": 1 }, "id": 4,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15, "pointSize": 5, "spanNulls": false, "stacking": { "mode": "none" } }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(mapexos_auth_attempts_total[5m])", "legendFormat": "{{method}} / {{status}}" }]
+    },
+    {
+      "title": "Auth Duration by Method (p50 / p95 / p99)", "description": "Latency percentiles for authentication operations grouped by method. p50 is the median response time; p99 reveals worst-case tail latency. Password auth is typically slower than token validation. High p99 may indicate database contention or slow external identity provider calls.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 7 }, "id": 5,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le, method) (rate(mapexos_auth_duration_seconds_bucket[5m])))", "legendFormat": "p50 {{method}}" },
+        { "expr": "histogram_quantile(0.95, sum by (le, method) (rate(mapexos_auth_duration_seconds_bucket[5m])))", "legendFormat": "p95 {{method}}" },
+        { "expr": "histogram_quantile(0.99, sum by (le, method) (rate(mapexos_auth_duration_seconds_bucket[5m])))", "legendFormat": "p99 {{method}}" }
+      ]
+    },
+    {
+      "title": "Session Operations Rate", "description": "Session lifecycle operations per second broken down by operation (create, validate, revoke, refresh) and status. A high create rate with low validate rate may indicate sessions are not being reused. Elevated error rates on validate suggest expired or tampered session tokens.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 7 }, "id": 6,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(mapexos_session_operations_total[5m])", "legendFormat": "{{operation}} / {{status}}" }]
+    },
+
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 15 }, "id": 101, "title": "User CRUD", "type": "row" },
+    {
+      "title": "Total User Operations", "description": "Cumulative count of all user CRUD operations (create, read, update, delete, list) since the last service restart. Provides a quick sense of how much user management activity the system has handled.", "type": "stat",
+      "gridPos": { "h": 6, "w": 4, "x": 0, "y": 16 }, "id": 10,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "blue", "value": null }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "sum(mapexos_user_operations_total)", "legendFormat": "total" }]
+    },
+    {
+      "title": "User Operations Rate", "description": "User CRUD operations per second broken down by operation type and status. Helps identify which operations dominate (typically list and read) and whether error rates are climbing for specific operations.", "type": "timeseries",
+      "gridPos": { "h": 6, "w": 10, "x": 4, "y": 16 }, "id": 11,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(mapexos_user_operations_total[5m])", "legendFormat": "{{operation}} / {{status}}" }]
+    },
+    {
+      "title": "User Operation Duration (p50 / p95 / p99)", "description": "Latency percentiles for user CRUD operations grouped by operation type. List operations are typically slower due to database scans. High p99 on create may indicate index contention or validation overhead.", "type": "timeseries",
+      "gridPos": { "h": 6, "w": 10, "x": 14, "y": 16 }, "id": 12,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le, operation) (rate(mapexos_user_operation_duration_seconds_bucket[5m])))", "legendFormat": "p50 {{operation}}" },
+        { "expr": "histogram_quantile(0.95, sum by (le, operation) (rate(mapexos_user_operation_duration_seconds_bucket[5m])))", "legendFormat": "p95 {{operation}}" },
+        { "expr": "histogram_quantile(0.99, sum by (le, operation) (rate(mapexos_user_operation_duration_seconds_bucket[5m])))", "legendFormat": "p99 {{operation}}" }
+      ]
+    },
+    {
+      "title": "User List Results (p50 / p95 / p99)", "description": "Distribution of the number of items returned per user list query. Helps detect overly broad queries (high p99) or pagination issues. A consistently high count may indicate missing filters on the client side.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 22 }, "id": 13,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "short" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, rate(mapexos_user_list_results_count_bucket[5m]))", "legendFormat": "p50" },
+        { "expr": "histogram_quantile(0.95, rate(mapexos_user_list_results_count_bucket[5m]))", "legendFormat": "p95" },
+        { "expr": "histogram_quantile(0.99, rate(mapexos_user_list_results_count_bucket[5m]))", "legendFormat": "p99" }
+      ]
+    },
+
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 30 }, "id": 102, "title": "Group CRUD", "type": "row" },
+    {
+      "title": "Total Group Operations", "description": "Cumulative count of all group CRUD operations since the last service restart. Groups organize users for permission assignment, so this metric reflects how actively the tenant is managing access control structures.", "type": "stat",
+      "gridPos": { "h": 6, "w": 4, "x": 0, "y": 31 }, "id": 20,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "blue", "value": null }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "sum(mapexos_group_operations_total)", "legendFormat": "total" }]
+    },
+    {
+      "title": "Group Operations Rate", "description": "Group CRUD operations per second broken down by operation type and status. Useful for spotting bursts of group creation (onboarding) or unexpected delete spikes.", "type": "timeseries",
+      "gridPos": { "h": 6, "w": 10, "x": 4, "y": 31 }, "id": 21,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(mapexos_group_operations_total[5m])", "legendFormat": "{{operation}} / {{status}}" }]
+    },
+    {
+      "title": "Group Operation Duration (p50 / p95 / p99)", "description": "Latency percentiles for group CRUD operations grouped by operation type. Group operations that involve membership cascades (delete, update) may show higher latency than simple reads.", "type": "timeseries",
+      "gridPos": { "h": 6, "w": 10, "x": 14, "y": 31 }, "id": 22,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le, operation) (rate(mapexos_group_operation_duration_seconds_bucket[5m])))", "legendFormat": "p50 {{operation}}" },
+        { "expr": "histogram_quantile(0.95, sum by (le, operation) (rate(mapexos_group_operation_duration_seconds_bucket[5m])))", "legendFormat": "p95 {{operation}}" },
+        { "expr": "histogram_quantile(0.99, sum by (le, operation) (rate(mapexos_group_operation_duration_seconds_bucket[5m])))", "legendFormat": "p99 {{operation}}" }
+      ]
+    },
+    {
+      "title": "Group List Results (p50 / p95 / p99)", "description": "Distribution of items returned per group list query. Monitors pagination effectiveness and helps detect clients fetching excessively large result sets.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 37 }, "id": 23,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "short" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, rate(mapexos_group_list_results_count_bucket[5m]))", "legendFormat": "p50" },
+        { "expr": "histogram_quantile(0.95, rate(mapexos_group_list_results_count_bucket[5m]))", "legendFormat": "p95" },
+        { "expr": "histogram_quantile(0.99, rate(mapexos_group_list_results_count_bucket[5m]))", "legendFormat": "p99" }
+      ]
+    },
+
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 45 }, "id": 103, "title": "Role CRUD", "type": "row" },
+    {
+      "title": "Total Role Operations", "description": "Cumulative count of all role CRUD operations since the last service restart. Roles define permission sets, so activity here reflects RBAC configuration changes across the platform.", "type": "stat",
+      "gridPos": { "h": 6, "w": 4, "x": 0, "y": 46 }, "id": 30,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "blue", "value": null }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "sum(mapexos_role_operations_total)", "legendFormat": "total" }]
+    },
+    {
+      "title": "Role Operations Rate", "description": "Role CRUD operations per second broken down by operation type and status. Role changes are typically infrequent; sustained high rates may indicate automated provisioning or misconfigured scripts.", "type": "timeseries",
+      "gridPos": { "h": 6, "w": 10, "x": 4, "y": 46 }, "id": 31,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(mapexos_role_operations_total[5m])", "legendFormat": "{{operation}} / {{status}}" }]
+    },
+    {
+      "title": "Role Operation Duration (p50 / p95 / p99)", "description": "Latency percentiles for role CRUD operations grouped by operation type. Role updates that cascade permission recalculations may exhibit higher p99 latency.", "type": "timeseries",
+      "gridPos": { "h": 6, "w": 10, "x": 14, "y": 46 }, "id": 32,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le, operation) (rate(mapexos_role_operation_duration_seconds_bucket[5m])))", "legendFormat": "p50 {{operation}}" },
+        { "expr": "histogram_quantile(0.95, sum by (le, operation) (rate(mapexos_role_operation_duration_seconds_bucket[5m])))", "legendFormat": "p95 {{operation}}" },
+        { "expr": "histogram_quantile(0.99, sum by (le, operation) (rate(mapexos_role_operation_duration_seconds_bucket[5m])))", "legendFormat": "p99 {{operation}}" }
+      ]
+    },
+    {
+      "title": "Role List Results (p50 / p95 / p99)", "description": "Distribution of items returned per role list query. Most tenants have a small number of roles, so consistently high counts may indicate permission sprawl or missing pagination.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 52 }, "id": 33,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "short" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, rate(mapexos_role_list_results_count_bucket[5m]))", "legendFormat": "p50" },
+        { "expr": "histogram_quantile(0.95, rate(mapexos_role_list_results_count_bucket[5m]))", "legendFormat": "p95" },
+        { "expr": "histogram_quantile(0.99, rate(mapexos_role_list_results_count_bucket[5m]))", "legendFormat": "p99" }
+      ]
+    },
+
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 60 }, "id": 104, "title": "Membership CRUD", "type": "row" },
+    {
+      "title": "Total Membership Operations", "description": "Cumulative count of all membership CRUD operations since the last service restart. Memberships link users to organizations and groups, so this metric reflects how actively tenant structures are being modified.", "type": "stat",
+      "gridPos": { "h": 6, "w": 4, "x": 0, "y": 61 }, "id": 40,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "blue", "value": null }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "sum(mapexos_membership_operations_total)", "legendFormat": "total" }]
+    },
+    {
+      "title": "Membership Operations Rate", "description": "Membership CRUD operations per second broken down by operation type and status. High create/delete rates during onboarding or offboarding cycles are expected. Persistent error rates may indicate referential integrity issues between users and groups.", "type": "timeseries",
+      "gridPos": { "h": 6, "w": 10, "x": 4, "y": 61 }, "id": 41,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(mapexos_membership_operations_total[5m])", "legendFormat": "{{operation}} / {{status}}" }]
+    },
+    {
+      "title": "Membership Operation Duration (p50 / p95 / p99)", "description": "Latency percentiles for membership CRUD operations grouped by operation type. Membership changes that trigger cache invalidation or permission recalculation may show elevated latency.", "type": "timeseries",
+      "gridPos": { "h": 6, "w": 10, "x": 14, "y": 61 }, "id": 42,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le, operation) (rate(mapexos_membership_operation_duration_seconds_bucket[5m])))", "legendFormat": "p50 {{operation}}" },
+        { "expr": "histogram_quantile(0.95, sum by (le, operation) (rate(mapexos_membership_operation_duration_seconds_bucket[5m])))", "legendFormat": "p95 {{operation}}" },
+        { "expr": "histogram_quantile(0.99, sum by (le, operation) (rate(mapexos_membership_operation_duration_seconds_bucket[5m])))", "legendFormat": "p99 {{operation}}" }
+      ]
+    },
+    {
+      "title": "Membership List Results (p50 / p95 / p99)", "description": "Distribution of items returned per membership list query. Monitors how many membership records are returned per request. High counts may indicate tenants with very large user bases or missing query filters.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 67 }, "id": 43,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "short" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, rate(mapexos_membership_list_results_count_bucket[5m]))", "legendFormat": "p50" },
+        { "expr": "histogram_quantile(0.95, rate(mapexos_membership_list_results_count_bucket[5m]))", "legendFormat": "p95" },
+        { "expr": "histogram_quantile(0.99, rate(mapexos_membership_list_results_count_bucket[5m]))", "legendFormat": "p99" }
+      ]
+    },
+
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 75 }, "id": 105, "title": "Organization CRUD", "type": "row" },
+    {
+      "title": "Total Organization Operations", "description": "Cumulative count of all organization CRUD operations since the last service restart. Organizations are the top-level tenant boundary, so changes here are typically rare and significant (new tenant onboarding, org settings updates).", "type": "stat",
+      "gridPos": { "h": 6, "w": 4, "x": 0, "y": 76 }, "id": 50,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "blue", "value": null }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "sum(mapexos_organization_operations_total)", "legendFormat": "total" }]
+    },
+    {
+      "title": "Organization Operations Rate", "description": "Organization CRUD operations per second broken down by operation type and status. Organization changes are rare in steady state; spikes typically correlate with tenant provisioning or bulk administrative actions.", "type": "timeseries",
+      "gridPos": { "h": 6, "w": 10, "x": 4, "y": 76 }, "id": 51,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(mapexos_organization_operations_total[5m])", "legendFormat": "{{operation}} / {{status}}" }]
+    },
+    {
+      "title": "Organization Operation Duration (p50 / p95 / p99)", "description": "Latency percentiles for organization CRUD operations grouped by operation type. Organization creation may involve setting up default roles, groups, and seed data, leading to higher latency than simple reads.", "type": "timeseries",
+      "gridPos": { "h": 6, "w": 10, "x": 14, "y": 76 }, "id": 52,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le, operation) (rate(mapexos_organization_operation_duration_seconds_bucket[5m])))", "legendFormat": "p50 {{operation}}" },
+        { "expr": "histogram_quantile(0.95, sum by (le, operation) (rate(mapexos_organization_operation_duration_seconds_bucket[5m])))", "legendFormat": "p95 {{operation}}" },
+        { "expr": "histogram_quantile(0.99, sum by (le, operation) (rate(mapexos_organization_operation_duration_seconds_bucket[5m])))", "legendFormat": "p99 {{operation}}" }
+      ]
+    },
+    {
+      "title": "Organization List Results (p50 / p95 / p99)", "description": "Distribution of items returned per organization list query. In a multi-tenant platform the total organization count is typically small, so high values here may indicate an admin listing all tenants.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 82 }, "id": 53,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "short" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, rate(mapexos_organization_list_results_count_bucket[5m]))", "legendFormat": "p50" },
+        { "expr": "histogram_quantile(0.95, rate(mapexos_organization_list_results_count_bucket[5m]))", "legendFormat": "p95" },
+        { "expr": "histogram_quantile(0.99, rate(mapexos_organization_list_results_count_bucket[5m]))", "legendFormat": "p99" }
+      ]
+    },
+
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 90 }, "id": 106, "title": "Cache", "type": "row" },
+    {
+      "title": "Cache Hit/Miss Rate by Type", "description": "Cache lookup rate per second broken down by cache type (e.g., session, user, role, permission) and result (hit or miss). A healthy cache shows a high hit-to-miss ratio. Sustained high miss rates indicate cold caches after restart, cache eviction pressure, or access patterns that bypass cached entities.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 91 }, "id": 60,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(mapexos_cache_total[5m])", "legendFormat": "{{type}} / {{result}}" }]
+    },
+    {
+      "title": "Cache Hit Ratio by Type", "description": "Percentage of cache lookups that resulted in a hit, computed per cache type over a 5-minute window. Values close to 1.0 (100%) indicate effective caching. A drop below 0.8 warrants investigation into TTL settings or working set size.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 91 }, "id": 61,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "percentunit", "min": 0, "max": 1 }, "overrides": [] },
+      "targets": [{ "expr": "sum by (type) (rate(mapexos_cache_total{result=\"hit\"}[5m])) / sum by (type) (rate(mapexos_cache_total[5m]))", "legendFormat": "{{type}}" }]
+    },
+
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 99 }, "id": 107, "title": "Go Runtime", "type": "row" },
+    {
+      "title": "Goroutines", "description": "Current number of active goroutines in the MapexIAM process. Goroutines are lightweight threads managed by the Go runtime. A steadily increasing count without a corresponding drop indicates goroutine leaks, often caused by blocked channels, unclosed HTTP connections, or stuck database queries.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 0, "y": 100 }, "id": 70,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "blue", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 20 }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "go_goroutines{job=\"mapexIam\"}", "legendFormat": "goroutines" }]
+    },
+    {
+      "title": "Heap Memory", "description": "Go heap memory usage for the MapexIAM process. 'heap in use' is the amount of memory currently allocated to live objects. 'heap sys' is the total memory obtained from the OS for heap storage. A growing gap between sys and in-use indicates memory fragmentation. Sustained growth in heap in-use without plateauing may indicate a memory leak.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 6, "y": 100 }, "id": 71,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "decbytes" }, "overrides": [] },
+      "targets": [
+        { "expr": "go_memstats_heap_alloc_bytes{job=\"mapexIam\"}", "legendFormat": "heap in use" },
+        { "expr": "go_memstats_heap_sys_bytes{job=\"mapexIam\"}", "legendFormat": "heap sys" }
+      ]
+    },
+    {
+      "title": "Process Memory (RSS)", "description": "Resident Set Size (RSS) of the MapexIAM process as reported by the OS. This is the actual physical memory consumed, including heap, stack, and memory-mapped files. Compare with heap metrics to understand non-heap memory usage (goroutine stacks, cgo allocations, mmap regions).", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 12, "y": 100 }, "id": 72,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "orange", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 20 }, "unit": "decbytes" }, "overrides": [] },
+      "targets": [{ "expr": "process_resident_memory_bytes{job=\"mapexIam\"}", "legendFormat": "RSS" }]
+    },
+    {
+      "title": "GC Pause Duration", "description": "Rate of time spent in Go garbage collection stop-the-world pauses. This measures the cumulative GC pause time per second. High values indicate the GC is consuming significant CPU time, which can cause latency spikes in request handling. Consider tuning GOGC or reducing allocation rate if this exceeds a few percent of wall-clock time.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 18, "y": 100 }, "id": 73,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "red", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [{ "expr": "rate(go_gc_duration_seconds_sum{job=\"mapexIam\"}[5m])", "legendFormat": "GC time/s" }]
+    },
+    {
+      "title": "Open File Descriptors", "description": "Number of open file descriptors versus the OS-imposed maximum for the MapexIAM process. File descriptors are consumed by network connections (MongoDB, NATS, HTTP clients), open files, and pipes. Approaching the max limit causes 'too many open files' errors. Monitor the ratio to set alerts before exhaustion.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 108 }, "id": 74,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "short" }, "overrides": [] },
+      "targets": [
+        { "expr": "process_open_fds{job=\"mapexIam\"}", "legendFormat": "open" },
+        { "expr": "process_max_fds{job=\"mapexIam\"}", "legendFormat": "max" }
+      ]
+    },
+    {
+      "title": "CPU Usage", "description": "CPU time consumed by the MapexIAM process expressed as a fraction of one core. A value of 1.0 means the process is using one full CPU core. Values above the number of available cores indicate CPU saturation. Correlate spikes with request rate or GC activity to identify the root cause of CPU pressure.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 108 }, "id": 75,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "purple", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 20 }, "unit": "percentunit" }, "overrides": [] },
+      "targets": [{ "expr": "rate(process_cpu_seconds_total{job=\"mapexIam\"}[5m])", "legendFormat": "CPU" }]
+    },
+    {
+      "title": "GC Cycles Rate", "description": "Number of completed garbage collection cycles per second for the MapexIAM process. A high GC frequency with short pauses is normal for Go services under load. However, if GC cycles increase without a corresponding increase in request rate, it may indicate excessive short-lived allocations that could be optimized with object pooling or buffer reuse.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 108 }, "id": 76,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "yellow", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(go_gc_duration_seconds_count{job=\"mapexIam\"}[5m])", "legendFormat": "GC cycles/s" }]
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": ["mapexIam", "core", "go"],
+  "templating": { "list": [{ "current": { "selected": false, "text": "Prometheus", "value": "prometheus" }, "hide": 0, "includeAll": false, "name": "DS_PROMETHEUS", "options": [], "query": "prometheus", "refresh": 1, "regex": "", "type": "datasource" }] },
+  "time": { "from": "now-1h", "to": "now" },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "MapexIAM - Overview",
+  "uid": "mapexIam-overview",
+  "version": 2
+}

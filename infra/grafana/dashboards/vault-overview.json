@@ -1,0 +1,354 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "links": [],
+  "panels": [
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 }, "id": 100, "title": "Credential Operations", "type": "row" },
+    {
+      "title": "Credential Operations Rate",
+      "description": "Rate of credential CRUD operations per second, broken down by operation type (create, read, update, delete) and status (success, error). A rising error rate may indicate issues with the encryption layer, MongoDB connectivity, or invalid input data.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 1 },
+      "id": 1,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15, "spanNulls": false, "stacking": { "mode": "none" } },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "rate(vault_credential_operations_total[5m])", "legendFormat": "{{operation}} / {{status}}" }]
+    },
+    {
+      "title": "Operation Duration (p50 / p95 / p99)",
+      "description": "Credential operation latency percentiles. p50 is the median experience, p95 catches slow operations, and p99 reveals worst-case latency. High values may point to slow encryption/decryption, MongoDB queries, or contention under load.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 1 },
+      "id": 2,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le, operation) (rate(vault_credential_operation_duration_seconds_bucket[5m])))", "legendFormat": "p50 {{operation}}" },
+        { "expr": "histogram_quantile(0.95, sum by (le, operation) (rate(vault_credential_operation_duration_seconds_bucket[5m])))", "legendFormat": "p95 {{operation}}" },
+        { "expr": "histogram_quantile(0.99, sum by (le, operation) (rate(vault_credential_operation_duration_seconds_bucket[5m])))", "legendFormat": "p99 {{operation}}" }
+      ]
+    },
+    {
+      "title": "Total Operations (success)",
+      "description": "Cumulative count of successful credential operations since the service started. Use this to gauge overall throughput volume and verify that the service is actively handling requests.",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 4, "x": 16, "y": 1 },
+      "id": 3,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": { "steps": [{ "color": "green", "value": null }] },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "sum(vault_credential_operations_total{status=\"success\"})", "legendFormat": "success" }]
+    },
+    {
+      "title": "Total Operations (error)",
+      "description": "Cumulative count of failed credential operations since the service started. Any sustained growth here should be investigated immediately -- check logs for encryption failures, validation errors, or database issues.",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 4, "x": 20, "y": 1 },
+      "id": 4,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": { "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 1 }, { "color": "red", "value": 10 }] },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "sum(vault_credential_operations_total{status=\"error\"})", "legendFormat": "errors" }]
+    },
+    {
+      "title": "Operations by Type",
+      "description": "Breakdown of total operations per operation type (create, read, update, delete). Helps understand which credential operations dominate and whether the distribution matches expected usage patterns.",
+      "type": "piechart",
+      "gridPos": { "h": 4, "w": 8, "x": 16, "y": 5 },
+      "id": 5,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "sum by (operation) (vault_credential_operations_total)", "legendFormat": "{{operation}}" }]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 9 }, "id": 101, "title": "Token Refresh", "type": "row" },
+    {
+      "title": "Token Refresh Rate",
+      "description": "Rate of OAuth/session token refresh operations per second, broken down by token type and status. Monitors automatic credential renewal. A spike in errors may indicate expired refresh tokens, revoked OAuth grants, or upstream provider outages.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 10 },
+      "id": 6,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "rate(vault_credential_token_refresh_total[5m])", "legendFormat": "{{type}} / {{status}}" }]
+    },
+    {
+      "title": "Total Refreshes (success)",
+      "description": "Cumulative count of successful token refreshes since startup. Confirms that automatic credential renewal is functioning correctly.",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 4, "x": 8, "y": 10 },
+      "id": 7,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": { "steps": [{ "color": "green", "value": null }] },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "sum(vault_credential_token_refresh_total{status=\"success\"})", "legendFormat": "success" }]
+    },
+    {
+      "title": "Total Refreshes (error)",
+      "description": "Cumulative count of failed token refreshes since startup. Failed refreshes mean credentials will become stale and downstream services (triggers, workflows) will fail. Investigate immediately.",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 4, "x": 12, "y": 10 },
+      "id": 8,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": { "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 1 }, { "color": "red", "value": 10 }] },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "sum(vault_credential_token_refresh_total{status=\"error\"})", "legendFormat": "errors" }]
+    },
+    {
+      "title": "Refresh by Type",
+      "description": "Total refreshes broken down by credential type (oauth, session). Shows which types of credentials are being refreshed most frequently.",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 8, "x": 8, "y": 14 },
+      "id": 9,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": { "steps": [{ "color": "blue", "value": null }] },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "sum by (type) (vault_credential_token_refresh_total)", "legendFormat": "{{type}}" }]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 18 }, "id": 102, "title": "Decrypt Requests", "type": "row" },
+    {
+      "title": "Decrypt Requests Rate",
+      "description": "Rate of internal credential decrypt API requests per second by status. This metric tracks how often other services (workflow, triggers) request decrypted credential values. High error rates may indicate encryption key issues or corrupted stored credentials.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 19 },
+      "id": 10,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "rate(vault_credential_decrypt_requests_total[5m])", "legendFormat": "{{status}}" }]
+    },
+    {
+      "title": "Total Decrypts (success)",
+      "description": "Cumulative count of successful decrypt requests since startup. Represents total credential lookups served to downstream services.",
+      "type": "stat",
+      "gridPos": { "h": 8, "w": 4, "x": 8, "y": 19 },
+      "id": 11,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": { "steps": [{ "color": "green", "value": null }] },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "sum(vault_credential_decrypt_requests_total{status=\"success\"})", "legendFormat": "success" }]
+    },
+    {
+      "title": "Total Decrypts (error)",
+      "description": "Cumulative count of failed decrypt requests since startup. Errors here directly impact downstream workflow and trigger executions that depend on credentials.",
+      "type": "stat",
+      "gridPos": { "h": 8, "w": 4, "x": 12, "y": 19 },
+      "id": 12,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": { "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 1 }, { "color": "red", "value": 10 }] },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "sum(vault_credential_decrypt_requests_total{status=\"error\"})", "legendFormat": "errors" }]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 27 }, "id": 103, "title": "Go Runtime", "type": "row" },
+    {
+      "title": "Goroutines",
+      "description": "Number of active goroutines in the Vault service. A steadily increasing count without a corresponding increase in load may indicate goroutine leaks. Normal range depends on concurrency settings and active connections.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 0, "y": 28 },
+      "id": 13,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "fixedColor": "blue", "mode": "fixed" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 20 },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "go_goroutines{job=\"vault\"}", "legendFormat": "goroutines" }]
+    },
+    {
+      "title": "Heap Memory",
+      "description": "Go heap memory usage: 'heap in use' = memory holding live objects; 'heap sys' = total memory obtained from the OS for the heap. If 'heap in use' approaches 'heap sys', the GC is under pressure and may cause latency spikes.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 6, "y": 28 },
+      "id": 14,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "targets": [
+        { "expr": "go_memstats_heap_alloc_bytes{job=\"vault\"}", "legendFormat": "heap in use" },
+        { "expr": "go_memstats_heap_sys_bytes{job=\"vault\"}", "legendFormat": "heap sys" }
+      ]
+    },
+    {
+      "title": "Process Memory (RSS) & CPU",
+      "description": "RSS = actual physical memory consumed by the process. CPU rate = cores consumed per second. Monitor RSS for memory leaks (sustained growth) and CPU for unexpected spikes that may indicate expensive encryption operations.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 12, "y": 28 },
+      "id": 15,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "targets": [
+        { "expr": "process_resident_memory_bytes{job=\"vault\"}", "legendFormat": "RSS" },
+        { "expr": "rate(process_cpu_seconds_total{job=\"vault\"}[5m])", "legendFormat": "CPU (rate)" }
+      ]
+    },
+    {
+      "title": "GC Pause Duration",
+      "description": "Total time spent in Go garbage collection pauses per second. High GC pause rates reduce available CPU for request processing and can cause latency spikes in credential operations.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 18, "y": 28 },
+      "id": 16,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "fixedColor": "red", "mode": "fixed" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "rate(go_gc_duration_seconds_sum{job=\"vault\"}[5m])", "legendFormat": "GC time/s" }]
+    },
+    {
+      "title": "Open File Descriptors",
+      "description": "Current open vs maximum allowed file descriptors. If 'open' approaches 'max', the service will fail to accept new connections or open files. This can happen with connection leaks to MongoDB or upstream OAuth providers.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 36 },
+      "id": 17,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [
+        { "expr": "process_open_fds{job=\"vault\"}", "legendFormat": "open" },
+        { "expr": "process_max_fds{job=\"vault\"}", "legendFormat": "max" }
+      ]
+    },
+    {
+      "title": "GC Cycles Rate",
+      "description": "Number of garbage collection cycles executed per second. Frequent GC cycles indicate high allocation rates. Compare with GC pause duration to assess overall GC impact on performance.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 36 },
+      "id": 18,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "fixedColor": "yellow", "mode": "fixed" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "rate(go_gc_duration_seconds_count{job=\"vault\"}[5m])", "legendFormat": "GC cycles/s" }]
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": ["vault", "go"],
+  "templating": {
+    "list": [
+      {
+        "current": { "selected": false, "text": "Prometheus", "value": "prometheus" },
+        "hide": 0,
+        "includeAll": false,
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "type": "datasource"
+      }
+    ]
+  },
+  "time": { "from": "now-1h", "to": "now" },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Vault - Overview",
+  "uid": "vault-overview",
+  "version": 2
+}

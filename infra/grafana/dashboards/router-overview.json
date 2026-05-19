@@ -1,0 +1,231 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "links": [],
+  "panels": [
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 }, "id": 100, "title": "Event Processing", "type": "row" },
+    {
+      "title": "Total Processed", "description": "Cumulative events processed by the Router since the last restart. Includes all statuses (success, error, no_match). This is the primary volume indicator for IoT event throughput.", "type": "stat",
+      "gridPos": { "h": 8, "w": 4, "x": 0, "y": 1 }, "id": 40,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "green", "value": null }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "sum(router_event_processed_total)", "legendFormat": "total" }]
+    },
+    {
+      "title": "Total Failed", "description": "Cumulative events that failed processing (error status). If this grows, check match rules, asset cache, or downstream NATS publish issues.", "type": "stat",
+      "gridPos": { "h": 8, "w": 4, "x": 4, "y": 1 }, "id": 41,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "green", "value": null }, { "color": "red", "value": 1 }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "sum(router_event_processed_total{status=\"error\"})", "legendFormat": "failed" }]
+    },
+    {
+      "title": "Processed Rate", "description": "Events processed per second by status. 'success' = matched a route group and published downstream. 'error' = processing failed. 'no_match' = event didn't match any route group (normal for filtered streams).", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 1 }, "id": 1,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15, "spanNulls": false, "stacking": { "mode": "none" } }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(router_event_processed_total[5m])", "legendFormat": "{{status}}" }]
+    },
+    {
+      "title": "Processing Duration (p50 / p95 / p99)", "description": "End-to-end time from receiving the NATS message to ACK, including asset lookup, match evaluation, and downstream publish. High p99 usually means slow asset cache misses (hitting MongoDB).", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 1 }, "id": 2,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, rate(router_event_processing_duration_seconds_bucket[5m]))", "legendFormat": "p50" },
+        { "expr": "histogram_quantile(0.95, rate(router_event_processing_duration_seconds_bucket[5m]))", "legendFormat": "p95" },
+        { "expr": "histogram_quantile(0.99, rate(router_event_processing_duration_seconds_bucket[5m]))", "legendFormat": "p99" }
+      ]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 9 }, "id": 101, "title": "Messages (ACK/NACK)", "type": "row" },
+    {
+      "title": "Message Outcomes Rate", "description": "NATS message lifecycle outcomes. 'ack' = processed successfully. 'nack' = transient error, will retry. 'reject' = permanent error, won't retry. 'dlq' = max retries exceeded, sent to Dead Letter Queue.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 10 }, "id": 4,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(router_message_total[5m])", "legendFormat": "{{result}}" }]
+    },
+    {
+      "title": "Total Messages", "description": "Cumulative NATS messages by outcome since startup. Healthy ratio: ack >> (nack + reject + dlq). Growing dlq count needs investigation.", "type": "stat",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 10 }, "id": 5,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "green", "value": null }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "router_message_total", "legendFormat": "{{result}}" }]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 18 }, "id": 102, "title": "Asset Cache", "type": "row" },
+    {
+      "title": "Cache Lookups by Tier", "description": "Asset TieredCache lookups per second by tier (L0=RAM, L1=disk, L2=MinIO, fallback=HTTP). High L0 hit rate is ideal. Frequent L2/fallback hits mean the in-memory cache is too small or assets aren't being cached properly.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 19 }, "id": 6,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(router_asset_cache_total[5m])", "legendFormat": "{{tier}}" }]
+    },
+    {
+      "title": "Cache Latency by Tier (p50 / p95 / p99)", "description": "Time to resolve an asset from each cache tier. L0 (RAM) should be sub-millisecond. L1 (disk) ~1-5ms. L2 (MinIO) ~10-50ms. Fallback (HTTP to assets service) ~50-200ms. If L0 latency spikes, check memory pressure.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 19 }, "id": 7,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le, tier) (rate(router_asset_cache_duration_seconds_bucket[5m])))", "legendFormat": "p50 {{tier}}" },
+        { "expr": "histogram_quantile(0.95, sum by (le, tier) (rate(router_asset_cache_duration_seconds_bucket[5m])))", "legendFormat": "p95 {{tier}}" },
+        { "expr": "histogram_quantile(0.99, sum by (le, tier) (rate(router_asset_cache_duration_seconds_bucket[5m])))", "legendFormat": "p99 {{tier}}" }
+      ]
+    },
+    {
+      "title": "Cache Invalidations Rate", "description": "Cache invalidation events per second by status. Invalidations happen when assets are updated/deleted via API. High rates may indicate frequent asset config changes or a cache thrashing loop.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 19 }, "id": 8,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "bars", "lineWidth": 1, "fillOpacity": 50 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(router_cache_invalidations_total[5m])", "legendFormat": "{{status}}" }]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 27 }, "id": 103, "title": "Match Evaluation", "type": "row" },
+    {
+      "title": "Total Matches", "description": "Cumulative match evaluations by result. 'match' = event matched at least one route group. 'no_match' = event didn't match any route. High no_match is normal if the Router receives all events but only some have route groups configured.", "type": "stat",
+      "gridPos": { "h": 8, "w": 4, "x": 0, "y": 28 }, "id": 42,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "green", "value": null }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "router_match_evaluations_total", "legendFormat": "{{result}}" }]
+    },
+    {
+      "title": "Match Evaluations Rate", "description": "Route group match evaluations per second by result. 'match' means at least one route group matched and downstream publish happened. 'no_match' means the event was evaluated but no route group matched — this is normal for unrouted assets.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 10, "x": 4, "y": 28 }, "id": 9,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(router_match_evaluations_total[5m])", "legendFormat": "{{result}}" }]
+    },
+    {
+      "title": "Rules Evaluated Rate", "description": "Individual match rules evaluated per second across all route groups. Each event may trigger multiple rule evaluations (one per route group). High values with low match rate means many route groups are being tested but few match.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 10, "x": 14, "y": 28 }, "id": 10,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "blue", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(router_match_rules_evaluated_total[5m])", "legendFormat": "rules/s" }]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 36 }, "id": 104, "title": "Event Publish", "type": "row" },
+    {
+      "title": "Events Published Rate", "description": "NATS publish attempts per second by kind (workflow = to WORKFLOW-EXECUTION stream, trigger = to TRIGGERS stream) and status. Errors here mean matched events are being lost — check NATS server health.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 37 }, "id": 12,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(router_event_published_total[5m])", "legendFormat": "{{kind}} / {{status}}" }]
+    },
+    {
+      "title": "Publish Latency by Kind (p50 / p95 / p99)", "description": "Time to publish a matched event to NATS by destination kind. Should be sub-millisecond. High latency indicates NATS server pressure, network issues, or slow JetStream acknowledgement.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 37 }, "id": 13,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le, kind) (rate(router_publish_duration_seconds_bucket[5m])))", "legendFormat": "p50 {{kind}}" },
+        { "expr": "histogram_quantile(0.95, sum by (le, kind) (rate(router_publish_duration_seconds_bucket[5m])))", "legendFormat": "p95 {{kind}}" },
+        { "expr": "histogram_quantile(0.99, sum by (le, kind) (rate(router_publish_duration_seconds_bucket[5m])))", "legendFormat": "p99 {{kind}}" }
+      ]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 45 }, "id": 105, "title": "RouteGroup CRUD", "type": "row" },
+    {
+      "title": "Total RouteGroup Ops", "description": "Cumulative route group CRUD operations since startup. Shows how actively route groups are being managed via API.", "type": "stat",
+      "gridPos": { "h": 8, "w": 4, "x": 0, "y": 46 }, "id": 43,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "green", "value": null }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "sum(router_routegroup_operations_total)", "legendFormat": "total" }]
+    },
+    {
+      "title": "Operations Rate", "description": "Route group CRUD operations per second by type (create, update, delete, get, list) and status. High error rates on create/update may indicate validation failures or MongoDB issues.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 10, "x": 4, "y": 46 }, "id": 14,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(router_routegroup_operations_total[5m])", "legendFormat": "{{operation}} / {{status}}" }]
+    },
+    {
+      "title": "Operation Duration (p50 / p95 / p99)", "description": "Latency of route group CRUD operations. List operations are typically slower due to MongoDB queries with pagination. Get should be fast if cached.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 10, "x": 14, "y": 46 }, "id": 15,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le, operation) (rate(router_routegroup_operation_duration_seconds_bucket[5m])))", "legendFormat": "p50 {{operation}}" },
+        { "expr": "histogram_quantile(0.95, sum by (le, operation) (rate(router_routegroup_operation_duration_seconds_bucket[5m])))", "legendFormat": "p95 {{operation}}" }
+      ]
+    },
+    {
+      "title": "RouteGroup Cache Hit/Miss", "description": "Route group TieredCache lookups per second. High hit rate means route group configs are served from memory without hitting MongoDB. Misses trigger a DB query and cache repopulation.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 54 }, "id": 11,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(router_routegroup_cache_total[5m])", "legendFormat": "{{result}}" }]
+    },
+    {
+      "title": "List Results Count (p50 / p95 / p99)", "description": "Number of route groups returned per list query. Shows how many route groups exist per organization. Large result sets may slow down list operations.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 54 }, "id": 16,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "short" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, rate(router_routegroup_list_results_count_bucket[5m]))", "legendFormat": "p50" },
+        { "expr": "histogram_quantile(0.95, rate(router_routegroup_list_results_count_bucket[5m]))", "legendFormat": "p95" }
+      ]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 62 }, "id": 106, "title": "Go Runtime", "type": "row" },
+    {
+      "title": "Goroutines", "description": "Active goroutines. The Router processes events in batches using worker goroutines. Sustained growth without load increase may indicate goroutine leaks.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 0, "y": 63 }, "id": 17,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "blue", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 20 }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "go_goroutines{job=\"router\"}", "legendFormat": "goroutines" }]
+    },
+    {
+      "title": "Heap Memory", "description": "Go heap memory: 'in use' = actively allocated objects; 'sys' = total from OS. Large gap means GC fragmentation. The Router caches assets in-memory, so heap grows with asset count.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 6, "y": 63 }, "id": 18,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "decbytes" }, "overrides": [] },
+      "targets": [
+        { "expr": "go_memstats_heap_alloc_bytes{job=\"router\"}", "legendFormat": "heap in use" },
+        { "expr": "go_memstats_heap_sys_bytes{job=\"router\"}", "legendFormat": "heap sys" }
+      ]
+    },
+    {
+      "title": "Process Memory (RSS)", "description": "Resident Set Size — actual physical memory used. This is what matters for container limits and OOM kills.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 12, "y": 63 }, "id": 19,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "orange", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 20 }, "unit": "decbytes" }, "overrides": [] },
+      "targets": [{ "expr": "process_resident_memory_bytes{job=\"router\"}", "legendFormat": "RSS" }]
+    },
+    {
+      "title": "GC Pause Duration", "description": "Time spent in stop-the-world GC pauses per second. High values cause latency spikes in event processing.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 18, "y": 63 }, "id": 20,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "red", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [{ "expr": "rate(go_gc_duration_seconds_sum{job=\"router\"}[5m])", "legendFormat": "GC time/s" }]
+    },
+    {
+      "title": "Open File Descriptors", "description": "Open vs max FDs. Each NATS/MongoDB connection uses an FD. Approaching max causes 'too many open files' errors.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 71 }, "id": 21,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "short" }, "overrides": [] },
+      "targets": [
+        { "expr": "process_open_fds{job=\"router\"}", "legendFormat": "open" },
+        { "expr": "process_max_fds{job=\"router\"}", "legendFormat": "max" }
+      ]
+    },
+    {
+      "title": "CPU Usage", "description": "CPU cores consumed per second. Value 1.0 = one full core. The Router is CPU-intensive during match evaluation with many route groups.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 71 }, "id": 22,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "purple", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 20 }, "unit": "percentunit" }, "overrides": [] },
+      "targets": [{ "expr": "rate(process_cpu_seconds_total{job=\"router\"}[5m])", "legendFormat": "CPU" }]
+    },
+    {
+      "title": "GC Cycles Rate", "description": "GC cycles per second. High rate (>10/s) means too much short-lived allocation pressure — common when processing high event volumes with many JSON marshal/unmarshal operations.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 71 }, "id": 23,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "yellow", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(go_gc_duration_seconds_count{job=\"router\"}[5m])", "legendFormat": "GC cycles/s" }]
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": ["mapexIam", "router", "go"],
+  "templating": { "list": [{ "current": { "selected": false, "text": "Prometheus", "value": "prometheus" }, "hide": 0, "includeAll": false, "name": "DS_PROMETHEUS", "options": [], "query": "prometheus", "refresh": 1, "regex": "", "type": "datasource" }] },
+  "time": { "from": "now-1h", "to": "now" },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Router - Overview",
+  "uid": "router-overview",
+  "version": 2
+}

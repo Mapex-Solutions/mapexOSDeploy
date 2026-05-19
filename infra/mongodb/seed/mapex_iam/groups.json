@@ -1,0 +1,14 @@
+[
+  {
+    "_id": { "$oid": "0000000000000000000aa301" },
+    "name": "Admin",
+    "description": "Default administrators group",
+    "enabled": true,
+    "isSystem": false,
+    "orgId": { "$oid": "0000000000000000000aa001" },
+    "pathKey": "000001",
+    "scope": "local",
+    "created": { "$date": "2026-01-01T00:00:00.000Z" },
+    "updated": { "$date": "2026-01-01T00:00:00.000Z" }
+  }
+]

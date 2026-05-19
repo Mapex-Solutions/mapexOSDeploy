@@ -1,0 +1,196 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "links": [],
+  "panels": [
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 }, "id": 100, "title": "Event Processing", "type": "row" },
+    {
+      "title": "Total Events Processed", "description": "Cumulative count of all events processed across all consumers since last restart. A steadily growing number means the pipeline is healthy. If it plateaus while data sources are active, check NATS connectivity and consumer health.", "type": "stat",
+      "gridPos": { "h": 6, "w": 4, "x": 0, "y": 1 }, "id": 1,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "green", "value": null }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "sum(events_event_processed_total{job=\"events\"})", "legendFormat": "processed" }]
+    },
+    {
+      "title": "Total Failed", "description": "Cumulative count of messages that were nacked, rejected, or sent to the DLQ across all consumers. Any sustained growth here indicates processing failures. Check consumer logs and ClickHouse health. Zero is the ideal value.", "type": "stat",
+      "gridPos": { "h": 6, "w": 4, "x": 4, "y": 1 }, "id": 2,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "green", "value": null }, { "color": "red", "value": 1 }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "sum(events_message_total{job=\"events\", result=~\"nack|reject|dlq\"})", "legendFormat": "failed" }]
+    },
+    {
+      "title": "Total ClickHouse Inserts", "description": "Cumulative count of successful ClickHouse batch inserts across all tables since last restart. Compare with Total Events Processed to ensure events are being persisted. A large gap means events are being processed but not stored.", "type": "stat",
+      "gridPos": { "h": 6, "w": 4, "x": 8, "y": 1 }, "id": 3,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "blue", "value": null }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "sum(events_clickhouse_insert_total{job=\"events\", status=\"success\"})", "legendFormat": "inserts" }]
+    },
+    {
+      "title": "Events Processed Rate", "description": "Events processed per second, broken down by consumer (device, trigger, workflow, dlq) and status. This is the primary throughput indicator. Sudden drops suggest upstream issues; spikes may indicate event bursts from IoT devices or triggered workflows.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 1 }, "id": 4,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15, "pointSize": 5, "spanNulls": false, "stacking": { "mode": "none" } }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(events_event_processed_total{job=\"events\"}[5m])", "legendFormat": "{{consumer}} / {{status}}" }]
+    },
+    {
+      "title": "Processing Duration by Consumer (p50 / p95 / p99)", "description": "End-to-end latency of event processing per consumer. p50 is the median experience; p99 reveals tail latency. High p99 with normal p50 suggests occasional slow paths (e.g., cache misses, large payloads). If all percentiles are high, the consumer is overloaded or ClickHouse inserts are slow.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 9 }, "id": 5,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le, consumer) (rate(events_event_processing_duration_seconds_bucket{job=\"events\"}[5m])))", "legendFormat": "p50 {{consumer}}" },
+        { "expr": "histogram_quantile(0.95, sum by (le, consumer) (rate(events_event_processing_duration_seconds_bucket{job=\"events\"}[5m])))", "legendFormat": "p95 {{consumer}}" },
+        { "expr": "histogram_quantile(0.99, sum by (le, consumer) (rate(events_event_processing_duration_seconds_bucket{job=\"events\"}[5m])))", "legendFormat": "p99 {{consumer}}" }
+      ]
+    },
+    {
+      "title": "Batch Size by Consumer (p50 / p95 / p99)", "description": "Number of events per batch delivered to each consumer. Larger batches improve throughput but increase memory usage and processing latency. If batch sizes are consistently at 1, batching may not be effective. Very large batches may cause memory pressure.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 9 }, "id": 6,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "short" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le, consumer) (rate(events_event_batch_size_bucket{job=\"events\"}[5m])))", "legendFormat": "p50 {{consumer}}" },
+        { "expr": "histogram_quantile(0.95, sum by (le, consumer) (rate(events_event_batch_size_bucket{job=\"events\"}[5m])))", "legendFormat": "p95 {{consumer}}" },
+        { "expr": "histogram_quantile(0.99, sum by (le, consumer) (rate(events_event_batch_size_bucket{job=\"events\"}[5m])))", "legendFormat": "p99 {{consumer}}" }
+      ]
+    },
+
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 17 }, "id": 101, "title": "Messages (ACK/NACK)", "type": "row" },
+    {
+      "title": "Message Outcomes Rate", "description": "Rate of message acknowledgment outcomes per second by consumer and result (ack, nack, reject, dlq). In a healthy system, ack dominates. Nack means temporary failures (message will be retried). Reject means permanent failures (message is discarded). DLQ means the message was moved to the dead-letter queue after exhausting retries.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 18 }, "id": 7,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(events_message_total{job=\"events\"}[5m])", "legendFormat": "{{consumer}} / {{result}}" }]
+    },
+    {
+      "title": "Failure Ratio by Consumer", "description": "Percentage of messages that were NOT acknowledged successfully (nack + reject + dlq) relative to total messages per consumer. Values above 5% warrant investigation; above 20% is critical. A sustained non-zero ratio means events are being lost or retried excessively.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 18 }, "id": 8,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "percentunit", "min": 0, "max": 1 }, "overrides": [] },
+      "targets": [{ "expr": "sum by (consumer) (rate(events_message_total{job=\"events\", result=~\"nack|reject|dlq\"}[5m])) / sum by (consumer) (rate(events_message_total{job=\"events\"}[5m]))", "legendFormat": "{{consumer}}" }]
+    },
+
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 26 }, "id": 102, "title": "ClickHouse Storage", "type": "row" },
+    {
+      "title": "ClickHouse Insert Rate", "description": "Batch inserts per second into ClickHouse, broken down by table (events_device, events_trigger, events_workflow, events_dlq) and status (success/error). Errors indicate ClickHouse connectivity issues, schema mismatches, or resource exhaustion. Check ClickHouse logs if error rate increases.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 27 }, "id": 9,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(events_clickhouse_insert_total{job=\"events\"}[5m])", "legendFormat": "{{table}} / {{status}}" }]
+    },
+    {
+      "title": "ClickHouse Insert Duration (p50 / p95 / p99)", "description": "Latency of ClickHouse batch insert operations per table. Normal values are under 100ms. p99 above 500ms suggests ClickHouse is under pressure (merges, disk I/O, memory). Sustained high latency will cause back-pressure on NATS consumers and eventually nacks.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 27 }, "id": 10,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le, table) (rate(events_clickhouse_insert_duration_seconds_bucket{job=\"events\"}[5m])))", "legendFormat": "p50 {{table}}" },
+        { "expr": "histogram_quantile(0.95, sum by (le, table) (rate(events_clickhouse_insert_duration_seconds_bucket{job=\"events\"}[5m])))", "legendFormat": "p95 {{table}}" },
+        { "expr": "histogram_quantile(0.99, sum by (le, table) (rate(events_clickhouse_insert_duration_seconds_bucket{job=\"events\"}[5m])))", "legendFormat": "p99 {{table}}" }
+      ]
+    },
+    {
+      "title": "ClickHouse Insert Batch Size (p50 / p95 / p99)", "description": "Number of rows per ClickHouse batch insert per table. Larger batches are more efficient for ClickHouse (fewer parts created). Very small batches (1-2 rows) indicate low throughput or aggressive flush intervals. Very large batches increase memory usage and insert latency.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 27 }, "id": 11,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "short" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le, table) (rate(events_clickhouse_insert_batch_size_bucket{job=\"events\"}[5m])))", "legendFormat": "p50 {{table}}" },
+        { "expr": "histogram_quantile(0.95, sum by (le, table) (rate(events_clickhouse_insert_batch_size_bucket{job=\"events\"}[5m])))", "legendFormat": "p95 {{table}}" },
+        { "expr": "histogram_quantile(0.99, sum by (le, table) (rate(events_clickhouse_insert_batch_size_bucket{job=\"events\"}[5m])))", "legendFormat": "p99 {{table}}" }
+      ]
+    },
+
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 35 }, "id": 103, "title": "Cache & Mapping", "type": "row" },
+    {
+      "title": "Template Cache Hit/Miss", "description": "Rate of template cache lookups per second, split by result (hit/miss). A high miss rate means the cache is cold or templates are changing frequently, causing extra database queries. Ideal hit ratio is above 95%. After a restart, expect a burst of misses as the cache warms up.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 36 }, "id": 12,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(events_template_cache_total{job=\"events\"}[5m])", "legendFormat": "{{result}}" }]
+    },
+    {
+      "title": "Retention Cache Hit/Miss", "description": "Rate of retention policy cache lookups per second, split by result (hit/miss). Retention policies determine how long events are stored in ClickHouse. A high miss rate causes extra queries to fetch retention settings. Like template cache, expect misses after restart.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 36 }, "id": 13,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(events_retention_cache_total{job=\"events\"}[5m])", "legendFormat": "{{result}}" }]
+    },
+    {
+      "title": "EVA Fields Mapped Rate", "description": "Rate of EVA (Extended Value Attributes) field mappings per second. EVA fields are dynamic fields defined in asset templates that get mapped onto incoming device events. Higher rates correlate with device event throughput and template complexity. A drop while device events are flowing may indicate template cache issues.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 36 }, "id": 14,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "blue", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(events_eva_fields_mapped_total{job=\"events\"}[5m])", "legendFormat": "fields/s" }]
+    },
+
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 44 }, "id": 104, "title": "Go Runtime", "type": "row" },
+    {
+      "title": "Goroutines", "description": "Active goroutines. Sustained growth without load increase may indicate goroutine leaks.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 0, "y": 45 }, "id": 15,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "blue", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 20 }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "go_goroutines{job=\"events\"}", "legendFormat": "goroutines" }]
+    },
+    {
+      "title": "Heap Memory", "description": "Go heap memory: 'in use' = actively allocated; 'sys' = total from OS. Large gap means GC fragmentation.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 6, "y": 45 }, "id": 16,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "decbytes" }, "overrides": [] },
+      "targets": [
+        { "expr": "go_memstats_heap_alloc_bytes{job=\"events\"}", "legendFormat": "heap in use" },
+        { "expr": "go_memstats_heap_sys_bytes{job=\"events\"}", "legendFormat": "heap sys" }
+      ]
+    },
+    {
+      "title": "Process Memory (RSS)", "description": "Resident Set Size — actual physical memory used. This is what matters for container limits and OOM kills.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 12, "y": 45 }, "id": 17,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "orange", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 20 }, "unit": "decbytes" }, "overrides": [] },
+      "targets": [{ "expr": "process_resident_memory_bytes{job=\"events\"}", "legendFormat": "RSS" }]
+    },
+    {
+      "title": "GC Pause Duration", "description": "Time spent in stop-the-world GC pauses per second. High values cause latency spikes.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 18, "y": 45 }, "id": 18,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "red", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [{ "expr": "rate(go_gc_duration_seconds_sum{job=\"events\"}[5m])", "legendFormat": "GC time/s" }]
+    },
+    {
+      "title": "Open File Descriptors", "description": "Open vs max FDs. Each connection uses an FD. Approaching max causes errors.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 53 }, "id": 19,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "short" }, "overrides": [] },
+      "targets": [
+        { "expr": "process_open_fds{job=\"events\"}", "legendFormat": "open" },
+        { "expr": "process_max_fds{job=\"events\"}", "legendFormat": "max" }
+      ]
+    },
+    {
+      "title": "CPU Usage", "description": "CPU cores consumed per second. Value 1.0 = one full core.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 53 }, "id": 20,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "purple", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 20 }, "unit": "percentunit" }, "overrides": [] },
+      "targets": [{ "expr": "rate(process_cpu_seconds_total{job=\"events\"}[5m])", "legendFormat": "CPU" }]
+    },
+    {
+      "title": "GC Cycles Rate", "description": "GC cycles per second. High rate (>10/s) means too much short-lived allocation pressure.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 53 }, "id": 21,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "yellow", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(go_gc_duration_seconds_count{job=\"events\"}[5m])", "legendFormat": "GC cycles/s" }]
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": ["events", "go"],
+  "templating": { "list": [{ "current": { "selected": false, "text": "Prometheus", "value": "prometheus" }, "hide": 0, "includeAll": false, "name": "DS_PROMETHEUS", "options": [], "query": "prometheus", "refresh": 1, "regex": "", "type": "datasource" }] },
+  "time": { "from": "now-1h", "to": "now" },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Events - Overview",
+  "uid": "events-overview",
+  "version": 2
+}

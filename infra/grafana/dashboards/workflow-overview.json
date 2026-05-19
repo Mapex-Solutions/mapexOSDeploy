@@ -1,0 +1,234 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "links": [],
+  "panels": [
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 }, "id": 100, "title": "Execution — Overview", "type": "row" },
+    {
+      "title": "Active Executions", "description": "Number of workflow executions currently in-flight (running DAG walker). If this stays high, workflows may be stuck in wait nodes or external calls.", "type": "stat",
+      "gridPos": { "h": 8, "w": 4, "x": 0, "y": 1 }, "id": 1,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 50 }, { "color": "red", "value": 200 }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "workflow_execution_active{job=\"workflow\"}", "legendFormat": "active" }]
+    },
+    {
+      "title": "Total Started", "description": "Cumulative count of executions started since the last service restart. Broken down by trigger source: workflow (from NATS/Router), subworkflow (child execution), http (manual API call).", "type": "stat",
+      "gridPos": { "h": 8, "w": 4, "x": 4, "y": 1 }, "id": 20,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "blue", "value": null }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "sum(workflow_execution_started_total)", "legendFormat": "started" }]
+    },
+    {
+      "title": "Total Completed", "description": "Cumulative count of executions that finished successfully (all nodes completed without error). A healthy system shows completed >> failed.", "type": "stat",
+      "gridPos": { "h": 8, "w": 4, "x": 8, "y": 1 }, "id": 21,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "green", "value": null }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "sum(workflow_execution_completed_total)", "legendFormat": "completed" }]
+    },
+    {
+      "title": "Total Failed", "description": "Cumulative count of executions that terminated with error (node failure, timeout, unhandled exception). If this grows fast, check the error logs and the Resilience section below.", "type": "stat",
+      "gridPos": { "h": 8, "w": 4, "x": 12, "y": 1 }, "id": 22,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "green", "value": null }, { "color": "red", "value": 1 }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "sum(workflow_execution_failed_total)", "legendFormat": "failed" }]
+    },
+    {
+      "title": "Started Rate by Source", "description": "Executions started per second, grouped by trigger source. Useful to understand the load profile: are most executions coming from IoT events (workflow), child workflows (subworkflow), or manual API calls (http)?", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 1 }, "id": 2,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15, "spanNulls": false, "stacking": { "mode": "none" } }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(workflow_execution_started_total[5m])", "legendFormat": "{{trigger}}" }]
+    },
+    {
+      "title": "Completed vs Failed Rate", "description": "Rate of terminal states per second. Green lines (completed) should dominate. Red lines (failed) indicate problems. Spikes in failed rate correlate with error bursts in the logs.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 9 }, "id": 3,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [
+        { "expr": "rate(workflow_execution_completed_total[5m])", "legendFormat": "completed ({{trigger}})" },
+        { "expr": "rate(workflow_execution_failed_total[5m])", "legendFormat": "failed ({{trigger}})" }
+      ]
+    },
+    {
+      "title": "Started by Source (Total)", "description": "Cumulative started count broken down by trigger source. Shows the proportion of workflow vs subworkflow vs http executions over time.", "type": "stat",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 9 }, "id": 23,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "thresholds" }, "thresholds": { "steps": [{ "color": "green", "value": null }] }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "workflow_execution_started_total", "legendFormat": "{{trigger}}" }]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 17 }, "id": 101, "title": "Execution — Performance", "type": "row" },
+    {
+      "title": "Duration (p50 / p95 / p99)", "description": "End-to-end execution time from start to terminal state (completed or failed). p50 is the median — most executions finish in this time. p99 shows the worst-case tail latency. High p99 with low p50 means a few slow workflows (wait nodes, external calls) dragging the tail.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 18 }, "id": 4,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le, trigger) (rate(workflow_execution_duration_seconds_bucket[5m])))", "legendFormat": "p50 {{trigger}}" },
+        { "expr": "histogram_quantile(0.95, sum by (le, trigger) (rate(workflow_execution_duration_seconds_bucket[5m])))", "legendFormat": "p95 {{trigger}}" },
+        { "expr": "histogram_quantile(0.99, sum by (le, trigger) (rate(workflow_execution_duration_seconds_bucket[5m])))", "legendFormat": "p99 {{trigger}}" }
+      ]
+    },
+    {
+      "title": "Steps per Execution (p50 / p95 / p99)", "description": "Number of DAG nodes executed per workflow run. A simple workflow might have 3-5 steps; a complex one with loops/branches can have 50+. Sudden increases may indicate infinite loops or unexpected branching.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 18 }, "id": 5,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "short" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, rate(workflow_execution_steps_total_bucket[5m]))", "legendFormat": "p50" },
+        { "expr": "histogram_quantile(0.95, rate(workflow_execution_steps_total_bucket[5m]))", "legendFormat": "p95" },
+        { "expr": "histogram_quantile(0.99, rate(workflow_execution_steps_total_bucket[5m]))", "legendFormat": "p99" }
+      ]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 26 }, "id": 102, "title": "Execution — Checkpoint & Dispatch", "type": "row" },
+    {
+      "title": "Checkpoint Latency (p50 / p95 / p99)", "description": "Time to persist execution state to NATS KV (Put/Update). This happens after every node completes. Values above 10ms may indicate NATS server pressure or network issues. Directly impacts execution throughput.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 27 }, "id": 6,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, rate(workflow_checkpoint_duration_seconds_bucket[5m]))", "legendFormat": "p50" },
+        { "expr": "histogram_quantile(0.95, rate(workflow_checkpoint_duration_seconds_bucket[5m]))", "legendFormat": "p95" },
+        { "expr": "histogram_quantile(0.99, rate(workflow_checkpoint_duration_seconds_bucket[5m]))", "legendFormat": "p99" }
+      ]
+    },
+    {
+      "title": "Dispatch Rate", "description": "NATS messages dispatched per second by type (subworkflow launch, schedule timer, resume re-enqueue) and result (ok/error). High error rates indicate NATS publish failures — check NATS server health.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 27 }, "id": 7,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(workflow_dispatch_total[5m])", "legendFormat": "{{type}} / {{result}}" }]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 35 }, "id": 103, "title": "Definition CRUD", "type": "row" },
+    {
+      "title": "Operations Rate", "description": "Workflow definition create/update/delete/get/list operations per second. High error rates indicate MongoDB issues or validation failures.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 36 }, "id": 8,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(workflow_definition_operations_total[5m])", "legendFormat": "{{operation}} / {{status}}" }]
+    },
+    {
+      "title": "Cache Hit/Miss", "description": "Definition TieredCache lookups per second. High hit rate means definitions are served from memory/disk without hitting MongoDB. A sudden spike in misses may indicate cache invalidation or new definitions being loaded.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 36 }, "id": 9,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(workflow_definition_cache_total[5m])", "legendFormat": "{{result}}" }]
+    },
+    {
+      "title": "Operation Duration (p50 / p95 / p99)", "description": "Latency of definition CRUD operations. List operations are typically slower due to MongoDB queries with pagination. Create/update include MinIO script upload.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 36 }, "id": 24,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le, operation) (rate(workflow_definition_operation_duration_seconds_bucket[5m])))", "legendFormat": "p50 {{operation}}" },
+        { "expr": "histogram_quantile(0.95, sum by (le, operation) (rate(workflow_definition_operation_duration_seconds_bucket[5m])))", "legendFormat": "p95 {{operation}}" }
+      ]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 44 }, "id": 104, "title": "Plugin CRUD", "type": "row" },
+    {
+      "title": "Operations Rate", "description": "Plugin marketplace manifest CRUD operations per second. Plugins are cached via TieredCache — most reads should be cache hits.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 45 }, "id": 10,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(workflow_plugin_operations_total[5m])", "legendFormat": "{{operation}} / {{status}}" }]
+    },
+    {
+      "title": "Operation Duration (p50 / p95 / p99)", "description": "Latency of plugin CRUD operations. High values on get/list may indicate plugin marketplace mock service is slow.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 45 }, "id": 25,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le, operation) (rate(workflow_plugin_operation_duration_seconds_bucket[5m])))", "legendFormat": "p50 {{operation}}" },
+        { "expr": "histogram_quantile(0.95, sum by (le, operation) (rate(workflow_plugin_operation_duration_seconds_bucket[5m])))", "legendFormat": "p95 {{operation}}" }
+      ]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 53 }, "id": 105, "title": "Resilience", "type": "row" },
+    {
+      "title": "CAS Retries", "description": "Compare-And-Swap retries in HandleResume. Happens when two concurrent operations try to update the same execution state in NATS KV. Occasional retries are normal under load; sustained high rates indicate hot-key contention.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 54 }, "id": 11,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "orange", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(workflow_resilience_cas_retries_total[5m])", "legendFormat": "CAS retries/s" }]
+    },
+    {
+      "title": "Token Rejections", "description": "Stale execution token rejections. Happens when a callback arrives for an execution that has already moved to a different state (e.g., timed out). Normal in small numbers; high rates may indicate scheduling or timeout misconfiguration.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 54 }, "id": 12,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "red", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(workflow_resilience_token_rejections_total[5m])", "legendFormat": "rejections/s" }]
+    },
+    {
+      "title": "Shutdown Stops", "description": "DAG walker stops due to graceful shutdown signal. Only increments during service restart/deploy. If this appears during normal operation, something is triggering unexpected shutdowns.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 54 }, "id": 13,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "yellow", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(workflow_resilience_shutdown_stops_total[5m])", "legendFormat": "stops/s" }]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 62 }, "id": 106, "title": "Go Runtime", "type": "row" },
+    {
+      "title": "Goroutines", "description": "Number of active goroutines. Each in-flight execution uses goroutines for the DAG walker. Sustained growth without corresponding execution increases may indicate goroutine leaks.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 0, "y": 63 }, "id": 14,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "blue", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 20 }, "unit": "short" }, "overrides": [] },
+      "targets": [{ "expr": "go_goroutines{job=\"workflow\"}", "legendFormat": "goroutines" }]
+    },
+    {
+      "title": "Heap Memory", "description": "Go heap memory: 'in use' is actively allocated objects; 'sys' is total memory obtained from OS. Large gap between them means fragmentation or GC hasn't reclaimed yet.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 6, "y": 63 }, "id": 15,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "decbytes" }, "overrides": [] },
+      "targets": [
+        { "expr": "go_memstats_heap_alloc_bytes{job=\"workflow\"}", "legendFormat": "heap in use" },
+        { "expr": "go_memstats_heap_sys_bytes{job=\"workflow\"}", "legendFormat": "heap sys" }
+      ]
+    },
+    {
+      "title": "Process Memory (RSS)", "description": "Resident Set Size — actual physical memory used by the process. This is what the OS reports and what matters for container memory limits.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 12, "y": 63 }, "id": 16,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "orange", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 20 }, "unit": "decbytes" }, "overrides": [] },
+      "targets": [{ "expr": "process_resident_memory_bytes{job=\"workflow\"}", "legendFormat": "RSS" }]
+    },
+    {
+      "title": "GC Pause Duration", "description": "Time spent in garbage collection stop-the-world pauses per second. High values cause latency spikes in all handlers. If this grows, consider tuning GOGC or reducing allocation pressure.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 18, "y": 63 }, "id": 17,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "red", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "s" }, "overrides": [] },
+      "targets": [{ "expr": "rate(go_gc_duration_seconds_sum{job=\"workflow\"}[5m])", "legendFormat": "GC time/s" }]
+    },
+    {
+      "title": "Open File Descriptors", "description": "Open vs max allowed file descriptors. Each NATS connection, MongoDB connection, and HTTP client uses FDs. Approaching max causes 'too many open files' errors.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 71 }, "id": 18,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "mode": "palette-classic" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 }, "unit": "short" }, "overrides": [] },
+      "targets": [
+        { "expr": "process_open_fds{job=\"workflow\"}", "legendFormat": "open" },
+        { "expr": "process_max_fds{job=\"workflow\"}", "legendFormat": "max" }
+      ]
+    },
+    {
+      "title": "CPU Usage", "description": "CPU seconds consumed per second. Value of 1.0 = one full CPU core. The workflow service is mostly I/O bound (NATS, MongoDB), so high CPU may indicate excessive JSON marshalling or value resolution in hot loops.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 71 }, "id": 19,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "purple", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 20 }, "unit": "percentunit" }, "overrides": [] },
+      "targets": [{ "expr": "rate(process_cpu_seconds_total{job=\"workflow\"}[5m])", "legendFormat": "CPU" }]
+    },
+    {
+      "title": "GC Cycles Rate", "description": "Garbage collection cycles per second. More cycles = more CPU overhead but shorter pauses. If this is very high (>10/s), the service is allocating too much short-lived memory.", "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 71 }, "id": 20,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": { "defaults": { "color": { "fixedColor": "yellow", "mode": "fixed" }, "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 }, "unit": "ops" }, "overrides": [] },
+      "targets": [{ "expr": "rate(go_gc_duration_seconds_count{job=\"workflow\"}[5m])", "legendFormat": "GC cycles/s" }]
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": ["mapexIam", "workflow", "go"],
+  "templating": { "list": [{ "current": { "selected": false, "text": "Prometheus", "value": "prometheus" }, "hide": 0, "includeAll": false, "name": "DS_PROMETHEUS", "options": [], "query": "prometheus", "refresh": 1, "regex": "", "type": "datasource" }] },
+  "time": { "from": "now-1h", "to": "now" },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Workflow - Overview",
+  "uid": "workflow-overview",
+  "version": 2
+}

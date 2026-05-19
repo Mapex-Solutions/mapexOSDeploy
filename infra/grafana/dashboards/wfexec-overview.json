@@ -1,0 +1,442 @@
+{
+  "annotations": { "list": [] },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "links": [],
+  "panels": [
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 }, "id": 100, "title": "Script Execution", "type": "row" },
+    {
+      "title": "Executions Rate",
+      "description": "Workflow code-node executions per second by status (success/error). This is the primary throughput indicator. A drop in rate with rising NATS consumer lag indicates the service cannot keep up with incoming workflow execution requests.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 0, "y": 1 },
+      "id": 1,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15, "spanNulls": false, "stacking": { "mode": "none" } },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "rate(wfexec_executions_total[5m])", "legendFormat": "{{status}}" }]
+    },
+    {
+      "title": "Execution Duration (p50 / p95 / p99)",
+      "description": "End-to-end workflow script execution latency percentiles. Includes NATS message handling, script lookup, V8 execution, and result publishing. p50 = typical latency, p95 = slow executions, p99 = worst case.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 6, "x": 6, "y": 1 },
+      "id": 2,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, rate(wfexec_execution_duration_seconds_bucket[5m]))", "legendFormat": "p50" },
+        { "expr": "histogram_quantile(0.95, rate(wfexec_execution_duration_seconds_bucket[5m]))", "legendFormat": "p95" },
+        { "expr": "histogram_quantile(0.99, rate(wfexec_execution_duration_seconds_bucket[5m]))", "legendFormat": "p99" }
+      ]
+    },
+    {
+      "title": "Total Executions",
+      "description": "Cumulative count of all workflow code-node executions since the service started. Provides an at-a-glance view of total throughput volume.",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 3, "x": 12, "y": 1 },
+      "id": 3,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": { "steps": [{ "color": "green", "value": null }] },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "sum(wfexec_executions_total)", "legendFormat": "total" }]
+    },
+    {
+      "title": "Total Script Errors",
+      "description": "Cumulative count of script execution errors since startup. Errors indicate user workflow scripts throwing exceptions or timing out. Sustained growth requires reviewing workflow code nodes or increasing timeouts.",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 3, "x": 15, "y": 1 },
+      "id": 4,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": { "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 10 }, { "color": "red", "value": 100 }] },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "sum(wfexec_script_errors_total)", "legendFormat": "errors" }]
+    },
+    {
+      "title": "Workers (gauge)",
+      "description": "Current number of active Piscina worker threads. This represents the parallel V8 execution capacity. If all workers are busy, new tasks queue up, increasing wait duration.",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 3, "x": 18, "y": 1 },
+      "id": 5,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": { "steps": [{ "color": "green", "value": null }, { "color": "yellow", "value": 8 }, { "color": "red", "value": 16 }] },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "wfexec_piscina_workers{job=\"wfexec\"}", "legendFormat": "workers" }]
+    },
+    {
+      "title": "Piscina Completed Total",
+      "description": "Cumulative count of tasks completed by the Piscina worker pool since startup. Compare with total executions to verify that every execution request results in a completed task.",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 3, "x": 21, "y": 1 },
+      "id": 6,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "thresholds" },
+          "thresholds": { "steps": [{ "color": "green", "value": null }] },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "wfexec_piscina_completed_total{job=\"wfexec\"}", "legendFormat": "completed" }]
+    },
+    {
+      "title": "Script Duration by Type (p50 / p95 / p99)",
+      "description": "V8 script execution time per script type. This measures only the time inside the V8 isolate, excluding framework overhead. Compare with execution duration to isolate framework vs script overhead.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 12, "y": 5 },
+      "id": 7,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le, script_type) (rate(wfexec_script_duration_seconds_bucket[5m])))", "legendFormat": "p50 {{script_type}}" },
+        { "expr": "histogram_quantile(0.95, sum by (le, script_type) (rate(wfexec_script_duration_seconds_bucket[5m])))", "legendFormat": "p95 {{script_type}}" },
+        { "expr": "histogram_quantile(0.99, sum by (le, script_type) (rate(wfexec_script_duration_seconds_bucket[5m])))", "legendFormat": "p99 {{script_type}}" }
+      ]
+    },
+    {
+      "title": "Script Errors Rate",
+      "description": "Script execution errors per second by script type and error type (timeout, runtime, compilation). Helps distinguish between user code errors and infrastructure issues.",
+      "type": "timeseries",
+      "gridPos": { "h": 4, "w": 6, "x": 0, "y": 9 },
+      "id": 8,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "bars", "lineWidth": 1, "fillOpacity": 50 },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "rate(wfexec_script_errors_total[5m])", "legendFormat": "{{script_type}} / {{error_type}}" }]
+    },
+    {
+      "title": "Compile Duration (p50 / p99)",
+      "description": "Script compilation time by source (fresh compile vs bytecode restore). Bytecode restores should be significantly faster than fresh compiles. If fresh compile rate is high, the bytecode cache may not be functioning properly.",
+      "type": "timeseries",
+      "gridPos": { "h": 4, "w": 6, "x": 6, "y": 9 },
+      "id": 9,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, sum by (le, source) (rate(wfexec_compile_duration_seconds_bucket[5m])))", "legendFormat": "p50 {{source}}" },
+        { "expr": "histogram_quantile(0.99, sum by (le, source) (rate(wfexec_compile_duration_seconds_bucket[5m])))", "legendFormat": "p99 {{source}}" }
+      ]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 13 }, "id": 101, "title": "Cache Tiers", "type": "row" },
+    {
+      "title": "Script Source Cache by Tier",
+      "description": "Script source cache lookups per second by tier (memory, redis, origin). The tiered cache serves workflow code-node source code. Most lookups should hit memory or redis. Frequent origin hits indicate cache misses triggering MinIO fetches.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 14 },
+      "id": 10,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "rate(wfexec_script_source_cache_total[5m])", "legendFormat": "{{tier}}" }]
+    },
+    {
+      "title": "Bytecode Cache by Tier",
+      "description": "Bytecode cache lookups per second by tier. Bytecode caching avoids recompiling V8 scripts from source on every execution. Frequent misses at lower tiers (memory) with hits at higher tiers (redis) indicate memory pressure.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 14 },
+      "id": 11,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "rate(wfexec_bytecode_cache_total[5m])", "legendFormat": "{{tier}}" }]
+    },
+    {
+      "title": "Script Registry by Result",
+      "description": "Script registry lookups per second by result (hit/miss). The script registry is the fastest cache layer -- an in-memory map of compiled scripts. Monitoring hit vs miss rate helps tune registry eviction policies.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 14 },
+      "id": 12,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "rate(wfexec_script_registry_total[5m])", "legendFormat": "{{result}}" }]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 22 }, "id": 102, "title": "Piscina Worker Pool", "type": "row" },
+    {
+      "title": "Completed Tasks Rate",
+      "description": "Rate of tasks completed by the Piscina worker pool per second. This is the effective throughput of the V8 execution layer. Compare with executions rate to verify 1:1 correspondence.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 23 },
+      "id": 13,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "fixedColor": "green", "mode": "fixed" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 },
+          "unit": "ops"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "rate(wfexec_piscina_completed_total[5m])", "legendFormat": "completed/s" }]
+    },
+    {
+      "title": "Run Duration (p50 / p95 / p99)",
+      "description": "Piscina task run duration -- the time a worker thread spends executing a task. Includes V8 script execution and result serialization. High values indicate expensive workflow scripts or large result payloads.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 23 },
+      "id": 14,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, rate(wfexec_piscina_run_duration_seconds_bucket[5m]))", "legendFormat": "run p50" },
+        { "expr": "histogram_quantile(0.95, rate(wfexec_piscina_run_duration_seconds_bucket[5m]))", "legendFormat": "run p95" },
+        { "expr": "histogram_quantile(0.99, rate(wfexec_piscina_run_duration_seconds_bucket[5m]))", "legendFormat": "run p99" }
+      ]
+    },
+    {
+      "title": "Wait Duration (p50 / p95 / p99)",
+      "description": "Time tasks spend waiting in the Piscina queue before a worker picks them up. High wait times mean all workers are busy. If p95 wait > 100ms, consider increasing the worker count or reducing script execution time.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 23 },
+      "id": 15,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, rate(wfexec_piscina_wait_duration_seconds_bucket[5m]))", "legendFormat": "wait p50" },
+        { "expr": "histogram_quantile(0.95, rate(wfexec_piscina_wait_duration_seconds_bucket[5m]))", "legendFormat": "wait p95" },
+        { "expr": "histogram_quantile(0.99, rate(wfexec_piscina_wait_duration_seconds_bucket[5m]))", "legendFormat": "wait p99" }
+      ]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 31 }, "id": 103, "title": "NATS Consumer", "type": "row" },
+    {
+      "title": "Consumer Lag",
+      "description": "Number of pending (unprocessed) messages per NATS consumer. Sustained lag indicates the service is consuming slower than messages are being produced. Monitor this alongside worker pool utilization to determine if scaling is needed.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 32 },
+      "id": 16,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "fixedColor": "orange", "mode": "fixed" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 20 },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "wfexec_nats_consumer_lag{job=\"wfexec\"}", "legendFormat": "{{consumer}}" }]
+    },
+    {
+      "title": "Batch Size (p50 / p95)",
+      "description": "Messages fetched per NATS batch. Larger batches improve throughput but increase per-batch latency. If p95 is consistently at max batch size, the service is under sustained load.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 32 },
+      "id": 17,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [
+        { "expr": "histogram_quantile(0.50, rate(wfexec_batch_size_bucket[5m]))", "legendFormat": "p50" },
+        { "expr": "histogram_quantile(0.95, rate(wfexec_batch_size_bucket[5m]))", "legendFormat": "p95" }
+      ]
+    },
+    { "collapsed": false, "gridPos": { "h": 1, "w": 24, "x": 0, "y": 40 }, "id": 104, "title": "Node.js Runtime", "type": "row" },
+    {
+      "title": "Heap Memory",
+      "description": "V8 heap memory: 'used' = live objects; 'total' = allocated heap. If used approaches total, V8 will trigger more frequent GC.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 4, "x": 0, "y": 41 },
+      "id": 18,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "targets": [
+        { "expr": "nodejs_heap_size_used_bytes{job=\"wfexec\"}", "legendFormat": "heap used" },
+        { "expr": "nodejs_heap_size_total_bytes{job=\"wfexec\"}", "legendFormat": "heap total" }
+      ]
+    },
+    {
+      "title": "Event Loop Lag",
+      "description": "Node.js event loop lag. p50 shows typical responsiveness; p99 shows worst-case blocking. Values above 100ms indicate the event loop is being blocked.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 4, "x": 4, "y": 41 },
+      "id": 19,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "targets": [
+        { "expr": "nodejs_eventloop_lag_p50_seconds{job=\"wfexec\"}", "legendFormat": "p50" },
+        { "expr": "nodejs_eventloop_lag_p99_seconds{job=\"wfexec\"}", "legendFormat": "p99" }
+      ]
+    },
+    {
+      "title": "Process Memory & CPU",
+      "description": "RSS = actual physical memory. CPU rate = cores consumed per second.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 4, "x": 8, "y": 41 },
+      "id": 20,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "mode": "palette-classic" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 15 },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "targets": [
+        { "expr": "process_resident_memory_bytes{job=\"wfexec\"}", "legendFormat": "RSS" },
+        { "expr": "rate(process_cpu_seconds_total{job=\"wfexec\"}[5m])", "legendFormat": "CPU (rate)" }
+      ]
+    },
+    {
+      "title": "GC Duration",
+      "description": "V8 garbage collection pause time per second.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 4, "x": 12, "y": 41 },
+      "id": 21,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "fixedColor": "red", "mode": "fixed" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 10 },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "rate(nodejs_gc_duration_seconds_sum{job=\"wfexec\"}[5m])", "legendFormat": "GC time/s" }]
+    },
+    {
+      "title": "Active Handles",
+      "description": "Active handles (sockets, timers, etc.). Sustained growth may indicate handle leaks.",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 4, "x": 16, "y": 41 },
+      "id": 22,
+      "datasource": { "type": "prometheus", "uid": "${DS_PROMETHEUS}" },
+      "fieldConfig": {
+        "defaults": {
+          "color": { "fixedColor": "blue", "mode": "fixed" },
+          "custom": { "drawStyle": "line", "lineWidth": 2, "fillOpacity": 20 },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "targets": [{ "expr": "nodejs_active_handles_total{job=\"wfexec\"}", "legendFormat": "handles" }]
+    }
+  ],
+  "schemaVersion": 39,
+  "tags": ["wfexec", "js_workflow_executor", "nodejs"],
+  "templating": {
+    "list": [
+      {
+        "current": { "selected": false, "text": "Prometheus", "value": "prometheus" },
+        "hide": 0,
+        "includeAll": false,
+        "name": "DS_PROMETHEUS",
+        "options": [],
+        "query": "prometheus",
+        "refresh": 1,
+        "regex": "",
+        "type": "datasource"
+      }
+    ]
+  },
+  "time": { "from": "now-1h", "to": "now" },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "JS Workflow Executor - Overview",
+  "uid": "wfexec-overview",
+  "version": 2
+}

@@ -1,0 +1,108 @@
+# =============================================================================
+# Prometheus Configuration - MapexOS (Standalone)
+# =============================================================================
+#
+# All services run inside Docker on the same network.
+# Targets use container service names instead of host.docker.internal.
+#
+# =============================================================================
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  # Prometheus self-monitoring
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  # MapexOS - Core
+  - job_name: "mapexIam"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets: ["mapexIam:5000"]
+        labels:
+          service: "mapexIam"
+          environment: "standalone"
+
+  # MapexOS - HTTP Gateway
+  - job_name: "httpgw"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets: ["http-gateway:5001"]
+        labels:
+          service: "http_gateway"
+          environment: "standalone"
+
+  # MapexOS - Assets
+  - job_name: "assets"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets: ["assets:5002"]
+        labels:
+          service: "assets"
+          environment: "standalone"
+
+  # MapexOS - Router
+  - job_name: "router"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets: ["router:5003"]
+        labels:
+          service: "router"
+          environment: "standalone"
+
+  # MapexOS - Events
+  - job_name: "events"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets: ["events:5004"]
+        labels:
+          service: "events"
+          environment: "standalone"
+
+  # MapexOS - Triggers
+  - job_name: "triggers"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets: ["triggers:5006"]
+        labels:
+          service: "triggers"
+          environment: "standalone"
+
+  # MapexOS - JS Executor
+  - job_name: "jsexec"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets: ["js-executor:8000"]
+        labels:
+          service: "js_executor"
+          environment: "standalone"
+
+  # MapexOS - JS Workflow Executor
+  - job_name: "wfexec"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets: ["js-workflow-executor:8001"]
+        labels:
+          service: "js_workflow_executor"
+          environment: "standalone"
+
+  # MapexOS - Workflow
+  - job_name: "workflow"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets: ["workflow:5007"]
+        labels:
+          service: "workflow"
+          environment: "standalone"
+
+  # MapexOS - Vault
+  - job_name: "vault"
+    metrics_path: "/metrics"
+    static_configs:
+      - targets: ["mapex-vault:5010"]
+        labels:
+          service: "mapexVault"
+          environment: "standalone"

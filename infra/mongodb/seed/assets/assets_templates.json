@@ -1,0 +1,328 @@
+[
+  {
+    "_id": {
+      "$oid": "2cb6fd2c1994ddcb51b370ad"
+    },
+    "name": "TEMPERATURE - Accurately measures temperature anywhere",
+    "description": "Disruptive Technologies Integration. Supports events: touch, connectionStatus, networksStatus, batteryStatus, temperature",
+    "categoryId": {
+      "$oid": "507f1f77bcf86cd799439011"
+    },
+    "categoryName": "Assets IoT",
+    "manufacturerId": {
+      "$oid": "507f1f77bcf86cd799439015"
+    },
+    "manufacturerName": "Disruptive Technologies",
+    "modelId": {
+      "$oid": "bfd6ae58994b2571dfddae5c"
+    },
+    "modelName": "TEMPERATURE - Accurately measures temperature anywhere",
+    "version": "1.0",
+    "isSystem": true,
+    "isTemplate": false,
+    "assetIdPath": "metadata.deviceId",
+    "scriptTest": "{\n  \"event\": {\n    \"eventId\": \"d4ade2jgj9mc738inbs0\",\n    \"targetName\": \"projects/c8caej0697o000f6gmm0/devices/emud4ade19omr2c73bnoe50\",\n    \"eventType\": \"temperature\",\n    \"data\": {\n      \"temperature\": {\n        \"value\": 0,\n        \"updateTime\": \"2025-11-12T18:50:50.282669Z\",\n        \"samples\": [\n          {\n            \"value\": 0,\n            \"sampleTime\": \"2025-11-12T18:50:50.282669Z\"\n          }\n        ],\n        \"isBackfilled\": false\n      }\n    },\n    \"timestamp\": \"2025-11-12T18:50:50.282669Z\"\n  },\n  \"labels\": {\n    \"name\": \"Temperature\"\n  },\n  \"metadata\": {\n    \"deviceId\": \"emud4ade19omr2c73bnoe50\",\n    \"projectId\": \"c8caej0697o000f6gmm0\",\n    \"deviceType\": \"temperature\",\n    \"productNumber\": \"\"\n  }\n}",
+    "scriptProcessor": "",
+    "scriptValidator": "const schema = $mv.object({\n  event: $mv.object({\n    eventId: $mv.string().required(),\n    targetName: $mv.string().required(),\n    eventType: $mv.string().required(),\n    data: $mv.object().required(),\n    timestamp: $mv.string().required()\n  }).required(),\n  labels: $mv.object({\n    name: $mv.string().required()\n  }).required(),\n  metadata: $mv.object({\n    deviceId: $mv.string().required(),\n    projectId: $mv.string().required(),\n    deviceType: $mv.string().required(),\n    productNumber: $mv.string().optional()\n  }).required()\n}).required();\n\nconst { value, error } = schema.validate(payload, { abortEarly: false, stripUnknown: true });\nif (error) throw new Error('Validation failed: ' + error.message);\nconst result = { ...value, _validated: true, _validationTimestamp: Date.now() };",
+    "scriptConversion": "const result = {\n  eventType: payload.event.eventType,\n  eventId: payload.event.eventId,\n  data: {},\n  metadata: {\n    deviceId: payload.metadata.deviceId,\n    projectId: payload.metadata.projectId,\n    deviceType: payload.metadata.deviceType,\n    productNumber: payload.metadata.productNumber,\n    deviceName: payload.labels.name,\n    targetName: payload.event.targetName\n  },\n  created: new Date().toISOString(),\n  originalTimestamp: payload.event.timestamp\n};\n\n  if (payload.event.eventType === 'touch') {\n    result.data = {\n      updateTime: payload.event.data.touch?.updateTime\n    };\n  } else   if (payload.event.eventType === 'connectionStatus') {\n    result.data = {\n      connection: payload.event.data.connectionStatus?.connection,\n      available: payload.event.data.connectionStatus?.available,\n      updateTime: payload.event.data.connectionStatus?.updateTime\n    };\n  } else   if (payload.event.eventType === 'networkStatus') {\n    result.data = {\n      signalStrength: payload.event.data.networkStatus?.signalStrength,\n      rssi: payload.event.data.networkStatus?.rssi,\n      updateTime: payload.event.data.networkStatus?.updateTime,\n      cloudConnectors: payload.event.data.networkStatus?.cloudConnectors\n    };\n  } else   if (payload.event.eventType === 'batteryStatus') {\n    result.data = {\n      percentage: payload.event.data.batteryStatus?.percentage,\n      updateTime: payload.event.data.batteryStatus?.updateTime\n    };\n  } else   if (payload.event.eventType === 'temperature') {\n    result.data = {\n      value: payload.event.data.temperature?.value,\n      updateTime: payload.event.data.temperature?.updateTime,\n      samples: payload.event.data.temperature?.samples\n    };\n  }",
+    "created": {
+      "$date": "2025-11-13T17:58:33.850Z"
+    },
+    "enabled": true
+  },
+  {
+    "_id": {
+      "$oid": "80f17fa0fc87a5c78b659160"
+    },
+    "name": "TEMPERATURE & HUMIDITY - Measures relative humidity and temperature",
+    "description": "Disruptive Technologies Integration. Supports events: touch, connectionStatus, networksStatus, batteryStatus, humidity",
+    "categoryId": {
+      "$oid": "507f1f77bcf86cd799439011"
+    },
+    "categoryName": "Assets IoT",
+    "manufacturerId": {
+      "$oid": "507f1f77bcf86cd799439015"
+    },
+    "manufacturerName": "Disruptive Technologies",
+    "modelId": {
+      "$oid": "e179fb46981b4a99194d76f1"
+    },
+    "modelName": "TEMPERATURE & HUMIDITY - Measures relative humidity and temperature",
+    "version": "1.0",
+    "isSystem": true,
+    "isTemplate": false,
+    "assetIdPath": "metadata.deviceId",
+    "scriptTest": "{\n  \"event\": {\n    \"eventId\": \"d4adcj9omr2c73bnodq0\",\n    \"targetName\": \"projects/c8caej0697o000f6gmm0/devices/emud4adbh9omr2c73bnodpg\",\n    \"eventType\": \"humidity\",\n    \"data\": {\n      \"humidity\": {\n        \"temperature\": 0,\n        \"relativeHumidity\": 0,\n        \"samples\": [\n          {\n            \"temperature\": 0,\n            \"relativeHumidity\": 0,\n            \"sampleTime\": \"2025-11-12T18:47:41.930083Z\"\n          }\n        ],\n        \"updateTime\": \"2025-11-12T18:47:41.930083Z\",\n        \"isBackfilled\": false\n      }\n    },\n    \"timestamp\": \"2025-11-12T18:47:41.930083Z\"\n  },\n  \"labels\": {\n    \"name\": \"Humidity - B\"\n  },\n  \"metadata\": {\n    \"deviceId\": \"emud4adbh9omr2c73bnodpg\",\n    \"projectId\": \"c8caej0697o000f6gmm0\",\n    \"deviceType\": \"humidity\",\n    \"productNumber\": \"\"\n  }\n}",
+    "scriptProcessor": "",
+    "scriptValidator": "const schema = $mv.object({\n  event: $mv.object({\n    eventId: $mv.string().required(),\n    targetName: $mv.string().required(),\n    eventType: $mv.string().required(),\n    data: $mv.object().required(),\n    timestamp: $mv.string().required()\n  }).required(),\n  labels: $mv.object({\n    name: $mv.string().required()\n  }).required(),\n  metadata: $mv.object({\n    deviceId: $mv.string().required(),\n    projectId: $mv.string().required(),\n    deviceType: $mv.string().required(),\n    productNumber: $mv.string().optional()\n  }).required()\n}).required();\n\nconst { value, error } = schema.validate(payload, { abortEarly: false, stripUnknown: true });\nif (error) throw new Error('Validation failed: ' + error.message);\nconst result = { ...value, _validated: true, _validationTimestamp: Date.now() };",
+    "scriptConversion": "const result = {\n  eventType: payload.event.eventType,\n  eventId: payload.event.eventId,\n  data: {},\n  metadata: {\n    deviceId: payload.metadata.deviceId,\n    projectId: payload.metadata.projectId,\n    deviceType: payload.metadata.deviceType,\n    productNumber: payload.metadata.productNumber,\n    deviceName: payload.labels.name,\n    targetName: payload.event.targetName\n  },\n  created: new Date().toISOString(),\n  originalTimestamp: payload.event.timestamp\n};\n\n  if (payload.event.eventType === 'touch') {\n    result.data = {\n      updateTime: payload.event.data.touch?.updateTime\n    };\n  } else   if (payload.event.eventType === 'connectionStatus') {\n    result.data = {\n      connection: payload.event.data.connectionStatus?.connection,\n      available: payload.event.data.connectionStatus?.available,\n      updateTime: payload.event.data.connectionStatus?.updateTime\n    };\n  } else   if (payload.event.eventType === 'networkStatus') {\n    result.data = {\n      signalStrength: payload.event.data.networkStatus?.signalStrength,\n      rssi: payload.event.data.networkStatus?.rssi,\n      updateTime: payload.event.data.networkStatus?.updateTime,\n      cloudConnectors: payload.event.data.networkStatus?.cloudConnectors\n    };\n  } else   if (payload.event.eventType === 'batteryStatus') {\n    result.data = {\n      percentage: payload.event.data.batteryStatus?.percentage,\n      updateTime: payload.event.data.batteryStatus?.updateTime\n    };\n  } else   if (payload.event.eventType === 'humidity') {\n    result.data = {\n      temperature: payload.event.data.humidity?.temperature,\n      relativeHumidity: payload.event.data.humidity?.relativeHumidity,\n      updateTime: payload.event.data.humidity?.updateTime,\n      samples: payload.event.data.humidity?.samples\n    };\n  }",
+    "created": {
+      "$date": "2025-11-13T17:58:33.850Z"
+    },
+    "enabled": true
+  },
+  {
+    "_id": {
+      "$oid": "04c3a13033f07be010aa1c17"
+    },
+    "name": "CO2 - Measures CO2, temperature, humidity and air pressure",
+    "description": "Disruptive Technologies Integration. Supports events: touch, connectionStatus, networksStatus, batteryStatus, co2, humidity, temperature, pressure",
+    "categoryId": {
+      "$oid": "507f1f77bcf86cd799439011"
+    },
+    "categoryName": "Assets IoT",
+    "manufacturerId": {
+      "$oid": "507f1f77bcf86cd799439015"
+    },
+    "manufacturerName": "Disruptive Technologies",
+    "modelId": {
+      "$oid": "319f5d7e69949d8a55d804c4"
+    },
+    "modelName": "CO2 - Measures CO2, temperature, humidity and air pressure",
+    "version": "1.0",
+    "isSystem": true,
+    "isTemplate": false,
+    "assetIdPath": "metadata.deviceId",
+    "scriptTest": "",
+    "scriptProcessor": "",
+    "scriptValidator": "const schema = $mv.object({\n  event: $mv.object({\n    eventId: $mv.string().required(),\n    targetName: $mv.string().required(),\n    eventType: $mv.string().required(),\n    data: $mv.object().required(),\n    timestamp: $mv.string().required()\n  }).required(),\n  labels: $mv.object({\n    name: $mv.string().required()\n  }).required(),\n  metadata: $mv.object({\n    deviceId: $mv.string().required(),\n    projectId: $mv.string().required(),\n    deviceType: $mv.string().required(),\n    productNumber: $mv.string().optional()\n  }).required()\n}).required();\n\nconst { value, error } = schema.validate(payload, { abortEarly: false, stripUnknown: true });\nif (error) throw new Error('Validation failed: ' + error.message);\nconst result = { ...value, _validated: true, _validationTimestamp: Date.now() };",
+    "scriptConversion": "const result = {\n  eventType: payload.event.eventType,\n  eventId: payload.event.eventId,\n  data: {},\n  metadata: {\n    deviceId: payload.metadata.deviceId,\n    projectId: payload.metadata.projectId,\n    deviceType: payload.metadata.deviceType,\n    productNumber: payload.metadata.productNumber,\n    deviceName: payload.labels.name,\n    targetName: payload.event.targetName\n  },\n  created: new Date().toISOString(),\n  originalTimestamp: payload.event.timestamp\n};\n\n  if (payload.event.eventType === 'touch') {\n    result.data = {\n      updateTime: payload.event.data.touch?.updateTime\n    };\n  } else   if (payload.event.eventType === 'connectionStatus') {\n    result.data = {\n      connection: payload.event.data.connectionStatus?.connection,\n      available: payload.event.data.connectionStatus?.available,\n      updateTime: payload.event.data.connectionStatus?.updateTime\n    };\n  } else   if (payload.event.eventType === 'networkStatus') {\n    result.data = {\n      signalStrength: payload.event.data.networkStatus?.signalStrength,\n      rssi: payload.event.data.networkStatus?.rssi,\n      updateTime: payload.event.data.networkStatus?.updateTime,\n      cloudConnectors: payload.event.data.networkStatus?.cloudConnectors\n    };\n  } else   if (payload.event.eventType === 'batteryStatus') {\n    result.data = {\n      percentage: payload.event.data.batteryStatus?.percentage,\n      updateTime: payload.event.data.batteryStatus?.updateTime\n    };\n  } else   if (payload.event.eventType === 'co2') {\n    result.data = {\n      co2: payload.event.data.co2?.ppm,\n      updateTime: payload.event.data.co2?.updateTime,\n      samples: payload.event.data.co2?.samples\n    };\n  } else   if (payload.event.eventType === 'humidity') {\n    result.data = {\n      temperature: payload.event.data.humidity?.temperature,\n      relativeHumidity: payload.event.data.humidity?.relativeHumidity,\n      updateTime: payload.event.data.humidity?.updateTime,\n      samples: payload.event.data.humidity?.samples\n    };\n  } else   if (payload.event.eventType === 'temperature') {\n    result.data = {\n      value: payload.event.data.temperature?.value,\n      updateTime: payload.event.data.temperature?.updateTime,\n      samples: payload.event.data.temperature?.samples\n    };\n  } else   if (payload.event.eventType === 'pressure') {\n    result.data = {\n      pressure: payload.event.data.pressure?.pascal,\n      updateTime: payload.event.data.pressure?.updateTime,\n      samples: payload.event.data.pressure?.samples\n    };\n  }",
+    "created": {
+      "$date": "2025-11-13T17:58:33.851Z"
+    },
+    "enabled": true
+  },
+  {
+    "_id": {
+      "$oid": "38910063e64a9d6a699be46b"
+    },
+    "name": "DESK OCCUPANCY - Detects the presence of someone at a desk",
+    "description": "Disruptive Technologies Integration. Supports events: touch, connectionStatus, networksStatus, batteryStatus, deskOccupancy",
+    "categoryId": {
+      "$oid": "507f1f77bcf86cd799439011"
+    },
+    "categoryName": "Assets IoT",
+    "manufacturerId": {
+      "$oid": "507f1f77bcf86cd799439015"
+    },
+    "manufacturerName": "Disruptive Technologies",
+    "modelId": {
+      "$oid": "61f18c1f3cb1e5a41571b3bd"
+    },
+    "modelName": "DESK OCCUPANCY - Detects the presence of someone at a desk",
+    "version": "1.0",
+    "isSystem": true,
+    "isTemplate": false,
+    "assetIdPath": "metadata.deviceId",
+    "scriptTest": "{\n  \"event\": {\n    \"eventId\": \"d4adqdbgj9mc738inct0\",\n    \"targetName\": \"projects/c8caej0697o000f6gmm0/devices/emud4adqchomr2c73bnof40\",\n    \"eventType\": \"deskOccupancy\",\n    \"data\": {\n      \"deskOccupancy\": {\n        \"state\": \"OCCUPIED\",\n        \"updateTime\": \"2025-11-12T19:17:09.442937Z\",\n        \"remarks\": []\n      }\n    },\n    \"timestamp\": \"2025-11-12T19:17:09.442937Z\"\n  },\n  \"labels\": {\n    \"name\": \"Desk Occupancy Emulator\"\n  },\n  \"metadata\": {\n    \"deviceId\": \"emud4adqchomr2c73bnof40\",\n    \"projectId\": \"c8caej0697o000f6gmm0\",\n    \"deviceType\": \"deskOccupancy\",\n    \"productNumber\": \"\"\n  }\n}",
+    "scriptProcessor": "",
+    "scriptValidator": "const schema = $mv.object({\n  event: $mv.object({\n    eventId: $mv.string().required(),\n    targetName: $mv.string().required(),\n    eventType: $mv.string().required(),\n    data: $mv.object().required(),\n    timestamp: $mv.string().required()\n  }).required(),\n  labels: $mv.object({\n    name: $mv.string().required()\n  }).required(),\n  metadata: $mv.object({\n    deviceId: $mv.string().required(),\n    projectId: $mv.string().required(),\n    deviceType: $mv.string().required(),\n    productNumber: $mv.string().optional()\n  }).required()\n}).required();\n\nconst { value, error } = schema.validate(payload, { abortEarly: false, stripUnknown: true });\nif (error) throw new Error('Validation failed: ' + error.message);\nconst result = { ...value, _validated: true, _validationTimestamp: Date.now() };",
+    "scriptConversion": "const result = {\n  eventType: payload.event.eventType,\n  eventId: payload.event.eventId,\n  data: {},\n  metadata: {\n    deviceId: payload.metadata.deviceId,\n    projectId: payload.metadata.projectId,\n    deviceType: payload.metadata.deviceType,\n    productNumber: payload.metadata.productNumber,\n    deviceName: payload.labels.name,\n    targetName: payload.event.targetName\n  },\n  created: new Date().toISOString(),\n  originalTimestamp: payload.event.timestamp\n};\n\n  if (payload.event.eventType === 'touch') {\n    result.data = {\n      updateTime: payload.event.data.touch?.updateTime\n    };\n  } else   if (payload.event.eventType === 'connectionStatus') {\n    result.data = {\n      connection: payload.event.data.connectionStatus?.connection,\n      available: payload.event.data.connectionStatus?.available,\n      updateTime: payload.event.data.connectionStatus?.updateTime\n    };\n  } else   if (payload.event.eventType === 'networkStatus') {\n    result.data = {\n      signalStrength: payload.event.data.networkStatus?.signalStrength,\n      rssi: payload.event.data.networkStatus?.rssi,\n      updateTime: payload.event.data.networkStatus?.updateTime,\n      cloudConnectors: payload.event.data.networkStatus?.cloudConnectors\n    };\n  } else   if (payload.event.eventType === 'batteryStatus') {\n    result.data = {\n      percentage: payload.event.data.batteryStatus?.percentage,\n      updateTime: payload.event.data.batteryStatus?.updateTime\n    };\n  } else   if (payload.event.eventType === 'deskOccupancy') {\n    result.data = {\n      state: payload.event.data.deskOccupancy?.state,\n      updateTime: payload.event.data.deskOccupancy?.updateTime\n    };\n  }",
+    "created": {
+      "$date": "2025-11-13T17:58:33.851Z"
+    },
+    "enabled": true
+  },
+  {
+    "_id": {
+      "$oid": "dc326624e91097d64bc7c6d9"
+    },
+    "name": "DOOR & WINDOW - Detects if doors or windows are open or closed in real-time",
+    "description": "Disruptive Technologies Integration. Supports events: touch, connectionStatus, networksStatus, batteryStatus, contact",
+    "categoryId": {
+      "$oid": "507f1f77bcf86cd799439011"
+    },
+    "categoryName": "Assets IoT",
+    "manufacturerId": {
+      "$oid": "507f1f77bcf86cd799439015"
+    },
+    "manufacturerName": "Disruptive Technologies",
+    "modelId": {
+      "$oid": "5ff6fd3ba143d7f2b9ec25e9"
+    },
+    "modelName": "DOOR & WINDOW - Detects if doors or windows are open or closed in real-time",
+    "version": "1.0",
+    "isSystem": true,
+    "isTemplate": false,
+    "assetIdPath": "metadata.deviceId",
+    "scriptTest": "{\n  \"event\": {\n    \"eventId\": \"d4ades3gj9mc738inbu0\",\n    \"targetName\": \"projects/c8caej0697o000f6gmm0/devices/emud4adeppomr2c73bnoe70\",\n    \"eventType\": \"contact\",\n    \"data\": {\n      \"contact\": {\n        \"state\": \"OPEN\",\n        \"updateTime\": \"2025-11-12T18:52:32.801665Z\"\n      }\n    },\n    \"timestamp\": \"2025-11-12T18:52:32.801665Z\"\n  },\n  \"labels\": {\n    \"name\": \"Door & Window door\"\n  },\n  \"metadata\": {\n    \"deviceId\": \"emud4adeppomr2c73bnoe70\",\n    \"projectId\": \"c8caej0697o000f6gmm0\",\n    \"deviceType\": \"contact\",\n    \"productNumber\": \"\"\n  }\n}",
+    "scriptProcessor": "",
+    "scriptValidator": "const schema = $mv.object({\n  event: $mv.object({\n    eventId: $mv.string().required(),\n    targetName: $mv.string().required(),\n    eventType: $mv.string().required(),\n    data: $mv.object().required(),\n    timestamp: $mv.string().required()\n  }).required(),\n  labels: $mv.object({\n    name: $mv.string().required()\n  }).required(),\n  metadata: $mv.object({\n    deviceId: $mv.string().required(),\n    projectId: $mv.string().required(),\n    deviceType: $mv.string().required(),\n    productNumber: $mv.string().optional()\n  }).required()\n}).required();\n\nconst { value, error } = schema.validate(payload, { abortEarly: false, stripUnknown: true });\nif (error) throw new Error('Validation failed: ' + error.message);\nconst result = { ...value, _validated: true, _validationTimestamp: Date.now() };",
+    "scriptConversion": "const result = {\n  eventType: payload.event.eventType,\n  eventId: payload.event.eventId,\n  data: {},\n  metadata: {\n    deviceId: payload.metadata.deviceId,\n    projectId: payload.metadata.projectId,\n    deviceType: payload.metadata.deviceType,\n    productNumber: payload.metadata.productNumber,\n    deviceName: payload.labels.name,\n    targetName: payload.event.targetName\n  },\n  created: new Date().toISOString(),\n  originalTimestamp: payload.event.timestamp\n};\n\n  if (payload.event.eventType === 'touch') {\n    result.data = {\n      updateTime: payload.event.data.touch?.updateTime\n    };\n  } else   if (payload.event.eventType === 'connectionStatus') {\n    result.data = {\n      connection: payload.event.data.connectionStatus?.connection,\n      available: payload.event.data.connectionStatus?.available,\n      updateTime: payload.event.data.connectionStatus?.updateTime\n    };\n  } else   if (payload.event.eventType === 'networkStatus') {\n    result.data = {\n      signalStrength: payload.event.data.networkStatus?.signalStrength,\n      rssi: payload.event.data.networkStatus?.rssi,\n      updateTime: payload.event.data.networkStatus?.updateTime,\n      cloudConnectors: payload.event.data.networkStatus?.cloudConnectors\n    };\n  } else   if (payload.event.eventType === 'batteryStatus') {\n    result.data = {\n      percentage: payload.event.data.batteryStatus?.percentage,\n      updateTime: payload.event.data.batteryStatus?.updateTime\n    };\n  } else   if (payload.event.eventType === 'contact') {\n    result.data = {\n      state: payload.event.data.contact?.state,\n      updateTime: payload.event.data.contact?.updateTime\n    };\n  }",
+    "created": {
+      "$date": "2025-11-13T17:58:33.852Z"
+    },
+    "enabled": true
+  },
+  {
+    "_id": {
+      "$oid": "7c580a7b2dc2d8ef91e4c4a7"
+    },
+    "name": "PROXIMITY - Detects when an object is placed or removed within a 5 mm range",
+    "description": "Disruptive Technologies Integration. Supports events: touch, connectionStatus, networksStatus, batteryStatus, objectPresent, objectPresentCount",
+    "categoryId": {
+      "$oid": "507f1f77bcf86cd799439011"
+    },
+    "categoryName": "Assets IoT",
+    "manufacturerId": {
+      "$oid": "507f1f77bcf86cd799439015"
+    },
+    "manufacturerName": "Disruptive Technologies",
+    "modelId": {
+      "$oid": "b378b31f0f86c5c4383ea3c4"
+    },
+    "modelName": "PROXIMITY - Detects when an object is placed or removed within a 5 mm range",
+    "version": "1.0",
+    "isSystem": true,
+    "isTemplate": false,
+    "assetIdPath": "metadata.deviceId",
+    "scriptTest": "{\n  \"event\": {\n    \"eventId\": \"d4adedhomr2c73bnoe5g\",\n    \"targetName\": \"projects/c8caej0697o000f6gmm0/devices/emud4adec3gj9mc738inbtg\",\n    \"eventType\": \"objectPresent\",\n    \"data\": {\n      \"objectPresent\": {\n        \"state\": \"NOT_PRESENT\",\n        \"updateTime\": \"2025-11-12T18:51:34.301744Z\"\n      }\n    },\n    \"timestamp\": \"2025-11-12T18:51:34.301744Z\"\n  },\n  \"labels\": {\n    \"name\": \"Proximity\"\n  },\n  \"metadata\": {\n    \"deviceId\": \"emud4adec3gj9mc738inbtg\",\n    \"projectId\": \"c8caej0697o000f6gmm0\",\n    \"deviceType\": \"proximity\",\n    \"productNumber\": \"\"\n  }\n}",
+    "scriptProcessor": "",
+    "scriptValidator": "const schema = $mv.object({\n  event: $mv.object({\n    eventId: $mv.string().required(),\n    targetName: $mv.string().required(),\n    eventType: $mv.string().required(),\n    data: $mv.object().required(),\n    timestamp: $mv.string().required()\n  }).required(),\n  labels: $mv.object({\n    name: $mv.string().required()\n  }).required(),\n  metadata: $mv.object({\n    deviceId: $mv.string().required(),\n    projectId: $mv.string().required(),\n    deviceType: $mv.string().required(),\n    productNumber: $mv.string().optional()\n  }).required()\n}).required();\n\nconst { value, error } = schema.validate(payload, { abortEarly: false, stripUnknown: true });\nif (error) throw new Error('Validation failed: ' + error.message);\nconst result = { ...value, _validated: true, _validationTimestamp: Date.now() };",
+    "scriptConversion": "const result = {\n  eventType: payload.event.eventType,\n  eventId: payload.event.eventId,\n  data: {},\n  metadata: {\n    deviceId: payload.metadata.deviceId,\n    projectId: payload.metadata.projectId,\n    deviceType: payload.metadata.deviceType,\n    productNumber: payload.metadata.productNumber,\n    deviceName: payload.labels.name,\n    targetName: payload.event.targetName\n  },\n  created: new Date().toISOString(),\n  originalTimestamp: payload.event.timestamp\n};\n\n  if (payload.event.eventType === 'touch') {\n    result.data = {\n      updateTime: payload.event.data.touch?.updateTime\n    };\n  } else   if (payload.event.eventType === 'connectionStatus') {\n    result.data = {\n      connection: payload.event.data.connectionStatus?.connection,\n      available: payload.event.data.connectionStatus?.available,\n      updateTime: payload.event.data.connectionStatus?.updateTime\n    };\n  } else   if (payload.event.eventType === 'networkStatus') {\n    result.data = {\n      signalStrength: payload.event.data.networkStatus?.signalStrength,\n      rssi: payload.event.data.networkStatus?.rssi,\n      updateTime: payload.event.data.networkStatus?.updateTime,\n      cloudConnectors: payload.event.data.networkStatus?.cloudConnectors\n    };\n  } else   if (payload.event.eventType === 'batteryStatus') {\n    result.data = {\n      percentage: payload.event.data.batteryStatus?.percentage,\n      updateTime: payload.event.data.batteryStatus?.updateTime\n    };\n  } else   if (payload.event.eventType === 'objectPresent') {\n    result.data = {\n      state: payload.event.data.objectPresent?.state,\n      updateTime: payload.event.data.objectPresent?.updateTime\n    };\n  } else   if (payload.event.eventType === 'objectPresentCount') {\n    result.data = {\n      total: payload.event.data.objectPresentCount?.total,\n      updateTime: payload.event.data.objectPresentCount?.updateTime\n    };\n  }",
+    "created": {
+      "$date": "2025-11-13T17:58:33.852Z"
+    },
+    "enabled": true
+  },
+  {
+    "_id": {
+      "$oid": "47eb306581a241f2b24a4cfa"
+    },
+    "name": "MOTION - Detects the presence of people in a room",
+    "description": "Disruptive Technologies Integration. Supports events: touch, connectionStatus, networksStatus, batteryStatus, motion",
+    "categoryId": {
+      "$oid": "507f1f77bcf86cd799439011"
+    },
+    "categoryName": "Assets IoT",
+    "manufacturerId": {
+      "$oid": "507f1f77bcf86cd799439015"
+    },
+    "manufacturerName": "Disruptive Technologies",
+    "modelId": {
+      "$oid": "8c1d6b947fd443c7806d5549"
+    },
+    "modelName": "MOTION - Detects the presence of people in a room",
+    "version": "1.0",
+    "isSystem": true,
+    "isTemplate": false,
+    "assetIdPath": "metadata.deviceId",
+    "scriptTest": "{\n  \"event\": {\n    \"eventId\": \"d4adq21omr2c73bnof2g\",\n    \"targetName\": \"projects/c8caej0697o000f6gmm0/devices/emud4adq13gj9mc738incsg\",\n    \"eventType\": \"motion\",\n    \"data\": {\n      \"motion\": {\n        \"state\": \"NO_MOTION_DETECTED\",\n        \"updateTime\": \"2025-11-12T19:16:24.573350Z\"\n      }\n    },\n    \"timestamp\": \"2025-11-12T19:16:24.573350Z\"\n  },\n  \"labels\": {\n    \"name\": \"Motion\"\n  },\n  \"metadata\": {\n    \"deviceId\": \"emud4adq13gj9mc738incsg\",\n    \"projectId\": \"c8caej0697o000f6gmm0\",\n    \"deviceType\": \"motion\",\n    \"productNumber\": \"\"\n  }\n}",
+    "scriptProcessor": "",
+    "scriptValidator": "const schema = $mv.object({\n  event: $mv.object({\n    eventId: $mv.string().required(),\n    targetName: $mv.string().required(),\n    eventType: $mv.string().required(),\n    data: $mv.object().required(),\n    timestamp: $mv.string().required()\n  }).required(),\n  labels: $mv.object({\n    name: $mv.string().required()\n  }).required(),\n  metadata: $mv.object({\n    deviceId: $mv.string().required(),\n    projectId: $mv.string().required(),\n    deviceType: $mv.string().required(),\n    productNumber: $mv.string().optional()\n  }).required()\n}).required();\n\nconst { value, error } = schema.validate(payload, { abortEarly: false, stripUnknown: true });\nif (error) throw new Error('Validation failed: ' + error.message);\nconst result = { ...value, _validated: true, _validationTimestamp: Date.now() };",
+    "scriptConversion": "const result = {\n  eventType: payload.event.eventType,\n  eventId: payload.event.eventId,\n  data: {},\n  metadata: {\n    deviceId: payload.metadata.deviceId,\n    projectId: payload.metadata.projectId,\n    deviceType: payload.metadata.deviceType,\n    productNumber: payload.metadata.productNumber,\n    deviceName: payload.labels.name,\n    targetName: payload.event.targetName\n  },\n  created: new Date().toISOString(),\n  originalTimestamp: payload.event.timestamp\n};\n\n  if (payload.event.eventType === 'touch') {\n    result.data = {\n      updateTime: payload.event.data.touch?.updateTime\n    };\n  } else   if (payload.event.eventType === 'connectionStatus') {\n    result.data = {\n      connection: payload.event.data.connectionStatus?.connection,\n      available: payload.event.data.connectionStatus?.available,\n      updateTime: payload.event.data.connectionStatus?.updateTime\n    };\n  } else   if (payload.event.eventType === 'networkStatus') {\n    result.data = {\n      signalStrength: payload.event.data.networkStatus?.signalStrength,\n      rssi: payload.event.data.networkStatus?.rssi,\n      updateTime: payload.event.data.networkStatus?.updateTime,\n      cloudConnectors: payload.event.data.networkStatus?.cloudConnectors\n    };\n  } else   if (payload.event.eventType === 'batteryStatus') {\n    result.data = {\n      percentage: payload.event.data.batteryStatus?.percentage,\n      updateTime: payload.event.data.batteryStatus?.updateTime\n    };\n  } else   if (payload.event.eventType === 'motion') {\n    result.data = {\n      state: payload.event.data.motion?.state,\n      updateTime: payload.event.data.motion?.updateTime\n    };\n  }",
+    "created": {
+      "$date": "2025-11-13T17:58:33.852Z"
+    },
+    "enabled": true
+  },
+  {
+    "_id": {
+      "$oid": "982f4fc3f53defb15e1687f1"
+    },
+    "name": "WATER - Reports the presence of water on the sensor",
+    "description": "Disruptive Technologies Integration. Supports events: touch, connectionStatus, networksStatus, batteryStatus, waterPresent",
+    "categoryId": {
+      "$oid": "507f1f77bcf86cd799439011"
+    },
+    "categoryName": "Assets IoT",
+    "manufacturerId": {
+      "$oid": "507f1f77bcf86cd799439015"
+    },
+    "manufacturerName": "Disruptive Technologies",
+    "modelId": {
+      "$oid": "e860c6c8fd81d17f6f288081"
+    },
+    "modelName": "WATER - Reports the presence of water on the sensor",
+    "version": "1.0",
+    "isSystem": true,
+    "isTemplate": false,
+    "assetIdPath": "metadata.deviceId",
+    "scriptTest": "{\n  \"event\": {\n    \"eventId\": \"d4adpc9omr2c73bnoer0\",\n    \"targetName\": \"projects/c8caej0697o000f6gmm0/devices/emud4adpbhomr2c73bnoeqg\",\n    \"eventType\": \"waterPresent\",\n    \"data\": {\n      \"waterPresent\": {\n        \"state\": \"NOT_PRESENT\",\n        \"updateTime\": \"2025-11-12T19:14:57.374729Z\"\n      }\n    },\n    \"timestamp\": \"2025-11-12T19:14:57.374729Z\"\n  },\n  \"labels\": {\n    \"name\": \"Water Detector sensor\"\n  },\n  \"metadata\": {\n    \"deviceId\": \"emud4adpbhomr2c73bnoeqg\",\n    \"projectId\": \"c8caej0697o000f6gmm0\",\n    \"deviceType\": \"waterDetector\",\n    \"productNumber\": \"\"\n  }\n}",
+    "scriptProcessor": "",
+    "scriptValidator": "const schema = $mv.object({\n  event: $mv.object({\n    eventId: $mv.string().required(),\n    targetName: $mv.string().required(),\n    eventType: $mv.string().required(),\n    data: $mv.object().required(),\n    timestamp: $mv.string().required()\n  }).required(),\n  labels: $mv.object({\n    name: $mv.string().required()\n  }).required(),\n  metadata: $mv.object({\n    deviceId: $mv.string().required(),\n    projectId: $mv.string().required(),\n    deviceType: $mv.string().required(),\n    productNumber: $mv.string().optional()\n  }).required()\n}).required();\n\nconst { value, error } = schema.validate(payload, { abortEarly: false, stripUnknown: true });\nif (error) throw new Error('Validation failed: ' + error.message);\nconst result = { ...value, _validated: true, _validationTimestamp: Date.now() };",
+    "scriptConversion": "const result = {\n  eventType: payload.event.eventType,\n  eventId: payload.event.eventId,\n  data: {},\n  metadata: {\n    deviceId: payload.metadata.deviceId,\n    projectId: payload.metadata.projectId,\n    deviceType: payload.metadata.deviceType,\n    productNumber: payload.metadata.productNumber,\n    deviceName: payload.labels.name,\n    targetName: payload.event.targetName\n  },\n  created: new Date().toISOString(),\n  originalTimestamp: payload.event.timestamp\n};\n\n  if (payload.event.eventType === 'touch') {\n    result.data = {\n      updateTime: payload.event.data.touch?.updateTime\n    };\n  } else   if (payload.event.eventType === 'connectionStatus') {\n    result.data = {\n      connection: payload.event.data.connectionStatus?.connection,\n      available: payload.event.data.connectionStatus?.available,\n      updateTime: payload.event.data.connectionStatus?.updateTime\n    };\n  } else   if (payload.event.eventType === 'networkStatus') {\n    result.data = {\n      signalStrength: payload.event.data.networkStatus?.signalStrength,\n      rssi: payload.event.data.networkStatus?.rssi,\n      updateTime: payload.event.data.networkStatus?.updateTime,\n      cloudConnectors: payload.event.data.networkStatus?.cloudConnectors\n    };\n  } else   if (payload.event.eventType === 'batteryStatus') {\n    result.data = {\n      percentage: payload.event.data.batteryStatus?.percentage,\n      updateTime: payload.event.data.batteryStatus?.updateTime\n    };\n  } else   if (payload.event.eventType === 'waterPresent') {\n    result.data = {\n      state: payload.event.data.waterPresent?.state,\n      updateTime: payload.event.data.waterPresent?.updateTime\n    };\n  }",
+    "created": {
+      "$date": "2025-11-13T17:58:33.852Z"
+    },
+    "enabled": true
+  },
+  {
+    "_id": {
+      "$oid": "4adb4f104f4228ac33c540fb"
+    },
+    "name": "TACTILE TOUCH - Sends an immediate event whenever it is touched",
+    "description": "Disruptive Technologies Integration. Supports events: touch, connectionStatus, networksStatus, batteryStatus",
+    "categoryId": {
+      "$oid": "507f1f77bcf86cd799439011"
+    },
+    "categoryName": "Assets IoT",
+    "manufacturerId": {
+      "$oid": "507f1f77bcf86cd799439015"
+    },
+    "manufacturerName": "Disruptive Technologies",
+    "modelId": {
+      "$oid": "435f1eeecf60b6f1826004a5"
+    },
+    "modelName": "TACTILE TOUCH - Sends an immediate event whenever it is touched",
+    "version": "1.0",
+    "isSystem": true,
+    "isTemplate": false,
+    "assetIdPath": "metadata.deviceId",
+    "scriptTest": "{\n  \"event\": {\n    \"eventId\": \"d4addq3gj9mc738inbqg\",\n    \"targetName\": \"projects/c8caej0697o000f6gmm0/devices/emud4adbh9omr2c73bnodpg\",\n    \"eventType\": \"touch\",\n    \"data\": {\n      \"touch\": {\n        \"updateTime\": \"2025-11-12T18:50:16.552980Z\"\n      }\n    },\n    \"timestamp\": \"2025-11-12T18:50:16.552980Z\"\n  },\n  \"labels\": {\n    \"name\": \"Humidity - B\"\n  },\n  \"metadata\": {\n    \"deviceId\": \"emud4adbh9omr2c73bnodpg\",\n    \"projectId\": \"c8caej0697o000f6gmm0\",\n    \"deviceType\": \"humidity\",\n    \"productNumber\": \"\"\n  }\n}",
+    "scriptProcessor": "",
+    "scriptValidator": "const schema = $mv.object({\n  event: $mv.object({\n    eventId: $mv.string().required(),\n    targetName: $mv.string().required(),\n    eventType: $mv.string().required(),\n    data: $mv.object().required(),\n    timestamp: $mv.string().required()\n  }).required(),\n  labels: $mv.object({\n    name: $mv.string().required()\n  }).required(),\n  metadata: $mv.object({\n    deviceId: $mv.string().required(),\n    projectId: $mv.string().required(),\n    deviceType: $mv.string().required(),\n    productNumber: $mv.string().optional()\n  }).required()\n}).required();\n\nconst { value, error } = schema.validate(payload, { abortEarly: false, stripUnknown: true });\nif (error) throw new Error('Validation failed: ' + error.message);\nconst result = { ...value, _validated: true, _validationTimestamp: Date.now() };",
+    "scriptConversion": "const result = {\n  eventType: payload.event.eventType,\n  eventId: payload.event.eventId,\n  data: {},\n  metadata: {\n    deviceId: payload.metadata.deviceId,\n    projectId: payload.metadata.projectId,\n    deviceType: payload.metadata.deviceType,\n    productNumber: payload.metadata.productNumber,\n    deviceName: payload.labels.name,\n    targetName: payload.event.targetName\n  },\n  created: new Date().toISOString(),\n  originalTimestamp: payload.event.timestamp\n};\n\n  if (payload.event.eventType === 'touch') {\n    result.data = {\n      updateTime: payload.event.data.touch?.updateTime\n    };\n  } else   if (payload.event.eventType === 'connectionStatus') {\n    result.data = {\n      connection: payload.event.data.connectionStatus?.connection,\n      available: payload.event.data.connectionStatus?.available,\n      updateTime: payload.event.data.connectionStatus?.updateTime\n    };\n  } else   if (payload.event.eventType === 'networkStatus') {\n    result.data = {\n      signalStrength: payload.event.data.networkStatus?.signalStrength,\n      rssi: payload.event.data.networkStatus?.rssi,\n      updateTime: payload.event.data.networkStatus?.updateTime,\n      cloudConnectors: payload.event.data.networkStatus?.cloudConnectors\n    };\n  } else   if (payload.event.eventType === 'batteryStatus') {\n    result.data = {\n      percentage: payload.event.data.batteryStatus?.percentage,\n      updateTime: payload.event.data.batteryStatus?.updateTime\n    };\n  }",
+    "created": {
+      "$date": "2025-11-13T17:58:33.852Z"
+    },
+    "enabled": true
+  },
+  {
+    "_id": {
+      "$oid": "293b3402c531a438f59c053b"
+    },
+    "name": "TEMPERATURE PROBE - Measures temperature in a wide range of environments",
+    "description": "Disruptive Technologies Integration. Supports events: touch, connectionStatus, networksStatus, batteryStatus, temperature",
+    "categoryId": {
+      "$oid": "507f1f77bcf86cd799439011"
+    },
+    "categoryName": "Assets IoT",
+    "manufacturerId": {
+      "$oid": "507f1f77bcf86cd799439015"
+    },
+    "manufacturerName": "Disruptive Technologies",
+    "modelId": {
+      "$oid": "eb6c5bdacdba16e9a18948da"
+    },
+    "modelName": "TEMPERATURE PROBE - Measures temperature in a wide range of environments",
+    "version": "1.0",
+    "isSystem": true,
+    "isTemplate": false,
+    "assetIdPath": "metadata.deviceId",
+    "scriptTest": "{\n  \"event\": {\n    \"eventId\": \"d4ade2jgj9mc738inbs0\",\n    \"targetName\": \"projects/c8caej0697o000f6gmm0/devices/emud4ade19omr2c73bnoe50\",\n    \"eventType\": \"temperature\",\n    \"data\": {\n      \"temperature\": {\n        \"value\": 0,\n        \"updateTime\": \"2025-11-12T18:50:50.282669Z\",\n        \"samples\": [\n          {\n            \"value\": 0,\n            \"sampleTime\": \"2025-11-12T18:50:50.282669Z\"\n          }\n        ],\n        \"isBackfilled\": false\n      }\n    },\n    \"timestamp\": \"2025-11-12T18:50:50.282669Z\"\n  },\n  \"labels\": {\n    \"name\": \"Temperature\"\n  },\n  \"metadata\": {\n    \"deviceId\": \"emud4ade19omr2c73bnoe50\",\n    \"projectId\": \"c8caej0697o000f6gmm0\",\n    \"deviceType\": \"temperature\",\n    \"productNumber\": \"\"\n  }\n}",
+    "scriptProcessor": "",
+    "scriptValidator": "const schema = $mv.object({\n  event: $mv.object({\n    eventId: $mv.string().required(),\n    targetName: $mv.string().required(),\n    eventType: $mv.string().required(),\n    data: $mv.object().required(),\n    timestamp: $mv.string().required()\n  }).required(),\n  labels: $mv.object({\n    name: $mv.string().required()\n  }).required(),\n  metadata: $mv.object({\n    deviceId: $mv.string().required(),\n    projectId: $mv.string().required(),\n    deviceType: $mv.string().required(),\n    productNumber: $mv.string().optional()\n  }).required()\n}).required();\n\nconst { value, error } = schema.validate(payload, { abortEarly: false, stripUnknown: true });\nif (error) throw new Error('Validation failed: ' + error.message);\nconst result = { ...value, _validated: true, _validationTimestamp: Date.now() };",
+    "scriptConversion": "const result = {\n  eventType: payload.event.eventType,\n  eventId: payload.event.eventId,\n  data: {},\n  metadata: {\n    deviceId: payload.metadata.deviceId,\n    projectId: payload.metadata.projectId,\n    deviceType: payload.metadata.deviceType,\n    productNumber: payload.metadata.productNumber,\n    deviceName: payload.labels.name,\n    targetName: payload.event.targetName\n  },\n  created: new Date().toISOString(),\n  originalTimestamp: payload.event.timestamp\n};\n\n  if (payload.event.eventType === 'touch') {\n    result.data = {\n      updateTime: payload.event.data.touch?.updateTime\n    };\n  } else   if (payload.event.eventType === 'connectionStatus') {\n    result.data = {\n      connection: payload.event.data.connectionStatus?.connection,\n      available: payload.event.data.connectionStatus?.available,\n      updateTime: payload.event.data.connectionStatus?.updateTime\n    };\n  } else   if (payload.event.eventType === 'networkStatus') {\n    result.data = {\n      signalStrength: payload.event.data.networkStatus?.signalStrength,\n      rssi: payload.event.data.networkStatus?.rssi,\n      updateTime: payload.event.data.networkStatus?.updateTime,\n      cloudConnectors: payload.event.data.networkStatus?.cloudConnectors\n    };\n  } else   if (payload.event.eventType === 'batteryStatus') {\n    result.data = {\n      percentage: payload.event.data.batteryStatus?.percentage,\n      updateTime: payload.event.data.batteryStatus?.updateTime\n    };\n  } else   if (payload.event.eventType === 'temperature') {\n    result.data = {\n      value: payload.event.data.temperature?.value,\n      updateTime: payload.event.data.temperature?.updateTime,\n      samples: payload.event.data.temperature?.samples\n    };\n  }",
+    "created": {
+      "$date": "2025-11-13T17:58:33.852Z"
+    },
+    "availableFields": [
+      "created",
+      "data.samples.sampleTime",
+      "data.samples.value",
+      "data.updateTime",
+      "data.value",
+      "eventId",
+      "eventType",
+      "metadata.deviceId",
+      "metadata.deviceName",
+      "metadata.deviceType",
+      "metadata.productNumber",
+      "metadata.projectId",
+      "metadata.targetName",
+      "originalTimestamp"
+    ],
+    "enabled": true
+  }
+]
