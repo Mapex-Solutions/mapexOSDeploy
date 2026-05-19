@@ -13,8 +13,8 @@ Mapex Solutions — este repo puxa as imagens publicadas no Docker Hub.
 ## Início rápido
 
 ```bash
-git clone https://github.com/thiagoanselmo/mapexos-stack.git
-cd mapexos-stack
+git clone https://github.com/Mapex-Solutions/mapexOSDeploy.git
+cd mapexOSDeploy
 docker compose up -d
 ```
 
@@ -166,7 +166,7 @@ na inicialização — nunca um boot silencioso com credenciais vazadas.
 ## Versionamento
 
 Este repositório é versionado independentemente do código-fonte dos
-serviços. Cada tag do `mapexos-stack` fixa um `IMAGE_TAG` específico e é
+serviços. Cada tag do `mapexOSDeploy` fixa um `IMAGE_TAG` específico e é
 testada em conjunto. Trate a tag deste repo (ex: `v1.0.0`) como fonte da
 verdade: clonar a tag correspondente e rodar `docker compose up -d` deve
 sempre funcionar.
@@ -189,7 +189,7 @@ docker compose up -d
 |---|---|---|
 | MapexOS core (serviços Go + JS + frontend) | `Mapex-Solutions/mapexOS` | privado |
 | Plugin MQTT broker (Mosquitto + Go plugin) | `Mapex-Solutions/mapexMQTTBroker` | privado |
-| Distribuição Docker Compose (este repo) | `thiagoanselmo/mapexos-stack` | público |
+| Distribuição Docker Compose (este repo) | `Mapex-Solutions/mapexOSDeploy` | público |
 
 As imagens dos serviços são publicadas em <https://hub.docker.com/u/thiagoanselmo>.
 

@@ -14,8 +14,8 @@ Docker Hub.
 ## Quick start
 
 ```bash
-git clone https://github.com/thiagoanselmo/mapexos-stack.git
-cd mapexos-stack
+git clone https://github.com/Mapex-Solutions/mapexOSDeploy.git
+cd mapexOSDeploy
 docker compose up -d
 ```
 
@@ -166,7 +166,7 @@ loud fatal error at startup — never silent boot with a leaked default.
 ## Versioning
 
 This repository is versioned independently from the service source. Each
-tag of `mapexos-stack` pins a specific `IMAGE_TAG` and is tested
+tag of `mapexOSDeploy` pins a specific `IMAGE_TAG` and is tested
 together. Treat the tag of this repo (e.g. `v1.0.0`) as the source of
 truth: cloning the matching tag and running `docker compose up -d`
 should always work.
@@ -189,7 +189,7 @@ docker compose up -d
 |---|---|---|
 | MapexOS core (Go + JS services + frontend) | `Mapex-Solutions/mapexOS` | private |
 | MQTT broker plugin (Mosquitto + Go plugin) | `Mapex-Solutions/mapexMQTTBroker` | private |
-| Docker Compose distribution (this repo) | `thiagoanselmo/mapexos-stack` | public |
+| Docker Compose distribution (this repo) | `Mapex-Solutions/mapexOSDeploy` | public |
 
 Service images are published to <https://hub.docker.com/u/thiagoanselmo>.
 
