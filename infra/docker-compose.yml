@@ -22,7 +22,7 @@ services:
   # REDIS - Cache Layer
   # ===========================================================================
   redis:
-    image: redis:7-alpine
+    image: redis:7.4.9-alpine
     container_name: mapex-redis
     ports:
       - "6379:6379"
@@ -43,7 +43,7 @@ services:
   # MONGODB - Document Database (ReplicaSet rs0)
   # ===========================================================================
   mongodb:
-    image: mongo:7
+    image: mongo:7.0.34
     container_name: mapex-mongodb
     ports:
       - "27017:27017"
@@ -97,7 +97,7 @@ services:
   # CLICKHOUSE - Time-Series Analytics
   # ===========================================================================
   clickhouse:
-    image: clickhouse/clickhouse-server:latest
+    image: clickhouse/clickhouse-server:26.5.1.882
     container_name: mapex-clickhouse
     ports:
       - "8123:8123"   # HTTP interface
@@ -127,7 +127,7 @@ services:
 
   # ClickHouse Init - Creates tables on startup
   clickhouse-init:
-    image: clickhouse/clickhouse-server:latest
+    image: clickhouse/clickhouse-server:26.5.1.882
     container_name: mapex-clickhouse-init
     depends_on:
       clickhouse:
@@ -151,7 +151,7 @@ services:
   # MINIO - Object Storage (S3 Compatible)
   # ===========================================================================
   minio:
-    image: minio/minio:latest
+    image: minio/minio:RELEASE.2025-09-07T16-13-09Z
     container_name: mapex-minio
     ports:
       - "9000:9000"   # S3 API
@@ -172,7 +172,7 @@ services:
 
   # MinIO Init - Creates buckets on startup
   minio-init:
-    image: minio/mc:latest
+    image: minio/mc:RELEASE.2025-08-13T08-35-41Z
     container_name: mapex-minio-init
     depends_on:
       minio:
@@ -229,7 +229,7 @@ services:
   # NATS CORE - Central Message Broker
   # ===========================================================================
   nats-core:
-    image: nats:2.12-alpine
+    image: nats:2.14.1-alpine
     container_name: mapex-nats-core
     ports:
       - "4222:4222"   # Client connections
@@ -325,7 +325,7 @@ services:
   # (one-shot migration; no production data on these streams).
   # ===========================================================================
   nats-init:
-    image: natsio/nats-box:latest
+    image: natsio/nats-box:0.19.5
     container_name: mapex-nats-init
     env_file:
       - ./envs/local.env
@@ -659,7 +659,7 @@ services:
   # PROMETHEUS - Metrics Collection
   # ===========================================================================
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus:v3.11.3
     container_name: mapex-prometheus
     user: "root"
     ports:
@@ -680,7 +680,7 @@ services:
   # GRAFANA - Metrics Visualization
   # ===========================================================================
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:13.0.1
     container_name: mapex-grafana
     ports:
       - "3001:3000"
