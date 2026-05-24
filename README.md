@@ -107,32 +107,24 @@ credentials:
 ### 1. Build a production env file
 
 ```bash
-cp envs/production.example.env envs/production.env
-$EDITOR envs/production.env
+cp infra/envs/production.example.env infra/envs/production.env
+$EDITOR infra/envs/production.env
 ```
 
 Uncomment every line and fill with real values. The template includes
 helper commands for generating each secret (e.g. `openssl rand -hex 32`
 for `AUTH_SECRET`).
 
-### 2. Update the canonical `.env`
+### 2. Point the compose at the production env
 
-```diff
-- ENV_PROFILE=local
-- GO_ENV=dev
-- NODE_ENV=dev
-- IMAGE_TAG=1.0.0
-- MAPEXOS_PUBLIC_HOST=localhost
-+ ENV_PROFILE=production
-+ GO_ENV=prod
-+ NODE_ENV=prod
-+ IMAGE_TAG=1.0.0          # or whatever release you want to pin
-+ MAPEXOS_PUBLIC_HOST=mapex.example.com
-```
-
-### 3. Boot
+Edit `services/docker-compose.yml` and `infra/docker-compose.yml` so
+every `env_file:` entry that today references `local.env` references
+`production.env` instead. Same for `${GO_ENV:-dev}` → set
+`GO_ENV=prod` in your shell, or hardcode `prod` in the YAML:
 
 ```bash
+export GO_ENV=prod
+export MAPEXOS_PUBLIC_HOST=mapex.example.com
 docker compose up -d
 docker compose logs -f mapex-iam   # watch for "[SECURITY] refusing to start"
 ```
@@ -144,52 +136,53 @@ any sensitive env var (`AUTH_SECRET`, `INTERNAL_API_KEY`,
 default. Forgetting to uncomment a value in `production.env` triggers a
 loud fatal error at startup — never silent boot with a leaked default.
 
-> `envs/production.env` is in `.gitignore`. Never commit it.
+> `infra/envs/production.env` is in `.gitignore`. Never commit it.
 
 ---
 
 ## Configuration overview
 
-### Files
+### Layout
 
 | File | Role | Committed? |
 |---|---|---|
-| `.env` | Canonical knobs (profile, env, image tag, public host) | ✓ |
-| `envs/local.env` | Per-container env for local evaluation | ✓ |
-| `envs/production.example.env` | Template for production secrets | ✓ |
-| `envs/production.env` | Your actual production secrets | ✗ (gitignored) |
-| `services/<svc>/envs/<svc>.env` | Per-service overrides (ports, internal URLs) | ✓ |
+| `services/docker-compose.yml` | Image versions pinned literally (e.g. `thiagoanselmo/mapex-iam:1.0.0`) | ✓ |
+| `infra/docker-compose.yml` | Infra services (mongo, redis, nats, ...) + Mapex init/broker images | ✓ |
+| `infra/envs/local.env` | Shared runtime env for local evaluation | ✓ |
+| `infra/envs/production.example.env` | Template for production secrets | ✓ |
+| `infra/envs/production.env` | Your actual production secrets | ✗ (gitignored) |
+| `services/<svc>/envs/<svc>.env` | Per-service overrides (ports, names, internal URLs) | ✓ |
 
-### How the four knobs flow
+### How versions are pinned
 
-```
-.env
- ├── ENV_PROFILE      → which envs/<profile>.env is loaded by every service
- ├── GO_ENV / NODE_ENV → injected at compose-substitution time into:
- │                       - DB_PREFIX                ("${GO_ENV}-mapex_vault", …)
- │                       - NATS subject prefix      ("${GO_ENV}.mapexos.…")
- │                       - NATS stream UPPER prefix ("${UPPER_ENV}-MAPEXOS-…")
- │                       - The service security guard
- ├── IMAGE_TAG        → tag of every thiagoanselmo/* image pulled
- └── MAPEXOS_PUBLIC_HOST → host the frontend uses to reach backend APIs
-```
+- **Mapex services** (`thiagoanselmo/*`): the version is written
+  directly in `services/docker-compose.yml` and
+  `infra/docker-compose.yml`. Bumping a release means editing those
+  files. No magic env var, no surprise drift.
+- **Infra images** (`mongo`, `redis`, `nats`, ...): pinned to fixed
+  tags in `infra/docker-compose.yml`.
+- **Runtime knobs** (`GO_ENV`, `MAPEXOS_PUBLIC_HOST`) use the
+  `${VAR:-default}` syntax in the compose, so the stack boots without
+  any `.env` file in the repo root. Override via shell:
+  ```bash
+  GO_ENV=prod MAPEXOS_PUBLIC_HOST=mapex.example.com docker compose up -d
+  ```
 
 ---
 
 ## Versioning
 
 This repository is versioned independently from the service source. Each
-tag of `mapexOSDeploy` pins a specific `IMAGE_TAG` and is tested
-together. Treat the tag of this repo (e.g. `v1.0.0`) as the source of
-truth: cloning the matching tag and running `docker compose up -d`
-should always work.
+tag of `mapexOSDeploy` pins a specific image version (literally in the
+compose files) and is tested together. Treat the tag of this repo (e.g.
+`v1.0.0`) as the source of truth: cloning the matching tag and running
+`docker compose up -d` should always work.
 
 To upgrade:
 
 ```bash
 git fetch --tags
 git checkout v1.1.0
-$EDITOR .env            # bump IMAGE_TAG to 1.1.0
 docker compose pull
 docker compose up -d
 ```
@@ -210,21 +203,19 @@ Service images are published to <https://hub.docker.com/u/thiagoanselmo>.
 
 ## Troubleshooting
 
-**`docker compose` complains about missing `.env`** — you cloned but
-deleted the file. Restore it from git (`git checkout .env`).
-
-**`[SECURITY] refusing to start in GO_ENV=prod`** — you set `GO_ENV=prod`
-in `.env` but `envs/production.env` doesn't override every sensitive
-key. Re-read the error: it names the env vars still on dev defaults.
-Fill them in `production.env`.
+**`[SECURITY] refusing to start in GO_ENV=prod`** — you exported
+`GO_ENV=prod` but `infra/envs/production.env` doesn't override every
+sensitive key. Re-read the error: it names the env vars still on dev
+defaults. Fill them in `production.env`.
 
 **`unable to pull mapexos/…`** — old reference. Every image is under
 `thiagoanselmo/…`. Pull again after `git pull`.
 
 **Frontend says "network error"** — `MAPEXOS_PUBLIC_HOST` doesn't match
-the URL you're using. Set it in `.env` to whatever the browser uses to
-reach the host machine (`localhost`, an IP, or a DNS name) and recreate
-the frontend container: `docker compose up -d --force-recreate frontend`.
+the URL you're using. Override it via shell to whatever the browser
+uses to reach the host machine (`localhost`, an IP, or a DNS name) and
+recreate the frontend container:
+`MAPEXOS_PUBLIC_HOST=192.168.0.50 docker compose up -d --force-recreate frontend`.
 
 **Containers exit healthy then come back up** — normal during the first
 2 minutes. `mongodb-init`, `clickhouse-init`, `minio-init` and

@@ -68,7 +68,7 @@ services:
   # Image is published from the private mapexOS source repo; do not build
   # locally.
   mongodb-init:
-    image: thiagoanselmo/mongodb-init:${IMAGE_TAG}
+    image: thiagoanselmo/mongodb-init:1.0.0
     container_name: mapex-mongodb-init
     depends_on:
       mongodb:
@@ -80,7 +80,7 @@ services:
       - mapex-network
     restart: "no"
     env_file:
-      - ../envs/${ENV_PROFILE}.env
+      - ./envs/local.env
     environment:
       MONGO_HOST: mongodb
       # standalone runs every service inside compose — RS member host is
@@ -89,7 +89,7 @@ services:
       # DB_PREFIX is keyed to GO_ENV so multiple environments share the
       # same MongoDB instance without collisions (dev-mapex_vault vs
       # prod-mapex_vault). Image tag is independent (IMAGE_TAG above).
-      DB_PREFIX: ${GO_ENV}-
+      DB_PREFIX: ${GO_ENV:-dev}-
       PKI_BROKER_CN: mapex-mqtt-broker
       PKI_BROKER_SAN: mapex-mqtt-broker,localhost,127.0.0.1
 
@@ -103,7 +103,7 @@ services:
       - "8123:8123"   # HTTP interface
       - "9440:9000"   # Native TCP
     env_file:
-      - ../envs/${ENV_PROFILE}.env
+      - ./envs/local.env
     environment:
       # CLICKHOUSE_DB / USER / PASSWORD come from the env_file above —
       # envs/<profile>.env provides both the upstream-image-style aliases
@@ -135,7 +135,7 @@ services:
     volumes:
       - ./clickhouse/seed:/seed:ro
     env_file:
-      - ../envs/${ENV_PROFILE}.env
+      - ./envs/local.env
     environment:
       # CLICKHOUSE_HOST / PORT pin the in-network target so we don't rely
       # on the env_file (which may use a managed-cluster URI in prod).
@@ -260,12 +260,12 @@ services:
   #   - INTERNAL_API_KEY  must equal the assets MS internal_api_key
   # ===========================================================================
   mapex-broker-mqtt:
-    image: thiagoanselmo/mapex-broker-mqtt:${IMAGE_TAG}
+    image: thiagoanselmo/mapex-broker-mqtt:1.0.0
     container_name: mapex-broker-mqtt
     ports:
       - "1883:1883"
     env_file:
-      - ../envs/${ENV_PROFILE}.env
+      - ./envs/local.env
     environment:
       # Credentials (INTERNAL_API_KEY, CACHE_L2_ACCESS_KEY,
       # CACHE_L2_SECRET_KEY) come from the env_file above. The keys below
@@ -275,8 +275,8 @@ services:
       ASSETS_PORT: "5002"
       # NATS subjects are keyed to GO_ENV (not IMAGE_TAG) so multiple
       # environments can share the same NATS cluster.
-      NATS_SUBJECT_PRESENCE: ${GO_ENV}.mapexos.mqtt.presence.advisory
-      NATS_SUBJECT_INGRESS_PREFIX: ${GO_ENV}.mapexos.mqtt.data
+      NATS_SUBJECT_PRESENCE: ${GO_ENV:-dev}.mapexos.mqtt.presence.advisory
+      NATS_SUBJECT_INGRESS_PREFIX: ${GO_ENV:-dev}.mapexos.mqtt.data
       AUTH_CACHE_SECONDS: "60"
       AUTH_CACHE_JITTER: "10"
       PLUGIN_WORKER_POOL_SIZE: "4"
@@ -290,7 +290,7 @@ services:
       CACHE_L1_TTL_MINUTES: "30"
       CACHE_L2_ENDPOINT: minio:9000
       CACHE_L2_USE_SSL: "false"
-      FANOUT_INVALIDATE_SUBJECT: ${GO_ENV}.mapexos.fanout.asset.invalidate
+      FANOUT_INVALIDATE_SUBJECT: ${GO_ENV:-dev}.mapexos.fanout.asset.invalidate
     depends_on:
       nats-core:
         condition: service_healthy
@@ -328,9 +328,9 @@ services:
     image: natsio/nats-box:latest
     container_name: mapex-nats-init
     env_file:
-      - ../envs/${ENV_PROFILE}.env
+      - ./envs/local.env
     environment:
-      GO_ENV: ${GO_ENV}
+      GO_ENV: ${GO_ENV:-dev}
     depends_on:
       nats-core:
         condition: service_healthy
@@ -343,7 +343,7 @@ services:
         echo "=== Waiting for NATS servers to be ready ==="
         sleep 3
 
-        ENV=$${GO_ENV}
+        ENV=$${GO_ENV:-dev}
         UPPER_ENV=$$(echo "$$ENV" | tr '[:lower:]' '[:upper:]')
         LOWER_ENV=$$(echo "$$ENV" | tr '[:upper:]' '[:lower:]')
         echo "[nats-init] env=$$ENV upper=$$UPPER_ENV lower=$$LOWER_ENV"

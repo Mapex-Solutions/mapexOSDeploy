@@ -108,32 +108,24 @@ credenciais reais:
 ### 1. Crie um arquivo env de produção
 
 ```bash
-cp envs/production.example.env envs/production.env
-$EDITOR envs/production.env
+cp infra/envs/production.example.env infra/envs/production.env
+$EDITOR infra/envs/production.env
 ```
 
 Descomente todas as linhas e preencha com valores reais. O template
 inclui comandos auxiliares para gerar cada segredo (ex: `openssl rand
 -hex 32` para `AUTH_SECRET`).
 
-### 2. Atualize o `.env` canônico
+### 2. Aponte o compose para o env de produção
 
-```diff
-- ENV_PROFILE=local
-- GO_ENV=dev
-- NODE_ENV=dev
-- IMAGE_TAG=1.0.0
-- MAPEXOS_PUBLIC_HOST=localhost
-+ ENV_PROFILE=production
-+ GO_ENV=prod
-+ NODE_ENV=prod
-+ IMAGE_TAG=1.0.0          # ou a release que quiser fixar
-+ MAPEXOS_PUBLIC_HOST=mapex.exemplo.com
-```
-
-### 3. Suba a stack
+Edite `services/docker-compose.yml` e `infra/docker-compose.yml` para
+toda entrada de `env_file:` que hoje referencia `local.env` passar a
+referenciar `production.env`. O mesmo para `${GO_ENV:-dev}` — exporte
+`GO_ENV=prod` no shell, ou hardcode `prod` no YAML:
 
 ```bash
+export GO_ENV=prod
+export MAPEXOS_PUBLIC_HOST=mapex.exemplo.com
 docker compose up -d
 docker compose logs -f mapex-iam   # observe "[SECURITY] refusing to start"
 ```
@@ -145,52 +137,53 @@ e qualquer variável sensível (`AUTH_SECRET`, `INTERNAL_API_KEY`,
 Esquecer de descomentar um valor em `production.env` gera um erro fatal
 na inicialização — nunca um boot silencioso com credenciais vazadas.
 
-> `envs/production.env` está no `.gitignore`. Nunca faça commit dele.
+> `infra/envs/production.env` está no `.gitignore`. Nunca faça commit dele.
 
 ---
 
 ## Visão geral da configuração
 
-### Arquivos
+### Layout
 
 | Arquivo | Papel | Commitado? |
 |---|---|---|
-| `.env` | Knobs canônicos (perfil, env, tag da imagem, host público) | ✓ |
-| `envs/local.env` | Env por container para avaliação local | ✓ |
-| `envs/production.example.env` | Template para segredos de produção | ✓ |
-| `envs/production.env` | Seus segredos reais de produção | ✗ (gitignored) |
-| `services/<svc>/envs/<svc>.env` | Overrides por serviço (portas, URLs internas) | ✓ |
+| `services/docker-compose.yml` | Versões das imagens fixadas literalmente (ex.: `thiagoanselmo/mapex-iam:1.0.0`) | ✓ |
+| `infra/docker-compose.yml` | Serviços de infra (mongo, redis, nats, ...) + imagens Mapex de init/broker | ✓ |
+| `infra/envs/local.env` | Env de runtime compartilhada para avaliação local | ✓ |
+| `infra/envs/production.example.env` | Template para segredos de produção | ✓ |
+| `infra/envs/production.env` | Seus segredos reais de produção | ✗ (gitignored) |
+| `services/<svc>/envs/<svc>.env` | Overrides por serviço (portas, nomes, URLs internas) | ✓ |
 
-### Como os quatro knobs fluem
+### Como as versões são fixadas
 
-```
-.env
- ├── ENV_PROFILE      → qual envs/<profile>.env é carregado por cada serviço
- ├── GO_ENV / NODE_ENV → injetados no compose-substitution em:
- │                       - DB_PREFIX                ("${GO_ENV}-mapex_vault", …)
- │                       - Prefixo de subjects NATS ("${GO_ENV}.mapexos.…")
- │                       - Prefixo UPPER de streams  ("${UPPER_ENV}-MAPEXOS-…")
- │                       - O security guard do serviço
- ├── IMAGE_TAG        → tag de toda imagem thiagoanselmo/* puxada
- └── MAPEXOS_PUBLIC_HOST → host que o frontend usa para alcançar as APIs
-```
+- **Mapex services** (`thiagoanselmo/*`): a versão é escrita
+  diretamente em `services/docker-compose.yml` e
+  `infra/docker-compose.yml`. Subir release significa editar esses
+  arquivos. Sem var mágica, sem drift surpresa.
+- **Imagens de infra** (`mongo`, `redis`, `nats`, ...): fixadas em
+  tags concretas em `infra/docker-compose.yml`.
+- **Knobs de runtime** (`GO_ENV`, `MAPEXOS_PUBLIC_HOST`) usam a
+  sintaxe `${VAR:-default}` no compose, então a stack sobe sem
+  nenhum `.env` na raiz. Override via shell:
+  ```bash
+  GO_ENV=prod MAPEXOS_PUBLIC_HOST=mapex.exemplo.com docker compose up -d
+  ```
 
 ---
 
 ## Versionamento
 
 Este repositório é versionado independentemente do código-fonte dos
-serviços. Cada tag do `mapexOSDeploy` fixa um `IMAGE_TAG` específico e é
-testada em conjunto. Trate a tag deste repo (ex: `v1.0.0`) como fonte da
-verdade: clonar a tag correspondente e rodar `docker compose up -d` deve
-sempre funcionar.
+serviços. Cada tag do `mapexOSDeploy` fixa uma versão específica de
+imagem (literalmente nos compose files) e é testada em conjunto.
+Trate a tag deste repo (ex: `v1.0.0`) como fonte da verdade: clonar a
+tag correspondente e rodar `docker compose up -d` deve sempre funcionar.
 
 Para atualizar:
 
 ```bash
 git fetch --tags
 git checkout v1.1.0
-$EDITOR .env            # atualize IMAGE_TAG para 1.1.0
 docker compose pull
 docker compose up -d
 ```
@@ -211,22 +204,19 @@ As imagens dos serviços são publicadas em <https://hub.docker.com/u/thiagoanse
 
 ## Troubleshooting
 
-**`docker compose` reclama de `.env` ausente** — você clonou mas
-apagou o arquivo. Restaure pelo git (`git checkout .env`).
-
-**`[SECURITY] refusing to start in GO_ENV=prod`** — você setou
-`GO_ENV=prod` no `.env` mas `envs/production.env` não sobrescreveu
-toda chave sensível. Releia o erro: ele nomeia as env vars ainda em
+**`[SECURITY] refusing to start in GO_ENV=prod`** — você exportou
+`GO_ENV=prod` mas `infra/envs/production.env` não sobrescreveu toda
+chave sensível. Releia o erro: ele nomeia as env vars ainda em
 default de dev. Preencha no `production.env`.
 
 **`unable to pull mapexos/…`** — referência antiga. Toda imagem está
 sob `thiagoanselmo/…`. Puxe novamente após `git pull`.
 
 **Frontend diz "network error"** — `MAPEXOS_PUBLIC_HOST` não bate
-com a URL que você está usando. Defina no `.env` o que o navegador
-usa para chegar na máquina host (`localhost`, um IP, ou um nome DNS)
-e recrie o container do frontend:
-`docker compose up -d --force-recreate frontend`.
+com a URL que você está usando. Sobrescreva via shell com o que o
+navegador usa para chegar na máquina host (`localhost`, um IP, ou um
+nome DNS) e recrie o container do frontend:
+`MAPEXOS_PUBLIC_HOST=192.168.0.50 docker compose up -d --force-recreate frontend`.
 
 **Containers saem `healthy` e voltam a subir** — normal nos primeiros
 2 minutos. `mongodb-init`, `clickhouse-init`, `minio-init` e

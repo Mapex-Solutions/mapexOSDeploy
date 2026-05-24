@@ -26,12 +26,12 @@ services:
   # MAPEX IAM SERVICE (port 5000)
   # ===========================================================================
   mapex-iam:
-    image: thiagoanselmo/mapex-iam:${IMAGE_TAG}
+    image: thiagoanselmo/mapex-iam:1.0.0
     container_name: mapex-iam
     ports:
       - "5000:5000"
     env_file:
-      - ../envs/${ENV_PROFILE}.env
+      - ../infra/envs/local.env
       - ./mapexIam/envs/mapexIam.env
     depends_on:
       mongodb-init:
@@ -54,12 +54,12 @@ services:
   # HTTP GATEWAY SERVICE (port 5001)
   # ===========================================================================
   http-gateway:
-    image: thiagoanselmo/http-gateway:${IMAGE_TAG}
+    image: thiagoanselmo/http-gateway:1.0.0
     container_name: mapex-http-gateway
     ports:
       - "5001:5001"
     env_file:
-      - ../envs/${ENV_PROFILE}.env
+      - ../infra/envs/local.env
       - ./http_gateway/envs/http_gateway.env
     depends_on:
       mapex-iam:
@@ -78,12 +78,12 @@ services:
   # ASSETS SERVICE (port 5002)
   # ===========================================================================
   assets:
-    image: thiagoanselmo/assets:${IMAGE_TAG}
+    image: thiagoanselmo/assets:1.0.0
     container_name: mapex-assets
     ports:
       - "5002:5002"
     env_file:
-      - ../envs/${ENV_PROFILE}.env
+      - ../infra/envs/local.env
       - ./assets/envs/assets.env
     depends_on:
       mapex-iam:
@@ -102,12 +102,12 @@ services:
   # ROUTER SERVICE (port 5003)
   # ===========================================================================
   router:
-    image: thiagoanselmo/router:${IMAGE_TAG}
+    image: thiagoanselmo/router:1.0.0
     container_name: mapex-router
     ports:
       - "5003:5003"
     env_file:
-      - ../envs/${ENV_PROFILE}.env
+      - ../infra/envs/local.env
       - ./router/envs/router.env
     depends_on:
       mapex-iam:
@@ -126,12 +126,12 @@ services:
   # EVENTS SERVICE (port 5004)
   # ===========================================================================
   events:
-    image: thiagoanselmo/events:${IMAGE_TAG}
+    image: thiagoanselmo/events:1.0.0
     container_name: mapex-events
     ports:
       - "5004:5004"
     env_file:
-      - ../envs/${ENV_PROFILE}.env
+      - ../infra/envs/local.env
       - ./events/envs/events.env
     depends_on:
       mapex-iam:
@@ -152,12 +152,12 @@ services:
   # TRIGGERS SERVICE (port 5006)
   # ===========================================================================
   triggers:
-    image: thiagoanselmo/triggers:${IMAGE_TAG}
+    image: thiagoanselmo/triggers:1.0.0
     container_name: mapex-triggers
     ports:
       - "5006:5006"
     env_file:
-      - ../envs/${ENV_PROFILE}.env
+      - ../infra/envs/local.env
       - ./triggers/envs/triggers.env
     depends_on:
       mapex-iam:
@@ -176,12 +176,12 @@ services:
   # WORKFLOW SERVICE (port 5007)
   # ===========================================================================
   workflow:
-    image: thiagoanselmo/workflow:${IMAGE_TAG}
+    image: thiagoanselmo/workflow:1.0.0
     container_name: mapex-workflow
     ports:
       - "5007:5007"
     env_file:
-      - ../envs/${ENV_PROFILE}.env
+      - ../infra/envs/local.env
       - ./workflow/envs/workflow.env
     depends_on:
       mapex-iam:
@@ -202,12 +202,12 @@ services:
   # VAULT SERVICE (port 5010)
   # ===========================================================================
   mapex-vault:
-    image: thiagoanselmo/mapex-vault:${IMAGE_TAG}
+    image: thiagoanselmo/mapex-vault:1.0.0
     container_name: mapex-vault
     ports:
       - "5010:5010"
     env_file:
-      - ../envs/${ENV_PROFILE}.env
+      - ../infra/envs/local.env
       - ./mapexVault/envs/mapexVault.env
     depends_on:
       mapex-iam:
@@ -230,13 +230,13 @@ services:
   # JS EXECUTOR SERVICE (port 8000)
   # ===========================================================================
   js-executor:
-    image: thiagoanselmo/js-executor:${IMAGE_TAG}
+    image: thiagoanselmo/js-executor:1.0.0
     container_name: mapex-js-executor
     user: "root"
     ports:
       - "8000:8000"
     env_file:
-      - ../envs/${ENV_PROFILE}.env
+      - ../infra/envs/local.env
       - ./js_executor/envs/js_executor.env
     depends_on:
       assets:
@@ -249,13 +249,13 @@ services:
   # JS WORKFLOW EXECUTOR SERVICE (port 8001)
   # ===========================================================================
   js-wf-executor:
-    image: thiagoanselmo/js-wf-executor:${IMAGE_TAG}
+    image: thiagoanselmo/js-wf-executor:1.0.0
     container_name: mapex-js-wf-executor
     user: "root"
     ports:
       - "8001:8001"
     env_file:
-      - ../envs/${ENV_PROFILE}.env
+      - ../infra/envs/local.env
       - ./js_workflow_executor/envs/js_workflow_executor.env
     depends_on:
       nats-core:
@@ -268,20 +268,20 @@ services:
   # FRONTEND - Web UI (port 80)
   # ===========================================================================
   frontend:
-    image: thiagoanselmo/frontend:${IMAGE_TAG}
+    image: thiagoanselmo/frontend:1.0.0
     container_name: mapex-frontend
     ports:
       - "80:80"
     environment:
-      - MAPEXOS_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST}:5000
-      - HTTP_GATEWAY_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST}:5001
-      - ASSETS_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST}:5002
-      - ROUTER_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST}:5003
-      - EVENTS_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST}:5004
-      - TRIGGERS_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST}:5006
-      - WORKFLOW_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST}:5007
-      - VAULT_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST}:5010
-      - JS_EXECUTOR_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST}:8000
+      - MAPEXOS_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST:-localhost}:5000
+      - HTTP_GATEWAY_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST:-localhost}:5001
+      - ASSETS_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST:-localhost}:5002
+      - ROUTER_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST:-localhost}:5003
+      - EVENTS_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST:-localhost}:5004
+      - TRIGGERS_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST:-localhost}:5006
+      - WORKFLOW_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST:-localhost}:5007
+      - VAULT_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST:-localhost}:5010
+      - JS_EXECUTOR_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST:-localhost}:8000
     depends_on:
       mapex-iam:
         condition: service_healthy
