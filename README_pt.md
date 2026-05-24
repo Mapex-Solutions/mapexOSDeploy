@@ -40,6 +40,20 @@ MAPEXOS_PUBLIC_HOST=192.168.0.50 docker compose up -d
 
 ---
 
+## Experimente a plataforma — quickstart
+
+Quando a stack estiver no ar, a pasta [`quickstart/`](./quickstart/) te
+leva pela conexão de um sensor de temperatura ponta a ponta: criar
+asset template, route group, datasource HTTP ou MQTT, e aí mandar
+leituras sintéticas com um pequeno script Node.js e ver chegando no
+Grafana.
+
+Cada passo traz payloads JSON prontos para colar nos formulários da UI.
+
+Comece em [`quickstart/README_pt.md`](./quickstart/README_pt.md).
+
+---
+
 ## O que está rodando
 
 ### Serviços da aplicação
@@ -192,6 +206,35 @@ docker compose up -d
 | Distribuição Docker Compose (este repo) | `Mapex-Solutions/mapexOSDeploy` | público |
 
 As imagens dos serviços são publicadas em <https://hub.docker.com/u/thiagoanselmo>.
+
+---
+
+## Troubleshooting
+
+**`docker compose` reclama de `.env` ausente** — você clonou mas
+apagou o arquivo. Restaure pelo git (`git checkout .env`).
+
+**`[SECURITY] refusing to start in GO_ENV=prod`** — você setou
+`GO_ENV=prod` no `.env` mas `envs/production.env` não sobrescreveu
+toda chave sensível. Releia o erro: ele nomeia as env vars ainda em
+default de dev. Preencha no `production.env`.
+
+**`unable to pull mapexos/…`** — referência antiga. Toda imagem está
+sob `thiagoanselmo/…`. Puxe novamente após `git pull`.
+
+**Frontend diz "network error"** — `MAPEXOS_PUBLIC_HOST` não bate
+com a URL que você está usando. Defina no `.env` o que o navegador
+usa para chegar na máquina host (`localhost`, um IP, ou um nome DNS)
+e recrie o container do frontend:
+`docker compose up -d --force-recreate frontend`.
+
+**Containers saem `healthy` e voltam a subir** — normal nos primeiros
+2 minutos. `mongodb-init`, `clickhouse-init`, `minio-init` e
+`nats-init` são bootstrappers one-shot que saem `0` quando terminam.
+
+**Replica set do Mongo não forma** — geralmente é problema de DNS do
+Docker. `docker compose down && docker compose up -d` normalmente
+resolve.
 
 ---
 

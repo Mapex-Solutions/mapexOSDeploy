@@ -40,6 +40,19 @@ MAPEXOS_PUBLIC_HOST=192.168.0.50 docker compose up -d
 
 ---
 
+## Try the platform — quickstart
+
+Once the stack is up, the [`quickstart/`](./quickstart/) folder walks
+you through wiring a temperature sensor end to end: create an asset
+template, a route group, an HTTP or MQTT datasource, then push fake
+readings with a small Node.js script and watch them land in Grafana.
+
+Every step ships ready-to-paste JSON payloads for the UI forms.
+
+Start at [`quickstart/README.md`](./quickstart/README.md).
+
+---
+
 ## What's running
 
 ### Application services

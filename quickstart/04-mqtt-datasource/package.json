@@ -1,0 +1,15 @@
+{
+  "name": "mapexos-quickstart-mqtt",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MapexOS quickstart — MQTT publisher for the temperature sensor sample.",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node publish-events.js"
+  },
+  "dependencies": {
+    "mqtt": "^5.10.0"
+  }
+}

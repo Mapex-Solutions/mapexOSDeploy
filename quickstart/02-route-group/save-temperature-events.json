@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "name": "Save Temperature Events",
+  "description": "Quickstart: store every incoming event in ClickHouse.",
+  "enabled": true,
+  "routers": [
+    {
+      "kind": "save_event",
+      "saveEvent": {
+        "metadata": { "source": "quickstart" }
+      }
+    }
+  ]
+}

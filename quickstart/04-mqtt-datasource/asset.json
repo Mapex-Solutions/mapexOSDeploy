@@ -1,0 +1,17 @@
+{
+  "name": "Weather Station MQTT",
+  "description": "Quickstart asset that publishes to the MapexOS MQTT broker.",
+  "enabled": true,
+  "assetUUID": "weather-mqtt-001",
+  "assetTemplateId": "PASTE_TEMPLATE_ID_FROM_STEP_01",
+  "routeGroupIds": ["PASTE_ROUTE_GROUP_ID_FROM_STEP_02"],
+  "protocol": {
+    "type": "mqtt",
+    "mqtt": {
+      "clientId": "weather-mqtt-001",
+      "username": "weather-mqtt-001",
+      "authType": "password",
+      "password": "quickstart-mqtt-pass-change-me"
+    }
+  }
+}

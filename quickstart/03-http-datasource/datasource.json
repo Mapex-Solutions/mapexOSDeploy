@@ -1,0 +1,21 @@
+{
+  "name": "Quickstart HTTP Webhook",
+  "description": "Receives temperature readings via HTTP POST.",
+  "enabled": true,
+  "mode": "push",
+  "protocol": "http",
+  "auth": {
+    "type": "apiKey",
+    "apiKey": {
+      "type": "header",
+      "fieldName": "X-API-Key",
+      "key": "quickstart-http-key-change-me"
+    }
+  },
+  "assetBind": {
+    "type": "uuidField",
+    "data": {
+      "uuidField": ["assetUUID"]
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "Weather Station HTTP",
+  "description": "Quickstart asset bound to the HTTP webhook.",
+  "enabled": true,
+  "assetUUID": "weather-http-001",
+  "assetTemplateId": "PASTE_TEMPLATE_ID_FROM_STEP_01",
+  "routeGroupIds": ["PASTE_ROUTE_GROUP_ID_FROM_STEP_02"],
+  "protocol": {
+    "type": "http"
+  }
+}

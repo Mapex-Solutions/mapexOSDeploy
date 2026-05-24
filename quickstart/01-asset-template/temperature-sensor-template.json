@@ -1,0 +1,14 @@
+{
+  "name": "Temperature Sensor",
+  "enabled": true,
+  "description": "Weather station reading temperature, humidity and battery level.",
+  "version": "1.0",
+  "assetIdPath": "assetUUID",
+  "scriptConversion": "return payload;",
+  "availableFields": ["temperature", "humidity", "batteryLevel"],
+  "dynamicFields": [
+    { "fieldId": 1, "field": "temperature",  "type": "number" },
+    { "fieldId": 2, "field": "humidity",     "type": "number" },
+    { "fieldId": 3, "field": "batteryLevel", "type": "number" }
+  ]
+}
