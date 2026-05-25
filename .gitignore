@@ -1,0 +1,14 @@
+# Internal
+INTERNALS/
+
+# Production secrets (template lives at infra/envs/production.example.env)
+infra/envs/production.env
+
+# Node
+node_modules/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
