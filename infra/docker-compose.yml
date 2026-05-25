@@ -270,7 +270,12 @@ services:
       # Credentials (INTERNAL_API_KEY, CACHE_L2_ACCESS_KEY,
       # CACHE_L2_SECRET_KEY) come from the env_file above. The keys below
       # are platform-internal constants or GO_ENV-derived subjects.
-      NATS_URL: nats://nats-core:4222
+      #
+      # NATS_URL must carry the username:password inline — the broker
+      # plugin reads NATS_URL only (no separate NATS_USERNAME /
+      # NATS_PASSWORD fields on the Config struct). The user/pass come
+      # from the shared env_file above.
+      NATS_URL: nats://${NATS_USERNAME:-service}:${NATS_PASSWORD:-service_secret}@nats-core:4222
       ASSETS_HOST: assets
       ASSETS_PORT: "5002"
       # NATS subjects are keyed to GO_ENV (not IMAGE_TAG) so multiple
