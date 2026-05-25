@@ -71,19 +71,21 @@ Comece em [`quickstart/README_pt.md`](./quickstart/README_pt.md).
 | mapex-vault | 5010 | Cofre de credenciais, autoridade PKI |
 | js-executor | 8000 | Execução V8 de scripts para eventos IoT |
 | js-wf-executor | 8001 | Execução V8 de nós de código de workflow |
+| plugin-marketplace-mock | 3099 | CDN estática de manifests de plugins (workflow editor → aba Plugins) |
 
 ### Infraestrutura
 
 | Serviço | Porta | Imagem |
 |---|---|---|
-| MongoDB | 27017 | `mongo:7` (replicaSet `rs0`) |
-| Redis | 6379 | `redis:7-alpine` |
-| ClickHouse | 8123 / 9440 | `clickhouse/clickhouse-server` |
-| MinIO | 9000 / 9001 | `minio/minio` |
-| NATS Core | 4222 / 8222 | `nats:2.12-alpine` |
-| MQTT Broker | 1883 | `thiagoanselmo/mapex-broker-mqtt` |
-| Prometheus | 9090 | `prom/prometheus` |
-| Grafana | 3001 | `grafana/grafana` (8 dashboards pré-carregados) |
+| MongoDB | 27017 | `mongo:7.0.34` (replicaSet `rs0`) |
+| MongoDB init | — | `thiagoanselmo/mongodb-init:1.0.0` (one-shot) |
+| Redis | 6379 | `redis:7.4.9-alpine` |
+| ClickHouse | 8123 / 9440 | `clickhouse/clickhouse-server:26.5.1.882` |
+| MinIO | 9000 / 9001 | `minio/minio:RELEASE.2025-09-07T16-13-09Z` |
+| NATS Core | 4222 / 8222 | `nats:2.14.1-alpine` |
+| MQTT Broker | 1883 | `thiagoanselmo/mapex-broker-mqtt:1.0.0` |
+| Prometheus | 9090 | `prom/prometheus:v3.11.3` |
+| Grafana | 3001 | `grafana/grafana:13.0.1` (8 dashboards pré-carregados) |
 
 ---
 
