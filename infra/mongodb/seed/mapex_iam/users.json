@@ -15,7 +15,7 @@
     "jobTitle": "Platform Administrator",
     "enabled": true,
     "avatar": null,
-    "startTour": false,
+    "startTour": true,
     "created": { "$date": "2026-01-01T00:00:00.000Z" },
     "updated": { "$date": "2026-01-01T00:00:00.000Z" }
   }
