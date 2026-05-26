@@ -20,28 +20,30 @@
 #   - frontend         : Web UI (nginx)                (port 80)
 #
 # -----------------------------------------------------------------------------
-# ATTENTION — host defaults
+# ATTENTION — frontend backend URLs
 # -----------------------------------------------------------------------------
 #
-# All backend URLs the frontend bakes into the browser default to
-# `localhost`. The browser resolves `localhost` from the MACHINE that
-# opens the UI, not from the machine that runs `docker compose up`.
+# The frontend container bakes each backend URL (mapex-iam, gateway,
+# assets, router, events, triggers, workflow, vault, js-executor and
+# the plugin CDN) into the JS bundle at boot. The browser then talks
+# to those URLs directly — so `localhost` here means "localhost from
+# the machine that opens the UI", NOT from the machine that runs
+# docker compose.
 #
 #   * Running everything on your own dev machine and opening the UI
-#     locally? The default works as-is.
+#     locally? The defaults work as-is.
 #
-#   * Running the stack on a VM, a server, a Docker host on your LAN,
-#     or any host that is NOT the machine where you open the browser?
-#     Export MAPEXOS_PUBLIC_HOST to the address the browser will use
-#     (an IP, an FQDN, or a DNS name) BEFORE bringing the stack up:
+#   * Running the stack on a VM, a server, or splitting services
+#     across hosts? Edit each line in:
 #
-#         MAPEXOS_PUBLIC_HOST=192.168.15.6   docker compose up -d
-#         MAPEXOS_PUBLIC_HOST=mapex.example.com  docker compose up -d
+#         services/frontend/envs/frontend.env
 #
-# The same variable feeds every `http://${MAPEXOS_PUBLIC_HOST:-localhost}:<port>`
-# placeholder under the frontend's `environment:` block below. No
-# image rebuild is required — the frontend container substitutes the
-# resolved URLs into the JS bundle at boot.
+#     to point at the actual host or IP per service. Each URL is
+#     independent — you can mix and match (e.g. iam on a VM, plugin
+#     CDN on a public Netlify, the rest on localhost). No image
+#     rebuild needed: the frontend container reads the env vars and
+#     rewrites the placeholders in the JS bundle on every container
+#     start.
 #
 # =============================================================================
 
@@ -312,21 +314,11 @@ services:
     container_name: mapex-frontend
     ports:
       - "80:80"
-    # ATTENTION: every URL below defaults to `localhost`. If you are
-    # opening the UI from a machine other than the one running this
-    # compose, export MAPEXOS_PUBLIC_HOST=<host or ip> before
-    # `docker compose up -d` (see the file header for the full note).
-    environment:
-      - MAPEXOS_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST:-localhost}:5000
-      - HTTP_GATEWAY_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST:-localhost}:5001
-      - ASSETS_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST:-localhost}:5002
-      - ROUTER_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST:-localhost}:5003
-      - EVENTS_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST:-localhost}:5004
-      - TRIGGERS_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST:-localhost}:5006
-      - WORKFLOW_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST:-localhost}:5007
-      - VAULT_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST:-localhost}:5010
-      - JS_EXECUTOR_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST:-localhost}:8000
-      - PLUGIN_CDN_BASE_URL=http://${MAPEXOS_PUBLIC_HOST:-localhost}:3099/plugins
+    # Per-service URL overrides live in services/frontend/envs/frontend.env.
+    # Defaults point at localhost; edit one line per backend you want
+    # to retarget (see the file header for the full note).
+    env_file:
+      - ./frontend/envs/frontend.env
     depends_on:
       mapex-iam:
         condition: service_healthy
