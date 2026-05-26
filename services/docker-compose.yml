@@ -19,6 +19,30 @@
 #   - js-wf-executor   : Workflow JS code node executor (port 8001)
 #   - frontend         : Web UI (nginx)                (port 80)
 #
+# -----------------------------------------------------------------------------
+# ATTENTION — host defaults
+# -----------------------------------------------------------------------------
+#
+# All backend URLs the frontend bakes into the browser default to
+# `localhost`. The browser resolves `localhost` from the MACHINE that
+# opens the UI, not from the machine that runs `docker compose up`.
+#
+#   * Running everything on your own dev machine and opening the UI
+#     locally? The default works as-is.
+#
+#   * Running the stack on a VM, a server, a Docker host on your LAN,
+#     or any host that is NOT the machine where you open the browser?
+#     Export MAPEXOS_PUBLIC_HOST to the address the browser will use
+#     (an IP, an FQDN, or a DNS name) BEFORE bringing the stack up:
+#
+#         MAPEXOS_PUBLIC_HOST=192.168.15.6   docker compose up -d
+#         MAPEXOS_PUBLIC_HOST=mapex.example.com  docker compose up -d
+#
+# The same variable feeds every `http://${MAPEXOS_PUBLIC_HOST:-localhost}:<port>`
+# placeholder under the frontend's `environment:` block below. No
+# image rebuild is required — the frontend container substitutes the
+# resolved URLs into the JS bundle at boot.
+#
 # =============================================================================
 
 services:
@@ -288,6 +312,10 @@ services:
     container_name: mapex-frontend
     ports:
       - "80:80"
+    # ATTENTION: every URL below defaults to `localhost`. If you are
+    # opening the UI from a machine other than the one running this
+    # compose, export MAPEXOS_PUBLIC_HOST=<host or ip> before
+    # `docker compose up -d` (see the file header for the full note).
     environment:
       - MAPEXOS_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST:-localhost}:5000
       - HTTP_GATEWAY_API_BASE_URL=http://${MAPEXOS_PUBLIC_HOST:-localhost}:5001
