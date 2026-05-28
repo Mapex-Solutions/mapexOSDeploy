@@ -264,7 +264,12 @@ node publish-events.js
 
 O script conecta em `mqtt://localhost:1883` como
 `weather-mqtt-001`, depois publica 60 leituras no tópico
-`mapexos/assets/weather-mqtt-001/data`, uma por segundo.
+`events/weather-mqtt-001/data`, uma por segundo.
+
+O plugin do broker só aceita publishes em
+`events/{assetUUID}/{eventType}` — qualquer outro formato de
+tópico é rejeitado pela ACL, então o device precisa usar
+exatamente esse prefixo.
 
 Outras opções:
 
@@ -278,8 +283,8 @@ node publish-events.js --broker=mqtt://192.168.15.6:1883
 # Override de credenciais (precisa bater com o passo 3.4)
 node publish-events.js --username=weather-mqtt-001 --password=quickstart-mqtt-pass-change-me
 
-# Publicar em outro tópico
-node publish-events.js --topic=mapexos/custom/weather-mqtt-001
+# Publicar em outro eventType (sempre sob events/<assetUUID>/...)
+node publish-events.js --topic=events/weather-mqtt-001/alert
 ```
 
 ### 4.3 Ver as leituras chegando

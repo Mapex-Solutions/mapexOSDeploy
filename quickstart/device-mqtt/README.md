@@ -262,7 +262,12 @@ node publish-events.js
 
 The script connects to `mqtt://localhost:1883` as
 `weather-mqtt-001`, then publishes 60 readings to topic
-`mapexos/assets/weather-mqtt-001/data`, one per second.
+`events/weather-mqtt-001/data`, one per second.
+
+The broker plugin only accepts publishes on
+`events/{assetUUID}/{eventType}` — every other topic shape is
+rejected by the broker ACL, so the device must use that exact
+prefix.
 
 Other knobs:
 
@@ -276,8 +281,8 @@ node publish-events.js --broker=mqtt://192.168.15.6:1883
 # Override credentials (must match step 3.4)
 node publish-events.js --username=weather-mqtt-001 --password=quickstart-mqtt-pass-change-me
 
-# Publish to a different topic
-node publish-events.js --topic=mapexos/custom/weather-mqtt-001
+# Publish to a different event type (still under events/<assetUUID>/...)
+node publish-events.js --topic=events/weather-mqtt-001/alert
 ```
 
 ### 4.3 See the readings

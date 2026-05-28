@@ -16,7 +16,9 @@
 //                  (must match asset.protocol.mqtt.username)
 //   --password  MQTT password. Default: quickstart-mqtt-pass-change-me
 //                  (must match asset.protocol.mqtt.password)
-//   --topic     Topic to publish to. Default: mapexos/assets/<assetUUID>/data
+//   --topic     Topic to publish to. Default: events/<assetUUID>/data
+//               The broker plugin only accepts `events/{assetUUID}/{eventType}`;
+//               anything else is rejected by the ACL.
 
 let mqtt;
 try {
@@ -38,7 +40,7 @@ const count    = parseInt(args.count, 10) || 60;
 const broker   = args.broker   || 'mqtt://localhost:1883';
 const username = args.username || 'weather-mqtt-001';
 const password = args.password || 'quickstart-mqtt-pass-change-me';
-const topic    = args.topic    || `mapexos/assets/${asset}/data`;
+const topic    = args.topic    || `events/${asset}/data`;
 
 function nextReading() {
   return {
