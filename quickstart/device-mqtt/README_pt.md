@@ -22,6 +22,16 @@ Todo o fluxo é guiado pela UI. Abra <http://localhost> (ou o seu
 `admin@mapex.local` / `mapex@123`, e siga os passos em ordem. Cada
 valor abaixo é pra colar como está no campo correspondente.
 
+> **Já fez o quickstart HTTP?** O asset template e o route group são
+> agnósticos ao transporte — o template só descreve o formato do JSON e
+> a lógica de conversão, e o route group apenas envia os eventos para
+> o ClickHouse. Você pode pular o **Passo 1** e o **Passo 2** e ir
+> direto para o **[Passo 3 — Criar o asset (MQTT)](#passo-3--criar-o-asset-mqtt)**,
+> reaproveitando o template `Temperature Sensor` e o route group
+> `LakeHouse Storage` que você já configurou. Só refaça quando quiser
+> um payload diferente (novo template) ou rotear o evento para outro
+> destino (ex.: um trigger ou disparar um workflow).
+
 ---
 
 ## Passo 1 — Criar o asset template
@@ -187,7 +197,7 @@ O formulário é um wizard de 6 sub-passos.
 | Asset ID | `weather-mqtt-001` |
 | Status | `Active` |
 | Description | `Sensor MQTT de temperatura para o quickstart` |
-| Debug Mode | *(off)* |
+| Debug Mode | *(on)* |
 
 ### 3.2 Asset Template
 

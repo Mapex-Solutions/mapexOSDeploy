@@ -248,6 +248,24 @@ services:
       retries: 3
 
   # ===========================================================================
+  # MOSQUITTO INIT - chown the persistence dir before the broker starts.
+  #
+  # The mapex-broker image switches to the mosquitto user (uid 100, gid 101)
+  # at build time, so by the time mosquitto tries to snapshot mosquitto.db
+  # the bind-mounted host directory is still owned by root and the write
+  # fails ("Error saving in-memory database ... Permission denied"). This
+  # one-shot fixes the ownership/perms on every boot — safe to re-run.
+  # ===========================================================================
+  mosquitto-init:
+    image: alpine:3.20
+    container_name: mapex-mosquitto-init
+    user: "0:0"
+    volumes:
+      - ./mosquitto/data:/data
+    command: ["sh", "-c", "chown -R 100:101 /data && chmod 750 /data"]
+    restart: "no"
+
+  # ===========================================================================
   # MAPEX BROKER MQTT - MapexOS-flavored Mosquitto
   #
   # Pre-built image (thiagoanselmo/mapex-broker-mqtt) bundling Mosquitto v2 +
@@ -304,6 +322,10 @@ services:
       # Wait for mongodb-init to finish so the PKI bootstrap has written
       # server.crt / server.key / ca-chain.pem into the broker volume.
       mongodb-init:
+        condition: service_completed_successfully
+      # Wait for the host bind-mount to be chowned to uid/gid 100:101 so
+      # the in-container mosquitto user can write to /mosquitto/data.
+      mosquitto-init:
         condition: service_completed_successfully
     networks:
       - mapex-network

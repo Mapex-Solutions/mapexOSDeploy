@@ -22,6 +22,16 @@ The whole flow is UI-driven. Open <http://localhost> (or your
 Every value below is meant to be copied into the matching field
 as-is.
 
+> **Already did the HTTP quickstart?** The asset template and the
+> route group are transport-agnostic — the template only describes
+> the JSON shape and conversion logic, and the route group just sends
+> events to ClickHouse. You can skip **Step 1** and **Step 2** and
+> jump straight to **[Step 3 — Create the asset (MQTT)](#step-3--create-the-asset-mqtt)**,
+> reusing the `Temperature Sensor` template and the `LakeHouse Storage`
+> route group you already configured. Only redo them when you want a
+> different payload shape (new template) or to route the event somewhere
+> else (e.g., a trigger or fires a workflow).
+
 ---
 
 ## Step 1 — Create the asset template
@@ -186,7 +196,7 @@ The form is a 6-step wizard.
 | Asset ID | `weather-mqtt-001` |
 | Status | `Active` |
 | Description | `Sample MQTT temperature sensor for the quickstart` |
-| Debug Mode | *(off)* |
+| Debug Mode | *(on)* |
 
 ### 3.2 Asset Template
 
