@@ -235,7 +235,7 @@ O formulário é um wizard de 6 sub-passos.
 | Asset ID | `weather-http-001` |
 | Status | `Active` |
 | Description | `Sensor HTTP de temperatura para o quickstart` |
-| Debug Mode | *(off)* |
+| Debug Mode | *(on)* | Show logs
 
 ### 4.2 Asset Template
 

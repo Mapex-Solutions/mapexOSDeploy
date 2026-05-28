@@ -197,7 +197,7 @@ O formulário é um wizard de 6 sub-passos.
 | Asset ID | `weather-mqtt-001` |
 | Status | `Active` |
 | Description | `Sensor MQTT de temperatura para o quickstart` |
-| Debug Mode | *(on)* |
+| Debug Mode | *(on)* | Show logs
 
 ### 3.2 Asset Template
 

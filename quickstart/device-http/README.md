@@ -234,7 +234,7 @@ The form is a 6-step wizard.
 | Asset ID | `weather-http-001` |
 | Status | `Active` |
 | Description | `Sample HTTP temperature sensor for the quickstart` |
-| Debug Mode | *(off)* |
+| Debug Mode | *(on)* | Show logs
 
 ### 4.2 Asset Template
 

@@ -196,7 +196,7 @@ The form is a 6-step wizard.
 | Asset ID | `weather-mqtt-001` |
 | Status | `Active` |
 | Description | `Sample MQTT temperature sensor for the quickstart` |
-| Debug Mode | *(on)* |
+| Debug Mode | *(on)* | Show logs
 
 ### 3.2 Asset Template
 

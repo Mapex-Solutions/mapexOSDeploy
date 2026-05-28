@@ -20,3 +20,5 @@ node_modules/
 .idea/
 .vscode/
 *.swp
+
+quickstart/device-mqtt/package-lock.json
