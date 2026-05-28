@@ -59,7 +59,7 @@ Cole no editor de código:
 
 ```javascript
 // Sem pré-processamento — passa o payload adiante sem alterações.
-return payload;
+const result = payload;
 ```
 
 ### 1.4 Validation script
@@ -68,11 +68,11 @@ Cole no editor de código:
 
 ```javascript
 // Aceita qualquer payload que carregue os três campos como números.
-return (
-  typeof payload.temperature === 'number' &&
-  typeof payload.humidity === 'number' &&
-  typeof payload.batteryLevel === 'number'
-);
+const ok = typeof payload.temperature === 'number'
+        && typeof payload.humidity === 'number'
+        && typeof payload.batteryLevel === 'number';
+if (!ok) throw new Error('Payload precisa conter temperature, humidity e batteryLevel como números');
+const result = payload;
 ```
 
 ### 1.5 Conversion script
@@ -81,7 +81,7 @@ Cole no editor de código:
 
 ```javascript
 // Transforma o payload bruto no evento canônico da plataforma.
-return {
+const result = {
   eventType: 'data',
   eventId: `${payload.assetUUID}-${Date.now()}`,
   created: new Date().toISOString(),

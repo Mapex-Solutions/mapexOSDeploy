@@ -58,7 +58,7 @@ Paste in the code editor:
 
 ```javascript
 // No preprocessing needed — pass the payload through untouched.
-return payload;
+const result = payload;
 ```
 
 ### 1.4 Validation script
@@ -67,11 +67,11 @@ Paste in the code editor:
 
 ```javascript
 // Accept anything that carries the three sensor fields as numbers.
-return (
-  typeof payload.temperature === 'number' &&
-  typeof payload.humidity === 'number' &&
-  typeof payload.batteryLevel === 'number'
-);
+const ok = typeof payload.temperature === 'number'
+        && typeof payload.humidity === 'number'
+        && typeof payload.batteryLevel === 'number';
+if (!ok) throw new Error('Payload must contain temperature, humidity and batteryLevel as numbers');
+const result = payload;
 ```
 
 ### 1.5 Conversion script
@@ -80,7 +80,7 @@ Paste in the code editor:
 
 ```javascript
 // Reshape the raw payload into the platform's canonical event.
-return {
+const result = {
   eventType: 'data',
   eventId: `${payload.assetUUID}-${Date.now()}`,
   created: new Date().toISOString(),

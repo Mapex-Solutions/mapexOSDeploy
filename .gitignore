@@ -4,6 +4,14 @@ INTERNALS/
 # Production secrets (template lives at infra/envs/production.example.env)
 infra/envs/production.env
 
+# Runtime data of infra services (minio, mongodb, clickhouse, nats, redis, mosquitto, prometheus, grafana, ...)
+infra/*/data/**
+!infra/*/data/**/.gitkeep
+
+# Generated broker TLS material (created by the compose certs service on first boot)
+infra/broker-certs/*
+!infra/broker-certs/.gitkeep
+
 # Node
 node_modules/
 
