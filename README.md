@@ -1,13 +1,28 @@
 # MapexOS Stack
 
-> Self-hostable IoT platform for telemetry ingestion, rule-based routing,
-> workflow execution, and asset management. Pre-built Docker Hub images;
-> single command to boot the full stack.
+> **IoT-first, but not limited to IoT.**
+> MapexOS doesn't see devices or sensors — it sees **Assets**.
+> Any source. Any protocol. One abstraction.
+>
+> **Connect. Automate. Scale.** — The open platform for data integration
+> and intelligent automation.
+
+```
+   Sources                       MapexOS                         Destinations
+   ───────                       ───────                         ────────────
+   Devices ──┐                                              ┌── Webhooks / APIs
+   Gateways ─┤   Ingest → Validate → Transform → Route →    ├── Slack / Teams / Email
+   APIs ─────┼──        Store / Notify / Automate           ├── NATS / MQTT
+   Apps ─────┤                                              └── Custom plugins
+   3rd-party ┘
+```
 
 This repository distributes the Docker Compose orchestration for the
-MapexOS platform. The service source code lives in private Mapex
-Solutions repositories — this repo pulls the published images from
-Docker Hub.
+MapexOS platform — pre-built multi-arch images on Docker Hub, a single
+command to boot the full stack. The service source code lives in the
+[mapexOS](https://github.com/Mapex-Solutions/mapexOS) repository.
+
+[Versão em português](./README_pt.md) · [Documentation site](https://mapexos.io)
 
 ---
 
