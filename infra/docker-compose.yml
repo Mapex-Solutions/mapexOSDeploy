@@ -281,7 +281,12 @@ services:
     image: thiagoanselmo/mapex-broker-mqtt:1.0.0
     container_name: mapex-broker-mqtt
     ports:
+      # Plaintext listener (password auth).
       - "1883:1883"
+      # TLS/mTLS listener (cert auth) — published by default so device
+      # cert-mode CONNECTs reach the broker from the host, matching the
+      # entrypoint's auto-enabled 8883 TLS listener.
+      - "8883:8883"
     env_file:
       - ./envs/local.env
     environment:
