@@ -12,6 +12,12 @@ infra/*/data/**
 infra/broker-certs/*
 !infra/broker-certs/.gitkeep
 
+# Local cert/data backups taken before container recreation
+infra/_backups/
+
+# Compiled seed-encryptor binary (built on demand by kek-bootstrap.sh)
+infra/mongodb/init/seed-encryptor/seed-encryptor
+
 # Node
 node_modules/
 
