@@ -36,6 +36,13 @@ const (
 	oidNamespace = "mapex-pki-seed-v1"
 
 	collection = "pkiCertificateAuthorities"
+
+	// KEK seeding (the encryptionKeys collection consumed by mapexVault's
+	// kek module). A KEK is a random 32-byte key, hex-encoded then
+	// envelope-encrypted, so the Vault returns it ready for envelope.New.
+	kekSize         = 32
+	kekOIDNamespace = "mapex-kek-seed-v1"
+	kekCollection   = "encryptionKeys"
 )
 
 // caSpec describes one CA kind we know how to serialize. The slice
@@ -67,12 +74,31 @@ var caCatalog = []caSpec{
 	},
 }
 
+// kekSpec describes one platform KEK by context. Like caCatalog, this
+// slice is the single source of truth: adding a new KEK context means
+// appending here and adding one insertMany line to kek-bootstrap.sh.
+type kekSpec struct {
+	context string
+	outFile string
+}
+
+var kekCatalog = []kekSpec{
+	{
+		context: "lorawan_device_keys",
+		outFile: "lorawan_device_keys.json",
+	},
+}
+
 func main() {
 	in := flag.String("in", "", "input dir containing root_ca.{crt,key} and intermediate_ca.{crt,key}")
-	out := flag.String("out", "", "output dir for seed JSON files")
+	out := flag.String("out", "", "output dir for CA seed JSON files")
+	kekOut := flag.String("kek-out", "", "output dir for encryptionKeys (KEK) seed JSON files")
 	flag.Parse()
-	if *in == "" || *out == "" {
-		fatal("--in and --out are required")
+
+	caMode := *in != "" && *out != ""
+	kekMode := *kekOut != ""
+	if !caMode && !kekMode {
+		fatal("provide --in and --out (CA seed) and/or --kek-out (KEK seed)")
 	}
 
 	masterHex := os.Getenv("CREDENTIAL_MASTER_KEY")
@@ -84,18 +110,33 @@ func main() {
 		fatal("CREDENTIAL_MASTER_KEY must be 64 hex chars (32 bytes)")
 	}
 
-	if err := os.MkdirAll(*out, 0o755); err != nil {
-		fatal(fmt.Sprintf("mkdir out: %v", err))
+	now := time.Now().UTC()
+
+	if caMode {
+		if err := os.MkdirAll(*out, 0o755); err != nil {
+			fatal(fmt.Sprintf("mkdir out: %v", err))
+		}
+		for _, spec := range caCatalog {
+			if err := encodeOne(spec, *in, *out, masterKey, now); err != nil {
+				fatal(fmt.Sprintf("[%s] %v", spec.kind, err))
+			}
+			fmt.Printf("OK  %s -> %s\n", spec.kind, filepath.Join(*out, spec.outFile))
+		}
+		fmt.Printf("\nCA seed JSON ready in %s. Collection: %s\n", *out, collection)
 	}
 
-	now := time.Now().UTC()
-	for _, spec := range caCatalog {
-		if err := encodeOne(spec, *in, *out, masterKey, now); err != nil {
-			fatal(fmt.Sprintf("[%s] %v", spec.kind, err))
+	if kekMode {
+		if err := os.MkdirAll(*kekOut, 0o755); err != nil {
+			fatal(fmt.Sprintf("mkdir kek-out: %v", err))
 		}
-		fmt.Printf("OK  %s -> %s\n", spec.kind, filepath.Join(*out, spec.outFile))
+		for _, spec := range kekCatalog {
+			if err := encodeKEK(spec, *kekOut, masterKey, now); err != nil {
+				fatal(fmt.Sprintf("[%s] %v", spec.context, err))
+			}
+			fmt.Printf("OK  kek/%s -> %s\n", spec.context, filepath.Join(*kekOut, spec.outFile))
+		}
+		fmt.Printf("\nKEK seed JSON ready in %s. Collection: %s\n", *kekOut, kekCollection)
 	}
-	fmt.Printf("\nSeed JSON ready in %s. Collection: %s\n", *out, collection)
 }
 
 // encodeOne reads the PEM pair for a single CA kind, envelope-encrypts
@@ -128,6 +169,44 @@ func encodeOne(spec caSpec, inDir, outDir string, masterKey []byte, now time.Tim
 	oid := deterministicOID(oidNamespace, spec.kind)
 
 	doc := buildEJSONDoc(spec, oid, fingerprint, cert.NotBefore.UTC(), cert.NotAfter.UTC(), now, certPEM, env)
+
+	body, err := json.MarshalIndent([]map[string]any{doc}, "", "  ")
+	if err != nil {
+		return fmt.Errorf("marshal: %w", err)
+	}
+	body = append(body, '\n')
+	return os.WriteFile(filepath.Join(outDir, spec.outFile), body, 0o644)
+}
+
+// encodeKEK generates a fresh 32-byte KEK for one context, hex-encodes it,
+// envelope-encrypts the hex (so the Vault returns a value ready for
+// envelope.New), and writes the encryptionKeys EJSON document. The KEK never
+// touches disk in plaintext. Field names mirror the EncryptionKey entity bson
+// tags one-for-one.
+func encodeKEK(spec kekSpec, outDir string, masterKey []byte, now time.Time) error {
+	raw := make([]byte, kekSize)
+	if _, err := io.ReadFull(rand.Reader, raw); err != nil {
+		return fmt.Errorf("gen kek: %w", err)
+	}
+	kekHex := hex.EncodeToString(raw)
+
+	env, err := envelopeEncrypt(masterKey, []byte(kekHex))
+	if err != nil {
+		return fmt.Errorf("envelope encrypt: %w", err)
+	}
+
+	oid := deterministicOID(kekOIDNamespace, spec.context)
+	doc := map[string]any{
+		"_id":          ejsonOID(oid),
+		"context":      spec.context,
+		"isSystem":     true,
+		"encryptedDEK": ejsonBinary(env.encryptedDEK),
+		"dekNonce":     ejsonBinary(env.dekNonce),
+		"encryptedKey": ejsonBinary(env.encryptedData),
+		"keyNonce":     ejsonBinary(env.dataNonce),
+		"created":      ejsonDate(now),
+		"updated":      ejsonDate(now),
+	}
 
 	body, err := json.MarshalIndent([]map[string]any{doc}, "", "  ")
 	if err != nil {

@@ -157,6 +157,11 @@ wait_for_primary
 # shellcheck disable=SC1091
 source /usr/local/bin/pki-bootstrap.sh
 
+# Step 4b: KEK bootstrap (per-collection idempotency inside). Sourced for the
+# same `return 0` skip behaviour as the PKI bootstrap.
+# shellcheck disable=SC1091
+source /usr/local/bin/kek-bootstrap.sh
+
 # Step 5: Static JSON seed (idempotent at the document level via upserts
 # in seed_collection — each collection is reconciled independently, so a
 # partially-wiped collection is restored without touching the others).

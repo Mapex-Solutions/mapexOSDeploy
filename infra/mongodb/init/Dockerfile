@@ -18,5 +18,6 @@ RUN apt-get update \
 COPY --from=builder /out/seed-encryptor /usr/local/bin/seed-encryptor
 COPY seed.sh /usr/local/bin/seed.sh
 COPY pki-bootstrap.sh /usr/local/bin/pki-bootstrap.sh
-RUN chmod +x /usr/local/bin/seed.sh /usr/local/bin/pki-bootstrap.sh /usr/local/bin/seed-encryptor
+COPY kek-bootstrap.sh /usr/local/bin/kek-bootstrap.sh
+RUN chmod +x /usr/local/bin/seed.sh /usr/local/bin/pki-bootstrap.sh /usr/local/bin/kek-bootstrap.sh /usr/local/bin/seed-encryptor
 ENTRYPOINT ["/usr/local/bin/seed.sh"]
