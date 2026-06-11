@@ -54,6 +54,11 @@ services:
   mapex-iam:
     image: thiagoanselmo/mapex-iam:1.0.0
     container_name: mapex-iam
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 192M
     ports:
       - "5000:5000"
     env_file:
@@ -82,6 +87,11 @@ services:
   http-gateway:
     image: thiagoanselmo/http-gateway:1.0.0
     container_name: mapex-http-gateway
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 192M
     ports:
       - "5001:5001"
     env_file:
@@ -106,6 +116,11 @@ services:
   assets:
     image: thiagoanselmo/assets:1.0.0
     container_name: mapex-assets
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 192M
     ports:
       - "5002:5002"
     env_file:
@@ -130,6 +145,11 @@ services:
   router:
     image: thiagoanselmo/router:1.0.0
     container_name: mapex-router
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 192M
     ports:
       - "5003:5003"
     env_file:
@@ -154,6 +174,11 @@ services:
   events:
     image: thiagoanselmo/events:1.0.0
     container_name: mapex-events
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 192M
     ports:
       - "5004:5004"
     env_file:
@@ -180,6 +205,11 @@ services:
   triggers:
     image: thiagoanselmo/triggers:1.0.0
     container_name: mapex-triggers
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 192M
     ports:
       - "5006:5006"
     env_file:
@@ -204,6 +234,11 @@ services:
   workflow:
     image: thiagoanselmo/workflow:1.0.0
     container_name: mapex-workflow
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 192M
     ports:
       - "5007:5007"
     env_file:
@@ -230,6 +265,11 @@ services:
   mapex-vault:
     image: thiagoanselmo/mapex-vault:1.0.0
     container_name: mapex-vault
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 192M
     ports:
       - "5010:5010"
     env_file:
@@ -259,6 +299,11 @@ services:
     image: thiagoanselmo/js-executor:1.0.0
     container_name: mapex-js-executor
     user: "root"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 320M
     ports:
       - "8000:8000"
     env_file:
@@ -278,6 +323,11 @@ services:
     image: thiagoanselmo/js-wf-executor:1.0.0
     container_name: mapex-js-wf-executor
     user: "root"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 320M
     ports:
       - "8001:8001"
     env_file:
@@ -300,6 +350,11 @@ services:
   plugin-marketplace-mock:
     image: thiagoanselmo/plugin-marketplace-mock:1.0.0
     container_name: mapex-plugin-marketplace-mock
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 96M
     ports:
       - "3099:3099"
     networks:
@@ -312,6 +367,11 @@ services:
   frontend:
     image: thiagoanselmo/frontend:1.0.0
     container_name: mapex-frontend
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 96M
     ports:
       - "80:80"
     # Per-service URL overrides live in services/frontend/envs/frontend.env.

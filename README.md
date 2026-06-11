@@ -103,6 +103,44 @@ Start at [`quickstart/README.md`](./quickstart/README.md).
 
 ---
 
+## Resource limits
+
+Every long-running service ships with a `deploy.resources.limits`
+(CPU + memory) block in the compose files. These are deliberately
+**sized to fit a single local machine** — roughly a 4-core / 8 GB
+laptop — so you can clone the repo, boot the whole stack and simulate a
+few devices without it eating the host. The sum of the limits is about
+**10.5 vCPU / ~5 GB RAM**.
+
+A couple of things worth knowing:
+
+- **They are ceilings, not reservations.** Docker never *reserves* those
+  cores or that RAM — each value is just the most a container is allowed
+  to use. That's why the CPU limits sum to more vCPUs than a small laptop
+  has and the stack still runs fine: the kernel scheduler time-shares the
+  real cores, and idle containers cost nothing.
+- **Two engines are also tuned internally to match their cap.** MongoDB
+  gets `--wiredTigerCacheSizeGB` and ClickHouse gets
+  `max_server_memory_usage` / `mark_cache_size`, because both size their
+  caches off *host* RAM by default and would otherwise be OOM-killed once
+  a container limit is in place.
+- **Init one-shots** (`mongodb-init`, `clickhouse-init`, …) are left
+  uncapped on purpose — they run briefly during bootstrap and capping
+  them only risks slowing or failing the first boot.
+
+> **Production: revisit these.** The defaults exist so the stack fits a
+> laptop, **not** so it performs under real load. Production runs on a
+> **Kubernetes cluster**, where these compose limits don't apply — there
+> you set per-container `resources.requests` / `resources.limits` (and
+> HPA/VPA) sized to your actual demand and usage: number of devices,
+> message throughput, query volume, retention. Give
+> MongoDB/ClickHouse/Prometheus real headroom and right-size the services
+> under pressure. **Don't size from `docker stats`** — monitor your
+> **cluster's metrics** (Prometheus / Grafana, `kubectl top pods`,
+> Metrics Server) under representative load and tune from there.
+
+---
+
 ## Stopping & cleaning up
 
 ```bash

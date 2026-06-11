@@ -105,6 +105,46 @@ Comece em [`quickstart/README_pt.md`](./quickstart/README_pt.md).
 
 ---
 
+## Limites de recursos
+
+Todo serviço de longa duração traz um bloco `deploy.resources.limits`
+(CPU + memória) nos compose files. Esses limites foram
+**dimensionados de propósito para caber em uma única máquina local** —
+mais ou menos um laptop de 4 cores / 8 GB — para você clonar o repo,
+subir a stack inteira e simular alguns dispositivos sem sufocar o host.
+A soma dos limites fica em torno de **10.5 vCPU / ~5 GB de RAM**.
+
+Alguns pontos importantes:
+
+- **São tetos, não reservas.** O Docker nunca *reserva* esses cores ou
+  essa RAM — cada valor é apenas o máximo que um container pode usar.
+  Por isso a soma dos limites de CPU dá mais vCPUs do que um laptop
+  pequeno tem e mesmo assim a stack roda normalmente: o escalonador do
+  kernel divide os cores reais no tempo, e containers ociosos não custam
+  nada.
+- **Dois engines também são ajustados internamente para casar com o
+  teto.** O MongoDB recebe `--wiredTigerCacheSizeGB` e o ClickHouse
+  recebe `max_server_memory_usage` / `mark_cache_size`, porque ambos
+  dimensionam seus caches pela RAM do *host* por padrão e, sem isso,
+  seriam mortos por OOM assim que um limite de container entra em cena.
+- **Os init one-shot** (`mongodb-init`, `clickhouse-init`, …) ficam sem
+  limite de propósito — rodam por pouco tempo durante o bootstrap e
+  limitá-los só arriscaria atrasar ou quebrar o primeiro boot.
+
+> **Produção: revise isso.** Os valores padrão existem para a stack
+> caber em um laptop, **não** para ter performance sob carga real.
+> Produção roda em um **cluster Kubernetes**, onde estes limites do
+> compose não se aplicam — lá você define `resources.requests` /
+> `resources.limits` por container (e HPA/VPA) dimensionados conforme a
+> sua demanda e uso reais: número de dispositivos, volume de mensagens,
+> volume de queries, retenção. Dê folga de verdade para
+> MongoDB/ClickHouse/Prometheus e ajuste os serviços sob pressão.
+> **Não dimensione pelo `docker stats`** — acompanhe as **métricas do
+> seu cluster** (Prometheus / Grafana, `kubectl top pods`, Metrics
+> Server) sob carga representativa e ajuste a partir daí.
+
+---
+
 ## Parando e limpando
 
 ```bash

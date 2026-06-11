@@ -19,4 +19,11 @@
     <default_database>mapexos</default_database>
 
     <timezone>UTC</timezone>
+
+    <!-- Memory guardrails for the laptop/eval profile (container capped at
+         768 MB). Track server memory below the cgroup limit so a heavy query
+         or merge raises a ClickHouse exception instead of being OOM-killed,
+         and shrink the mark cache from its multi-GB default. -->
+    <max_server_memory_usage>603979776</max_server_memory_usage>
+    <mark_cache_size>268435456</mark_cache_size>
 </clickhouse>
