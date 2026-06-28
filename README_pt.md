@@ -87,7 +87,6 @@ Comece em [`quickstart/README_pt.md`](./quickstart/README_pt.md).
 | mapex-vault | 5010 | Cofre de credenciais, autoridade PKI |
 | js-executor | 8000 | Execução V8 de scripts para eventos IoT |
 | js-wf-executor | 8001 | Execução V8 de nós de código de workflow |
-| plugin-marketplace-mock | 3099 | CDN estática de manifests de plugins (workflow editor → aba Plugins) |
 
 ### Infraestrutura
 

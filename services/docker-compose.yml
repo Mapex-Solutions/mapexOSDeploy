@@ -341,27 +341,6 @@ services:
     restart: unless-stopped
 
   # ===========================================================================
-  # PLUGIN MARKETPLACE MOCK - Static CDN for plugin manifests (port 3099)
-  #
-  # Stand-in for the real Netlify CDN that hosts plugin manifests in
-  # production. Bundled with the local stack so the workflow editor's
-  # Plugins tab works out of the box without an external dependency.
-  # ===========================================================================
-  plugin-marketplace-mock:
-    image: thiagoanselmo/plugin-marketplace-mock:1.0.0
-    container_name: mapex-plugin-marketplace-mock
-    deploy:
-      resources:
-        limits:
-          cpus: "0.25"
-          memory: 96M
-    ports:
-      - "3099:3099"
-    networks:
-      - mapex-network
-    restart: unless-stopped
-
-  # ===========================================================================
   # FRONTEND - Web UI (port 80)
   # ===========================================================================
   frontend:

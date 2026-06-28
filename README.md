@@ -85,7 +85,6 @@ Start at [`quickstart/README.md`](./quickstart/README.md).
 | mapex-vault | 5010 | Credential vault, PKI authority |
 | js-executor | 8000 | V8 script execution for IoT events |
 | js-wf-executor | 8001 | V8 execution of workflow code nodes |
-| plugin-marketplace-mock | 3099 | Static plugin manifest CDN (workflow editor → Plugins tab) |
 
 ### Infrastructure
 
