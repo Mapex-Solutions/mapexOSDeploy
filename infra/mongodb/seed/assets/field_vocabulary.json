@@ -1,5 +1,8 @@
 [
   {
+    "_id": {
+      "$oid": "5ed67ddb6d6db2ea324b3c8a"
+    },
     "value": "temperature",
     "hint": {
       "en-US": "Ambient temperature",
@@ -13,6 +16,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "0a02a5ee8f5d3360e1467827"
+    },
     "value": "humidity",
     "hint": {
       "en-US": "Relative humidity",
@@ -26,6 +32,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "91f307214d47fe24b4a057c0"
+    },
     "value": "pressure",
     "hint": {
       "en-US": "Atmospheric pressure",
@@ -39,6 +48,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "501d314346f26dbb9616f7cd"
+    },
     "value": "co2",
     "hint": {
       "en-US": "CO₂ concentration",
@@ -52,6 +64,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "4231e19417427387e965b36c"
+    },
     "value": "light",
     "hint": {
       "en-US": "Illuminance",
@@ -65,6 +80,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "f71db4b4c89c9ae558cd4228"
+    },
     "value": "noise",
     "hint": {
       "en-US": "Sound level",
@@ -78,6 +96,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "a60560e51f3997dff3a16290"
+    },
     "value": "pm25",
     "hint": {
       "en-US": "Particulate matter ≤2.5µm",
@@ -91,6 +112,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "17b1a416afc0ff2289d30d0e"
+    },
     "value": "pm10",
     "hint": {
       "en-US": "Particulate matter ≤10µm",
@@ -104,6 +128,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "1eef8c3e768c449d7d4cc1c9"
+    },
     "value": "pm1",
     "hint": {
       "en-US": "Particulate matter ≤1µm",
@@ -117,6 +144,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "359b781105b7908bc0384f45"
+    },
     "value": "voc",
     "hint": {
       "en-US": "Volatile organic compounds",
@@ -130,6 +160,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "b8b0e9a24f1b024d236cd481"
+    },
     "value": "co",
     "hint": {
       "en-US": "Carbon monoxide",
@@ -143,6 +176,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "2d44364ba12b5d3f70c6b9a0"
+    },
     "value": "aqi",
     "hint": {
       "en-US": "Air quality index",
@@ -156,6 +192,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "11502645daffd8fa209e2124"
+    },
     "value": "motion",
     "hint": {
       "en-US": "Motion state",
@@ -169,6 +208,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "e6e85e4fc558545f4e7e7a94"
+    },
     "value": "occupancy",
     "hint": {
       "en-US": "Occupied or not",
@@ -182,6 +224,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "d39a581ad8f5a6089ac55042"
+    },
     "value": "peopleCount",
     "hint": {
       "en-US": "People count",
@@ -195,6 +240,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "f7bc345335310b0d1cef7807"
+    },
     "value": "contact",
     "hint": {
       "en-US": "Open/closed state",
@@ -208,6 +256,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "161e78be6d490151a22bb6b0"
+    },
     "value": "objectPresent",
     "hint": {
       "en-US": "Object presence",
@@ -221,6 +272,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "14d6ea01ff7a7d37ef13c624"
+    },
     "value": "waterLeak",
     "hint": {
       "en-US": "Water leak detected",
@@ -234,6 +288,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "a6b04315738917625f04413b"
+    },
     "value": "soilMoisture",
     "hint": {
       "en-US": "Soil moisture",
@@ -247,6 +304,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "5937cba49a09b62b75bf495a"
+    },
     "value": "ph",
     "hint": {
       "en-US": "pH level",
@@ -260,6 +320,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "dd59892b64007cc7ada81e61"
+    },
     "value": "conductivity",
     "hint": {
       "en-US": "Electrical conductivity",
@@ -273,6 +336,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "3eb4a4536d25cd29f04d8a4e"
+    },
     "value": "leafMoisture",
     "hint": {
       "en-US": "Leaf moisture",
@@ -286,6 +352,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "37d8849a3bd58d0c0481c3f3"
+    },
     "value": "flow",
     "hint": {
       "en-US": "Flow rate",
@@ -299,6 +368,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "c3e49b1d21a49b652fa96db4"
+    },
     "value": "distance",
     "hint": {
       "en-US": "Distance / level",
@@ -312,6 +384,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "81c1f5132ebd8898222d8f9b"
+    },
     "value": "current",
     "hint": {
       "en-US": "Electric current",
@@ -325,6 +400,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "cc36e6bfa4f7f64f436cb05d"
+    },
     "value": "voltage",
     "hint": {
       "en-US": "Voltage",
@@ -338,6 +416,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "dfbbfa8777a042e5a6297714"
+    },
     "value": "power",
     "hint": {
       "en-US": "Power",
@@ -351,6 +432,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "c1e639243186982ce281bc59"
+    },
     "value": "energy",
     "hint": {
       "en-US": "Energy consumption",
@@ -364,6 +448,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "b74b2d021e41413e1afbce5b"
+    },
     "value": "vibration",
     "hint": {
       "en-US": "Vibration",
@@ -377,6 +464,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "8c5f12518d6b3d7c1919b5ec"
+    },
     "value": "tilt",
     "hint": {
       "en-US": "Tilt angle",
@@ -390,6 +480,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "fa1b00e72683593db19e53c9"
+    },
     "value": "weight",
     "hint": {
       "en-US": "Weight",
@@ -403,6 +496,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "cadd01f268bb1b02a038d7d1"
+    },
     "value": "location",
     "hint": {
       "en-US": "GPS location",
@@ -416,6 +512,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "2f73a99b48fb7fe5df993c0e"
+    },
     "value": "windSpeed",
     "hint": {
       "en-US": "Wind speed",
@@ -429,6 +528,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "87a4bdb6d7ed969082968128"
+    },
     "value": "windDirection",
     "hint": {
       "en-US": "Wind direction",
@@ -442,6 +544,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "67ebf576af2385ba4852d0b7"
+    },
     "value": "rainfall",
     "hint": {
       "en-US": "Rainfall",
@@ -455,6 +560,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "281221e8de2e3070d4e2d65c"
+    },
     "value": "batteryLevel",
     "hint": {
       "en-US": "Battery level",
@@ -468,6 +576,9 @@
     "enabled": true
   },
   {
+    "_id": {
+      "$oid": "f69918b16d60cd96d9b3eaee"
+    },
     "value": "signalStrength",
     "hint": {
       "en-US": "Signal strength",
