@@ -182,6 +182,7 @@ echo ""
 # --- assets database ---
 echo "  [${DB_PREFIX}assets]"
 seed_collection "${DB_PREFIX}assets" "assets_templates" "$SEED_DIR/assets/assets_templates.json"
+seed_collection "${DB_PREFIX}assets" "field_vocabulary" "$SEED_DIR/assets/field_vocabulary.json"
 echo ""
 
 echo "============================================="

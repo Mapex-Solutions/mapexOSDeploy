@@ -1,0 +1,483 @@
+[
+  {
+    "value": "temperature",
+    "hint": {
+      "en-US": "Ambient temperature",
+      "pt-BR": "Temperatura do ambiente"
+    },
+    "type": "number",
+    "unit": "°C",
+    "category": "climate",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "humidity",
+    "hint": {
+      "en-US": "Relative humidity",
+      "pt-BR": "Umidade relativa"
+    },
+    "type": "number",
+    "unit": "%RH",
+    "category": "climate",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "pressure",
+    "hint": {
+      "en-US": "Atmospheric pressure",
+      "pt-BR": "Pressão atmosférica"
+    },
+    "type": "number",
+    "unit": "hPa",
+    "category": "climate",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "co2",
+    "hint": {
+      "en-US": "CO₂ concentration",
+      "pt-BR": "Concentração de CO₂"
+    },
+    "type": "number",
+    "unit": "ppm",
+    "category": "climate",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "light",
+    "hint": {
+      "en-US": "Illuminance",
+      "pt-BR": "Iluminância"
+    },
+    "type": "number",
+    "unit": "lux",
+    "category": "climate",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "noise",
+    "hint": {
+      "en-US": "Sound level",
+      "pt-BR": "Nível de ruído"
+    },
+    "type": "number",
+    "unit": "dB",
+    "category": "climate",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "pm25",
+    "hint": {
+      "en-US": "Particulate matter ≤2.5µm",
+      "pt-BR": "Material particulado ≤2,5µm"
+    },
+    "type": "number",
+    "unit": "µg/m³",
+    "category": "air-quality",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "pm10",
+    "hint": {
+      "en-US": "Particulate matter ≤10µm",
+      "pt-BR": "Material particulado ≤10µm"
+    },
+    "type": "number",
+    "unit": "µg/m³",
+    "category": "air-quality",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "pm1",
+    "hint": {
+      "en-US": "Particulate matter ≤1µm",
+      "pt-BR": "Material particulado ≤1µm"
+    },
+    "type": "number",
+    "unit": "µg/m³",
+    "category": "air-quality",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "voc",
+    "hint": {
+      "en-US": "Volatile organic compounds",
+      "pt-BR": "Compostos orgânicos voláteis"
+    },
+    "type": "number",
+    "unit": "ppb",
+    "category": "air-quality",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "co",
+    "hint": {
+      "en-US": "Carbon monoxide",
+      "pt-BR": "Monóxido de carbono"
+    },
+    "type": "number",
+    "unit": "ppm",
+    "category": "air-quality",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "aqi",
+    "hint": {
+      "en-US": "Air quality index",
+      "pt-BR": "Índice de qualidade do ar"
+    },
+    "type": "number",
+    "unit": "index",
+    "category": "air-quality",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "motion",
+    "hint": {
+      "en-US": "Motion state",
+      "pt-BR": "Estado de movimento"
+    },
+    "type": "string",
+    "unit": "",
+    "category": "presence-counting",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "occupancy",
+    "hint": {
+      "en-US": "Occupied or not",
+      "pt-BR": "Ocupado ou não"
+    },
+    "type": "bool",
+    "unit": "",
+    "category": "presence-counting",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "peopleCount",
+    "hint": {
+      "en-US": "People count",
+      "pt-BR": "Contagem de pessoas"
+    },
+    "type": "number",
+    "unit": "",
+    "category": "presence-counting",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "contact",
+    "hint": {
+      "en-US": "Open/closed state",
+      "pt-BR": "Estado aberto/fechado"
+    },
+    "type": "string",
+    "unit": "",
+    "category": "presence-counting",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "objectPresent",
+    "hint": {
+      "en-US": "Object presence",
+      "pt-BR": "Presença de objeto"
+    },
+    "type": "string",
+    "unit": "",
+    "category": "presence-counting",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "waterLeak",
+    "hint": {
+      "en-US": "Water leak detected",
+      "pt-BR": "Vazamento de água detectado"
+    },
+    "type": "bool",
+    "unit": "",
+    "category": "presence-counting",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "soilMoisture",
+    "hint": {
+      "en-US": "Soil moisture",
+      "pt-BR": "Umidade do solo"
+    },
+    "type": "number",
+    "unit": "%RH",
+    "category": "agriculture-liquids",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "ph",
+    "hint": {
+      "en-US": "pH level",
+      "pt-BR": "Nível de pH"
+    },
+    "type": "number",
+    "unit": "",
+    "category": "agriculture-liquids",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "conductivity",
+    "hint": {
+      "en-US": "Electrical conductivity",
+      "pt-BR": "Condutividade elétrica"
+    },
+    "type": "number",
+    "unit": "µS/cm",
+    "category": "agriculture-liquids",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "leafMoisture",
+    "hint": {
+      "en-US": "Leaf moisture",
+      "pt-BR": "Umidade da folha"
+    },
+    "type": "number",
+    "unit": "%",
+    "category": "agriculture-liquids",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "flow",
+    "hint": {
+      "en-US": "Flow rate",
+      "pt-BR": "Vazão"
+    },
+    "type": "number",
+    "unit": "L/min",
+    "category": "agriculture-liquids",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "distance",
+    "hint": {
+      "en-US": "Distance / level",
+      "pt-BR": "Distância / nível"
+    },
+    "type": "number",
+    "unit": "mm",
+    "category": "agriculture-liquids",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "current",
+    "hint": {
+      "en-US": "Electric current",
+      "pt-BR": "Corrente elétrica"
+    },
+    "type": "number",
+    "unit": "A",
+    "category": "electrical",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "voltage",
+    "hint": {
+      "en-US": "Voltage",
+      "pt-BR": "Tensão"
+    },
+    "type": "number",
+    "unit": "V",
+    "category": "electrical",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "power",
+    "hint": {
+      "en-US": "Power",
+      "pt-BR": "Potência"
+    },
+    "type": "number",
+    "unit": "W",
+    "category": "electrical",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "energy",
+    "hint": {
+      "en-US": "Energy consumption",
+      "pt-BR": "Consumo de energia"
+    },
+    "type": "number",
+    "unit": "kWh",
+    "category": "electrical",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "vibration",
+    "hint": {
+      "en-US": "Vibration",
+      "pt-BR": "Vibração"
+    },
+    "type": "number",
+    "unit": "mm/s",
+    "category": "mechanical-position",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "tilt",
+    "hint": {
+      "en-US": "Tilt angle",
+      "pt-BR": "Ângulo de inclinação"
+    },
+    "type": "number",
+    "unit": "°",
+    "category": "mechanical-position",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "weight",
+    "hint": {
+      "en-US": "Weight",
+      "pt-BR": "Peso"
+    },
+    "type": "number",
+    "unit": "kg",
+    "category": "mechanical-position",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "location",
+    "hint": {
+      "en-US": "GPS location",
+      "pt-BR": "Localização GPS"
+    },
+    "type": "geo",
+    "unit": "",
+    "category": "mechanical-position",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "windSpeed",
+    "hint": {
+      "en-US": "Wind speed",
+      "pt-BR": "Velocidade do vento"
+    },
+    "type": "number",
+    "unit": "m/s",
+    "category": "weather",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "windDirection",
+    "hint": {
+      "en-US": "Wind direction",
+      "pt-BR": "Direção do vento"
+    },
+    "type": "number",
+    "unit": "°",
+    "category": "weather",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "rainfall",
+    "hint": {
+      "en-US": "Rainfall",
+      "pt-BR": "Precipitação"
+    },
+    "type": "number",
+    "unit": "mm",
+    "category": "weather",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "batteryLevel",
+    "hint": {
+      "en-US": "Battery level",
+      "pt-BR": "Nível de bateria"
+    },
+    "type": "number",
+    "unit": "%",
+    "category": "device-health",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  },
+  {
+    "value": "signalStrength",
+    "hint": {
+      "en-US": "Signal strength",
+      "pt-BR": "Intensidade do sinal"
+    },
+    "type": "number",
+    "unit": "dBm",
+    "category": "device-health",
+    "isSystem": true,
+    "orgId": null,
+    "enabled": true
+  }
+]
