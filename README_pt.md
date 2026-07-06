@@ -93,12 +93,12 @@ Comece em [`quickstart/README_pt.md`](./quickstart/README_pt.md).
 | Serviço | Porta | Imagem |
 |---|---|---|
 | MongoDB | 27017 | `mongo:7.0.34` (replicaSet `rs0`) |
-| MongoDB init | — | `thiagoanselmo/mongodb-init:1.0.0` (one-shot) |
+| MongoDB init | — | `thiagoanselmo/mongodb-init:1.1.0` (one-shot) |
 | Redis | 6379 | `redis:7.4.9-alpine` |
 | ClickHouse | 8123 / 9440 | `clickhouse/clickhouse-server:26.5.1.882` |
 | MinIO | 9000 / 9001 | `minio/minio:RELEASE.2025-09-07T16-13-09Z` |
 | NATS Core | 4222 / 8222 | `nats:2.14.1-alpine` |
-| MQTT Broker | 1883 | `thiagoanselmo/mapex-broker-mqtt:1.0.0` |
+| MQTT Broker | 1883 | `thiagoanselmo/mapex-broker-mqtt:1.1.0` |
 | Prometheus | 9090 | `prom/prometheus:v3.11.3` |
 | Grafana | 3001 | `grafana/grafana:13.0.1` (8 dashboards pré-carregados) |
 
@@ -204,7 +204,7 @@ na inicialização — nunca um boot silencioso com credenciais vazadas.
 
 | Arquivo | Papel | Commitado? |
 |---|---|---|
-| `services/docker-compose.yml` | Versões das imagens fixadas literalmente (ex.: `thiagoanselmo/mapex-iam:1.0.0`) | ✓ |
+| `services/docker-compose.yml` | Versões das imagens fixadas literalmente (ex.: `thiagoanselmo/mapex-iam:1.1.0`) | ✓ |
 | `infra/docker-compose.yml` | Serviços de infra (mongo, redis, nats, ...) + imagens Mapex de init/broker | ✓ |
 | `infra/envs/local.env` | Env de runtime compartilhada para avaliação local | ✓ |
 | `infra/envs/production.example.env` | Template para segredos de produção | ✓ |

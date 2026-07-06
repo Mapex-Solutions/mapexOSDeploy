@@ -91,12 +91,12 @@ Start at [`quickstart/README.md`](./quickstart/README.md).
 | Service | Port | Image |
 |---|---|---|
 | MongoDB | 27017 | `mongo:7.0.34` (replicaSet `rs0`) |
-| MongoDB init | — | `thiagoanselmo/mongodb-init:1.0.0` (one-shot) |
+| MongoDB init | — | `thiagoanselmo/mongodb-init:1.1.0` (one-shot) |
 | Redis | 6379 | `redis:7.4.9-alpine` |
 | ClickHouse | 8123 / 9440 | `clickhouse/clickhouse-server:26.5.1.882` |
 | MinIO | 9000 / 9001 | `minio/minio:RELEASE.2025-09-07T16-13-09Z` |
 | NATS Core | 4222 / 8222 | `nats:2.14.1-alpine` |
-| MQTT Broker | 1883 | `thiagoanselmo/mapex-broker-mqtt:1.0.0` |
+| MQTT Broker | 1883 | `thiagoanselmo/mapex-broker-mqtt:1.1.0` |
 | Prometheus | 9090 | `prom/prometheus:v3.11.3` |
 | Grafana | 3001 | `grafana/grafana:13.0.1` (8 dashboards pre-loaded) |
 
@@ -200,7 +200,7 @@ loud fatal error at startup — never silent boot with a leaked default.
 
 | File | Role | Committed? |
 |---|---|---|
-| `services/docker-compose.yml` | Image versions pinned literally (e.g. `thiagoanselmo/mapex-iam:1.0.0`) | ✓ |
+| `services/docker-compose.yml` | Image versions pinned literally (e.g. `thiagoanselmo/mapex-iam:1.1.0`) | ✓ |
 | `infra/docker-compose.yml` | Infra services (mongo, redis, nats, ...) + Mapex init/broker images | ✓ |
 | `infra/envs/local.env` | Shared runtime env for local evaluation | ✓ |
 | `infra/envs/production.example.env` | Template for production secrets | ✓ |
