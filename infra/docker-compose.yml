@@ -235,15 +235,73 @@ services:
         mc mb mapex/mapex-asset-auth --ignore-existing
         echo "Bucket mapex-asset-auth created"
 
+        # mapex-firmware: OTA firmware artifacts (.bin) uploaded by the Asset MS
+        # via presigned PUT and served to devices via presigned GET. Keyed
+        # `{orgId}/{targetTemplateId}/{firmwareId}.bin`. Private — access is only
+        # ever through short-lived presigned URLs minted by the OTA module.
+        mc mb mapex/mapex-firmware --ignore-existing
+        echo "Bucket mapex-firmware created"
+
         echo "=== Setting bucket policies ==="
         mc anonymous set none mapex/mapex-assets
         mc anonymous set none mapex/mapex-templates
         mc anonymous set none mapex/mapex-bytecode
         mc anonymous set none mapex/mapex-workflows
         mc anonymous set none mapex/mapex-asset-auth
+        mc anonymous set none mapex/mapex-firmware
+
+        echo "=== Creating per-service least-privilege users + policies ==="
+        # One user per service (1:1 with an AWS IAM user/role), each attached to a
+        # policy scoped to exactly the buckets/verbs it needs. Repopulated on EVERY
+        # run (no skip-if-exists): the deploy cycle brings MinIO up clean, so this
+        # always (re)creates users + policies. Root stays a provisioning-only
+        # credential — services authenticate with these users.
+        # RO verbs = GetObject, ListBucket, GetObjectAttributes, GetBucketLocation
+        # RW verbs = RO + PutObject, DeleteObject
+
+        setup_user() { # $1=access $2=secret $3=policy $4=file
+          mc admin policy create mapex "$$3" "$$4"
+          mc admin user add mapex "$$1" "$$2"
+          mc admin policy attach mapex "$$3" --user "$$1"
+        }
+
+        # svc-assets: RW on assets, templates, asset-auth, firmware
+        printf '%s' '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":["s3:GetObject","s3:PutObject","s3:DeleteObject","s3:ListBucket","s3:GetObjectAttributes","s3:GetBucketLocation"],"Resource":["arn:aws:s3:::mapex-assets","arn:aws:s3:::mapex-assets/*","arn:aws:s3:::mapex-templates","arn:aws:s3:::mapex-templates/*","arn:aws:s3:::mapex-asset-auth","arn:aws:s3:::mapex-asset-auth/*","arn:aws:s3:::mapex-firmware","arn:aws:s3:::mapex-firmware/*"]}]}' > /tmp/svc-assets.json
+        setup_user "$${OBJECT_STORE_ASSETS_ACCESS_KEY}" "$${OBJECT_STORE_ASSETS_SECRET_KEY}" svc-assets /tmp/svc-assets.json
+
+        # svc-jsexec: RO on assets + templates, RW on bytecode
+        printf '%s' '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":["s3:GetObject","s3:ListBucket","s3:GetObjectAttributes","s3:GetBucketLocation"],"Resource":["arn:aws:s3:::mapex-assets","arn:aws:s3:::mapex-assets/*","arn:aws:s3:::mapex-templates","arn:aws:s3:::mapex-templates/*"]},{"Effect":"Allow","Action":["s3:GetObject","s3:PutObject","s3:DeleteObject","s3:ListBucket","s3:GetObjectAttributes","s3:GetBucketLocation"],"Resource":["arn:aws:s3:::mapex-bytecode","arn:aws:s3:::mapex-bytecode/*"]}]}' > /tmp/svc-jsexec.json
+        setup_user "$${OBJECT_STORE_JSEXEC_ACCESS_KEY}" "$${OBJECT_STORE_JSEXEC_SECRET_KEY}" svc-jsexec /tmp/svc-jsexec.json
+
+        # svc-workflow: RW on workflows (the Go workflow DAG engine writes/deletes node scripts)
+        printf '%s' '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":["s3:GetObject","s3:PutObject","s3:DeleteObject","s3:ListBucket","s3:GetObjectAttributes","s3:GetBucketLocation"],"Resource":["arn:aws:s3:::mapex-workflows","arn:aws:s3:::mapex-workflows/*"]}]}' > /tmp/svc-workflow.json
+        setup_user "$${OBJECT_STORE_WORKFLOW_ACCESS_KEY}" "$${OBJECT_STORE_WORKFLOW_SECRET_KEY}" svc-workflow /tmp/svc-workflow.json
+
+        # svc-jsworkflow: reads scripts + writes bytecode on workflows (no delete)
+        printf '%s' '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":["s3:GetObject","s3:PutObject","s3:ListBucket","s3:GetObjectAttributes","s3:GetBucketLocation"],"Resource":["arn:aws:s3:::mapex-workflows","arn:aws:s3:::mapex-workflows/*"]}]}' > /tmp/svc-jsworkflow.json
+        setup_user "$${OBJECT_STORE_JSWORKFLOW_ACCESS_KEY}" "$${OBJECT_STORE_JSWORKFLOW_SECRET_KEY}" svc-jsworkflow /tmp/svc-jsworkflow.json
+
+        # svc-router: RO on assets + templates
+        printf '%s' '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":["s3:GetObject","s3:ListBucket","s3:GetObjectAttributes","s3:GetBucketLocation"],"Resource":["arn:aws:s3:::mapex-assets","arn:aws:s3:::mapex-assets/*","arn:aws:s3:::mapex-templates","arn:aws:s3:::mapex-templates/*"]}]}' > /tmp/svc-router.json
+        setup_user "$${OBJECT_STORE_ROUTER_ACCESS_KEY}" "$${OBJECT_STORE_ROUTER_SECRET_KEY}" svc-router /tmp/svc-router.json
+
+        # svc-events: RO on templates only (events reads the template projection)
+        printf '%s' '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":["s3:GetObject","s3:ListBucket","s3:GetObjectAttributes","s3:GetBucketLocation"],"Resource":["arn:aws:s3:::mapex-templates","arn:aws:s3:::mapex-templates/*"]}]}' > /tmp/svc-events.json
+        setup_user "$${OBJECT_STORE_EVENTS_ACCESS_KEY}" "$${OBJECT_STORE_EVENTS_SECRET_KEY}" svc-events /tmp/svc-events.json
+
+        # svc-broker: RO on asset-auth
+        printf '%s' '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":["s3:GetObject","s3:ListBucket","s3:GetObjectAttributes","s3:GetBucketLocation"],"Resource":["arn:aws:s3:::mapex-asset-auth","arn:aws:s3:::mapex-asset-auth/*"]}]}' > /tmp/svc-broker.json
+        setup_user "$${OBJECT_STORE_BROKER_ACCESS_KEY}" "$${OBJECT_STORE_BROKER_SECRET_KEY}" svc-broker /tmp/svc-broker.json
+
+        # svc-lns: RO on asset-auth
+        printf '%s' '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":["s3:GetObject","s3:ListBucket","s3:GetObjectAttributes","s3:GetBucketLocation"],"Resource":["arn:aws:s3:::mapex-asset-auth","arn:aws:s3:::mapex-asset-auth/*"]}]}' > /tmp/svc-lns.json
+        setup_user "$${OBJECT_STORE_LNS_ACCESS_KEY}" "$${OBJECT_STORE_LNS_SECRET_KEY}" svc-lns /tmp/svc-lns.json
 
         echo "=== Listing buckets ==="
         mc ls mapex
+
+        echo "=== Listing users ==="
+        mc admin user list mapex
 
         echo "=== MinIO initialization complete ==="
 
@@ -322,9 +380,11 @@ services:
     env_file:
       - ./envs/local.env
     environment:
-      # Credentials (INTERNAL_API_KEY, CACHE_L2_ACCESS_KEY,
-      # CACHE_L2_SECRET_KEY) come from the env_file above. The keys below
-      # are platform-internal constants or GO_ENV-derived subjects.
+      # Credentials (INTERNAL_API_KEY) come from the env_file above. The
+      # object-store connection (OBJECT_STORE_ENDPOINT/REGION/USE_SSL/
+      # AUTH_IS_NEEDED) is shared from local.env; the scoped svc-broker
+      # credential is set below. The keys below are platform-internal
+      # constants or GO_ENV-derived subjects.
       #
       # NATS_URL must carry the username:password inline — the broker
       # plugin reads NATS_URL only (no separate NATS_USERNAME /
@@ -335,7 +395,7 @@ services:
       ASSETS_PORT: "5002"
       # NATS subjects are keyed to GO_ENV (not IMAGE_TAG) so multiple
       # environments can share the same NATS cluster.
-      NATS_SUBJECT_PRESENCE: ${GO_ENV:-dev}.mapexos.mqtt.presence.advisory
+      NATS_SUBJECT_PRESENCE: ${GO_ENV:-dev}.mapexos.presence.advisory
       NATS_SUBJECT_INGRESS_PREFIX: ${GO_ENV:-dev}.mapexos.mqtt.data
       AUTH_CACHE_SECONDS: "60"
       AUTH_CACHE_JITTER: "10"
@@ -348,8 +408,10 @@ services:
       # contract and NOT operator-configurable on the broker side.
       CACHE_L1_PATH: /var/cache/mqtt
       CACHE_L1_TTL_MINUTES: "30"
-      CACHE_L2_ENDPOINT: minio:9000
-      CACHE_L2_USE_SSL: "false"
+      # Scoped object-store credential (svc-broker); endpoint/use_ssl/auth come
+      # from local.env's OBJECT_STORE_* shared block.
+      OBJECT_STORE_ACCESS_KEY: svc-broker
+      OBJECT_STORE_SECRET_KEY: svc-broker-secret-change-me
       FANOUT_INVALIDATE_SUBJECT: ${GO_ENV:-dev}.mapexos.fanout.asset.invalidate
     depends_on:
       nats-core:
@@ -423,6 +485,8 @@ services:
         # Drop env-prefixed legacy name that the FANOUT stream had before
         # being promoted to platform-wide (was ASSETS-FANOUT, now FANOUT).
         nats stream rm "$${UPPER_ENV}-MAPEXOS-ASSETS-FANOUT" -f --server="$$CORE_URL" 2>/dev/null || true
+        # Drop the old per-protocol presence stream, now unified to EDGE-PRESENCE.
+        nats stream rm "$${UPPER_ENV}-MAPEXOS-ASSETS-MQTT-PRESENCE" -f --server="$$CORE_URL" 2>/dev/null || true
         echo "[nats-init] legacy streams dropped"
 
         # stream_ensure: add or update a JetStream stream idempotently.
@@ -462,6 +526,13 @@ services:
         stream_ensure "$${UPPER_ENV}-MAPEXOS-JSEXECUTOR-MQTTDATA" \
           --description="Republished MQTT telemetry from mapex-mqtt-broker" \
           --subjects="$${LOWER_ENV}.mapexos.mqtt.data.>" \
+          --storage=file \
+          --retention=work \
+          --defaults
+
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-JSEXECUTOR-LORAWANDATA" \
+          --description="Republished LoRaWAN uplinks from mapexLNS adapter" \
+          --subjects="$${LOWER_ENV}.mapexos.lorawan.data.>" \
           --storage=file \
           --retention=work \
           --defaults
@@ -671,15 +742,43 @@ services:
           --max-age=1h \
           --defaults
 
-        # MQTT presence — mapex-mqtt-broker plugin publishes connect +
-        # disconnect to a single subject; both consumers filter inside
-        # the assets MS healthmonitor module by the Event field.
-        stream_ensure "$${UPPER_ENV}-MAPEXOS-ASSETS-MQTT-PRESENCE" \
-          --description="MQTT broker presence advisories (connect/disconnect)" \
-          --subjects="$${LOWER_ENV}.mapexos.mqtt.presence.advisory" \
+        # Edge presence — every edge server (mapex-mqtt-broker plugin for
+        # MQTT, mapexLNS Gateway Server for LoRaWAN gateways) publishes
+        # connect + disconnect to one shared subject; the assets MS
+        # healthmonitor consumer filters by the Event field.
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-EDGE-PRESENCE" \
+          --description="Edge presence advisories (connect/disconnect)" \
+          --subjects="$${LOWER_ENV}.mapexos.presence.advisory" \
           --storage=file \
           --retention=work \
           --max-age=5m \
+          --discard=old \
+          --replicas=$${STREAM_REPLICAS:-1} \
+          --defaults
+
+        # Platform -> device commands for MQTT devices (DownlinkEnvelope,
+        # STATIC subject, identity in the payload). mapexMQTTBroker binds a
+        # durable queue-group consumer and delivers each command on the
+        # device topic commands/{assetUUID}/{commandType}.
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-MQTT-DOWNLINK" \
+          --description="MQTT downlink commands (Asset MS -> mapexMQTTBroker -> device)" \
+          --subjects="$${LOWER_ENV}.mapexos.mqtt.downlink" \
+          --storage=file \
+          --retention=work \
+          --max-age=10m \
+          --discard=old \
+          --replicas=$${STREAM_REPLICAS:-1} \
+          --defaults
+
+        # Platform -> device commands for LoRaWAN devices (same envelope);
+        # mapexLNS binds a durable consumer and schedules the downlink
+        # through the network server.
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-LORAWAN-DOWNLINK" \
+          --description="LoRaWAN downlink commands (Asset MS -> mapexLNS -> device)" \
+          --subjects="$${LOWER_ENV}.mapexos.lorawan.downlink" \
+          --storage=file \
+          --retention=work \
+          --max-age=10m \
           --discard=old \
           --replicas=$${STREAM_REPLICAS:-1} \
           --defaults
