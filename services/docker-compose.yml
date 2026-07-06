@@ -53,7 +53,7 @@ services:
   # MAPEX IAM SERVICE (port 5000)
   # ===========================================================================
   mapex-iam:
-    image: thiagoanselmo/mapex-iam:1.0.0
+    image: thiagoanselmo/mapex-iam:1.1.0
     container_name: mapex-iam
     deploy:
       resources:
@@ -86,7 +86,7 @@ services:
   # HTTP GATEWAY SERVICE (port 5001)
   # ===========================================================================
   http-gateway:
-    image: thiagoanselmo/http-gateway:1.0.0
+    image: thiagoanselmo/http-gateway:1.1.0
     container_name: mapex-http-gateway
     deploy:
       resources:
@@ -115,7 +115,7 @@ services:
   # ASSETS SERVICE (port 5002)
   # ===========================================================================
   assets:
-    image: thiagoanselmo/assets:1.0.0
+    image: thiagoanselmo/assets:1.1.0
     container_name: mapex-assets
     deploy:
       resources:
@@ -144,7 +144,7 @@ services:
   # ROUTER SERVICE (port 5003)
   # ===========================================================================
   router:
-    image: thiagoanselmo/router:1.0.0
+    image: thiagoanselmo/router:1.1.0
     container_name: mapex-router
     deploy:
       resources:
@@ -173,7 +173,7 @@ services:
   # EVENTS SERVICE (port 5004)
   # ===========================================================================
   events:
-    image: thiagoanselmo/events:1.0.0
+    image: thiagoanselmo/events:1.1.0
     container_name: mapex-events
     deploy:
       resources:
@@ -204,7 +204,7 @@ services:
   # TRIGGERS SERVICE (port 5006)
   # ===========================================================================
   triggers:
-    image: thiagoanselmo/triggers:1.0.0
+    image: thiagoanselmo/triggers:1.1.0
     container_name: mapex-triggers
     deploy:
       resources:
@@ -233,7 +233,7 @@ services:
   # WORKFLOW SERVICE (port 5007)
   # ===========================================================================
   workflow:
-    image: thiagoanselmo/workflow:1.0.0
+    image: thiagoanselmo/workflow:1.1.0
     container_name: mapex-workflow
     deploy:
       resources:
@@ -264,7 +264,7 @@ services:
   # VAULT SERVICE (port 5010)
   # ===========================================================================
   mapex-vault:
-    image: thiagoanselmo/mapex-vault:1.0.0
+    image: thiagoanselmo/mapex-vault:1.1.0
     container_name: mapex-vault
     deploy:
       resources:
@@ -300,7 +300,7 @@ services:
   # the Assets MS, hot session from Redis, device-keys KEK from mapexVault.
   # ===========================================================================
   lns:
-    image: thiagoanselmo/lns:1.0.0
+    image: thiagoanselmo/lns:1.1.0
     container_name: mapex-lns
     deploy:
       resources:
@@ -333,7 +333,7 @@ services:
   # JS EXECUTOR SERVICE (port 8000)
   # ===========================================================================
   js-executor:
-    image: thiagoanselmo/js-executor:1.0.0
+    image: thiagoanselmo/js-executor:1.1.0
     container_name: mapex-js-executor
     user: "root"
     deploy:
@@ -357,7 +357,7 @@ services:
   # JS WORKFLOW EXECUTOR SERVICE (port 8001)
   # ===========================================================================
   js-wf-executor:
-    image: thiagoanselmo/js-wf-executor:1.0.0
+    image: thiagoanselmo/js-wf-executor:1.1.0
     container_name: mapex-js-wf-executor
     user: "root"
     deploy:
@@ -381,7 +381,7 @@ services:
   # FRONTEND - Web UI (port 80)
   # ===========================================================================
   frontend:
-    image: thiagoanselmo/frontend:1.0.0
+    image: thiagoanselmo/frontend:1.1.0
     container_name: mapex-frontend
     deploy:
       resources:

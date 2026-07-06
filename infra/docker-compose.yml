@@ -80,7 +80,7 @@ services:
   # Image is published from the private mapexOS source repo; do not build
   # locally.
   mongodb-init:
-    image: thiagoanselmo/mongodb-init:1.0.0
+    image: thiagoanselmo/mongodb-init:1.1.0
     container_name: mapex-mongodb-init
     depends_on:
       mongodb:
@@ -363,7 +363,7 @@ services:
   #   - INTERNAL_API_KEY  must equal the assets MS internal_api_key
   # ===========================================================================
   mapex-broker-mqtt:
-    image: thiagoanselmo/mapex-broker-mqtt:1.0.0
+    image: thiagoanselmo/mapex-broker-mqtt:1.1.0
     container_name: mapex-broker-mqtt
     deploy:
       resources:
