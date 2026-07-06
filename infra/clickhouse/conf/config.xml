@@ -22,8 +22,16 @@
 
     <!-- Memory guardrails for the laptop/eval profile (container capped at
          768 MB). Track server memory below the cgroup limit so a heavy query
-         or merge raises a ClickHouse exception instead of being OOM-killed,
-         and shrink the mark cache from its multi-GB default. -->
-    <max_server_memory_usage>603979776</max_server_memory_usage>
-    <mark_cache_size>268435456</mark_cache_size>
+         or merge raises a ClickHouse exception instead of being OOM-killed.
+         The previous 576 MiB cap sat BELOW the idle baseline (256 MiB mark
+         cache + jemalloc + thread pools ~= 650-728 MiB RSS), so the tracker
+         rejected every allocation — even a ping — with code 241. Fix: shrink
+         the idle baseline (small mark cache, secondary caches off) so the
+         server fits comfortably, and raise the cap to 640 MiB, still 128 MiB
+         under the cgroup limit to leave OOM-kill headroom. -->
+    <max_server_memory_usage>671088640</max_server_memory_usage>
+    <mark_cache_size>67108864</mark_cache_size>
+    <uncompressed_cache_size>0</uncompressed_cache_size>
+    <mmap_cache_size>0</mmap_cache_size>
+    <compiled_expression_cache_size_bytes>0</compiled_expression_cache_size_bytes>
 </clickhouse>

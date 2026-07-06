@@ -4,8 +4,93 @@
       "$oid": "507f1f77bcf86cd799439011"
     },
     "type": "asset_category",
-    "name": "Assets IoT",
-    "value": "iot",
+    "name": "IoT Platforms",
+    "value": "iot-platforms",
+    "parentId": null,
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:44:06.350Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "507f1f77bcf86cd7994390c1"
+    },
+    "type": "asset_category",
+    "name": "IoT Sensors",
+    "value": "iot-sensors",
+    "parentId": null,
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:44:06.350Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "507f1f77bcf86cd7994390c2"
+    },
+    "type": "asset_category",
+    "name": "Trackers & Fleet",
+    "value": "trackers",
+    "parentId": null,
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:44:06.350Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "507f1f77bcf86cd7994390c3"
+    },
+    "type": "asset_category",
+    "name": "Energy & Metering",
+    "value": "energy",
+    "parentId": null,
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:44:06.350Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "507f1f77bcf86cd7994390c4"
+    },
+    "type": "asset_category",
+    "name": "Industrial / SCADA",
+    "value": "industrial",
+    "parentId": null,
+    "category": null,
+    "isSystem": true,
+    "isTemplate": false,
+    "orgId": null,
+    "pathKey": "",
+    "created": {
+      "$date": "2025-11-12T17:44:06.350Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "507f1f77bcf86cd7994390c5"
+    },
+    "type": "asset_category",
+    "name": "Custom",
+    "value": "custom",
     "parentId": null,
     "category": null,
     "isSystem": true,
