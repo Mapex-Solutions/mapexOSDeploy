@@ -15,6 +15,7 @@
 #   - triggers         : Trigger execution             (port 5006)
 #   - workflow          : DAG workflow engine           (port 5007)
 #   - mapex-vault       : Credential vault             (port 5010)
+#   - lns              : LoRaWAN Network Server        (http 5011, udp 1700, ws 1887)
 #   - js-executor      : Dynamic JS execution engine   (port 8000)
 #   - js-wf-executor   : Workflow JS code node executor (port 8001)
 #   - frontend         : Web UI (nginx)                (port 80)
@@ -291,6 +292,42 @@ services:
       timeout: 5s
       retries: 5
       start_period: 10s
+
+  # ===========================================================================
+  # LORAWAN NETWORK SERVER (LNS)
+  # /health HTTP 5011 | Semtech gateways UDP 1700 | Basics Station WebSocket 1887
+  # Embeds The Things Stack (Gateway + Network + Join servers); cold config from
+  # the Assets MS, hot session from Redis, device-keys KEK from mapexVault.
+  # ===========================================================================
+  lns:
+    image: thiagoanselmo/lns:1.0.0
+    container_name: mapex-lns
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
+    ports:
+      - "5011:5011"
+      - "1700:1700/udp"
+      - "1887:1887"
+    env_file:
+      - ../infra/envs/local.env
+      - ./lns/envs/lns.env
+    depends_on:
+      assets:
+        condition: service_healthy
+      mapex-vault:
+        condition: service_healthy
+    networks:
+      - mapex-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://127.0.0.1:5011/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
 
   # ===========================================================================
   # JS EXECUTOR SERVICE (port 8000)
