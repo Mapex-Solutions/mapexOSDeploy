@@ -20,18 +20,38 @@
 
     <timezone>UTC</timezone>
 
-    <!-- Memory guardrails for the laptop/eval profile (container capped at
-         768 MB). Track server memory below the cgroup limit so a heavy query
-         or merge raises a ClickHouse exception instead of being OOM-killed.
-         The previous 576 MiB cap sat BELOW the idle baseline (256 MiB mark
-         cache + jemalloc + thread pools ~= 650-728 MiB RSS), so the tracker
-         rejected every allocation — even a ping — with code 241. Fix: shrink
-         the idle baseline (small mark cache, secondary caches off) so the
-         server fits comfortably, and raise the cap to 640 MiB, still 128 MiB
-         under the cgroup limit to leave OOM-kill headroom. -->
-    <max_server_memory_usage>671088640</max_server_memory_usage>
+    <!-- Memory sizing for the small/eval profile (container limit in
+         docker-compose.yml). The cap is kept below the container limit because
+         in a cgroup the server's memory tracker also counts reclaimable page
+         cache and jemalloc-retained pages; MALLOC_CONF (in compose) returns
+         freed pages to the OS promptly. Keep the mark cache small and the
+         secondary caches off to keep the idle footprint low. -->
+    <max_server_memory_usage>943718400</max_server_memory_usage>
     <mark_cache_size>67108864</mark_cache_size>
     <uncompressed_cache_size>0</uncompressed_cache_size>
     <mmap_cache_size>0</mmap_cache_size>
     <compiled_expression_cache_size_bytes>0</compiled_expression_cache_size_bytes>
+
+    <!-- System-log retention for the small/eval profile. trace_log (query
+         profiler sampling) is disabled — metrics are already exposed via the
+         Prometheus endpoint — while the remaining logs collect less often and
+         carry a short TTL so they stay small and bounded on a long-lived
+         container. -->
+    <trace_log remove="1"/>
+    <metric_log>
+        <collect_interval_milliseconds>30000</collect_interval_milliseconds>
+        <ttl>event_date + INTERVAL 2 DAY DELETE</ttl>
+    </metric_log>
+    <asynchronous_metric_log>
+        <ttl>event_date + INTERVAL 2 DAY DELETE</ttl>
+    </asynchronous_metric_log>
+    <part_log>
+        <ttl>event_date + INTERVAL 2 DAY DELETE</ttl>
+    </part_log>
+    <query_log>
+        <ttl>event_date + INTERVAL 3 DAY DELETE</ttl>
+    </query_log>
+    <text_log>
+        <ttl>event_date + INTERVAL 2 DAY DELETE</ttl>
+    </text_log>
 </clickhouse>

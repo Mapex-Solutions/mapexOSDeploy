@@ -17,6 +17,16 @@
 #
 # =============================================================================
 
+# Shared log-rotation policy. Docker's default json-file driver is UNBOUNDED,
+# so a long-running dev container's stdout log grows without limit (ClickHouse
+# especially is chatty). This caps every service that references it at 3 x 10 MB
+# = 30 MB of rotated logs. Apply to a service with `logging: *default-logging`.
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
 services:
   # ===========================================================================
   # REDIS - Cache Layer
@@ -24,6 +34,7 @@ services:
   redis:
     image: redis:7.4.9-alpine
     container_name: mapex-redis
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -50,6 +61,7 @@ services:
   mongodb:
     image: mongo:7.0.34
     container_name: mapex-mongodb
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -82,6 +94,7 @@ services:
   mongodb-init:
     image: thiagoanselmo/mongodb-init:1.1.0
     container_name: mapex-mongodb-init
+    logging: *default-logging
     depends_on:
       mongodb:
         condition: service_started
@@ -111,11 +124,16 @@ services:
   clickhouse:
     image: clickhouse/clickhouse-server:26.5.1.882
     container_name: mapex-clickhouse
+    logging: *default-logging
     deploy:
       resources:
         limits:
           cpus: "1.0"
-          memory: 768M
+          # Small/eval sizing (a ceiling, not a reservation). ClickHouse's cap
+          # in config.xml sits below this limit: in a cgroup its memory tracker
+          # also counts reclaimable page cache and jemalloc-retained pages, and
+          # MALLOC_CONF below returns freed pages to the OS promptly.
+          memory: 1G
     ports:
       - "8123:8123"   # HTTP interface
       - "9440:9000"   # Native TCP
@@ -126,6 +144,9 @@ services:
       # envs/<profile>.env provides both the upstream-image-style aliases
       # and the service-style names from the same value.
       CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: 1
+      # Return freed pages to the OS within ~5s so the cgroup memory tracker
+      # reflects true usage under the small memory cap (see config.xml).
+      MALLOC_CONF: "dirty_decay_ms:5000,muzzy_decay_ms:5000"
     volumes:
       - ./clickhouse/conf/config.xml:/etc/clickhouse-server/config.d/config.xml:ro
       - ./clickhouse/data:/var/lib/clickhouse
@@ -146,6 +167,7 @@ services:
   clickhouse-init:
     image: clickhouse/clickhouse-server:26.5.1.882
     container_name: mapex-clickhouse-init
+    logging: *default-logging
     depends_on:
       clickhouse:
         condition: service_healthy
@@ -170,6 +192,7 @@ services:
   minio:
     image: minio/minio:RELEASE.2025-09-07T16-13-09Z
     container_name: mapex-minio
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -196,6 +219,7 @@ services:
   minio-init:
     image: minio/mc:RELEASE.2025-08-13T08-35-41Z
     container_name: mapex-minio-init
+    logging: *default-logging
     depends_on:
       minio:
         condition: service_healthy
@@ -311,6 +335,7 @@ services:
   nats-core:
     image: nats:2.14.1-alpine
     container_name: mapex-nats-core
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -344,6 +369,7 @@ services:
   mosquitto-init:
     image: alpine:3.20
     container_name: mapex-mosquitto-init
+    logging: *default-logging
     user: "0:0"
     volumes:
       - ./mosquitto/data:/data
@@ -365,6 +391,7 @@ services:
   mapex-broker-mqtt:
     image: thiagoanselmo/mapex-broker-mqtt:1.1.0
     container_name: mapex-broker-mqtt
+    logging: *default-logging
     deploy:
       resources:
         limits:
@@ -453,6 +480,7 @@ services:
   nats-init:
     image: natsio/nats-box:0.19.5
     container_name: mapex-nats-init
+    logging: *default-logging
     env_file:
       - ./envs/local.env
     environment:
@@ -824,6 +852,7 @@ services:
   prometheus:
     image: prom/prometheus:v3.11.3
     container_name: mapex-prometheus
+    logging: *default-logging
     user: "root"
     deploy:
       resources:
@@ -850,6 +879,7 @@ services:
   grafana:
     image: grafana/grafana:13.0.1
     container_name: mapex-grafana
+    logging: *default-logging
     deploy:
       resources:
         limits:

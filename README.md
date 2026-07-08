@@ -122,7 +122,13 @@ A couple of things worth knowing:
   gets `--wiredTigerCacheSizeGB` and ClickHouse gets
   `max_server_memory_usage` / `mark_cache_size`, because both size their
   caches off *host* RAM by default and would otherwise be OOM-killed once
-  a container limit is in place.
+  a container limit is in place. ClickHouse needs one extra step: inside a
+  cgroup its memory tracker also counts reclaimable page cache and
+  jemalloc-retained pages, so its cap is set **below** the container limit
+  and `MALLOC_CONF` tells jemalloc to return freed pages to the OS promptly.
+  Its own diagnostic logs (`trace_log`, `metric_log`, …) are capped too —
+  `trace_log` off, the rest on a short TTL — so they stay small on a
+  long-lived container.
 - **Init one-shots** (`mongodb-init`, `clickhouse-init`, …) are left
   uncapped on purpose — they run briefly during bootstrap and capping
   them only risks slowing or failing the first boot.

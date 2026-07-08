@@ -126,6 +126,13 @@ Alguns pontos importantes:
   recebe `max_server_memory_usage` / `mark_cache_size`, porque ambos
   dimensionam seus caches pela RAM do *host* por padrão e, sem isso,
   seriam mortos por OOM assim que um limite de container entra em cena.
+  O ClickHouse precisa de um passo a mais: dentro de um cgroup, seu
+  tracker de memória também conta page cache reclaimável e páginas retidas
+  pelo jemalloc, então o cap fica **abaixo** do limite do container e o
+  `MALLOC_CONF` diz ao jemalloc para devolver as páginas liberadas ao SO
+  prontamente. Os logs de diagnóstico do próprio ClickHouse (`trace_log`,
+  `metric_log`, …) também são limitados — `trace_log` desligado, o resto
+  com TTL curto — para permanecerem pequenos em um container de vida longa.
 - **Os init one-shot** (`mongodb-init`, `clickhouse-init`, …) ficam sem
   limite de propósito — rodam por pouco tempo durante o bootstrap e
   limitá-los só arriscaria atrasar ou quebrar o primeiro boot.
