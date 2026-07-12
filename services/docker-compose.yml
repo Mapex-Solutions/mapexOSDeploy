@@ -314,6 +314,17 @@ services:
     env_file:
       - ../infra/envs/local.env
       - ./lns/envs/lns.env
+    environment:
+      # Gateway client-mTLS trust anchor read from the mounted PEM instead of fetched
+      # from mapexVault at runtime — the CA is a static/non-secret trust anchor, so the
+      # gateway plane no longer blocks on mapexVault at boot (same pattern the MQTT
+      # broker uses).
+      TTS_GATEWAY_CA_CHAIN_FILE: /certs/ca-chain.pem
+    volumes:
+      # The platform CA chain the mongodb-init PKI bootstrap writes into ./broker-certs
+      # (shared read-only with the MQTT broker) — one trust-anchor pattern for every
+      # edge broker, MQTT or LoRaWAN.
+      - ../infra/broker-certs:/certs:ro
     depends_on:
       assets:
         condition: service_healthy
