@@ -1,0 +1,31 @@
+# Hybrid local development overlay — DO NOT use in production or Kubernetes.
+#
+# Purpose: run the mapex app services (assets, vault, ...) from source (go run)
+# on the host, while the infrastructure and the edge brokers (MQTT broker, LNS)
+# stay in Docker. The edge brokers are configured to reach the app services by
+# their compose hostnames (assets, mapex-vault); when those services run on the
+# host instead of in a container, the hostnames don't resolve. This overlay maps
+# just those hostnames to the host via `host-gateway`, so a container reaches the
+# go-run service on the host with no change to any service's env.
+#
+# In production / K8s every service is a container/pod on one network and
+# resolves by service DNS, so this overlay is neither needed nor applied there.
+#
+# Apply explicitly (never auto-merged):
+#   docker compose -f docker-compose.yml -f docker-compose.hostbridge.yml up -d
+#   (or: make up-hybrid)
+#
+# Requires the host-side services to listen on 0.0.0.0 (the default).
+services:
+  # LNS reaches the Assets MS for cold config + LoRaWAN device lookup, and
+  # mapexVault for the device-keys KEK.
+  lns:
+    extra_hosts:
+      - "assets:host-gateway"
+      - "mapex-vault:host-gateway"
+
+  # The MQTT broker reaches the Assets MS for its HTTP auth callout. Its CA
+  # trust anchor is a mounted file, so it needs no vault mapping.
+  mapex-broker-mqtt:
+    extra_hosts:
+      - "assets:host-gateway"
