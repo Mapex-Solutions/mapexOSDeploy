@@ -505,17 +505,19 @@ services:
         CORE_URL="nats://$${NATS_USERNAME}:$${NATS_PASSWORD}@nats-core:4222"
         # mapex-mqtt-broker is the device entry point.
 
-        echo "=== Dropping legacy stream names on CORE ==="
-        LEGACY_STREAMS="EVENTS EVENTS-RAW EVENTS-ASSET-STATUS EVENTS-BUSINESSRULE EVENTS-JSEXEC EVENTS-ROUTER EVENTS-TRIGGER EVENTS-WORKFLOW WORKFLOW-EXECUTION WORKFLOW-RESUME WORKFLOW-STATE WORKFLOW-SIGNAL WORKFLOW-LOGS WORKFLOW-SCHEDULE WORKFLOW-JS-CODE ASSET-HEARTBEAT ASSET-HEALTH-MONITOR MAPEXOS-MQTT-PRESENCE MAPEXOS-LISTS FANOUT ROUTE-GROUPS TRIGGERS PROCESSOR-JS-EXECUTE MQTT-DATA MAPEX-VAULT VAULT-SCHEDULE VAULT-RECONCILER MAPEXOS_CACHE_INVALIDATION MAPEXOS-DLQ MAPEXOS"
-        for s in $$LEGACY_STREAMS; do
+        # Drop streams superseded by the canonical set (one-time cleanup):
+        #   LORAWAN_DOWNLINK           — non-canonical name, replaced by {ENV}-MAPEXOS-LORAWAN-DOWNLINK
+        #   ...-JSEXECUTOR-PROCESS     — HTTP telemetry, now the {proto}.data transport ...-JSEXECUTOR-HTTPDATA
+        #   ...-ASSETS-FANOUT          — promoted platform-wide to FANOUT
+        #   ...-ASSETS-MQTT-PRESENCE   — unified into EDGE-PRESENCE
+        echo "=== Dropping superseded streams on CORE ==="
+        for s in "LORAWAN_DOWNLINK" \
+                 "$${UPPER_ENV}-MAPEXOS-JSEXECUTOR-PROCESS" \
+                 "$${UPPER_ENV}-MAPEXOS-ASSETS-FANOUT" \
+                 "$${UPPER_ENV}-MAPEXOS-ASSETS-MQTT-PRESENCE"; do
           nats stream rm "$$s" -f --server="$$CORE_URL" 2>/dev/null || true
         done
-        # Drop env-prefixed legacy name that the FANOUT stream had before
-        # being promoted to platform-wide (was ASSETS-FANOUT, now FANOUT).
-        nats stream rm "$${UPPER_ENV}-MAPEXOS-ASSETS-FANOUT" -f --server="$$CORE_URL" 2>/dev/null || true
-        # Drop the old per-protocol presence stream, now unified to EDGE-PRESENCE.
-        nats stream rm "$${UPPER_ENV}-MAPEXOS-ASSETS-MQTT-PRESENCE" -f --server="$$CORE_URL" 2>/dev/null || true
-        echo "[nats-init] legacy streams dropped"
+        echo "[nats-init] superseded streams dropped"
 
         # stream_ensure: add or update a JetStream stream idempotently.
         # POSIX sh (busybox/ash) — no bash arrays, so we filter `--defaults`
@@ -530,18 +532,21 @@ services:
           name="$$1"
           shift
           if nats stream info "$$name" --server="$$CORE_URL" >/dev/null 2>&1; then
-            # Stream exists — `nats stream update` only accepts mutable
-            # fields and rejects --storage / --defaults. We just sync the
-            # description (the only metadata we want to keep aligned with
-            # the compose file); structural reconfig still requires manual
-            # drop + recreate, which is the right default.
-            desc=""
+            # Stream exists — `nats stream update` accepts the mutable fields
+            # and rejects --storage / --defaults. We sync description AND
+            # subjects (both mutable) so a subject change in the compose lands
+            # on the next init; structural reconfig (storage, retention) still
+            # requires manual drop + recreate, which is the right default.
+            desc=""; subj=""
             for arg in "$$@"; do
               case "$$arg" in
                 --description=*) desc="$$arg" ;;
+                --subjects=*) subj="$$arg" ;;
               esac
             done
-            if [ -n "$$desc" ]; then
+            if [ -n "$$subj" ]; then
+              nats stream update "$$name" "$$desc" "$$subj" --server="$$CORE_URL" --no-interactive -f >/dev/null
+            elif [ -n "$$desc" ]; then
               nats stream update "$$name" "$$desc" --server="$$CORE_URL" --no-interactive -f >/dev/null
             fi
           else
@@ -553,14 +558,14 @@ services:
 
         stream_ensure "$${UPPER_ENV}-MAPEXOS-JSEXECUTOR-MQTTDATA" \
           --description="Republished MQTT telemetry from mapex-mqtt-broker" \
-          --subjects="$${LOWER_ENV}.mapexos.mqtt.data.>" \
+          --subjects="$${LOWER_ENV}.mapexos.mqtt.data" \
           --storage=file \
           --retention=work \
           --defaults
 
         stream_ensure "$${UPPER_ENV}-MAPEXOS-JSEXECUTOR-LORAWANDATA" \
           --description="Republished LoRaWAN uplinks from mapexLNS adapter" \
-          --subjects="$${LOWER_ENV}.mapexos.lorawan.data.>" \
+          --subjects="$${LOWER_ENV}.mapexos.lorawan.data" \
           --storage=file \
           --retention=work \
           --defaults
@@ -621,9 +626,9 @@ services:
           --retention=work \
           --defaults
 
-        stream_ensure "$${UPPER_ENV}-MAPEXOS-JSEXECUTOR-PROCESS" \
-          --description="JS script execution requests" \
-          --subjects="$${LOWER_ENV}.mapexos.processor.js.execute" \
+        stream_ensure "$${UPPER_ENV}-MAPEXOS-JSEXECUTOR-HTTPDATA" \
+          --description="Republished HTTP telemetry from http_gateway" \
+          --subjects="$${LOWER_ENV}.mapexos.http.data" \
           --storage=file \
           --retention=work \
           --defaults
