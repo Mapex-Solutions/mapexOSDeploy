@@ -6,12 +6,11 @@
     "type": "asset_category",
     "name": "IoT Platforms",
     "value": "iot-platforms",
+    "enabled": true,
     "parentId": null,
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:44:06.350Z"
     }
@@ -23,12 +22,11 @@
     "type": "asset_category",
     "name": "IoT Sensors",
     "value": "iot-sensors",
+    "enabled": true,
     "parentId": null,
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:44:06.350Z"
     }
@@ -40,12 +38,11 @@
     "type": "asset_category",
     "name": "Trackers & Fleet",
     "value": "trackers",
+    "enabled": true,
     "parentId": null,
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:44:06.350Z"
     }
@@ -57,12 +54,11 @@
     "type": "asset_category",
     "name": "Energy & Metering",
     "value": "energy",
+    "enabled": true,
     "parentId": null,
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:44:06.350Z"
     }
@@ -74,12 +70,11 @@
     "type": "asset_category",
     "name": "Industrial / SCADA",
     "value": "industrial",
+    "enabled": true,
     "parentId": null,
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:44:06.350Z"
     }
@@ -91,12 +86,11 @@
     "type": "asset_category",
     "name": "Custom",
     "value": "custom",
+    "enabled": true,
     "parentId": null,
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:44:06.350Z"
     }
@@ -108,14 +102,13 @@
     "type": "asset_manufacturer",
     "name": "Milesight IoT",
     "value": "milesight_iot",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439011"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:44:06.350Z"
     }
@@ -127,14 +120,13 @@
     "type": "asset_manufacturer",
     "name": "Dragino",
     "value": "dragino",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439011"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:44:06.350Z"
     }
@@ -146,14 +138,13 @@
     "type": "asset_manufacturer",
     "name": "Elsys",
     "value": "elsys",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439011"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:44:06.350Z"
     }
@@ -165,14 +156,13 @@
     "type": "asset_manufacturer",
     "name": "Disruptive Technologies",
     "value": "disruptive_technologies",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439011"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:44:06.350Z"
     }
@@ -184,14 +174,13 @@
     "type": "asset_model",
     "name": "AM102 - 2-in-1 IAQ Sensor",
     "value": "am102",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.341Z"
     }
@@ -203,14 +192,13 @@
     "type": "asset_model",
     "name": "AM102L - 2-in-1 IAQ Sensor",
     "value": "am102l",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.341Z"
     }
@@ -222,14 +210,13 @@
     "type": "asset_model",
     "name": "AM103 - 3-in-1 IAQ Sensor",
     "value": "am103",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.341Z"
     }
@@ -241,14 +228,13 @@
     "type": "asset_model",
     "name": "AM103L - 3-in-1 IAQ Sensor",
     "value": "am103l",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.341Z"
     }
@@ -260,14 +246,13 @@
     "type": "asset_model",
     "name": "AM104 - 4-in-1 IAQ Sensor",
     "value": "am104",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.341Z"
     }
@@ -279,14 +264,13 @@
     "type": "asset_model",
     "name": "AM107 - 7-in-1 IAQ Sensor",
     "value": "am107",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.341Z"
     }
@@ -298,14 +282,13 @@
     "type": "asset_model",
     "name": "AM307 - 9-in-1 IAQ Sensor",
     "value": "am307v2",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.341Z"
     }
@@ -317,14 +300,13 @@
     "type": "asset_model",
     "name": "AM307L - 9-in-1 IAQ Sensor",
     "value": "am307lv2",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.341Z"
     }
@@ -336,14 +318,13 @@
     "type": "asset_model",
     "name": "AM308 - 9-in-1 IAQ Sensor",
     "value": "am308v2",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.341Z"
     }
@@ -355,14 +336,13 @@
     "type": "asset_model",
     "name": "AM308L - 9-in-1 IAQ Sensor",
     "value": "am308lv2",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.341Z"
     }
@@ -374,14 +354,13 @@
     "type": "asset_model",
     "name": "AM319 HCHO - 9-in-1 IAQ Sensor (HCHO)",
     "value": "am319_hcho_v2",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.341Z"
     }
@@ -393,14 +372,13 @@
     "type": "asset_model",
     "name": "AM319 O3 - 9-in-1 IAQ Sensor (O3)",
     "value": "am319_o3_v2",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.341Z"
     }
@@ -412,14 +390,13 @@
     "type": "asset_model",
     "name": "AT101 - Outdoor Asset Tracker",
     "value": "at101",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.341Z"
     }
@@ -431,14 +408,13 @@
     "type": "asset_model",
     "name": "CT101 - Smart Current Transformer",
     "value": "ct101",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.341Z"
     }
@@ -450,14 +426,13 @@
     "type": "asset_model",
     "name": "CT103 - Smart Current Transformer",
     "value": "ct103",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.341Z"
     }
@@ -469,14 +444,13 @@
     "type": "asset_model",
     "name": "CT105 - Smart Current Transformer",
     "value": "ct105",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.341Z"
     }
@@ -488,14 +462,13 @@
     "type": "asset_model",
     "name": "CT303 - Smart Current Transformer",
     "value": "ct303",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -507,14 +480,13 @@
     "type": "asset_model",
     "name": "CT305 - Smart Current Transformer",
     "value": "ct305",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -526,14 +498,13 @@
     "type": "asset_model",
     "name": "CT310 - Smart Current Transformer",
     "value": "ct310",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -545,14 +516,13 @@
     "type": "asset_model",
     "name": "DS3604 - IoT E-Ink Display",
     "value": "ds3604",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -564,14 +534,13 @@
     "type": "asset_model",
     "name": "EM300-CL - Capacitive Level Sensor",
     "value": "em300_cl",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -583,14 +552,13 @@
     "type": "asset_model",
     "name": "EM300-DI - Pulse Counter",
     "value": "em300_di",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -602,14 +570,13 @@
     "type": "asset_model",
     "name": "EM300-DI (HALL) - Pulse Counter",
     "value": "em300_di_hall",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -621,14 +588,13 @@
     "type": "asset_model",
     "name": "EM300-MCS - Magnetic Contact Switch",
     "value": "em300_mcs",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -640,14 +606,13 @@
     "type": "asset_model",
     "name": "EM300-MLD - Membrane Leakage Detection Sensor",
     "value": "em300_mld",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -659,14 +624,13 @@
     "type": "asset_model",
     "name": "EM300-SLD - Spot Leakage Detection Sensor",
     "value": "em300_sld",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -678,14 +642,13 @@
     "type": "asset_model",
     "name": "EM300-TH - Temperature and Humidity Sensor",
     "value": "em300_th",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -697,14 +660,13 @@
     "type": "asset_model",
     "name": "EM300-ZLD - Zone Leakage Detection Sensor",
     "value": "em300_zld",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -716,14 +678,13 @@
     "type": "asset_model",
     "name": "EM310-TILT - Tilt Sensor",
     "value": "em310_tilt",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -735,14 +696,13 @@
     "type": "asset_model",
     "name": "EM310-UDL - Ultrasonic Distance/Level Sensor",
     "value": "em310_udl",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -754,14 +714,13 @@
     "type": "asset_model",
     "name": "EM320-TH - Temperature and Humidity Sensor",
     "value": "em320_th",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -773,14 +732,13 @@
     "type": "asset_model",
     "name": "EM320-TILT - Tilt Sensor",
     "value": "em320_tilt",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -792,14 +750,13 @@
     "type": "asset_model",
     "name": "EM400-MUD - Multifunctional Distance Sensor",
     "value": "em400_mud",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -811,14 +768,13 @@
     "type": "asset_model",
     "name": "EM400-TLD - ToF Laser Distance Sensor",
     "value": "em400_tld",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -830,14 +786,13 @@
     "type": "asset_model",
     "name": "EM400-UDL - Ultrasonic Distance/Level Sensor",
     "value": "em400_udl",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -849,14 +804,13 @@
     "type": "asset_model",
     "name": "EM410-RDL - Radar Distance Level Sensor",
     "value": "em410_rdl",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -868,14 +822,13 @@
     "type": "asset_model",
     "name": "EM500-CO2 - Outdoor CO2 Sensor",
     "value": "em500_co2",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -887,14 +840,13 @@
     "type": "asset_model",
     "name": "EM500-LGT - Light Sensor",
     "value": "em500_lgt",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -906,14 +858,13 @@
     "type": "asset_model",
     "name": "EM500-PP - Pipe Pressure Sensor",
     "value": "em500_pp",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -925,14 +876,13 @@
     "type": "asset_model",
     "name": "EM500-PT100 - Platinum Temperature Sensor",
     "value": "em500_pt100",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -944,14 +894,13 @@
     "type": "asset_model",
     "name": "EM500-SMTC - Soil Moisture, Temperature & Conductivity Sensor",
     "value": "em500_smtc",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -963,14 +912,13 @@
     "type": "asset_model",
     "name": "EM500-SWL - Submersible Water Level Sensor",
     "value": "em500_swl",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -982,14 +930,13 @@
     "type": "asset_model",
     "name": "EM500-UDL - Ultrasonic Distance/Level Sensor",
     "value": "em500_udl",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -1001,14 +948,13 @@
     "type": "asset_model",
     "name": "FT101 - Fine Dust Air Quality Sensor",
     "value": "ft101",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -1020,14 +966,13 @@
     "type": "asset_model",
     "name": "GS101 - Gas Sensor",
     "value": "gs101",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -1039,14 +984,13 @@
     "type": "asset_model",
     "name": "GS301 - Bathroom Odor Detector",
     "value": "gs301",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -1058,14 +1002,13 @@
     "type": "asset_model",
     "name": "GS524N - Gas Sensor",
     "value": "gs524n",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -1077,14 +1020,13 @@
     "type": "asset_model",
     "name": "GS601 - Vape Detector",
     "value": "gs601",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.342Z"
     }
@@ -1096,14 +1038,13 @@
     "type": "asset_model",
     "name": "TS101 - Insertion Temperature Sensor",
     "value": "ts101",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1115,14 +1056,13 @@
     "type": "asset_model",
     "name": "TS201 - Cost Effective Temperature Sensor",
     "value": "ts201",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1134,14 +1074,13 @@
     "type": "asset_model",
     "name": "TS201 - Cost Effective Temperature Sensor",
     "value": "ts201_v2",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1153,14 +1092,13 @@
     "type": "asset_model",
     "name": "TS301 - Temperature Sensor",
     "value": "ts301",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1172,14 +1110,13 @@
     "type": "asset_model",
     "name": "TS302 - Temperature Sensor",
     "value": "ts302",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1191,14 +1128,13 @@
     "type": "asset_model",
     "name": "UC100 - Protocol Converter",
     "value": "uc100",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1210,14 +1146,13 @@
     "type": "asset_model",
     "name": "UC100 - Protocol Converter",
     "value": "uc100_v2",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1229,14 +1164,13 @@
     "type": "asset_model",
     "name": "UC11-N1 - I/O Controller",
     "value": "uc11_n1",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1248,14 +1182,13 @@
     "type": "asset_model",
     "name": "UC11-T1 - I/O Controller",
     "value": "uc11_t1",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1267,14 +1200,13 @@
     "type": "asset_model",
     "name": "UC11XX - I/O Controller",
     "value": "uc11xx",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1286,14 +1218,13 @@
     "type": "asset_model",
     "name": "UC300 - IoT Controller",
     "value": "uc300",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1305,14 +1236,13 @@
     "type": "asset_model",
     "name": "UC50X - Multi-interface Controller",
     "value": "uc50x",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1324,14 +1254,13 @@
     "type": "asset_model",
     "name": "UC511 - Solenoid Valve Controller",
     "value": "uc511",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1343,14 +1272,13 @@
     "type": "asset_model",
     "name": "UC512 - Solenoid Valve Controller",
     "value": "uc512",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1362,14 +1290,13 @@
     "type": "asset_model",
     "name": "UC521 - Solenoid Valve Controller",
     "value": "uc521",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1381,14 +1308,13 @@
     "type": "asset_model",
     "name": "VS121 - AI Workplace Occupancy Sensor",
     "value": "vs121",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1400,14 +1326,13 @@
     "type": "asset_model",
     "name": "VS132 - AI People Counting Sensor",
     "value": "vs132",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1419,14 +1344,13 @@
     "type": "asset_model",
     "name": "VS133 - AI ToF People Counting Sensor",
     "value": "vs133",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1438,14 +1362,13 @@
     "type": "asset_model",
     "name": "VS135 - Ultra ToF People Counter",
     "value": "vs135",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1457,14 +1380,13 @@
     "type": "asset_model",
     "name": "VS321 - Battery Version Workplace Occupancy Sensor",
     "value": "vs321",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1476,14 +1398,13 @@
     "type": "asset_model",
     "name": "VS330 - Bathroom Occupancy Sensor",
     "value": "vs330",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1495,14 +1416,13 @@
     "type": "asset_model",
     "name": "VS340 - Desk & Seat Occupancy Sensor",
     "value": "vs340",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1514,14 +1434,13 @@
     "type": "asset_model",
     "name": "VS341 - Desk & Seat Occupancy Sensor",
     "value": "vs341",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1533,14 +1452,13 @@
     "type": "asset_model",
     "name": "VS350 - Passage People Counter",
     "value": "vs350",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1552,14 +1470,13 @@
     "type": "asset_model",
     "name": "VS351 - Mini AI Thermopile People Counter",
     "value": "vs351",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1571,14 +1488,13 @@
     "type": "asset_model",
     "name": "VS360 - IR Breakbeam People Counter",
     "value": "vs360",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1590,14 +1506,13 @@
     "type": "asset_model",
     "name": "VS370 - Radar Human Presence Sensor",
     "value": "vs370",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1609,14 +1524,13 @@
     "type": "asset_model",
     "name": "VS373 - Radar Fall Detection Sensor",
     "value": "vs373",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1628,14 +1542,13 @@
     "type": "asset_model",
     "name": "WS101 - Smart Button",
     "value": "ws101",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1647,14 +1560,13 @@
     "type": "asset_model",
     "name": "WS136 - Smart Scene Panel",
     "value": "ws136",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1666,14 +1578,13 @@
     "type": "asset_model",
     "name": "WS156 - Smart Scene Panel",
     "value": "ws156",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1685,14 +1596,13 @@
     "type": "asset_model",
     "name": "WS201 - Smart Fill Level Monitoring Sensor",
     "value": "ws201",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1704,14 +1614,13 @@
     "type": "asset_model",
     "name": "WS202 - PIR & Light Sensor",
     "value": "ws202",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1723,14 +1632,13 @@
     "type": "asset_model",
     "name": "WS203 - Motion & TH Sensor",
     "value": "ws203",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1742,14 +1650,13 @@
     "type": "asset_model",
     "name": "WS301 - Magnetic Contact Switch",
     "value": "ws301",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1761,14 +1668,13 @@
     "type": "asset_model",
     "name": "WS302 - Sound Level Sensor",
     "value": "ws302",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1780,14 +1686,13 @@
     "type": "asset_model",
     "name": "WS303 - Mini Leak Detection Sensor",
     "value": "ws303",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1799,14 +1704,13 @@
     "type": "asset_model",
     "name": "WS501 - Smart Wall Switch",
     "value": "ws501",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1818,14 +1722,13 @@
     "type": "asset_model",
     "name": "WS501 - Smart Wall Switch",
     "value": "ws501_cn",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1837,14 +1740,13 @@
     "type": "asset_model",
     "name": "WS501 - Smart Wall Switch",
     "value": "ws501_us",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1856,14 +1758,13 @@
     "type": "asset_model",
     "name": "WS501 - Smart Wall Switch",
     "value": "ws501_eu",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1875,14 +1776,13 @@
     "type": "asset_model",
     "name": "WS502 - Smart Wall Switch",
     "value": "ws502",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.343Z"
     }
@@ -1894,14 +1794,13 @@
     "type": "asset_model",
     "name": "WS502 - Smart Wall Switch",
     "value": "ws502_cn",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.344Z"
     }
@@ -1913,14 +1812,13 @@
     "type": "asset_model",
     "name": "WS502 - Smart Wall Switch",
     "value": "ws502_eu",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.344Z"
     }
@@ -1932,14 +1830,13 @@
     "type": "asset_model",
     "name": "WS503 - Smart Wall Switch",
     "value": "ws503",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.344Z"
     }
@@ -1951,14 +1848,13 @@
     "type": "asset_model",
     "name": "WS503 - Smart Wall Switch",
     "value": "ws503_cn",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.344Z"
     }
@@ -1970,14 +1866,13 @@
     "type": "asset_model",
     "name": "WS51X - Smart Wall Socket",
     "value": "ws51x",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.344Z"
     }
@@ -1989,14 +1884,13 @@
     "type": "asset_model",
     "name": "WS52X - Smart Portable Socket",
     "value": "ws52x",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.344Z"
     }
@@ -2008,14 +1902,13 @@
     "type": "asset_model",
     "name": "WS558 - Smart Light Controller",
     "value": "ws558",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.344Z"
     }
@@ -2027,14 +1920,13 @@
     "type": "asset_model",
     "name": "WT101 - Smart Radiator Thermostat",
     "value": "wt101",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.344Z"
     }
@@ -2046,14 +1938,13 @@
     "type": "asset_model",
     "name": "WT201 - Smart Thermostat",
     "value": "wt201",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.344Z"
     }
@@ -2065,14 +1956,13 @@
     "type": "asset_model",
     "name": "WT201 - Smart Thermostat",
     "value": "wt201_v2",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.344Z"
     }
@@ -2084,14 +1974,13 @@
     "type": "asset_model",
     "name": "WT301 - Smart Thermostat",
     "value": "wt301",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.344Z"
     }
@@ -2103,14 +1992,13 @@
     "type": "asset_model",
     "name": "WT302 - Smart Thermostat",
     "value": "wt302",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.344Z"
     }
@@ -2122,14 +2010,13 @@
     "type": "asset_model",
     "name": "WT303 - Smart Fan Coil Thermostat",
     "value": "wt303",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.344Z"
     }
@@ -2141,14 +2028,13 @@
     "type": "asset_model",
     "name": "WT304 - Smart Fan Coil Thermostat",
     "value": "wt304",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.344Z"
     }
@@ -2160,14 +2046,13 @@
     "type": "asset_model",
     "name": "WTS305 - Weather Station",
     "value": "wts305",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.344Z"
     }
@@ -2179,14 +2064,13 @@
     "type": "asset_model",
     "name": "WTS505 - IoT Weather Station",
     "value": "wts505",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.344Z"
     }
@@ -2198,14 +2082,13 @@
     "type": "asset_model",
     "name": "WTS506 - IoT Weather Station",
     "value": "wts506",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439012"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.344Z"
     }
@@ -2217,14 +2100,13 @@
     "type": "asset_model",
     "name": "AIS01 - Indoor Air Quality Sensor",
     "value": "ais01",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.375Z"
     }
@@ -2236,14 +2118,13 @@
     "type": "asset_model",
     "name": "AQS01-L - Air Quality Sensor",
     "value": "aqs01_l",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.375Z"
     }
@@ -2255,14 +2136,13 @@
     "type": "asset_model",
     "name": "AQS02-L - Air Quality Sensor",
     "value": "aqs02_l",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.375Z"
     }
@@ -2274,14 +2154,13 @@
     "type": "asset_model",
     "name": "BH01-LB - Gas Detector",
     "value": "bh01_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.375Z"
     }
@@ -2293,14 +2172,13 @@
     "type": "asset_model",
     "name": "CPL01 - Current Probe",
     "value": "cpl01",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.375Z"
     }
@@ -2312,14 +2190,13 @@
     "type": "asset_model",
     "name": "CPL03-LB - Current Probe",
     "value": "cpl03_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2331,14 +2208,13 @@
     "type": "asset_model",
     "name": "CS01-LB - Smoke Detector",
     "value": "cs01_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2350,14 +2226,13 @@
     "type": "asset_model",
     "name": "D20-LB&D20S-LB&D22-LB&D23-LB - External Sensor",
     "value": "d20_lbd20s_lbd22_lbd23_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2369,14 +2244,13 @@
     "type": "asset_model",
     "name": "DDS04-LB",
     "value": "dds04_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2388,14 +2262,13 @@
     "type": "asset_model",
     "name": "DDS20-LB",
     "value": "dds20_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2407,14 +2280,13 @@
     "type": "asset_model",
     "name": "DDS45-LB",
     "value": "dds45_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2426,14 +2298,13 @@
     "type": "asset_model",
     "name": "DDS75-LB",
     "value": "dds75_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2445,14 +2316,13 @@
     "type": "asset_model",
     "name": "DMT01 - Multi-Sensor",
     "value": "dmt01",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2464,14 +2334,13 @@
     "type": "asset_model",
     "name": "DS03A-LB - Door Sensor",
     "value": "ds03a_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2483,14 +2352,13 @@
     "type": "asset_model",
     "name": "DS20L - DS18B20 Temperature Sensor",
     "value": "ds20l",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2502,14 +2370,13 @@
     "type": "asset_model",
     "name": "LA66 USB - USB Adapter",
     "value": "la66_usb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2521,14 +2388,13 @@
     "type": "asset_model",
     "name": "LAQ4 - Air Quality Sensor",
     "value": "laq4",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2540,14 +2406,13 @@
     "type": "asset_model",
     "name": "LC01 - Contact Sensor",
     "value": "lc01",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2559,14 +2424,13 @@
     "type": "asset_model",
     "name": "LC03 - Contact Sensor",
     "value": "lc03",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2578,14 +2442,13 @@
     "type": "asset_model",
     "name": "LCC01-LB - Contact Closure",
     "value": "lcc01_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2597,14 +2460,13 @@
     "type": "asset_model",
     "name": "LDDS04 - ToF Distance Sensor",
     "value": "ldds04",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2616,14 +2478,13 @@
     "type": "asset_model",
     "name": "LDDS20 - ToF Distance Sensor",
     "value": "ldds20",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2635,14 +2496,13 @@
     "type": "asset_model",
     "name": "LDDS45 - ToF Distance Sensor",
     "value": "ldds45",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2654,14 +2514,13 @@
     "type": "asset_model",
     "name": "LDDS75 - ToF Distance Sensor",
     "value": "ldds75",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2673,14 +2532,13 @@
     "type": "asset_model",
     "name": "LDS02 - Optical Distance Sensor",
     "value": "lds02",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2692,14 +2550,13 @@
     "type": "asset_model",
     "name": "LDS03A - Optical Distance Sensor",
     "value": "lds03a",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2711,14 +2568,13 @@
     "type": "asset_model",
     "name": "LDS12-LB - Distance/Level Sensor",
     "value": "lds12_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2730,14 +2586,13 @@
     "type": "asset_model",
     "name": "LDS25-LB - Distance/Level Sensor",
     "value": "lds25_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2749,14 +2604,13 @@
     "type": "asset_model",
     "name": "LDS40-LB - Distance/Level Sensor",
     "value": "lds40_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2768,14 +2622,13 @@
     "type": "asset_model",
     "name": "LHT52 - Temperature & Humidity Sensor",
     "value": "lht52",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2787,14 +2640,13 @@
     "type": "asset_model",
     "name": "LHT65N - Temperature & Humidity Sensor (No External Probe)",
     "value": "lht65n",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2806,14 +2658,13 @@
     "type": "asset_model",
     "name": "LHT65N-PIR - Temperature & Humidity Sensor with PIR",
     "value": "lht65n_pir",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2825,14 +2676,13 @@
     "type": "asset_model",
     "name": "LHT65N-VIB - Temperature & Humidity Sensor with Vibration",
     "value": "lht65n_vib",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2844,14 +2694,13 @@
     "type": "asset_model",
     "name": "LLDS12 - Laser Distance Sensor",
     "value": "llds12",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2863,14 +2712,13 @@
     "type": "asset_model",
     "name": "LLDS40 - Laser Distance Sensor",
     "value": "llds40",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2882,14 +2730,13 @@
     "type": "asset_model",
     "name": "LLMS01 - Laser Motion Sensor",
     "value": "llms01",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2901,14 +2748,13 @@
     "type": "asset_model",
     "name": "LMDS120 - Microwave Radar Distance Sensor",
     "value": "lmds120",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2920,14 +2766,13 @@
     "type": "asset_model",
     "name": "LMDS200 - Microwave Radar Distance Sensor",
     "value": "lmds200",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2939,14 +2784,13 @@
     "type": "asset_model",
     "name": "LMS01-LB - Motion Sensor",
     "value": "lms01_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2958,14 +2802,13 @@
     "type": "asset_model",
     "name": "LSE01 - Soil Moisture & EC Sensor",
     "value": "lse01",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2977,14 +2820,13 @@
     "type": "asset_model",
     "name": "LSN50 & LSN50-V2",
     "value": "lsn50_lsn50_v2",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -2996,14 +2838,13 @@
     "type": "asset_model",
     "name": "LSN50V2-D20-D22-D23 - Node with Smoke/Gas Detector",
     "value": "lsn50v2_d20_d22_d23",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3015,14 +2856,13 @@
     "type": "asset_model",
     "name": "LSN50V2-S31&S31B - Node with Soil Moisture Sensor",
     "value": "lsn50v2_s31s31b",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3034,14 +2874,13 @@
     "type": "asset_model",
     "name": "LSPH01 - Soil pH Sensor",
     "value": "lsph01",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3053,14 +2892,13 @@
     "type": "asset_model",
     "name": "LT22222-L - Temperature Sensor Array",
     "value": "lt22222_l",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3072,14 +2910,13 @@
     "type": "asset_model",
     "name": "LTC2 - Current Transformer Sensor",
     "value": "ltc2",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3091,14 +2928,13 @@
     "type": "asset_model",
     "name": "LTC2-LB - Current Transformer Sensor",
     "value": "ltc2_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3110,14 +2946,13 @@
     "type": "asset_model",
     "name": "LWL02 - Water Leak Detector",
     "value": "lwl02",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3129,14 +2964,13 @@
     "type": "asset_model",
     "name": "LWL03A - Water Leak Detector",
     "value": "lwl03a",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3148,14 +2982,13 @@
     "type": "asset_model",
     "name": "LWL04-LB - Water Leak Detector",
     "value": "lwl04_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3167,14 +3000,13 @@
     "type": "asset_model",
     "name": "MDS120-LB - Microwave Radar Distance Sensor (Battery)",
     "value": "mds120_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3186,14 +3018,13 @@
     "type": "asset_model",
     "name": "MDS200-LB - Microwave Radar Distance Sensor (Battery)",
     "value": "mds200_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3205,14 +3036,13 @@
     "type": "asset_model",
     "name": "PB01 - Push Button",
     "value": "pb01",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3224,14 +3054,13 @@
     "type": "asset_model",
     "name": "PB05 - Push Button",
     "value": "pb05",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3243,14 +3072,13 @@
     "type": "asset_model",
     "name": "PF52 - Push Button",
     "value": "pf52",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3262,14 +3090,13 @@
     "type": "asset_model",
     "name": "POM01-LB - Presence Detection Sensor",
     "value": "pom01_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3281,14 +3108,13 @@
     "type": "asset_model",
     "name": "PS-LB - Pressure Sensor",
     "value": "ps_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3300,14 +3126,13 @@
     "type": "asset_model",
     "name": "RS485-BL - RS485 Interface",
     "value": "rs485_bl",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3319,14 +3144,13 @@
     "type": "asset_model",
     "name": "RS485-LB - RS485 Interface",
     "value": "rs485_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3338,14 +3162,13 @@
     "type": "asset_model",
     "name": "RS485-LB_A16-15 - RS485 Interface",
     "value": "rs485_lb_a16_15",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3357,14 +3180,13 @@
     "type": "asset_model",
     "name": "RS485-LN - RS485 Interface",
     "value": "rs485_ln",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3376,14 +3198,13 @@
     "type": "asset_model",
     "name": "S31-LB&S31B-LB - Soil Moisture Sensor",
     "value": "s31_lbs31b_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3395,14 +3216,13 @@
     "type": "asset_model",
     "name": "SDI-12-LB - SDI-12 Interface",
     "value": "sdi_12_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3414,14 +3234,13 @@
     "type": "asset_model",
     "name": "SE01-LB - Soil Moisture & EC Sensor",
     "value": "se01_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3433,14 +3252,13 @@
     "type": "asset_model",
     "name": "SE02-LB - Soil Moisture & EC Sensor",
     "value": "se02_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3452,14 +3270,13 @@
     "type": "asset_model",
     "name": "SE0X-LB - Soil Moisture & EC Sensor",
     "value": "se0x_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3471,14 +3288,13 @@
     "type": "asset_model",
     "name": "SN50_V3-LB - Sensor Node",
     "value": "sn50_v3_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3490,14 +3306,13 @@
     "type": "asset_model",
     "name": "SPH01-LB - Soil pH Sensor",
     "value": "sph01_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3509,14 +3324,13 @@
     "type": "asset_model",
     "name": "SW3L - 3-Button Switch",
     "value": "sw3l",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3528,14 +3342,13 @@
     "type": "asset_model",
     "name": "SW3L-LB - 3-Button Switch",
     "value": "sw3l_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3547,14 +3360,13 @@
     "type": "asset_model",
     "name": "T68DL - E-Ink Display",
     "value": "t68dl",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3566,14 +3378,13 @@
     "type": "asset_model",
     "name": "TC01-LB - Current Transformer",
     "value": "tc01_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3585,14 +3396,13 @@
     "type": "asset_model",
     "name": "THERMOSTAT1 - Thermostat",
     "value": "thermostat1",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3604,14 +3414,13 @@
     "type": "asset_model",
     "name": "TRACKERD - GPS Tracker",
     "value": "trackerd",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3623,14 +3432,13 @@
     "type": "asset_model",
     "name": "TS01-LB - Temperature Sensor",
     "value": "ts01_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3642,14 +3450,13 @@
     "type": "asset_model",
     "name": "UV254-LB - UV254 Sensor",
     "value": "uv254_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3661,14 +3468,13 @@
     "type": "asset_model",
     "name": "WEATHER STATION - Weather Station",
     "value": "weather_station",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3680,14 +3486,13 @@
     "type": "asset_model",
     "name": "WL03A-LB - Water Leak Detector",
     "value": "wl03a_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3699,14 +3504,13 @@
     "type": "asset_model",
     "name": "WQS-LB - Water Quality Sensor",
     "value": "wqs_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3718,14 +3522,13 @@
     "type": "asset_model",
     "name": "WSC2-LB - Valve Controller",
     "value": "wsc2_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3737,14 +3540,13 @@
     "type": "asset_model",
     "name": "WSC3-LB - Valve Controller",
     "value": "wsc3_lb",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439013"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:14:44.376Z"
     }
@@ -3756,14 +3558,13 @@
     "type": "asset_model",
     "name": "ELT - Temperature, Humidity, Acceleration & Atmospheric Pressure Sensor",
     "value": "elt",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -3775,14 +3576,13 @@
     "type": "asset_model",
     "name": "ELT DISTANCE RADAR - Radar Distance Sensor",
     "value": "elt_distance_radar",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -3794,14 +3594,13 @@
     "type": "asset_model",
     "name": "ELT INTERNA ANTENNA - Temperature, Humidity, Acceleration & Atmospheric Pressure Sensor with Internal Antenna",
     "value": "elt_interna_antenna",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -3813,14 +3612,13 @@
     "type": "asset_model",
     "name": "ELT LITE - Multisensor with One Generic Input",
     "value": "elt_lite",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -3832,14 +3630,13 @@
     "type": "asset_model",
     "name": "ELT ULTRASONIC 10M - Ultrasonic Distance Sensor 10m Range",
     "value": "elt_ultrasonic_10m",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -3851,14 +3648,13 @@
     "type": "asset_model",
     "name": "ELT ULTRASONIC 5M - Ultrasonic Distance Sensor 5m Range",
     "value": "elt_ultrasonic_5m",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -3870,14 +3666,13 @@
     "type": "asset_model",
     "name": "ELT ULTRASONIC SNOW - Ultrasonic Snow Level Sensor",
     "value": "elt_ultrasonic_snow",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -3889,14 +3684,13 @@
     "type": "asset_model",
     "name": "EMS - Temperature, Humidity, Leak Detection, Acceleration & Magnet Switch Sensor",
     "value": "ems",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -3908,14 +3702,13 @@
     "type": "asset_model",
     "name": "EMS DESK - Desk Occupancy, Temperature & Humidity Sensor",
     "value": "ems_desk",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -3927,14 +3720,13 @@
     "type": "asset_model",
     "name": "EMS DOOR - Magnet Switch & Acceleration Sensor",
     "value": "ems_door",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -3946,14 +3738,13 @@
     "type": "asset_model",
     "name": "EMS LITE - Leak Detection, Temperature & Humidity Sensor",
     "value": "ems_lite",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -3965,14 +3756,13 @@
     "type": "asset_model",
     "name": "ERS - Temperature, Humidity, Light & Motion PIR Sensor",
     "value": "ers",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -3984,14 +3774,13 @@
     "type": "asset_model",
     "name": "ERS CO2 - CO2, Temperature, Humidity, Light & Motion PIR Sensor",
     "value": "ers_co2",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -4003,14 +3792,13 @@
     "type": "asset_model",
     "name": "ERS CO2 LITE - CO2, Temperature & Humidity Sensor",
     "value": "ers_co2_lite",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -4022,14 +3810,13 @@
     "type": "asset_model",
     "name": "ERS DISPLAY - Temperature, Humidity, Light & Motion PIR Sensor with E-paper Display",
     "value": "ers_display",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -4041,14 +3828,13 @@
     "type": "asset_model",
     "name": "ERS DISPLAY CO2 - Temperature, Humidity, CO2, Light & Motion PIR Sensor with E-paper Display",
     "value": "ers_display_co2",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -4060,14 +3846,13 @@
     "type": "asset_model",
     "name": "ERS DISPLAY CO2 LITE - CO2, Temperature & Humidity Sensor with E-paper Display",
     "value": "ers_display_co2_lite",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -4079,14 +3864,13 @@
     "type": "asset_model",
     "name": "ERS DISPLAY LITE - Temperature & Humidity Sensor with E-paper Display",
     "value": "ers_display_lite",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -4098,14 +3882,13 @@
     "type": "asset_model",
     "name": "ERS ECO CO2 LITE - CO2, Temperature & Humidity Sensor (Solar Powered)",
     "value": "ers_eco_co2_lite",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -4117,14 +3900,13 @@
     "type": "asset_model",
     "name": "ERS ECO LITE - Temperature & Humidity Sensor (Solar Powered)",
     "value": "ers_eco_lite",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -4136,14 +3918,13 @@
     "type": "asset_model",
     "name": "ERS EYE - Room Occupancy, Temperature, Humidity, Light & Motion PIR Sensor",
     "value": "ers_eye",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -4155,14 +3936,13 @@
     "type": "asset_model",
     "name": "ERS LITE - Temperature & Humidity Sensor",
     "value": "ers_lite",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -4174,14 +3954,13 @@
     "type": "asset_model",
     "name": "ERS SOUND - Sound Level, Temperature, Humidity, Light & Motion PIR Sensor",
     "value": "ers_sound",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -4193,14 +3972,13 @@
     "type": "asset_model",
     "name": "ERS TEMP - Temperature Sensor",
     "value": "ers_temp",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -4212,14 +3990,13 @@
     "type": "asset_model",
     "name": "ERS VOC - VOC, Temperature, Humidity, Light & Motion PIR Sensor",
     "value": "ers_voc",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439014"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:37:51.245Z"
     }
@@ -4231,14 +4008,13 @@
     "type": "asset_model",
     "name": "CO2 - Measures CO2, temperature, humidity and air pressure",
     "value": "co2",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439015"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:42:40.145Z"
     }
@@ -4250,14 +4026,13 @@
     "type": "asset_model",
     "name": "DESK OCCUPANCY - Detects the presence of someone at a desk",
     "value": "desk_occupancy",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439015"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:42:40.144Z"
     }
@@ -4269,14 +4044,13 @@
     "type": "asset_model",
     "name": "DOOR & WINDOW - Detects if doors or windows are open or closed in real-time",
     "value": "door_window",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439015"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:42:40.145Z"
     }
@@ -4288,14 +4062,13 @@
     "type": "asset_model",
     "name": "MOTION - Detects the presence of people in a room",
     "value": "motion",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439015"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:42:40.145Z"
     }
@@ -4307,14 +4080,13 @@
     "type": "asset_model",
     "name": "PROXIMITY - Detects when an object is placed or removed within a 5 mm range",
     "value": "proximity",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439015"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:42:40.144Z"
     }
@@ -4326,14 +4098,13 @@
     "type": "asset_model",
     "name": "TACTILE TOUCH - Sends an immediate event whenever it is touched",
     "value": "tactile_touch",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439015"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:42:40.144Z"
     }
@@ -4345,14 +4116,13 @@
     "type": "asset_model",
     "name": "TEMPERATURE - Accurately measures temperature anywhere",
     "value": "temperature",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439015"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:42:40.144Z"
     }
@@ -4364,14 +4134,13 @@
     "type": "asset_model",
     "name": "TEMPERATURE & HUMIDITY - Measures relative humidity and temperature",
     "value": "temperature_humidity",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439015"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:42:40.145Z"
     }
@@ -4383,14 +4152,13 @@
     "type": "asset_model",
     "name": "TEMPERATURE PROBE - Measures temperature in a wide range of environments",
     "value": "temperature_probe",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439015"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:42:40.145Z"
     }
@@ -4402,16 +4170,4045 @@
     "type": "asset_model",
     "name": "WATER - Reports the presence of water on the sensor",
     "value": "water",
+    "enabled": true,
     "parentId": {
       "$oid": "507f1f77bcf86cd799439015"
     },
-    "category": null,
+    "verticalId": null,
     "isSystem": true,
-    "isTemplate": false,
     "orgId": null,
-    "pathKey": "",
     "created": {
       "$date": "2025-11-12T17:42:40.144Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000a10001"
+    },
+    "type": "vertical",
+    "name": "Condomínio",
+    "value": "condominium",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": null,
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000a10002"
+    },
+    "type": "vertical",
+    "name": "Shopping",
+    "value": "mall",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": null,
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000a10003"
+    },
+    "type": "vertical",
+    "name": "Corporativo",
+    "value": "corporate",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": null,
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000a20001"
+    },
+    "type": "org_type",
+    "name": "Plataforma",
+    "value": "root",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": null,
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000a20002"
+    },
+    "type": "org_type",
+    "name": "Parceiro",
+    "value": "vendor",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": null,
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000a20003"
+    },
+    "type": "org_type",
+    "name": "Cliente",
+    "value": "customer",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": null,
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b20001"
+    },
+    "type": "category",
+    "name": "Limpeza",
+    "value": "cleaning",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": null,
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b20002"
+    },
+    "type": "category",
+    "name": "Manutenção",
+    "value": "maintenance",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": null,
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b20003"
+    },
+    "type": "category",
+    "name": "Segurança",
+    "value": "security",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": null,
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b20004"
+    },
+    "type": "category",
+    "name": "Administrativo",
+    "value": "administrative",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": null,
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b20005"
+    },
+    "type": "category",
+    "name": "Estrutura",
+    "value": "structural",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": null,
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b20006"
+    },
+    "type": "category",
+    "name": "Equipamentos",
+    "value": "equipment",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": null,
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b20007"
+    },
+    "type": "category",
+    "name": "Outros",
+    "value": "other",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": null,
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11001"
+    },
+    "type": "place_type",
+    "name": "Estrutura",
+    "value": "g_structure",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11002"
+    },
+    "type": "place_type",
+    "name": "Unidade privativa",
+    "value": "g_private",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11003"
+    },
+    "type": "place_type",
+    "name": "Circulação",
+    "value": "g_circulation",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11004"
+    },
+    "type": "place_type",
+    "name": "Convívio",
+    "value": "g_social",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11005"
+    },
+    "type": "place_type",
+    "name": "Lazer",
+    "value": "g_leisure",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11006"
+    },
+    "type": "place_type",
+    "name": "Área técnica",
+    "value": "g_technical",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11007"
+    },
+    "type": "place_type",
+    "name": "Operação",
+    "value": "g_operations",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11008"
+    },
+    "type": "place_type",
+    "name": "Estacionamento",
+    "value": "g_parking",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11009"
+    },
+    "type": "place_type",
+    "name": "Bloco / Torre",
+    "value": "block",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11001"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1100a"
+    },
+    "type": "place_type",
+    "name": "Andar / Pavimento",
+    "value": "floor",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11001"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1100b"
+    },
+    "type": "place_type",
+    "name": "Subsolo",
+    "value": "basement",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11001"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1100c"
+    },
+    "type": "place_type",
+    "name": "Cobertura",
+    "value": "rooftop",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11001"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1100d"
+    },
+    "type": "place_type",
+    "name": "Fachada",
+    "value": "facade",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11001"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1100e"
+    },
+    "type": "place_type",
+    "name": "Apartamento",
+    "value": "unit",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11002"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1100f"
+    },
+    "type": "place_type",
+    "name": "Casa",
+    "value": "unit",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11002"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11010"
+    },
+    "type": "place_type",
+    "name": "Cobertura duplex",
+    "value": "unit",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11002"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11011"
+    },
+    "type": "place_type",
+    "name": "Loja",
+    "value": "unit",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11002"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11012"
+    },
+    "type": "place_type",
+    "name": "Box / Depósito privativo",
+    "value": "storage_unit",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11002"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11013"
+    },
+    "type": "place_type",
+    "name": "Hall de entrada",
+    "value": "lobby",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11003"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11014"
+    },
+    "type": "place_type",
+    "name": "Corredor",
+    "value": "corridor",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11003"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11015"
+    },
+    "type": "place_type",
+    "name": "Escada",
+    "value": "stairwell",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11003"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11016"
+    },
+    "type": "place_type",
+    "name": "Elevador",
+    "value": "elevator",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11003"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11017"
+    },
+    "type": "place_type",
+    "name": "Rampa",
+    "value": "ramp",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11003"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11018"
+    },
+    "type": "place_type",
+    "name": "Banheiro de área comum",
+    "value": "restroom",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11003"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11019"
+    },
+    "type": "place_type",
+    "name": "Salão de festas",
+    "value": "party_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11004"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1101a"
+    },
+    "type": "place_type",
+    "name": "Espaço gourmet",
+    "value": "gourmet_space",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11004"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1101b"
+    },
+    "type": "place_type",
+    "name": "Churrasqueira",
+    "value": "bbq_area",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11004"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1101c"
+    },
+    "type": "place_type",
+    "name": "Sala de jogos",
+    "value": "game_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11004"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1101d"
+    },
+    "type": "place_type",
+    "name": "Cinema",
+    "value": "cinema",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11004"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1101e"
+    },
+    "type": "place_type",
+    "name": "Academia",
+    "value": "gym",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11004"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1101f"
+    },
+    "type": "place_type",
+    "name": "Brinquedoteca",
+    "value": "playroom",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11004"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11020"
+    },
+    "type": "place_type",
+    "name": "Coworking",
+    "value": "coworking",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11004"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11021"
+    },
+    "type": "place_type",
+    "name": "Sala de reunião",
+    "value": "meeting_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11004"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11022"
+    },
+    "type": "place_type",
+    "name": "Lavanderia coletiva",
+    "value": "laundry",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11004"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11023"
+    },
+    "type": "place_type",
+    "name": "Piscina externa",
+    "value": "pool_outdoor",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11024"
+    },
+    "type": "place_type",
+    "name": "Piscina interna",
+    "value": "pool_indoor",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11025"
+    },
+    "type": "place_type",
+    "name": "Sauna",
+    "value": "sauna",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11026"
+    },
+    "type": "place_type",
+    "name": "Quadra",
+    "value": "sports_court",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11027"
+    },
+    "type": "place_type",
+    "name": "Playground",
+    "value": "playground",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11028"
+    },
+    "type": "place_type",
+    "name": "Jardim",
+    "value": "garden",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11029"
+    },
+    "type": "place_type",
+    "name": "Quiosque / Gazebo",
+    "value": "gazebo",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1102a"
+    },
+    "type": "place_type",
+    "name": "Pet place",
+    "value": "pet_area",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1102b"
+    },
+    "type": "place_type",
+    "name": "Pátio / Área externa",
+    "value": "courtyard",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1102c"
+    },
+    "type": "place_type",
+    "name": "Casa de bombas",
+    "value": "pump_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1102d"
+    },
+    "type": "place_type",
+    "name": "Casa de máquinas",
+    "value": "machine_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1102e"
+    },
+    "type": "place_type",
+    "name": "ETE — Estação de Tratamento de Esgoto",
+    "value": "wastewater_plant",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1102f"
+    },
+    "type": "place_type",
+    "name": "ETA — Estação de Tratamento de Água",
+    "value": "water_plant",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11030"
+    },
+    "type": "place_type",
+    "name": "Reservatório / Caixa d'água",
+    "value": "water_tank",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11031"
+    },
+    "type": "place_type",
+    "name": "Central de gás",
+    "value": "gas_central",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11032"
+    },
+    "type": "place_type",
+    "name": "Subestação",
+    "value": "substation",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11033"
+    },
+    "type": "place_type",
+    "name": "Gerador",
+    "value": "generator_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11034"
+    },
+    "type": "place_type",
+    "name": "Shaft",
+    "value": "shaft",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11035"
+    },
+    "type": "place_type",
+    "name": "Casa de lixo",
+    "value": "waste_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11036"
+    },
+    "type": "place_type",
+    "name": "CPD / Sala técnica",
+    "value": "server_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11037"
+    },
+    "type": "place_type",
+    "name": "Portaria",
+    "value": "gatehouse",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11038"
+    },
+    "type": "place_type",
+    "name": "Zeladoria",
+    "value": "caretaker_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11039"
+    },
+    "type": "place_type",
+    "name": "Administração",
+    "value": "admin_office",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1103a"
+    },
+    "type": "place_type",
+    "name": "Sala de encomendas",
+    "value": "mail_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1103b"
+    },
+    "type": "place_type",
+    "name": "Vestiário",
+    "value": "locker_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1103c"
+    },
+    "type": "place_type",
+    "name": "Depósito",
+    "value": "storage",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1103d"
+    },
+    "type": "place_type",
+    "name": "Portão / Acesso",
+    "value": "access_gate",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1103e"
+    },
+    "type": "place_type",
+    "name": "Garagem",
+    "value": "parking",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11008"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1103f"
+    },
+    "type": "place_type",
+    "name": "Vaga",
+    "value": "parking_spot",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11008"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11040"
+    },
+    "type": "place_type",
+    "name": "Vaga PCD",
+    "value": "parking_spot_accessible",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11008"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11041"
+    },
+    "type": "place_type",
+    "name": "Vaga elétrica",
+    "value": "parking_spot_ev",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11008"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11042"
+    },
+    "type": "place_type",
+    "name": "Vaga de visitantes",
+    "value": "parking_spot_visitor",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11008"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11043"
+    },
+    "type": "place_type",
+    "name": "Bicicletário",
+    "value": "bike_rack",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b11008"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11044"
+    },
+    "type": "place_type",
+    "name": "Geral",
+    "value": "general",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12001"
+    },
+    "type": "place_type",
+    "name": "Estrutura",
+    "value": "g_structure",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12002"
+    },
+    "type": "place_type",
+    "name": "Unidades comerciais",
+    "value": "g_commercial",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12003"
+    },
+    "type": "place_type",
+    "name": "Circulação",
+    "value": "g_circulation",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12004"
+    },
+    "type": "place_type",
+    "name": "Convivência e serviços",
+    "value": "g_amenities",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12005"
+    },
+    "type": "place_type",
+    "name": "Área técnica",
+    "value": "g_technical",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12006"
+    },
+    "type": "place_type",
+    "name": "Operação",
+    "value": "g_operations",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12007"
+    },
+    "type": "place_type",
+    "name": "Estacionamento",
+    "value": "g_parking",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12008"
+    },
+    "type": "place_type",
+    "name": "Nível / Piso",
+    "value": "level",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12001"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12009"
+    },
+    "type": "place_type",
+    "name": "Ala",
+    "value": "wing",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12001"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1200a"
+    },
+    "type": "place_type",
+    "name": "Subsolo",
+    "value": "basement",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12001"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1200b"
+    },
+    "type": "place_type",
+    "name": "Mezanino",
+    "value": "mezzanine",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12001"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1200c"
+    },
+    "type": "place_type",
+    "name": "Cobertura",
+    "value": "rooftop",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12001"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1200d"
+    },
+    "type": "place_type",
+    "name": "Fachada",
+    "value": "facade",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12001"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1200e"
+    },
+    "type": "place_type",
+    "name": "Loja",
+    "value": "unit",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12002"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1200f"
+    },
+    "type": "place_type",
+    "name": "Loja âncora",
+    "value": "unit",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12002"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12010"
+    },
+    "type": "place_type",
+    "name": "Quiosque",
+    "value": "unit",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12002"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12011"
+    },
+    "type": "place_type",
+    "name": "Restaurante",
+    "value": "unit",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12002"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12012"
+    },
+    "type": "place_type",
+    "name": "Sala comercial",
+    "value": "unit",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12002"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12013"
+    },
+    "type": "place_type",
+    "name": "Cinema",
+    "value": "cinema",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12002"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12014"
+    },
+    "type": "place_type",
+    "name": "Corredor comercial",
+    "value": "mall_corridor",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12003"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12015"
+    },
+    "type": "place_type",
+    "name": "Hall de entrada",
+    "value": "lobby",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12003"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12016"
+    },
+    "type": "place_type",
+    "name": "Escada rolante",
+    "value": "escalator",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12003"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12017"
+    },
+    "type": "place_type",
+    "name": "Elevador",
+    "value": "elevator",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12003"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12018"
+    },
+    "type": "place_type",
+    "name": "Escada",
+    "value": "stairwell",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12003"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12019"
+    },
+    "type": "place_type",
+    "name": "Rampa",
+    "value": "ramp",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12003"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1201a"
+    },
+    "type": "place_type",
+    "name": "Praça de alimentação",
+    "value": "food_court",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12004"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1201b"
+    },
+    "type": "place_type",
+    "name": "Praça de eventos",
+    "value": "event_space",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12004"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1201c"
+    },
+    "type": "place_type",
+    "name": "Banheiro público",
+    "value": "public_restroom",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12004"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1201d"
+    },
+    "type": "place_type",
+    "name": "Fraldário",
+    "value": "baby_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12004"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1201e"
+    },
+    "type": "place_type",
+    "name": "Espaço kids",
+    "value": "playground",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12004"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1201f"
+    },
+    "type": "place_type",
+    "name": "Casa de bombas",
+    "value": "pump_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12020"
+    },
+    "type": "place_type",
+    "name": "Casa de máquinas",
+    "value": "machine_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12021"
+    },
+    "type": "place_type",
+    "name": "CAG — Central de água gelada",
+    "value": "chiller_plant",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12022"
+    },
+    "type": "place_type",
+    "name": "ETE — Estação de Tratamento de Esgoto",
+    "value": "wastewater_plant",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12023"
+    },
+    "type": "place_type",
+    "name": "ETA — Estação de Tratamento de Água",
+    "value": "water_plant",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12024"
+    },
+    "type": "place_type",
+    "name": "Reservatório / Caixa d'água",
+    "value": "water_tank",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12025"
+    },
+    "type": "place_type",
+    "name": "Central de gás",
+    "value": "gas_central",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12026"
+    },
+    "type": "place_type",
+    "name": "Subestação",
+    "value": "substation",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12027"
+    },
+    "type": "place_type",
+    "name": "Gerador",
+    "value": "generator_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12028"
+    },
+    "type": "place_type",
+    "name": "Shaft",
+    "value": "shaft",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12029"
+    },
+    "type": "place_type",
+    "name": "Central de resíduos",
+    "value": "waste_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1202a"
+    },
+    "type": "place_type",
+    "name": "CPD / Sala técnica",
+    "value": "server_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1202b"
+    },
+    "type": "place_type",
+    "name": "Central de segurança",
+    "value": "security_center",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1202c"
+    },
+    "type": "place_type",
+    "name": "Administração",
+    "value": "admin_office",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1202d"
+    },
+    "type": "place_type",
+    "name": "Doca / Área de carga",
+    "value": "loading_dock",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1202e"
+    },
+    "type": "place_type",
+    "name": "Ambulatório",
+    "value": "first_aid_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1202f"
+    },
+    "type": "place_type",
+    "name": "Achados e perdidos",
+    "value": "lost_found",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12030"
+    },
+    "type": "place_type",
+    "name": "Vestiário",
+    "value": "locker_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12031"
+    },
+    "type": "place_type",
+    "name": "Depósito",
+    "value": "storage",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12032"
+    },
+    "type": "place_type",
+    "name": "Estacionamento",
+    "value": "parking",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12033"
+    },
+    "type": "place_type",
+    "name": "Edifício-garagem",
+    "value": "parking_deck",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12034"
+    },
+    "type": "place_type",
+    "name": "Vaga",
+    "value": "parking_spot",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12035"
+    },
+    "type": "place_type",
+    "name": "Vaga PCD",
+    "value": "parking_spot_accessible",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12036"
+    },
+    "type": "place_type",
+    "name": "Vaga elétrica",
+    "value": "parking_spot_ev",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12037"
+    },
+    "type": "place_type",
+    "name": "Vaga de moto",
+    "value": "parking_spot_motorcycle",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12038"
+    },
+    "type": "place_type",
+    "name": "Valet",
+    "value": "valet",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b12039"
+    },
+    "type": "place_type",
+    "name": "Bicicletário",
+    "value": "bike_rack",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b12007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1203a"
+    },
+    "type": "place_type",
+    "name": "Geral",
+    "value": "general",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13001"
+    },
+    "type": "place_type",
+    "name": "Estrutura",
+    "value": "g_structure",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13002"
+    },
+    "type": "place_type",
+    "name": "Unidades",
+    "value": "g_private",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13003"
+    },
+    "type": "place_type",
+    "name": "Áreas de trabalho",
+    "value": "g_workspace",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13004"
+    },
+    "type": "place_type",
+    "name": "Circulação",
+    "value": "g_circulation",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13005"
+    },
+    "type": "place_type",
+    "name": "Convivência",
+    "value": "g_amenities",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13006"
+    },
+    "type": "place_type",
+    "name": "Área técnica",
+    "value": "g_technical",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13007"
+    },
+    "type": "place_type",
+    "name": "Operação",
+    "value": "g_operations",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13008"
+    },
+    "type": "place_type",
+    "name": "Estacionamento",
+    "value": "g_parking",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13009"
+    },
+    "type": "place_type",
+    "name": "Torre / Edifício",
+    "value": "building",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13001"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1300a"
+    },
+    "type": "place_type",
+    "name": "Andar / Pavimento",
+    "value": "floor",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13001"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1300b"
+    },
+    "type": "place_type",
+    "name": "Subsolo",
+    "value": "basement",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13001"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1300c"
+    },
+    "type": "place_type",
+    "name": "Mezanino",
+    "value": "mezzanine",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13001"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1300d"
+    },
+    "type": "place_type",
+    "name": "Cobertura",
+    "value": "rooftop",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13001"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1300e"
+    },
+    "type": "place_type",
+    "name": "Fachada",
+    "value": "facade",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13001"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1300f"
+    },
+    "type": "place_type",
+    "name": "Heliponto",
+    "value": "helipad",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13001"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13010"
+    },
+    "type": "place_type",
+    "name": "Conjunto / Sala comercial",
+    "value": "unit",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13002"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13011"
+    },
+    "type": "place_type",
+    "name": "Laje corporativa",
+    "value": "unit",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13002"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13012"
+    },
+    "type": "place_type",
+    "name": "Loja",
+    "value": "unit",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13002"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13013"
+    },
+    "type": "place_type",
+    "name": "Depósito privativo",
+    "value": "storage_unit",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13002"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13014"
+    },
+    "type": "place_type",
+    "name": "Sala de reunião",
+    "value": "meeting_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13003"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13015"
+    },
+    "type": "place_type",
+    "name": "Sala de treinamento",
+    "value": "training_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13003"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13016"
+    },
+    "type": "place_type",
+    "name": "Auditório",
+    "value": "auditorium",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13003"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13017"
+    },
+    "type": "place_type",
+    "name": "Coworking",
+    "value": "coworking",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13003"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13018"
+    },
+    "type": "place_type",
+    "name": "Copa",
+    "value": "pantry",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13003"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13019"
+    },
+    "type": "place_type",
+    "name": "Arquivo",
+    "value": "archive",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13003"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1301a"
+    },
+    "type": "place_type",
+    "name": "Hall de entrada",
+    "value": "lobby",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13004"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1301b"
+    },
+    "type": "place_type",
+    "name": "Corredor",
+    "value": "corridor",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13004"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1301c"
+    },
+    "type": "place_type",
+    "name": "Elevador",
+    "value": "elevator",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13004"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1301d"
+    },
+    "type": "place_type",
+    "name": "Escada",
+    "value": "stairwell",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13004"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1301e"
+    },
+    "type": "place_type",
+    "name": "Rampa",
+    "value": "ramp",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13004"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1301f"
+    },
+    "type": "place_type",
+    "name": "Banheiro",
+    "value": "restroom",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13004"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13020"
+    },
+    "type": "place_type",
+    "name": "Refeitório / Restaurante",
+    "value": "cafeteria",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13021"
+    },
+    "type": "place_type",
+    "name": "Academia",
+    "value": "gym",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13022"
+    },
+    "type": "place_type",
+    "name": "Espaço de descompressão",
+    "value": "lounge",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13023"
+    },
+    "type": "place_type",
+    "name": "Terraço / Deck",
+    "value": "terrace",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13005"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13024"
+    },
+    "type": "place_type",
+    "name": "Casa de bombas",
+    "value": "pump_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13025"
+    },
+    "type": "place_type",
+    "name": "Casa de máquinas",
+    "value": "machine_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13026"
+    },
+    "type": "place_type",
+    "name": "CAG — Central de água gelada",
+    "value": "chiller_plant",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13027"
+    },
+    "type": "place_type",
+    "name": "Reservatório / Caixa d'água",
+    "value": "water_tank",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13028"
+    },
+    "type": "place_type",
+    "name": "Subestação",
+    "value": "substation",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13029"
+    },
+    "type": "place_type",
+    "name": "Gerador",
+    "value": "generator_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1302a"
+    },
+    "type": "place_type",
+    "name": "Data center / CPD",
+    "value": "server_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1302b"
+    },
+    "type": "place_type",
+    "name": "Shaft",
+    "value": "shaft",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1302c"
+    },
+    "type": "place_type",
+    "name": "Central de gás",
+    "value": "gas_central",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1302d"
+    },
+    "type": "place_type",
+    "name": "ETE — Estação de Tratamento de Esgoto",
+    "value": "wastewater_plant",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1302e"
+    },
+    "type": "place_type",
+    "name": "Casa de lixo",
+    "value": "waste_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13006"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1302f"
+    },
+    "type": "place_type",
+    "name": "Portaria",
+    "value": "gatehouse",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13030"
+    },
+    "type": "place_type",
+    "name": "Central de segurança",
+    "value": "security_center",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13031"
+    },
+    "type": "place_type",
+    "name": "Recepção",
+    "value": "reception",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13032"
+    },
+    "type": "place_type",
+    "name": "Administração predial",
+    "value": "admin_office",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13033"
+    },
+    "type": "place_type",
+    "name": "Correio / Encomendas",
+    "value": "mail_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13034"
+    },
+    "type": "place_type",
+    "name": "Doca / Carga e descarga",
+    "value": "loading_dock",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13035"
+    },
+    "type": "place_type",
+    "name": "Ambulatório",
+    "value": "first_aid_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13036"
+    },
+    "type": "place_type",
+    "name": "Vestiário",
+    "value": "locker_room",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13037"
+    },
+    "type": "place_type",
+    "name": "Depósito",
+    "value": "storage",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13038"
+    },
+    "type": "place_type",
+    "name": "Acesso / Catraca",
+    "value": "access_gate",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13007"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13039"
+    },
+    "type": "place_type",
+    "name": "Garagem",
+    "value": "parking",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13008"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1303a"
+    },
+    "type": "place_type",
+    "name": "Edifício-garagem",
+    "value": "parking_deck",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13008"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1303b"
+    },
+    "type": "place_type",
+    "name": "Vaga",
+    "value": "parking_spot",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13008"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1303c"
+    },
+    "type": "place_type",
+    "name": "Vaga PCD",
+    "value": "parking_spot_accessible",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13008"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1303d"
+    },
+    "type": "place_type",
+    "name": "Vaga elétrica",
+    "value": "parking_spot_ev",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13008"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1303e"
+    },
+    "type": "place_type",
+    "name": "Vaga de visitantes",
+    "value": "parking_spot_visitor",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13008"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1303f"
+    },
+    "type": "place_type",
+    "name": "Vaga de moto",
+    "value": "parking_spot_motorcycle",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13008"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13040"
+    },
+    "type": "place_type",
+    "name": "Bicicletário",
+    "value": "bike_rack",
+    "enabled": true,
+    "parentId": {
+      "$oid": "000000000000000000b13008"
+    },
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13041"
+    },
+    "type": "place_type",
+    "name": "Geral",
+    "value": "general",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b11045"
+    },
+    "type": "place_type",
+    "name": "Área comum",
+    "value": "common_area",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10001"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b1203b"
+    },
+    "type": "place_type",
+    "name": "Área comum",
+    "value": "common_area",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10002"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "000000000000000000b13042"
+    },
+    "type": "place_type",
+    "name": "Área comum",
+    "value": "common_area",
+    "enabled": true,
+    "parentId": null,
+    "verticalId": {
+      "$oid": "000000000000000000a10003"
+    },
+    "isSystem": true,
+    "orgId": null,
+    "created": {
+      "$date": "2026-08-23T00:00:00.000Z"
     }
   }
 ]
